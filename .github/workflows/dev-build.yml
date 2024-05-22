@@ -18,12 +18,6 @@ jobs:
       with:
         node-version: '18'
         cache: 'npm'
-    - name: Setup Google Chrome
-      id: setup-chrome
-      uses: browser-actions/setup-chrome@v1
-      with:
-        chrome-version: stable
-        install-dependencies: true
     - name: Set CHROME_BIN environment variable
       run: echo "export CHROME_BIN=$(which google-chrome)" >> $GITHUB_ENV
     - name: Install Dependencies
