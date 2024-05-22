@@ -28,6 +28,13 @@ jobs:
       run: npm test --no-watch --no-progress --browsers=ChromeHeadless
       env:
         CHROME_BIN: /usr/bin/google-chrome
+    - name: Print Test Results
+      if: failure()
+      run: cat test-results.xml
+    - name: Cleanup
+      if: failure()
+      run: echo "Performing cleanup tasks..."
+      continue-on-error: true
     - name: Copy Files to Deployment Directory
       if: success()
       run: sudo cp -r dist/* /var/www/marketplaces.com/public_html
