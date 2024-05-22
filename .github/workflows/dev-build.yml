@@ -30,8 +30,12 @@ jobs:
       run: npm run build -- --output-path=dist
     - run: |
         ${{ steps.setup-chrome.outputs.chrome-path }} --version
+    - name: Set CHROME_BIN environment variable
+      run: echo "export CHROME_BIN=$(which google-chrome)" >> $GITHUB_ENV
     - name: Execute Tests
       run: npm test --no-watch --no-progress --browsers=ChromeHeadless
+      env:
+        CHROME_BIN: /usr/bin/google-chrome
     - name: Copy Files to Deployment Directory
       if: success()
       run: sudo cp -r dist/* /var/www/marketplaces.com/public_html
