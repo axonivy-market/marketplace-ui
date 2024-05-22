@@ -24,7 +24,9 @@ jobs:
       run: npm run build -- --output-path=dist
     - name: Setup Google Chrome
       uses: browser-actions/setup-chrome@v1
-    - run: chrome --version
+      with:
+        chrome-version: stable
+        install-dependencies: true
     - name: Execute Tests
       run: npm test
     - name: Copy Files to Deployment Directory
