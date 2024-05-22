@@ -18,11 +18,12 @@ jobs:
       with:
         node-version: '18'
         cache: 'npm'
-    - name: Install Chrome
-      run: sudo apt-get install -y wget unzip xvfb \
-              && wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-              && sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
-  
+    - name: Setup Google Chrome
+      id: setup-chrome
+      uses: browser-actions/setup-chrome@v1
+      with:
+        chrome-version: stable
+        install-dependencies: true
     - name: Set CHROME_BIN environment variable
       run: echo "export CHROME_BIN=$(which google-chrome)" >> $GITHUB_ENV
     - name: Install Dependencies
@@ -30,7 +31,7 @@ jobs:
     - name: Build Angular App
       run: npm run build -- --output-path=dist
     - name: Execute Tests
-      run: npm test
+      run: npm test --no-watch --no-progress --browsers=ChromeHeadless
       env:
         CHROME_BIN: /usr/bin/google-chrome
     - name: Copy Files to Deployment Directory
