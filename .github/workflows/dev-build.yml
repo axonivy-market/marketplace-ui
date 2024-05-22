@@ -22,13 +22,10 @@ jobs:
       run: npm ci
     - name: Build Angular App
       run: npm run build -- --output-path=dist
-    - run: npm test
-    - name: Deploy to GitHub Pages
+    - name: Setup Google Chrome
+      uses: browser-actions/setup-chrome@v1
+    - name: Execute Tests
+      run: npm test
+    - name: Copy Files to Deployment Directory
       if: success()
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist
-        # Optional: if you are using a custom domain
-        # cname: your-custom-domain.com  
-
+      run: sudo cp -r dist/* /var/www/marketplaces.com/public_html
