@@ -1,0 +1,39 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__logo {
+  margin-left: 1rem;
+}
+
+.logo__image {
+  width: 200px;
+  height: 3rem;
+  margin-top: 1rem;
+  vertical-align: initial;
+}
+
+.header__nav {
+  margin-left: 20rem;
+}
+
+.header__menu--right {
+  margin-right: 5px;
+}
+
+.nav-item {
+  cursor: pointer;
+}
+
+.nav-item.active .active-line {
+  display: block;
+}
+
+.active-line {
+  display: none;
+  position: relative;
+  height: 2px;
+  width: auto;
+  background-color: var(--bs-highlight-color);
+}
