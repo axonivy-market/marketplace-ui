@@ -31,7 +31,7 @@ jobs:
     - run: |
         ${{ steps.setup-chrome.outputs.chrome-path }} --version
     - name: Execute Tests
-      run: npm test
+      run: npm test --no-watch --no-progress --browsers=ChromeHeadless
     - name: Copy Files to Deployment Directory
       if: success()
       run: sudo cp -r dist/* /var/www/marketplaces.com/public_html
