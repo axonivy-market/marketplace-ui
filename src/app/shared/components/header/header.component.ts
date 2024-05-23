@@ -7,8 +7,6 @@ import { LANGUAGES, NAV_ITEMS } from '../../constants/common.constant';
 import { Language } from '../../enums/language.enum';
 import { NavItem } from '../../models/nav-item.model';
 
-const DATA_THEME = 'data-bs-theme';
-
 @Component({
   selector: 'app-header',
   standalone: true,
