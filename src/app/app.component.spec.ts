@@ -23,7 +23,7 @@ describe('AppComponent', () => {
 
   it('default active nav should be Market', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.active')?.textContent).toContain(
+    expect(compiled.querySelector('li.nav-item.active a.nav-link')?.textContent).toContain(
       'nav.market'
     );
   });
