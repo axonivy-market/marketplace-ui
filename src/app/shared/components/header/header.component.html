@@ -47,8 +47,9 @@
       [(ngModel)]="selectedLanguage"
       (ngModelChange)="onSelectLanguage($event)"
       name="language">
-      <option value="en-GB">English</option>
-      <option value="fr-FR">French</option>
+      @for (language of languages; track $index) {
+        <option [value]="language.value">{{ language.label }}</option>
+      }
     </select>
 
     <div class="m-2 header__download-button">

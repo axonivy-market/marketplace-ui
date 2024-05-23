@@ -1,12 +1,11 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
-import { Component, Inject, Input, OnDestroy, inject } from '@angular/core';
-import { Theme } from '../../enums/theme.enum';
-import { NavItem } from '../../models/nav-item.model';
-import { ThemeService } from '../../../core/services/theme/theme.service';
-import { Subscription } from 'rxjs';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NAV_ITEMS } from '../../constants/common.constant';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ThemeService } from '../../../core/services/theme/theme.service';
+import { LANGUAGES, NAV_ITEMS } from '../../constants/common.constant';
+import { Language } from '../../enums/language.enum';
+import { NavItem } from '../../models/nav-item.model';
 
 const DATA_THEME = 'data-bs-theme';
 
@@ -15,19 +14,20 @@ const DATA_THEME = 'data-bs-theme';
   standalone: true,
   imports: [CommonModule, FormsModule, TranslateModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
+  styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
   selectedNav: string = '/';
-  selectedLanguage: string = 'en-GB';
+  selectedLanguage: string = Language.FR_FR;
+  languages = LANGUAGES;
 
   navItems: NavItem[] = NAV_ITEMS;
 
   themeService = inject(ThemeService);
   translateService = inject(TranslateService);
   constructor() {
-    this.translateService.setDefaultLang('en-GB');
-    this.translateService.use('en-GB');
+    this.translateService.setDefaultLang(this.selectedLanguage);
+    this.translateService.use(this.selectedLanguage);
   }
 
   onSelectLanguage(language: string) {
