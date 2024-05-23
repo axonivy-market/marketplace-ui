@@ -9,12 +9,12 @@ module.exports = function (config) {
       require('karma-jasmine'),
       require('karma-webpack'),
       require('karma-chrome-launcher'),
-      require("karma-jsdom-launcher"),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
+      require('karma-junit-reporter'),
       require('@angular-devkit/build-angular/plugins/karma'),
-      require('karma-junit-reporter')
     ],
+
     client: {
       jasmine: {
         // you can add configuration options for Jasmine here
@@ -23,29 +23,26 @@ module.exports = function (config) {
         // or set a specific seed with `seed: 4321`
         stopSpecOnExpectationFailure: true,
         failFast: true,
-        timeoutInterval: 60000
+        timeoutInterval: 60000,
       },
-      clearContext: false // leave Jasmine Spec Runner output visible in browser
+      clearContext: false, // leave Jasmine Spec Runner output visible in browser
     },
     jasmineHtmlReporter: {
-      suppressAll: true // removes the duplicated traces
+      suppressAll: true, // removes the duplicated traces
     },
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage/marketplace-ui'),
       subdir: '.',
-      reporters: [
-        { type: 'html' },
-        { type: 'text-summary' }
-      ]
+      reporters: [{ type: 'html' }, { type: 'text-summary' }],
     },
     angularCli: {
-      environment: 'dev'
+      environment: 'dev',
     },
     reporters: ['progress', 'junit'],
     junitReporter: {
       outputDir: 'reports',
       outputFile: 'karma-junit.xml',
-      useBrowserName: false
+      useBrowserName: false,
     },
     browsers: ['ChromeHeadless'],
     restartOnFileChange: true,
@@ -53,8 +50,8 @@ module.exports = function (config) {
       Chrome_with_debugging: {
         base: 'Chrome',
         flags: ['--remote-debugging-port=9222'],
-        debug: true
-      }
+        debug: true,
+      },
     },
   });
 };
