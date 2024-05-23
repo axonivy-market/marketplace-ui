@@ -9,5 +9,6 @@
   ],
   "singleQuote": true,
   "htmlWhitespaceSensitivity": "ignore",
-  "bracketSameLine": true
+  "bracketSameLine": true,
+  "trailingComma": "none"
 }

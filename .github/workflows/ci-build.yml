@@ -6,9 +6,6 @@ on:
   pull_request:
   workflow_dispatch:
 
-env:
-  DIST_FILE: ivy-website-market.tar
-
 jobs:
   build:
     runs-on: ["ubuntu-latest"]

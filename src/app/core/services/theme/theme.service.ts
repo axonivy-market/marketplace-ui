@@ -29,14 +29,12 @@ export class ThemeService {
     this.theme.set(theme);
     localStorage.setItem(DATA_THEME, theme);
     document.querySelector('html')!.setAttribute(DATA_THEME, theme);
-    this.theme() === Theme.DARK
-      ? this.isDarkMode.set(true)
-      : this.isDarkMode.set(false);
+    this.isDarkMode.set(this.theme() === Theme.DARK);
   }
 
   changeTheme() {
     this.theme.update((value) =>
-      value === Theme.DARK ? Theme.LIGHT : Theme.DARK,
+      value === Theme.DARK ? Theme.LIGHT : Theme.DARK
     );
     this.setTheme(this.theme());
   }
