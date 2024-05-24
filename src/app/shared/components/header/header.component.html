@@ -48,7 +48,9 @@
       (ngModelChange)="onSelectLanguage($event)"
       name="language">
       @for (language of languages; track $index) {
-        <option [value]="language.value">{{ language.label }}</option>
+        <option [value]="language.value">
+          {{ language.label | translate }}
+        </option>
       }
     </select>
 

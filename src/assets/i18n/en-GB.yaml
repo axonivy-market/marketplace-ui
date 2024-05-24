@@ -1,7 +1,11 @@
-nav:
-  news: News
-  doc: Doc
-  tutorial: Tutorial
-  community: Community
-  team: Team
-  market: Market
+common:
+  language:
+    english: English
+    french: Français
+  nav:
+    news: News
+    doc: Doc
+    tutorial: Tutorial
+    community: Community
+    team: Team
+    market: Market

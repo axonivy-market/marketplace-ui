@@ -3,27 +3,27 @@ import { NavItem } from '../models/nav-item.model';
 
 export const NAV_ITEMS: NavItem[] = [
   {
-    label: 'nav.news',
+    label: 'common.nav.news',
     link: 'https://developer.axonivy.com/news'
   },
   {
-    label: 'nav.doc',
+    label: 'common.nav.doc',
     link: 'https://developer.axonivy.com/doc'
   },
   {
-    label: 'nav.tutorial',
+    label: 'common.nav.tutorial',
     link: 'https://developer.axonivy.com/tutorial'
   },
   {
-    label: 'nav.community',
+    label: 'common.nav.community',
     link: 'https://community.axonivy.com/'
   },
   {
-    label: 'nav.team',
+    label: 'common.nav.team',
     link: 'https://developer.axonivy.com/team'
   },
   {
-    label: 'nav.market',
+    label: 'common.nav.market',
     link: '/'
   }
 ];
@@ -31,10 +31,10 @@ export const NAV_ITEMS: NavItem[] = [
 export const LANGUAGES = [
   {
     value: Language.EN_GB,
-    label: 'English'
+    label: 'common.language.english'
   },
   {
     value: Language.FR_FR,
-    label: 'French'
+    label: 'common.language.french'
   }
 ];
