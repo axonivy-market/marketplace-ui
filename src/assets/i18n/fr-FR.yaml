@@ -1,0 +1,11 @@
+common:
+  language:
+    english: English
+    french: Français
+  nav:
+    news: Actualités
+    doc: Documentation
+    tutorial: Tutoriel
+    community: Communauté
+    team: Équipe
+    market: Marché

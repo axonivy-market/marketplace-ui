@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    @for (product of products; track $index) {
+      <div
+        (click)="viewProductDetail(product.id)"
+        class="col-sm-12 col-md-4 mt-2 mb-2">
+        <app-product-card [product]="product"></app-product-card>
+      </div>
+    }
+  </div>
+</div>
