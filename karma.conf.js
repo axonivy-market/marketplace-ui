@@ -47,11 +47,10 @@ module.exports = function (config) {
     browsers: ['ChromeHeadless'],
     restartOnFileChange: true,
     customLaunchers: {
-      Chrome_with_debugging: {
-        base: 'Chrome',
-        flags: ['--remote-debugging-port=9222'],
-        debug: true,
-      },
+      ChromeHeadlessCI: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
     },
   });
 };
