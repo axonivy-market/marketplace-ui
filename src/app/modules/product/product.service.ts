@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Product } from '../../shared/models/product.model';
-import { MOCK_PRODUCTS } from '../../shared/constants/mock-data.utils';
+import { MOCK_PRODUCTS } from '../../shared/mocks/mock-data';
 
 @Injectable()
 export class ProductService {
