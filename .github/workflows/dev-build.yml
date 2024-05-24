@@ -21,11 +21,11 @@ jobs:
     - name: Set CHROME_BIN environment variable
       run: echo "export CHROME_BIN=$(which google-chrome)" >> $GITHUB_ENV
     - name: Install Dependencies
-      run: npm install
+      run: npm install --force
     - name: Build Angular App
       run: npm run build -- --output-path=dist
     - name: Execute Tests
-      run: npm test --no-watch --no-progress --browsers=ChromeHeadless
+      run: npm run test --no-watch --no-progress --headless --no-sandbox --browsers=ChromeHeadless
       env:
         CHROME_BIN: /usr/bin/google-chrome
       continue-on-error: true
