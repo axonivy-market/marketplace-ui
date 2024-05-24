@@ -16,7 +16,7 @@ import { NavItem } from '../../models/nav-item.model';
 })
 export class HeaderComponent {
   selectedNav: string = '/';
-  selectedLanguage: string = Language.FR_FR;
+  selectedLanguage: string = Language.EN_GB;
   languages = LANGUAGES;
 
   navItems: NavItem[] = NAV_ITEMS;
