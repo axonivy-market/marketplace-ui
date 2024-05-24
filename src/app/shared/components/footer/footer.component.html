@@ -4,8 +4,8 @@
       class="logo__image"
       [src]="
         themeService.isDarkMode()
-          ? '/assets/misc/axonivy-logo.svg'
-          : '/assets/misc/axonivy-logo-black.svg'
+          ? '/assets/images/misc/axonivy-logo.svg'
+          : '/assets/images/misc/axonivy-logo-black.svg'
       "
       alt="Axon Ivy" />
 
@@ -26,7 +26,7 @@
       <ul class="navbar-nav me-auto mb-lg-0">
         @for (item of navItems; track $index) {
           <li class="nav-item">
-            <a class="nav-link" aria-current="page">{{ item.label }}</a>
+            <a class="nav-link" aria-current="page">{{ item.label | translate }}</a>
             <div class="active-line"></div>
           </li>
         }
