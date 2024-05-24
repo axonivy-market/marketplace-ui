@@ -44,13 +44,13 @@ module.exports = function (config) {
       outputFile: 'karma-junit.xml',
       useBrowserName: false,
     },
-    browsers: ['ChromeHeadless'],
-    restartOnFileChange: true,
+    browsers: ['ChromeHeadlessNoSandbox'],
     customLaunchers: {
-      ChromeHeadlessCI: {
+      ChromeHeadlessNoSandbox: {
         base: 'ChromeHeadless',
         flags: ['--no-sandbox']
       }
     },
+    restartOnFileChange: true,
   });
 };
