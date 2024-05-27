@@ -1,4 +1,10 @@
-<div class="card w-100 h-100 p-3">
-  <p class="h2">{{ product.name }}</p>
-  <p class="text">{{ product.description }}</p>
+<div class="card border-light w-100 h-100 p-3">
+  <div class="d-flex justify-content-between align-items-start card-body">
+    <img class="card-img-top bg-light" [src]="product | logo" alt="" />
+    <button class="btn btn-primary disabled">{{ product.type }}</button>
+  </div>
+  <div class="card-body mt-100">
+    <h5 class="card-title font-weight-bold">{{ product.name }}</h5>
+    <p class="card-text font-weight-light">{{ product.description }}</p>
+  </div>
 </div>

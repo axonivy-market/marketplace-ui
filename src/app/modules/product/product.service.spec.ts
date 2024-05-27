@@ -4,7 +4,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ProductService } from './product.service';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-const PRODUCT_ID = 'adobe-acrobat-connector';
+const PRODUCT_ID = 'portal';
 const NOT_EXIST_ID = 'undefined';
 
 describe('ProductService', () => {

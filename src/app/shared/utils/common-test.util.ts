@@ -2,7 +2,7 @@ import { of } from 'rxjs';
 import { Product } from '../models/product.model';
 
 export const MOCK_PRODUCT = {
-  id: 'adobe-acrobat-connector',
+  id: 'portal',
   name: 'product name',
   description: 'product description',
 } as Product;
