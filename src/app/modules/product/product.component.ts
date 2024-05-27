@@ -19,7 +19,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   productService = inject(ProductService);
   router = inject(Router);
-  subscription: Subscription[] = [];
+  subscriptions: Subscription[] = [];
 
   constructor() {}
 
@@ -27,7 +27,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     const sub = this.productService.getAllProducts().subscribe((products) => {
       this.products = products;
     });
-    this.subscription.push(sub);
+    this.subscriptions.push(sub);
   }
 
   viewProductDetail(productId: string) {
@@ -35,7 +35,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.forEach((sub) => {
+    this.subscriptions.forEach((sub) => {
       sub.unsubscribe();
     });
   }
