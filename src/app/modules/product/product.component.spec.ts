@@ -57,7 +57,7 @@ describe('ProductComponent', () => {
 
   it('ngOnDestroy should unsubscribe all sub', () => {
     const sub = new Subscription();
-    component.subscription.push(sub);
+    component.subscriptions.push(sub);
     component.ngOnDestroy();
     expect(component.ngOnDestroy).toBeTruthy();
   });
