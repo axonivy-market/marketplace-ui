@@ -37,3 +37,8 @@
   width: auto;
   background-color: var(--bs-highlight-color);
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 2rem 60rem 1fr;
+}
