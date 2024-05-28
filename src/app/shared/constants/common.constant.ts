@@ -1,4 +1,6 @@
+import { FilterType } from '../enums/filter-type.enum';
 import { Language } from '../enums/language.enum';
+import { SortType } from '../enums/sort-type.enum';
 import { NavItem } from '../models/nav-item.model';
 
 export const NAV_ITEMS: NavItem[] = [
@@ -36,5 +38,39 @@ export const LANGUAGES = [
   {
     value: Language.FR_FR,
     label: 'common.language.french'
+  }
+];
+
+export const FILTER_TYPES = [
+  {
+    value: FilterType.All_TYPES,
+    label: 'common.filter.allTypes'
+  },
+  {
+    value: FilterType.CONNECTORS,
+    label: 'common.filter.connector'
+  },
+  {
+    value: FilterType.UTILITIES,
+    label: 'common.filter.util'
+  },
+  {
+    value: FilterType.DEMOS,
+    label: 'common.filter.demos'
+  }
+];
+
+export const SORT_TYPES = [
+  {
+    value: SortType.POPULARITY,
+    label: 'common.sort.popularity'
+  },
+  {
+    value: SortType.ALPHABETICALLY,
+    label: 'common.sort.alphabetically'
+  },
+  {
+    value: SortType.RECENT,
+    label: 'common.sort.recent'
   }
 ];

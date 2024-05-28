@@ -161,7 +161,7 @@ export const MOCK_PRODUCTS = [
     name: 'Connectivity Demos',
     description:
       '3rd party integration based on web service technology such as REST and SOAP is a must.',
-    type: 'solution',
+    type: 'demos',
     platformReview: '4.5',
     sourceUrl: 'https://github.com/axonivy-market/demo-projects',
     statusBadgeUrl:
@@ -207,7 +207,7 @@ export const MOCK_PRODUCTS = [
     name: 'Custom Mail Demo',
     description:
       'Demonstrating how mails can be customized by providing mail processes.',
-    type: 'solution',
+    type: 'demos',
     platformReview: '4.5',
     sourceUrl: 'https://github.com/axonivy-market/custom-mail-demo',
     statusBadgeUrl:
@@ -228,7 +228,7 @@ export const MOCK_PRODUCTS = [
     id: 'demos-app',
     name: 'Demos Application',
     description: 'Demos Application',
-    type: 'solution',
+    type: 'demos',
     platformReview: '4.5',
     sourceUrl: 'https://github.com/axonivy-market/demo-projects',
     statusBadgeUrl:
@@ -368,8 +368,8 @@ export const MOCK_PRODUCTS = [
     version: '1.0',
     name: 'Employee Onboarding',
     description:
-      'This solution helps HR managers to accelerate time-to-market for employee onboarding.',
-    type: 'solution',
+      'This demos helps HR managers to accelerate time-to-market for employee onboarding.',
+    type: 'demos',
     cost: 'paid',
     language: 'EN',
     industry: 'Cross-Industry',
@@ -381,7 +381,7 @@ export const MOCK_PRODUCTS = [
     name: 'Error Handling Demos',
     description:
       'Errors in process automation mean leaving the happy path. Learn more about business and technical errors.',
-    type: 'solution',
+    type: 'demos',
     platformReview: '4.5',
     sourceUrl: 'https://github.com/axonivy-market/demo-projects',
     statusBadgeUrl:
@@ -472,7 +472,7 @@ export const MOCK_PRODUCTS = [
     name: 'Html Dialog Demos',
     description:
       'User-friendly forms for all devices is key in  process automation. Learn more about nice GUIs.',
-    type: 'solution',
+    type: 'demos',
     platformReview: '4.5',
     sourceUrl: 'https://github.com/axonivy-market/demo-projects',
     statusBadgeUrl:
@@ -754,7 +754,7 @@ export const MOCK_PRODUCTS = [
     id: 'processing-valve-demo',
     name: 'Processing Valve Demo',
     description: 'Processing Valve Demo',
-    type: 'solution',
+    type: 'demos',
     platformReview: '4.5',
     sourceUrl: 'https://github.com/axonivy/extension-demos/',
     language: 'English',
@@ -774,7 +774,7 @@ export const MOCK_PRODUCTS = [
     id: 'quick-start-tutorial',
     name: 'Quick Start Tutorial',
     description: 'Quick Start Tutorial',
-    type: 'solution',
+    type: 'demos',
     platformReview: '4',
     sourceUrl: 'https://github.com/axonivy-market/demo-projects',
     statusBadgeUrl:
@@ -797,7 +797,7 @@ export const MOCK_PRODUCTS = [
     name: 'Rule Engine Demos',
     description:
       'The separation of process logic and business logic accelerates time-to-market significantly.',
-    type: 'solution',
+    type: 'demos',
     platformReview: '4.5',
     sourceUrl: 'https://github.com/axonivy-market/demo-projects',
     statusBadgeUrl:
@@ -970,7 +970,7 @@ export const MOCK_PRODUCTS = [
     name: 'Workflow Demos',
     description:
       'Learn more about human workflows, Adaptive Case Management (ACM) and Business Data usage',
-    type: 'solution',
+    type: 'demos',
     platformReview: '4.5',
     sourceUrl: 'https://github.com/axonivy-market/demo-projects',
     statusBadgeUrl:

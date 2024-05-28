@@ -1,23 +1,11 @@
 <div class="container">
-  <div class="mb-3">
-    <button type="button" class="btn btn-primary" data-toggle="button">All Types</button>
-  </div>
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text">
-        <i class="bi bi-search"></i>
-      </span>
-    </div>
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Search a keyword"
-      aria-label="Search a keyword"
-      aria-describedby="basic-addon1" />
-  </div>
+  <app-product-filter
+    (searchChange)="onSearchChanged($event)"
+    (filterChange)="onFilterChange($event)"
+    (sortChange)="onSortChange($event)"></app-product-filter>
 
   <div class="row">
-    @for (product of products; track $index) {
+    @for (product of products | async; track $index) {
       <div
         (click)="viewProductDetail(product.id)"
         class="col-sm-12 col-md-4 mt-2 mb-2">

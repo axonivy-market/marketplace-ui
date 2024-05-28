@@ -9,3 +9,14 @@ common:
     community: Community
     team: Team
     market: Market
+  filter:
+    allTypes: All Types
+    connector: Connectors
+    util: Utilities
+    demos: Demos
+  sort:
+    popularity: Popularity
+    alphabetically: Alphabetically
+    recent: Recent
+  search:
+    placeholder: Search a keyword
