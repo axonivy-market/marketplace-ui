@@ -1,0 +1,49 @@
+<div class="mt-5">
+  <p class="h3 mb-5">Filters</p>
+  <div class="d-flex justify-content-between align-items-center mb-5">
+    <div class="d-flex">
+      @for (type of filterTypes; track $index) {
+        <div
+          (click)="onSelectFilterType(type.value)"
+          class="filter-type rounded me-2 p-2"
+          [ngClass]="
+            themeService.isDarkMode()
+              ? 'bg-light border-light text-dark'
+              : 'bg-primary border text-light'
+          ">
+          {{ type.label | translate }}
+        </div>
+      }
+    </div>
+    <div class="sort">
+      <select
+        [(ngModel)]="selectedSortType"
+        (ngModelChange)="onSortChange()"
+        class="form-select form-select-sm w-auto"
+        aria-label="sort"
+        name="sort">
+        @for (type of sortTypes; track $index) {
+          <option [value]="type.value">
+            {{ type.label | translate }}
+          </option>
+        }
+      </select>
+    </div>
+  </div>
+
+  <div class="input-group mb-5">
+    <div class="input-group-prepend">
+      <span class="input-group-text border-0">
+        <i class="bi bi-search"></i>
+      </span>
+    </div>
+    <input
+      [(ngModel)]="searchText"
+      (ngModelChange)="onSearchChanged($event)"
+      type="text"
+      class="form-control border-0"
+      [placeholder]="translateService.get('common.search.placeholder') | async"
+      [ariaLabel]="translateService.get('common.search.placeholder') | async"
+      aria-describedby="search" />
+  </div>
+</div>
