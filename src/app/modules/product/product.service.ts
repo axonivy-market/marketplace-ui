@@ -34,6 +34,7 @@ export class ProductService {
   }
 
   getProductByType(productType: string): Observable<Product[]> {
+    console.log(productType)
     if (productType === '' || productType === FilterType.All_TYPES) {
       return of(MOCK_PRODUCTS);
     }

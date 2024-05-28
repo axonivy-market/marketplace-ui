@@ -5,12 +5,15 @@
       @for (type of filterTypes; track $index) {
         <div
           (click)="onSelectFilterType(type.value)"
-          class="filter-type rounded me-2 p-2"
-          [ngClass]="
-            themeService.isDarkMode()
-              ? 'bg-light border-light text-dark'
-              : 'bg-primary border text-light'
-          ">
+          class="filter-type border rounded me-2 p-2"
+          [ngClass]="{
+            'border-light': themeService.isDarkMode(),
+            'border-dark': !themeService.isDarkMode(),
+            'bg-light text-dark':
+              selectedFilterType === type.value && themeService.isDarkMode(),
+            'bg-primary border-0 text-light':
+              selectedFilterType === type.value && !themeService.isDarkMode()
+          }">
           {{ type.label | translate }}
         </div>
       }
@@ -41,7 +44,8 @@
       [(ngModel)]="searchText"
       (ngModelChange)="onSearchChanged($event)"
       type="text"
-      class="form-control border-0"
+      class="form-control border-0 search-input"
+      [ngClass]="{ dark: themeService.isDarkMode() }"
       [placeholder]="translateService.get('common.search.placeholder') | async"
       [ariaLabel]="translateService.get('common.search.placeholder') | async"
       aria-describedby="search" />

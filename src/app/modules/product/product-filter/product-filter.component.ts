@@ -22,7 +22,7 @@ export class ProductFilterComponent {
   @Output() filterChange = new EventEmitter<FilterType>();
   @Output() sortChange = new EventEmitter<SortType>();
 
-  selectedFilterType = '';
+  selectedFilterType = FilterType.All_TYPES;
   filterTypes = FILTER_TYPES;
   selectedSortType: SortType = SortType.POPULARITY;
   sortTypes = SORT_TYPES;
@@ -33,6 +33,7 @@ export class ProductFilterComponent {
   translateService = inject(TranslateService);
 
   onSelectFilterType(type: FilterType) {
+    this.selectedFilterType = type;
     this.filterChange.emit(type);
   }
 

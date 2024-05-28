@@ -1,9 +1,13 @@
-<div class="card border-light w-100 h-100 p-3">
+<div
+  class="card border-0 product-card w-100 h-100 p-3"
+  [ngClass]="{ dark: themeSerivce.isDarkMode() }">
   <div class="d-flex justify-content-between align-items-start card-body">
     <img class="card-img-top bg-light rounded" [src]="product | logo" alt="" />
     <div
       class="rounded px-2 py-1 text-light"
-      [ngClass]="themeSerivce.isDarkMode() ? 'bg-light text-dark' : 'bg-primary'">
+      [ngClass]="
+        themeSerivce.isDarkMode() ? 'bg-light text-dark' : 'bg-primary'
+      ">
       {{ 'common.filter.' + product.type | translate }}
     </div>
   </div>

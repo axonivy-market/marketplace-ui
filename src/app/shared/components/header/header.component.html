@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <div class="d-flex flex-row-reverse">
+  <div class="d-flex justify-content-start">
     <div class="d-flex align-items-center header__nav">
       <div class="navbar navbar-expand-lg">
         <ul class="navbar-nav mb-lg-0">
@@ -31,37 +31,39 @@
     </div>
   </div>
 
-  <div>
-    <div class="d-flex align-items-center header__menu--right">
-      <div class="m-2 header__theme-button">
-        <div (click)="themeService.changeTheme()">
-          @if (themeService.isDarkMode()) {
-            <i class="bi bi-moon"></i>
-          } @else {
-            <i class="bi bi-sun"></i>
-          }
-        </div>
-      </div>
-      <div class="m-2 header__search-button">
-        <i class="bi bi-search"></i>
-      </div>
-
-      <select
-        class="m-2 form-select form-select-sm w-auto"
-        aria-label="Language"
-        [(ngModel)]="selectedLanguage"
-        (ngModelChange)="onSelectLanguage($event)"
-        name="language">
-        @for (language of languages; track $index) {
-          <option [value]="language.value">
-            {{ language.label | translate }}
-          </option>
+  <div class="d-flex align-items-center">
+    <div class="m-2 header__theme-button">
+      <div (click)="themeService.changeTheme()">
+        @if (themeService.isDarkMode()) {
+          <i class="bi bi-moon"></i>
+        } @else {
+          <i class="bi bi-sun"></i>
         }
-      </select>
-
-      <div class="m-2 header__download-button">
-        <button class="btn btn-primary">Download V10.0.18</button>
       </div>
+    </div>
+    <div class="m-2 header__search-button">
+      <i class="bi bi-search"></i>
+    </div>
+
+    <select
+      class="m-2 form-select form-select-sm w-auto"
+      aria-label="Language"
+      [(ngModel)]="selectedLanguage"
+      (ngModelChange)="onSelectLanguage($event)"
+      name="language">
+      @for (language of languages; track $index) {
+        <option [value]="language.value">
+          {{ language.label | translate }}
+        </option>
+      }
+    </select>
+
+    <div class="m-2 header__download-button">
+      <button
+        class="btn"
+        [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'">
+        Download V10.0.18
+      </button>
     </div>
   </div>
 </div>
