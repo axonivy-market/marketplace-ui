@@ -55,7 +55,7 @@ export const FILTER_TYPES = [
     label: 'common.filter.util'
   },
   {
-    value: FilterType.DEMOS,
+    value: FilterType.SOLUTION,
     label: 'common.filter.demos'
   }
 ];

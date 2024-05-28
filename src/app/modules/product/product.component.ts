@@ -1,26 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { Product } from '../../shared/models/product.model';
-import { ProductService } from './product.service';
-import {
-  Observable,
-  Subject,
-  Subscription,
-  debounceTime,
-  fromEvent
-} from 'rxjs';
-import { ProductCardComponent } from './product-card/product-card.component';
-import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { FilterType } from '../../shared/enums/filter-type.enum';
+import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Observable, Subject, Subscription, debounceTime } from 'rxjs';
 import { ThemeService } from '../../core/services/theme/theme.service';
+import { FilterType } from '../../shared/enums/filter-type.enum';
 import { SortType } from '../../shared/enums/sort-type.enum';
-import {
-  FILTER_TYPES,
-  SORT_TYPES
-} from '../../shared/constants/common.constant';
+import { Criteria } from '../../shared/models/criteria.model';
+import { Product } from '../../shared/models/product.model';
+import { ProductCardComponent } from './product-card/product-card.component';
 import { ProductFilterComponent } from './product-filter/product-filter.component';
+import { ProductService } from './product.service';
 
 const SEARCH_DEBOUNCE_TIME = 1000;
 
@@ -42,6 +33,11 @@ export class ProductComponent implements OnInit, OnDestroy {
   products!: Observable<Product[]>;
   subscriptions: Subscription[] = [];
   searchTextChanged = new Subject<string>();
+  criteria: Criteria = {
+    search: '',
+    type: FilterType.All_TYPES,
+    sort: SortType.POPULARITY
+  };
 
   productService = inject(ProductService);
   themeService = inject(ThemeService);
@@ -49,14 +45,18 @@ export class ProductComponent implements OnInit, OnDestroy {
   router = inject(Router);
 
   constructor() {
-    this.products = this.productService.getProductsWithSort(
-      SortType.POPULARITY
-    );
+    this.products = this.productService.getProductsByCriteria(this.criteria);
     this.subscriptions.push(
       this.searchTextChanged
         .pipe(debounceTime(SEARCH_DEBOUNCE_TIME))
         .subscribe((value) => {
-          this.products = this.productService.getProductByName(value);
+          this.criteria = {
+            ...this.criteria,
+            search: value
+          };
+          this.products = this.productService.getProductsByCriteria(
+            this.criteria
+          );
         })
     );
   }
@@ -68,11 +68,19 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   onFilterChange(type: FilterType) {
-    this.products = this.productService.getProductByType(type);
+    this.criteria = {
+      ...this.criteria,
+      type: type
+    };
+    this.products = this.productService.getProductsByCriteria(this.criteria);
   }
 
   onSortChange(type: SortType) {
-    this.products = this.productService.getProductsWithSort(type);
+    this.criteria = {
+      ...this.criteria,
+      sort: type
+    };
+    this.products = this.productService.getProductsByCriteria(this.criteria);
   }
 
   onSearchChanged(searchString: string) {
