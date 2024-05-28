@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-between">
+<!-- <div class="d-flex justify-content-between">
   <div class="flex-column logo">
     <img
       class="logo__image"
@@ -17,7 +17,7 @@
 
     <div class="flex-row">
       <button class="btn btn-primary">Download V10.0.18</button>
-      <button class="btn btn-outline-primary m-3" >Download V11.2.1</button>
+      <button class="btn btn-outline-primary m-3">Download V11.2.1</button>
     </div>
   </div>
 
@@ -26,7 +26,9 @@
       <ul class="navbar-nav me-auto mb-lg-0">
         @for (item of navItems; track $index) {
           <li class="nav-item">
-            <a class="nav-link" aria-current="page">{{ item.label | translate }}</a>
+            <a class="nav-link" aria-current="page">
+              {{ item.label | translate }}
+            </a>
             <div class="active-line"></div>
           </li>
         }
@@ -34,3 +36,97 @@
     </div>
   </div>
 </div>
+
+<div class="border border-dark d-flex justify-content-between">
+  <div class="social flex-row">
+    <button class="btn btn-primary">Download V10.0.18</button>
+    <button class="btn btn-outline-primary m-3">Download V11.2.1</button>
+  </div>
+  <img
+    class="logo__image"
+    [src]="
+      themeService.isDarkMode()
+        ? '/assets/images/misc/axonivy-logo.svg'
+        : '/assets/images/misc/axonivy-logo-black.svg'
+    "
+    alt="Axon Ivy" />
+
+</div> -->
+
+<!-- Footer -->
+<footer class="text-center text-lg-start bg-body-tertiary text-muted">
+  <!-- Section: Ivy Information -->
+  <section class="d-flex justify-content-between p-4 border-bottom">
+    <div class="flex-column logo">
+      <!-- Left -->
+      <img
+        class="logo__image"
+        [src]="
+          themeService.isDarkMode()
+            ? '/assets/images/misc/axonivy-logo.svg'
+            : '/assets/images/misc/axonivy-logo-black.svg'
+        "
+        alt="Axon Ivy" />
+
+      <!-- Right -->
+      <div>
+        New version release available for Linux,
+        <br />
+        Window and MacOS operating systems.
+      </div>
+
+      <div class="flex-row">
+        <button class="btn btn-primary">Download V10.0.18</button>
+        <button class="btn btn-outline-primary m-3">Download V11.2.1</button>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center">
+      <div class="navbar navbar-expand-lg">
+        <ul class="navbar-nav me-auto mb-lg-0">
+          @for (item of navItems; track $index) {
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page">
+                {{ item.label | translate }}
+              </a>
+              <div class="active-line"></div>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+  <!-- Section: Social media -->
+
+  <!-- Section: Policy & Social Media -->
+  <section class="d-flex justify-content-between">
+    <!-- Grid row -->
+    <!-- Grid column -->
+    <div class=" d-flex mb-4">
+      <!-- Links -->
+      <h6 class="text-uppercase fw-bold mb-4">2023 Axon Ivy Inx.</h6>
+      <p>
+        <a href="#!" class="text-reset">Privacy Policy</a>
+      </p>
+      <p>
+        <a href="#!" class="text-reset">Terms of Service</a>
+      </p>
+    </div>
+
+    <!-- Grid column -->
+    <div class="d-flex">
+      <!-- Links -->
+      <h6 class="text-uppercase fw-bold mb-4"><i class="bi bi-linkedin"></i></h6>
+      <p>
+        <a href="#!" class="text-reset"><i class="fas fa-trash"></i></a>
+      </p>
+
+      <p>
+        <a href="#!" class="text-reset"><i class="bi bi-youtube"></i></a>
+      </p>
+    </div>
+    <!-- Grid row -->
+  </section>
+  <!-- Section: Links  -->
+</footer>
+<!-- Footer -->

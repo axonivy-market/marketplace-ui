@@ -1,4 +1,4 @@
-<div class="grid-container">
+<!-- <div class="grid-container">
   <div class="col-2">
     <div class="header__logo">
       <a href="/" class="logo">
@@ -66,4 +66,78 @@
       </button>
     </div>
   </div>
-</div>
+</div> -->
+
+<!-- testing new navbar -->
+<nav class="navbar navbar-expand-lg navbar-light">
+  <a href="/" class="logo">
+    <img
+      class="logo__image"
+      [src]="
+        themeService.isDarkMode()
+          ? '/assets/images/misc/axonivy-logo.svg'
+          : '/assets/images/misc/axonivy-logo-black.svg'
+      "
+      alt="Axon Ivy" />
+  </a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div
+    class="collapse navbar-collapse justify-content-between"
+    id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      @for (item of navItems; track $index) {
+        <li class="nav-item" [ngClass]="{ active: item.link === '/' }">
+          <a class="nav-link" aria-current="page" [href]="item.link">
+            {{ item.label | translate }}
+          </a>
+          <div class="active-line"></div>
+        </li>
+      }
+    </ul>
+    <div class="d-flex align-items-center">
+      <div class="m-2 header__theme-button">
+        <div (click)="themeService.changeTheme()">
+          @if (themeService.isDarkMode()) {
+            <i class="bi bi-moon"></i>
+          } @else {
+            <i class="bi bi-sun"></i>
+          }
+        </div>
+      </div>
+      <div class="m-2 header__search-button">
+        <i class="bi bi-search"></i>
+      </div>
+
+      <select
+        class="m-2 form-select form-select-sm w-auto"
+        aria-label="Language"
+        [(ngModel)]="selectedLanguage"
+        (ngModelChange)="onSelectLanguage($event)"
+        name="language">
+        @for (language of languages; track $index) {
+          <option [value]="language.value">
+            {{ language.label | translate }}
+          </option>
+        }
+      </select>
+
+      <div class="m-2 header__download-button">
+        <button
+          class="btn"
+          [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'">
+          Download V10.0.18
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
