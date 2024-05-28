@@ -8,7 +8,6 @@ import { Product } from '../models/product.model';
 export class ProductLogoPipe implements PipeTransform {
 
   transform(product: Product, args?: any): any {
-    // Implement your pipe logic here
     return `/assets/_market/${product.id}/logo.png`;
   }
 
