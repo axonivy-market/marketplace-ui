@@ -8,34 +8,21 @@ on:
 
 jobs:
   build:
-
+    name: Build and deploy new code to Deployment directory
     runs-on: self-hosted
 
     steps:
     - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+    - uses: actions/setup-node@v4
       with:
         node-version: '18'
         cache: 'npm'
-    - name: Set CHROME_BIN environment variable
-      run: echo "export CHROME_BIN=$(which google-chrome)" >> $GITHUB_ENV
     - name: Install Dependencies
       run: npm install
-    - name: Build Angular App
+    - name: Build Angular app
       run: npm run build -- --output-path=dist
     - name: Execute Tests
       run: npm run test
-      env:
-        CHROME_BIN: /usr/bin/google-chrome
-      continue-on-error: true
-    - name: Print Test Results
-      if: failure()
-      run: cat test-results.xml
-    - name: Cleanup
-      if: failure()
-      run: echo "Performing cleanup tasks..."
-      continue-on-error: true
-    - name: Copy Files to Deployment Directory
+    - name: Copy files to Deployment directory
       if: success()
-      run: sudo cp -r dist/* /var/www/marketplaces.com/public_html
+      run: sudo cp -r dist/* /var/www/marketplace-ui
