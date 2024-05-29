@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { Observable, Subject, Subscription, debounceTime } from 'rxjs';
+import { Subject, Subscription, debounceTime } from 'rxjs';
 import { ThemeService } from '../../core/services/theme/theme.service';
 import { FilterType } from '../../shared/enums/filter-type.enum';
 import { SortType } from '../../shared/enums/sort-type.enum';
@@ -29,8 +29,8 @@ const SEARCH_DEBOUNCE_TIME = 1000;
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })
-export class ProductComponent implements OnInit, OnDestroy {
-  products!: Observable<Product[]>;
+export class ProductComponent implements OnDestroy {
+  products: Product[] = [];
   subscriptions: Subscription[] = [];
   searchTextChanged = new Subject<string>();
   criteria: Criteria = {
@@ -45,7 +45,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   router = inject(Router);
 
   constructor() {
-    this.products = this.productService.getProductsByCriteria(this.criteria);
+    this.loadAllProducts();
     this.subscriptions.push(
       this.searchTextChanged
         .pipe(debounceTime(SEARCH_DEBOUNCE_TIME))
@@ -54,14 +54,20 @@ export class ProductComponent implements OnInit, OnDestroy {
             ...this.criteria,
             search: value
           };
-          this.products = this.productService.getProductsByCriteria(
-            this.criteria
-          );
+          this.loadAllProducts();
         })
     );
   }
 
-  ngOnInit(): void {}
+  loadAllProducts() {
+    this.subscriptions.push(
+      this.productService
+        .getProductsByCriteria(this.criteria)
+        .subscribe((products) => {
+          this.products = products;
+        })
+    );
+  }
 
   viewProductDetail(productId: string) {
     this.router.navigate(['', productId]);
@@ -72,7 +78,7 @@ export class ProductComponent implements OnInit, OnDestroy {
       ...this.criteria,
       type: type
     };
-    this.products = this.productService.getProductsByCriteria(this.criteria);
+    this.loadAllProducts();
   }
 
   onSortChange(type: SortType) {
@@ -80,7 +86,7 @@ export class ProductComponent implements OnInit, OnDestroy {
       ...this.criteria,
       sort: type
     };
-    this.products = this.productService.getProductsByCriteria(this.criteria);
+    this.loadAllProducts();
   }
 
   onSearchChanged(searchString: string) {
