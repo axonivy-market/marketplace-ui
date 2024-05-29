@@ -16,8 +16,12 @@
     </div>
 
     <div class="flex-row">
-      <button class="btn btn-primary">Download V10.0.18</button>
-      <button class="btn btn-outline-primary m-3" >Download V11.2.1</button>
+      <button
+        class="btn"
+        [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'">
+        Download V10.0.18
+      </button>
+      <button class="btn border-0 m-3" [style.backgroundColor]="themeService.isDarkMode() ? 'var(--bs-gray-800)' : ''">Download V11.2.1</button>
     </div>
   </div>
 
@@ -26,7 +30,9 @@
       <ul class="navbar-nav me-auto mb-lg-0">
         @for (item of navItems; track $index) {
           <li class="nav-item">
-            <a class="nav-link" aria-current="page">{{ item.label | translate }}</a>
+            <a class="nav-link" aria-current="page">
+              {{ item.label | translate }}
+            </a>
             <div class="active-line"></div>
           </li>
         }
