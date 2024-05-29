@@ -9,3 +9,10 @@ common:
     community: Communauté
     team: Équipe
     market: Marché
+  footer:
+    newVersionsInfo: TODO New version release available for Linux,<br /> Window and MacOS operating systems.
+    downloadLatestLTSVersion: TODO Download V10.0.18
+    downloadLatestDevVersion: TODO Download V11.2.1
+    ivyCompanyInfo: © 2023 Axon Ivy Inc
+    privayPolicy: TODO Privacy Policy
+    termsOfService: TODO Terms of Service

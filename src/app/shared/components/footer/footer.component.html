@@ -1,7 +1,8 @@
 <!-- Footer -->
-<footer class="text-center text-lg-start bg-body-tertiary text-muted">
+<footer class="text-center">
   <!-- Section: Ivy Information -->
-  <section class="d-flex justify-content-lg-between justify-content-md-center p-4 border-bottom">
+  <section
+    class="d-flex justify-content-lg-between justify-content-md-center p-4 border-bottom">
     <div class="flex-column logo">
       <!-- Left -->
       <img
@@ -13,21 +14,19 @@
         "
         alt="Axon Ivy" />
 
-      <!-- Right -->
-      <div>
-        New version release available for Linux,
-        <br />
-        Window and MacOS operating systems.
+      <div [innerHtml]="'common.footer.newVersionsInfo' | translate">
+        
       </div>
 
       <div class="flex-row">
-        <button class="btn btn-primary">Download V10.0.18</button>
-        <button class="btn btn-outline-primary m-3">Download V11.2.1</button>
+        <button class="btn btn-primary" >{{'common.footer.downloadLatestLTSVersion'| translate}}</button>
+        <button class="btn btn-outline-primary m-3">{{'common.footer.downloadLatestDevVersion'| translate}}</button>
       </div>
     </div>
 
+    <!-- Right -->
     <div class="d-flex align-items-center d-md-none d-lg-block">
-      <div class=" navbar navbar-expand-lg">
+      <div class="navbar navbar-expand-lg">
         <ul class="navbar-nav me-auto mb-lg-0">
           @for (item of navItems; track $index) {
             <li class="nav-item">
@@ -42,20 +41,22 @@
     </div>
   </section>
   <!-- Section: Policy & Social Media -->
-  <section class="d-flex flex-lg-row flex-sm-column justify-content-between p-4 border-bottom">
+  <section
+    class="d-flex flex-lg-row flex-sm-column justify-content-between p-4 border-bottom">
     <div class="navbar navbar-expand-lg align-self-md-center w-md-100">
       <!-- Left -->
-      <div class="flex-md-row navbar-nav me-auto mb-lg-0 flex-wrap w-md-100 justify-content-center">
+      <div
+        class="flex-md-row navbar-nav me-auto mb-lg-0 flex-wrap w-md-100 justify-content-center">
         <div class="p-2 w-md-100">
-          <a class="nav-link" aria-current="page">2023 Axon Ivy Inx.</a>
+          <a class="nav-link" aria-current="page" >{{'common.footer.ivyCompanyInfo'| translate}}</a>
           <div class="active-line"></div>
         </div>
         <div class="p-2">
-          <a class="nav-link" aria-current="page">Privacy Policy</a>
+          <a class="nav-link" aria-current="page">{{'common.footer.privayPolicy'| translate}}</a>
           <div class="active-line"></div>
         </div>
         <div class="p-2">
-          <a class="nav-link" aria-current="page">Terms of Service</a>
+          <a class="nav-link" aria-current="page">{{'common.footer.termsOfService'| translate}}</a>
           <div class="active-line"></div>
         </div>
       </div>
@@ -78,7 +79,8 @@
             <a class="nav-link" aria-current="page">
               <i class="fab fa-youtube"></i>
             </a>
-          </li><li class="p-2">
+          </li>
+          <li class="p-2">
             <a class="nav-link" aria-current="page">
               <i class="fab fa-facebook"></i>
             </a>
@@ -87,6 +89,5 @@
       </div>
     </div>
   </section>
-  <!-- Section: Links  -->
 </footer>
 <!-- Footer -->

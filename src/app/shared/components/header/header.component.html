@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <a href="/" class="logo navbar-brand">
       <img
@@ -29,8 +29,8 @@
         <input
           class="form-control me-2"
           type="search"
-          placeholder="Search"
-          aria-label="Search" />
+          [placeholder]="translateService.get('common.search.placeholder') | async"
+          [ariaLabel]="translateService.get('common.search.placeholder') | async" />
       </form>
       <ul class="navbar-nav mr-auto">
         @for (item of navItems; track $index) {
@@ -77,7 +77,7 @@
           <button
             class="btn w-md-100"
             [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'">
-            Download V10.0.18
+            {{'common.footer.downloadLatestLTSVersion'| translate}}
           </button>
         </li>
       </ul>
