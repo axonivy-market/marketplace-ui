@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { of } from 'rxjs';
+// import { ProductFilterComponent } from '../../modules/product/product-filter/product-filter.component';
+
 
 class TranslateServiceStub {
   get(key: any): any {

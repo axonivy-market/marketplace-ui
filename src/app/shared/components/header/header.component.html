@@ -1,143 +1,83 @@
-<!-- <div class="grid-container">
-  <div class="col-2">
-    <div class="header__logo">
-      <a href="/" class="logo">
-        <img
-          class="logo__image"
-          [src]="
-            themeService.isDarkMode()
-              ? '/assets/images/misc/axonivy-logo.svg'
-              : '/assets/images/misc/axonivy-logo-black.svg'
-          "
-          alt="Axon Ivy" />
-      </a>
-    </div>
-  </div>
-
-  <div class="d-flex justify-content-center">
-    <div class="d-flex align-items-center header__nav">
-      <div class="navbar navbar-expand-lg">
-        <ul class="navbar-nav mb-lg-0">
-          @for (item of navItems; track $index) {
-            <li class="nav-item" [ngClass]="{ active: item.link === '/' }">
-              <a class="nav-link" aria-current="page" [href]="item.link">
-                {{ item.label | translate }}
-              </a>
-              <div class="active-line"></div>
-            </li>
-          }
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="d-flex align-items-center">
-    <div class="m-2 header__theme-button">
-      <div (click)="themeService.changeTheme()">
-        @if (themeService.isDarkMode()) {
-          <i class="bi bi-moon"></i>
-        } @else {
-          <i class="bi bi-sun"></i>
-        }
-      </div>
-    </div>
-    <div class="m-2 header__search-button">
-      <i class="bi bi-search"></i>
-    </div>
-
-    <select
-      class="m-2 form-select form-select-sm w-auto"
-      aria-label="Language"
-      [(ngModel)]="selectedLanguage"
-      (ngModelChange)="onSelectLanguage($event)"
-      name="language">
-      @for (language of languages; track $index) {
-        <option [value]="language.value">
-          {{ language.label | translate }}
-        </option>
-      }
-    </select>
-
-    <div class="m-2 header__download-button">
-      <button
-        class="btn"
-        [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'">
-        Download V10.0.18
-      </button>
-    </div>
-  </div>
-</div> -->
-
-<!-- testing new navbar -->
 <nav class="navbar navbar-expand-lg navbar-light">
-  <a href="/" class="logo">
-    <img
-      class="logo__image"
-      [src]="
-        themeService.isDarkMode()
-          ? '/assets/images/misc/axonivy-logo.svg'
-          : '/assets/images/misc/axonivy-logo-black.svg'
-      "
-      alt="Axon Ivy" />
-  </a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <div class="container-fluid">
+    <a href="/" class="logo navbar-brand">
+      <img
+        class="logo__image"
+        [src]="
+          themeService.isDarkMode()
+            ? '/assets/images/misc/axonivy-logo.svg'
+            : '/assets/images/misc/axonivy-logo-black.svg'
+        "
+        alt="Axon Ivy" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div
-    class="collapse navbar-collapse justify-content-between"
-    id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      @for (item of navItems; track $index) {
-        <li class="nav-item" [ngClass]="{ active: item.link === '/' }">
-          <a class="nav-link" aria-current="page" [href]="item.link">
-            {{ item.label | translate }}
-          </a>
-          <div class="active-line"></div>
-        </li>
-      }
-    </ul>
-    <div class="d-flex align-items-center">
-      <div class="m-2 header__theme-button">
-        <div (click)="themeService.changeTheme()">
-          @if (themeService.isDarkMode()) {
-            <i class="bi bi-moon"></i>
-          } @else {
-            <i class="bi bi-sun"></i>
-          }
-        </div>
-      </div>
-      <div class="m-2 header__search-button">
-        <i class="bi bi-search"></i>
-      </div>
-
-      <select
-        class="m-2 form-select form-select-sm w-auto"
-        aria-label="Language"
-        [(ngModel)]="selectedLanguage"
-        (ngModelChange)="onSelectLanguage($event)"
-        name="language">
-        @for (language of languages; track $index) {
-          <option [value]="language.value">
-            {{ language.label | translate }}
-          </option>
+    <div
+      class="collapse navbar-collapse justify-content-between"
+      id="navbarSupportedContent">
+      <div></div>
+      <form class="d-lg-none" role="search">
+        <!-- <app-product-filter
+    (searchChange)="onSearchChanged($event)"
+    (filterChange)="onFilterChange($event)"
+    (sortChange)="onSortChange($event)"></app-product-filter> -->
+      </form>
+      <ul class="navbar-nav mr-auto ">
+        @for (item of navItems; track $index) {
+          <li class="nav-item" [ngClass]="{ active: item.link === '/' }">
+            <a class="nav-link" aria-current="page" [href]="item.link">
+              {{ item.label | translate }}
+            </a>
+            <div class="active-line"></div>
+          </li>
         }
-      </select>
+      </ul>
+      <ul class="navbar-nav mr-auto flex-lg-row flex-sm-column-reverse ">
+        <li class="m-2 header__theme-button border-top-md-gray">
+          <div class="nav-item text-md-center" (click)="themeService.changeTheme()">
+            @if (themeService.isDarkMode()) {
+              <i class="bi bi-moon"></i>
+            } @else {
+              <i class="bi bi-sun"></i>
+            }
+          </div>
+        </li>
+        <li class="m-2 header__search-button nav-item d-sm-none">
+          <i class="bi bi-search"></i>
+        </li>
 
-      <div class="m-2 header__download-button">
-        <button
-          class="btn"
-          [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'">
-          Download V10.0.18
-        </button>
-      </div>
+        <li>
+          <select
+            class="nav-item m-2 form-select form-select-sm w-auto d-sm-none"
+            aria-label="Language"
+            [(ngModel)]="selectedLanguage"
+            (ngModelChange)="onSelectLanguage($event)"
+            name="language">
+            @for (language of languages; track $index) {
+              <option [value]="language.value">
+                {{ language.label | translate }}
+              </option>
+            }
+          </select>
+        </li>
+
+        <li class="nav-item m-2 header__download-button">
+          <button
+            class="btn w-md-100"
+            [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'">
+            Download V10.0.18
+          </button>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
