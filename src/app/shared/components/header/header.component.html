@@ -26,24 +26,27 @@
       id="navbarSupportedContent">
       <div></div>
       <form class="d-lg-none" role="search">
-        <!-- <app-product-filter
-    (searchChange)="onSearchChanged($event)"
-    (filterChange)="onFilterChange($event)"
-    (sortChange)="onSortChange($event)"></app-product-filter> -->
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search" />
       </form>
-      <ul class="navbar-nav mr-auto ">
+      <ul class="navbar-nav mr-auto">
         @for (item of navItems; track $index) {
           <li class="nav-item" [ngClass]="{ active: item.link === '/' }">
             <a class="nav-link" aria-current="page" [href]="item.link">
               {{ item.label | translate }}
             </a>
-            <div class="active-line"></div>
+            <!-- <div class="active-line"></div> -->
           </li>
         }
       </ul>
-      <ul class="navbar-nav mr-auto flex-lg-row flex-sm-column-reverse ">
+      <ul class="navbar-nav mr-auto flex-lg-row flex-sm-column-reverse">
         <li class="m-2 header__theme-button border-top-md-gray">
-          <div class="nav-item text-md-center" (click)="themeService.changeTheme()">
+          <div
+            class="nav-item text-md-center"
+            (click)="themeService.changeTheme()">
             @if (themeService.isDarkMode()) {
               <i class="bi bi-moon"></i>
             } @else {
@@ -51,13 +54,13 @@
             }
           </div>
         </li>
-        <li class="m-2 header__search-button nav-item d-sm-none">
+        <li class="m-2 header__search-button nav-item d-sm-none d-lg-block">
           <i class="bi bi-search"></i>
         </li>
 
         <li>
           <select
-            class="nav-item m-2 form-select form-select-sm w-auto d-sm-none"
+            class="nav-item m-2 form-select form-select-sm w-auto d-sm-none d-lg-block"
             aria-label="Language"
             [(ngModel)]="selectedLanguage"
             (ngModelChange)="onSelectLanguage($event)"
