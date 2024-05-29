@@ -29,8 +29,12 @@
         <input
           class="form-control me-2"
           type="search"
-          [placeholder]="translateService.get('common.search.placeholder') | async"
-          [ariaLabel]="translateService.get('common.search.placeholder') | async" />
+          [placeholder]="
+            translateService.get('common.search.placeholder') | async
+          "
+          [ariaLabel]="
+            translateService.get('common.search.placeholder') | async
+          " />
       </form>
       <ul class="navbar-nav mr-auto">
         @for (item of navItems; track $index) {
@@ -42,7 +46,8 @@
           </li>
         }
       </ul>
-      <ul class="navbar-nav mr-auto flex-lg-row flex-sm-column-reverse">
+      <ul
+        class="navbar-nav mr-auto flex-lg-row flex-sm-column-reverse align-items-lg-center align-items-sm-stretch">
         <li class="m-2 header__theme-button border-top-md-gray">
           <div
             class="nav-item text-md-center"
@@ -55,7 +60,22 @@
           </div>
         </li>
         <li class="m-2 header__search-button nav-item d-sm-none d-lg-block">
-          <i class="bi bi-search"></i>
+          <input
+            class="form-control me-2"
+            [hidden]="!this.isSearchButtonClicked"
+            type="search"
+            (blur)="this.isSearchButtonClicked = false"
+            [placeholder]="
+              translateService.get('common.search.placeholder') | async
+            "
+            [ariaLabel]="
+              translateService.get('common.search.placeholder') | async
+            " />
+
+          <i
+            class="bi bi-search"
+            [hidden]="this.isSearchButtonClicked"
+            (click)="this.isSearchButtonClicked = true"></i>
         </li>
 
         <li>
@@ -77,7 +97,7 @@
           <button
             class="btn w-md-100"
             [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'">
-            {{'common.footer.downloadLatestLTSVersion'| translate}}
+            {{ 'common.footer.downloadLatestLTSVersion' | translate }}
           </button>
         </li>
       </ul>

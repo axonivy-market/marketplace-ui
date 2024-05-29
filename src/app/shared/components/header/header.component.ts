@@ -18,6 +18,7 @@ export class HeaderComponent {
   selectedNav: string = '/';
   selectedLanguage: string = Language.EN_GB;
   languages = LANGUAGES;
+  isSearchButtonClicked = false;
 
   navItems: NavItem[] = NAV_ITEMS;
 
