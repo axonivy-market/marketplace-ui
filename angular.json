@@ -28,10 +28,12 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/assets/_market"
+              "src/assets/_market",
+              {"glob": "**/*", "input": "C:\\Users\\nttu\\Documents\\work\\projects\\market\\market-test\\target\\market", "output": "./assets/_market"}
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.min.js"

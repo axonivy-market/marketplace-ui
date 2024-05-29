@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductCardComponent } from './product-card.component';
 import { Product } from '../../../shared/models/product.model';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 const mockProduct = {
   name: 'Product name',
@@ -14,7 +15,8 @@ describe('ProductCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProductCardComponent],
+      imports: [ProductCardComponent, TranslateModule.forRoot()],
+      providers: [TranslateService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProductCardComponent);
