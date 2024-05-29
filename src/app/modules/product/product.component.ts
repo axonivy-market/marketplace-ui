@@ -13,7 +13,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { ProductFilterComponent } from './product-filter/product-filter.component';
 import { ProductService } from './product.service';
 
-const SEARCH_DEBOUNCE_TIME = 1000;
+const SEARCH_DEBOUNCE_TIME = 500;
 
 @Component({
   selector: 'app-product',
