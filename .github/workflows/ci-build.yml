@@ -6,8 +6,26 @@ on:
   workflow_dispatch:
 
 jobs:
+  build:
+    name: Angular tests
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - name: Install Dependencies
+        run: npm install
+      - name: Execute Tests
+        run: npm run test
+      - name: Clean up
+        run: |
+          rm -rf *
+
   analysis:
     name: Sonarqube analysis
+    needs: build
     runs-on: self-hosted
     env:
       SONAR_PROJECT_KEY: "AxonIvy-Market-UI"
@@ -35,20 +53,3 @@ jobs:
         with:
           args:
             -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
-
-  build:
-    name: Angular tests
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
-      - name: Install Dependencies
-        run: npm install
-      - name: Execute Tests
-        run: npm run test
-      - name: Clean up
-        run: |
-          rm -rf *
