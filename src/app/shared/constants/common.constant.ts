@@ -30,6 +30,40 @@ export const NAV_ITEMS: NavItem[] = [
   }
 ];
 
+export const SOCIAL_MEDIA_LINK = [
+  {
+    styleClass: 'fab fa-linkedin',
+    url: '/'
+  },
+  {
+    styleClass: 'fab fa-xing',
+    url: '/'
+  },
+  {
+    styleClass: 'fab fa-youtube',
+    url: '/'
+  },
+  {
+    styleClass: 'fab fa-facebook',
+    url: '/'
+  }
+];
+
+export const IVY_FOOTER_LINKS = [
+  {
+    containerStyleClass: 'p-2 w-md-100',
+    label: 'common.footer.ivyCompanyInfo'
+  },
+  {
+    containerStyleClass: 'p-2',
+    label: 'common.footer.privayPolicy'
+  },
+  {
+    containerStyleClass: 'p-2',
+    label: 'common.footer.termsOfService'
+  }
+];
+
 export const LANGUAGES = [
   {
     value: Language.EN_GB,
