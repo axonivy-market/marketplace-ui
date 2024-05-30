@@ -4,6 +4,7 @@
   <section
     class="d-flex justify-content-lg-between justify-content-md-center justify-content-sm-center p-4 border-bottom">
     <div class="flex-column logo">
+      
       <!-- Left -->
       <img
         class="logo__image"
@@ -13,14 +14,20 @@
             : '/assets/images/misc/axonivy-logo-black.svg'
         "
         alt="Axon Ivy" />
-
-      <div [innerHtml]="'common.footer.newVersionsInfo' | translate">
-        
-      </div>
-
+      <div [innerHtml]="'common.footer.newVersionsInfo' | translate"></div>
       <div class="flex-row">
-        <button class="btn btn-primary" >{{'common.footer.downloadLatestLTSVersion'| translate}}</button>
-        <button class="btn btn-outline-primary m-3">{{'common.footer.downloadLatestDevVersion'| translate}}</button>
+        <button
+          class="btn"
+          [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'">
+          {{ 'common.footer.downloadLatestLTSVersion' | translate }}
+        </button>
+        <button
+          class="btn border-0 m-3"
+          [style.backgroundColor]="
+            themeService.isDarkMode() ? 'var(--bs-gray-800)' : ''
+          ">
+          {{ 'common.footer.downloadLatestDevVersion' | translate }}
+        </button>
       </div>
     </div>
 
@@ -48,15 +55,21 @@
       <div
         class="flex-md-row navbar-nav me-auto mb-lg-0 flex-wrap w-md-100 justify-content-center">
         <div class="p-2 w-md-100">
-          <a class="nav-link" aria-current="page" >{{'common.footer.ivyCompanyInfo'| translate}}</a>
+          <a class="nav-link" aria-current="page">
+            {{ 'common.footer.ivyCompanyInfo' | translate }}
+          </a>
           <div class="active-line"></div>
         </div>
         <div class="p-2">
-          <a class="nav-link" aria-current="page">{{'common.footer.privayPolicy'| translate}}</a>
+          <a class="nav-link" aria-current="page">
+            {{ 'common.footer.privayPolicy' | translate }}
+          </a>
           <div class="active-line"></div>
         </div>
         <div class="p-2">
-          <a class="nav-link" aria-current="page">{{'common.footer.termsOfService'| translate}}</a>
+          <a class="nav-link" aria-current="page">
+            {{ 'common.footer.termsOfService' | translate }}
+          </a>
           <div class="active-line"></div>
         </div>
       </div>
