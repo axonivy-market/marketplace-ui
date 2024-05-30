@@ -1,5 +1,4 @@
-import { Component, OnDestroy, inject } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, inject } from '@angular/core';
 import { ThemeService } from '../../../core/services/theme/theme.service';
 import { NavItem } from '../../models/nav-item.model';
 import {
