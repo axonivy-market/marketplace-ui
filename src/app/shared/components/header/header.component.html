@@ -25,6 +25,8 @@
       class="collapse navbar-collapse justify-content-between"
       id="navbarSupportedContent">
       <div></div>
+
+      <!-- Mobile Search Input -->
       <form class="d-lg-none" role="search">
         <input
           class="form-control me-2"
@@ -36,6 +38,8 @@
             translateService.get('common.search.placeholder') | async
           " />
       </form>
+
+      <!-- Navigation -->
       <ul class="navbar-nav mr-auto">
         @for (item of navItems; track $index) {
           <li class="nav-item" [ngClass]="{ active: item.link === '/' }">
@@ -45,11 +49,13 @@
           </li>
         }
       </ul>
+
       <ul
         class="navbar-nav mr-auto flex-lg-row flex-column-reverse align-items-lg-center align-items-sm-stretch">
+        <!-- Theme Mode -->
         <li class="m-2 header__theme-button border-top-md-gray">
           <div
-            class="nav-item text-center"
+            class="nav-item text-center m-t-5"
             (click)="themeService.changeTheme()">
             @if (themeService.isDarkMode()) {
               <i class="bi bi-moon"></i>
@@ -58,25 +64,31 @@
             }
           </div>
         </li>
-        <li class="m-2 header__search-button nav-item d-none d-lg-block">
-          <input
-            class="form-control me-2"
-            [hidden]="!this.isSearchButtonClicked"
-            type="search"
-            (blur)="this.isSearchButtonClicked = false"
-            [placeholder]="
-              translateService.get('common.search.placeholder') | async
-            "
-            [ariaLabel]="
-              translateService.get('common.search.placeholder') | async
-            " />
 
+        <!-- Collapse Search -->
+        <li class="m-2 header__search-button nav-item d-none d-lg-block">
           <i
             class="bi bi-search"
-            [hidden]="this.isSearchButtonClicked"
-            (click)="this.isSearchButtonClicked = true"></i>
-        </li>
+            data-bs-toggle="collapse"
+            href="#collapseSearch"
+            role="button"
+            aria-expanded="false"
+            aria-controls="collapseSearch"></i>
 
+          <div class="collapse" id="collapseSearch">
+            <input
+              class="form-control me-2 position-absolute top-100 start-0"
+              type="search"
+              [placeholder]="
+                translateService.get('common.search.placeholder') | async
+              "
+              [ariaLabel]="
+                translateService.get('common.search.placeholder') | async
+              " />
+          </div>
+        </li>
+        
+        <!-- Language Selection -->
         <li>
           <select
             class="nav-item m-2 form-select form-select-sm w-auto d-none d-lg-block"
@@ -91,7 +103,7 @@
             }
           </select>
         </li>
-
+        <!-- Download Latest LTS Version -->
         <li class="nav-item m-2 header__download-button">
           <button
             class="btn w-md-100"
