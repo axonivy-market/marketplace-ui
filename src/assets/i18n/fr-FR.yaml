@@ -9,3 +9,15 @@ common:
     community: Communauté
     team: Équipe
     market: Marché
+  filter:
+    allTypes: All Types
+    connector: Connectors
+    util: Utilities
+    demos: Demos
+    solution: Solutions
+  sort:
+    popularity: Popularity
+    alphabetically: Alphabetically
+    recent: Recent
+  search:
+    placeholder: Search a keyword
