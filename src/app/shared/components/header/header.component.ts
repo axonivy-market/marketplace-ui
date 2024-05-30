@@ -12,7 +12,7 @@ import { NavItem } from '../../models/nav-item.model';
   standalone: true,
   imports: [CommonModule, FormsModule, TranslateModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrls: ['./header.component.scss', '../../../app.component.scss']
 })
 export class HeaderComponent {
   selectedNav: string = '/';

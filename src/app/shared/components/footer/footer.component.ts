@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, TranslateModule],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.scss'
+  styleUrls: ['./footer.component.scss', '../../../app.component.scss']
 })
 export class FooterComponent {
   themeService = inject(ThemeService);

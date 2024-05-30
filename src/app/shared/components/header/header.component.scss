@@ -43,10 +43,7 @@
   grid-template-columns: 1rem 58rem 30rem;
 }
 
-@media all and (max-width: 1024px) {
-  .w-md-100{
-      width: -webkit-fill-available;
-  }
+@media all and (max-width: 992px) {
   .border-top-md-gray {
     border-top: gray solid 1px;
   }
