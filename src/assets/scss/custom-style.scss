@@ -1,5 +1,4 @@
 $ivyPrimaryColorLightHEX: #007095;
-
 $ivyPrimaryColorLightRGB: 0, 112, 149;
 
 [data-bs-theme='light'] {
@@ -19,7 +18,6 @@ $ivySecondaryColorDark: #383838;
   --bs-body-bg: #{$ivyBodyBackgroundDark};
   --bs-primary-rgb: #{$ivyPrimaryColorDark};
   --bs-secondary-rgb: #{$ivySecondaryColorDark};
-  --bs-secondary-rgb: 56, 56, 56;
   --bs-tertiary-bg: #{$ivySecondaryColorDark};
 
   --ivy-secondary: #{$ivySecondaryColorDark};
