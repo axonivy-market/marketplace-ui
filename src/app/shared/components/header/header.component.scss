@@ -43,6 +43,12 @@
   grid-template-columns: 1rem 58rem 30rem;
 }
 
+.show {
+  height: 100lvh;
+}
+.top-25 {
+  top: 25%;
+}
 @media all and (max-width: 992px) {
   .border-top-md-gray {
     border-top: gray solid 1px;

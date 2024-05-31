@@ -18,7 +18,8 @@ export class HeaderComponent {
   selectedNav: string = '/';
   selectedLanguage: string = Language.EN_GB;
   languages = LANGUAGES;
-  isSearchButtonClicked = false;
+  isSearchBarDisplayed = false;
+  isMobileMenuCollapsed = true;
 
   navItems: NavItem[] = NAV_ITEMS;
 
@@ -31,5 +32,13 @@ export class HeaderComponent {
 
   onSelectLanguage(language: string) {
     this.translateService.use(language);
+  }
+
+  onCollapsedMobileMenu() {
+    this.isMobileMenuCollapsed = !this.isMobileMenuCollapsed;
+  }
+
+  onClickSearchIcon() {
+    this.isSearchBarDisplayed = !this.isSearchBarDisplayed;
   }
 }
