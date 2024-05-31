@@ -72,39 +72,43 @@ export const LANGUAGES = [
   {
     value: Language.FR_FR,
     label: 'common.language.french'
+  },
+  {
+    value: Language.DE_DE,
+    label: 'common.language.german'
   }
 ];
 
 export const FILTER_TYPES = [
   {
     value: FilterType.All_TYPES,
-    label: 'common.filter.allTypes'
+    label: 'common.filter.value.allTypes'
   },
   {
     value: FilterType.CONNECTORS,
-    label: 'common.filter.connector'
+    label: 'common.filter.value.connector'
   },
   {
     value: FilterType.UTILITIES,
-    label: 'common.filter.util'
+    label: 'common.filter.value.util'
   },
   {
     value: FilterType.SOLUTION,
-    label: 'common.filter.solution'
+    label: 'common.filter.value.solution'
   }
 ];
 
 export const SORT_TYPES = [
   {
     value: SortType.POPULARITY,
-    label: 'common.sort.popularity'
+    label: 'common.sort.value.popularity'
   },
   {
     value: SortType.ALPHABETICALLY,
-    label: 'common.sort.alphabetically'
+    label: 'common.sort.value.alphabetically'
   },
   {
     value: SortType.RECENT,
-    label: 'common.sort.recent'
+    label: 'common.sort.value.recent'
   }
 ];

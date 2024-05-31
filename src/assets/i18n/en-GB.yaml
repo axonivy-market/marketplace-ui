@@ -2,6 +2,7 @@ common:
   language:
     english: English
     french: Français
+    german: Deutsch
   nav:
     news: News
     doc: Doc
@@ -9,16 +10,28 @@ common:
     community: Community
     team: Team
     market: Market
+  introduction:
+    about: The Axon Ivy market offers a unique experience to accelerate process automation.
+    contribute:
+      From standard connectors of leading providers to, ready-to-use process
+      models, business solutions and many utilities such as document
+      generation and workflow user interfaces.
+    link: Contribute to the community and
+      <a class="link-opacity-100" href="">build your own connector!</a>
   filter:
-    allTypes: All Types
-    connector: Connectors
-    util: Utilities
-    demos: Demos
-    solution: Solutions
+    label: Filter
+    value:
+      allTypes: All Types
+      connector: Connectors
+      util: Utilities
+      demos: Demos
+      solution: Solutions
   sort:
-    popularity: Popularity
-    alphabetically: Alphabetically
-    recent: Recent
+    label: Sort by
+    value:
+      popularity: Popularity
+      alphabetically: Alphabetically
+      recent: Recent
   search:
     placeholder: Search a keyword
   footer:

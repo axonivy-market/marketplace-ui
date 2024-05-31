@@ -1,0 +1,30 @@
+$ivyPrimaryColorLightHEX: #007095;
+
+$ivyPrimaryColorLightRGB: 0, 112, 149;
+
+[data-bs-theme='light'] {
+  --bs-primary-rgb: #{$ivyPrimaryColorLightRGB};
+
+  .btn-primary {
+    --bs-btn-bg: #{$ivyPrimaryColorLightHEX};
+  }
+}
+
+$ivyPrimaryColorDark: 44, 44, 44;
+$ivySecondaryColorDark: 56, 56, 56;
+$ivyBodyBackgroundDark: #2c2c2c;
+$ivySecondaryColorDark: #383838;
+
+[data-bs-theme='dark'] {
+  --bs-body-bg: #{$ivyBodyBackgroundDark};
+  --bs-primary-rgb: #{$ivyPrimaryColorDark};
+  --bs-secondary-rgb: #{$ivySecondaryColorDark};
+  --bs-secondary-rgb: 56, 56, 56;
+  --bs-tertiary-bg: #{$ivySecondaryColorDark};
+
+  --ivy-secondary: #{$ivySecondaryColorDark};
+
+  .card {
+    --bs-card-bg: #{$ivySecondaryColorDark};
+  }
+}

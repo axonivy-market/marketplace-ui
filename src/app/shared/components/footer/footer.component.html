@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="border-top">
+<footer class="border-top mt-5">
   <!-- Section: Ivy Information -->
   <section
     class="d-flex justify-content-lg-between justify-content-center p-4 border-bottom">
@@ -22,11 +22,7 @@
           [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'">
           {{ 'common.footer.downloadLatestLTSVersion' | translate }}
         </button>
-        <button
-          class="btn border-0 m-3"
-          [style.backgroundColor]="
-            themeService.isDarkMode() ? 'var(--bs-gray-800)' : ''
-          ">
+        <button class="btn bg-secondary border-0 m-3">
           {{ 'common.footer.downloadLatestDevVersion' | translate }}
         </button>
       </div>

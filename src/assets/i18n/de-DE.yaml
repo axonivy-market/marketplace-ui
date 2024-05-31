@@ -1,0 +1,43 @@
+common:
+  language:
+    english: Englisch
+    french: Französisch
+    german: Deutsch
+  nav:
+    news: Nachrichten
+    doc: Dokumentation
+    tutorial: Tutorial
+    community: Community
+    team: Team
+    market: Markt
+  introduction:
+    about: Der Axon Ivy-Markt bietet eine einzigartige Erfahrung zur Beschleunigung der Prozessautomatisierung.
+    contribute:
+      Von Standardkonnektoren führender Anbieter über fertige Prozessmodelle
+      Prozessmodellen, Geschäftslösungen und vielen Hilfsmitteln wie Dokumenten
+      Generierung und Workflow-Benutzeroberflächen.
+    link: einen Beitrag zur Gemeinschaft leisten und
+      <a class="link-opacity-100" href="">Bauen Sie Ihr eigenes Verbindungsstück!</a>
+  filter:
+    label: Filter
+    value:
+      allTypes: Alle Typen
+      connector: Konnektoren
+      util: Dienstprogramme
+      demos: Demos
+      solution: Lösungen
+  sort:
+    label: Sortierung
+    value:
+      popularity: Popularität
+      alphabetically: Alphabetisch
+      recent: Aktuell
+  search:
+    placeholder: Suche ein Stichwort
+  footer:
+    newVersionsInfo: Neue Version verfügbar für Linux,<br /> Windows und MacOS Betriebssysteme.
+    downloadLatestLTSVersion: V10.0.18 herunterladen
+    downloadLatestDevVersion: V11.2.1 herunterladen
+    ivyCompanyInfo: © 2023 Axon Ivy Inc
+    privayPolicy: Datenschutzrichtlinie
+    termsOfService: Nutzungsbedingungen

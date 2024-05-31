@@ -1,5 +1,7 @@
 <div class="mt-5">
-  <p class="h3 mb-5">Filters</p>
+  <p class="h3 mb-5">
+    {{ translateService.get('common.filter.label') | async }}
+  </p>
   <div class="d-flex justify-content-between align-items-center mb-5">
     <div class="d-flex d-none d-md-flex">
       @for (type of filterTypes; track $index) {
@@ -21,21 +23,23 @@
 
     <div class="col-6 d-sm-block d-md-none">
       <select
-      [(ngModel)]="selectedFilterType"
-      (ngModelChange)="onSelectFilterType($event)"
-      class="form-select form-select-lg me-2 w-100"
-      aria-label="sort"
-      name="sort">
-      @for (type of filterTypes; track $index) {
-        <option [value]="type.value">
-          {{ type.label | translate }}
-        </option>
-      }
-    </select>
+        [(ngModel)]="selectedFilterType"
+        (ngModelChange)="onSelectFilterType($event)"
+        class="form-select form-select-lg me-2 w-100"
+        aria-label="sort"
+        name="sort">
+        @for (type of filterTypes; track $index) {
+          <option [value]="type.value">
+            {{ type.label | translate }}
+          </option>
+        }
+      </select>
     </div>
 
     <div class="d-flex col-sm-6 col-md-5 col-lg-3 align-items-center">
-      <span class="d-none d-md-block w-25">Sort by:</span>
+      <span class="fw-bold d-none d-md-block w-25">
+        {{ translateService.get('common.sort.label') | async }}:
+      </span>
       <select
         [(ngModel)]="selectedSortType"
         (ngModelChange)="onSortChange()"
@@ -53,7 +57,7 @@
 
   <div class="input-group input-group-lg mb-5">
     <div class="input-group-prepend">
-      <span class="input-group-text h-100 lh-lg border-0">
+      <span class="input-group-text h-100 lh-lg border-0 rounded-end-0">
         <i class="bi bi-search h-100"></i>
       </span>
     </div>
@@ -61,7 +65,7 @@
       [(ngModel)]="searchText"
       (ngModelChange)="onSearchChanged($event)"
       type="text"
-      class="form-control border-0 search-input"
+      class="form-control border-0 rounded-start-0 search-input"
       [ngClass]="{ dark: themeService.isDarkMode() }"
       [placeholder]="translateService.get('common.search.placeholder') | async"
       [ariaLabel]="translateService.get('common.search.placeholder') | async"
