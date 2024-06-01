@@ -31,104 +31,110 @@
     </button>
 
     <div
-      class="collapse navbar-collapse justify-content-between"
+      class="collapse navbar-collapse"
       id="navbarSupportedContent">
-      <div>
-        <!-- Mobile Search Input -->
-        <form class="d-lg-none" role="search">
-          <div class="input-group mb-5">
-            <div class="input-group-prepend">
-              <span class="input-group-text border-0">
-                <i class="bi bi-search"></i>
-              </span>
+      <div class="d-flex flex-column flex-lg-row justify-content-between w-100 min-height-100 align-items-lg-center">
+        <!-- dummy div for ui spacing in lg screen-->
+        <div class="d-lg-block d-none"></div>
+        <div>
+          <!-- Mobile Search Input -->
+          <form class="d-lg-none" role="search">
+            <div class="input-group mb-5">
+              <div class="input-group-prepend">
+                <span class="input-group-text border-0">
+                  <i class="bi bi-search"></i>
+                </span>
+              </div>
+              <input
+                class="form-control me-2"
+                type="search"
+                [placeholder]="
+                  translateService.get('common.search.placeholder') | async
+                "
+                [ariaLabel]="
+                  translateService.get('common.search.placeholder') | async
+                " />
             </div>
-            <input
-              class="form-control me-2"
-              type="search"
-              [placeholder]="
-                translateService.get('common.search.placeholder') | async
-              "
-              [ariaLabel]="
-                translateService.get('common.search.placeholder') | async
-              " />
-          </div>
-        </form>
+          </form>
 
-        <!-- Navigation -->
-        <ul class="navbar-nav mr-auto">
-          @for (item of navItems; track $index) {
-            <li class="nav-item" [ngClass]="{ active: item.link === '/' }">
-              <a class="nav-link" aria-current="page" [href]="item.link">
-                {{ item.label | translate }}
-              </a>
-            </li>
-          }
+          <!-- Navigation -->
+          <ul class="navbar-nav mr-auto">
+            @for (item of navItems; track $index) {
+              <li class="nav-item" [ngClass]="{ active: item.link === '/' }">
+                <a class="nav-link" aria-current="page" [href]="item.link">
+                  {{ item.label | translate }}
+                </a>
+              </li>
+            }
+          </ul>
+        </div>
+
+        <ul
+          class="navbar-nav mr-auto flex-lg-row flex-column-reverse align-items-lg-center align-items-sm-stretch">
+          <!-- Theme Mode -->
+          <li class="m-2 header__theme-button border-top-md-gray">
+            <div
+              class="nav-item text-center m-t-5"
+              (click)="themeService.changeTheme()">
+              @if (themeService.isDarkMode()) {
+                <i class="bi bi-sun"></i>
+              } @else {
+                <i class="bi bi-moon"></i>
+              }
+            </div>
+          </li>
+
+          <!-- Collapse Search -->
+          <li class="m-2 header__search-button nav-item d-none d-lg-block">
+            <i class="bi bi-search" (click)="onClickSearchIcon()"></i>
+
+            <div
+              class="input-group mb-5 position-absolute top-100 start-0"
+              [hidden]="!isSearchBarDisplayed">
+              <div class="input-group-prepend">
+                <span class="input-group-text border-0 shadow">
+                  <i class="bi bi-search"></i>
+                </span>
+              </div>
+              <input
+                class="form-control me-2 border-0 search-input shadow"
+                type="search"
+                [placeholder]="
+                  translateService.get('common.search.placeholder') | async
+                "
+                [ariaLabel]="
+                  translateService.get('common.search.placeholder') | async
+                " />
+            </div>
+          </li>
+
+          <!-- Language Selection -->
+          <li>
+            <select
+              class="nav-item m-2 form-select form-select-sm w-auto d-none d-lg-block"
+              aria-label="Language"
+              [(ngModel)]="selectedLanguage"
+              (ngModelChange)="onSelectLanguage($event)"
+              name="language">
+              @for (language of languages; track $index) {
+                <option [value]="language.value">
+                  {{ language.label | translate }}
+                </option>
+              }
+            </select>
+          </li>
+          <!-- Download Latest LTS Version -->
+          <li class="nav-item m-2 header__download-button">
+            <button
+              class="btn w-md-100"
+              [ngClass]="
+                themeService.isDarkMode() ? 'btn-light' : 'btn-primary'
+              ">
+              {{ 'common.footer.downloadLatestLTSVersion' | translate }}
+            </button>
+          </li>
         </ul>
       </div>
-
-      <ul
-        class="top-25 navbar-nav mr-auto flex-lg-row flex-column-reverse align-items-lg-center align-items-sm-stretch position-relative start-0">
-        <!-- Theme Mode -->
-        <li class="m-2 header__theme-button border-top-md-gray">
-          <div
-            class="nav-item text-center m-t-5"
-            (click)="themeService.changeTheme()">
-            @if (themeService.isDarkMode()) {
-              <i class="bi bi-sun"></i>
-            } @else {
-              <i class="bi bi-moon"></i>
-            }
-          </div>
-        </li>
-
-        <!-- Collapse Search -->
-        <li class="m-2 header__search-button nav-item d-none d-lg-block">
-          <i class="bi bi-search" (click)="onClickSearchIcon()"></i>
-
-          <div
-            class="input-group mb-5 position-absolute top-100 start-0"
-            [hidden]="!isSearchBarDisplayed">
-            <div class="input-group-prepend">
-              <span class="input-group-text border-0 shadow">
-                <i class="bi bi-search"></i>
-              </span>
-            </div>
-            <input
-              class="form-control me-2 border-0 search-input shadow"
-              type="search"
-              [placeholder]="
-                translateService.get('common.search.placeholder') | async
-              "
-              [ariaLabel]="
-                translateService.get('common.search.placeholder') | async
-              " />
-          </div>
-        </li>
-
-        <!-- Language Selection -->
-        <li>
-          <select
-            class="nav-item m-2 form-select form-select-sm w-auto d-none d-lg-block"
-            aria-label="Language"
-            [(ngModel)]="selectedLanguage"
-            (ngModelChange)="onSelectLanguage($event)"
-            name="language">
-            @for (language of languages; track $index) {
-              <option [value]="language.value">
-                {{ language.label | translate }}
-              </option>
-            }
-          </select>
-        </li>
-        <!-- Download Latest LTS Version -->
-        <li class="nav-item m-2 header__download-button">
-          <button
-            class="btn w-md-100"
-            [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'">
-            {{ 'common.footer.downloadLatestLTSVersion' | translate }}
-          </button>
-        </li>
-      </ul>
     </div>
   </div>
 </nav>
