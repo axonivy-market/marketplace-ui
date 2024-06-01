@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../../shared/models/product.model';
 import { ProductService } from '../product.service';
+import { ProductVersionActionComponent } from './product-version-action/product-version-action.component';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [],
+  imports: [ProductVersionActionComponent],
   providers: [ProductService],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss',
