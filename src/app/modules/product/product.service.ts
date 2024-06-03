@@ -25,7 +25,6 @@ export class ProductService {
 
   getProductsByCriteria(criteria: Criteria): Observable<Product[]> {
     let products = MOCK_PRODUCTS;
-    console.log(criteria);
     products = this.getProductByNameOrDescription(products, criteria.search);
 
     if (criteria.type) {
@@ -43,7 +42,6 @@ export class ProductService {
     products: Product[],
     searchText: string
   ): Product[] {
-    console.log(searchText);
     if (searchText === '') {
       return products;
     }

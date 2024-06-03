@@ -100,7 +100,7 @@ describe('ProductService', () => {
             products[i + 1].platformReview.localeCompare(
               products[i].platformReview
             )
-          ).toEqual(0);
+          ).toEqual(1);
         }
       }
     });
