@@ -96,11 +96,9 @@ describe('ProductService', () => {
           products[i + 1] &&
           products[i + 1].platformReview
         ) {
-          expect(
-            products[i + 1].platformReview.localeCompare(
-              products[i].platformReview
-            )
-          ).toEqual(1);
+          expect(Number(products[i + 1].platformReview)).toBeGreaterThanOrEqual(
+            Number(products[i].platformReview)
+          );
         }
       }
     });
