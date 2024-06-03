@@ -25,9 +25,8 @@ export class ProductService {
 
   getProductsByCriteria(criteria: Criteria): Observable<Product[]> {
     let products = MOCK_PRODUCTS;
-    if (criteria.search) {
-      products = this.getProductByNameOrDescription(products, criteria.search);
-    }
+    console.log(criteria);
+    products = this.getProductByNameOrDescription(products, criteria.search);
 
     if (criteria.type) {
       products = this.getProductByType(products, criteria.type);
@@ -40,10 +39,11 @@ export class ProductService {
     return of(products);
   }
 
-  getProductByNameOrDescription(
+  private getProductByNameOrDescription(
     products: Product[],
     searchText: string
   ): Product[] {
+    console.log(searchText);
     if (searchText === '') {
       return products;
     }
@@ -55,14 +55,17 @@ export class ProductService {
     );
   }
 
-  getProductByType(products: Product[], productType: string): Product[] {
+  private getProductByType(
+    products: Product[],
+    productType: string
+  ): Product[] {
     if (productType === '' || productType === FilterType.All_TYPES) {
       return products;
     }
     return products.filter((product) => product.type === productType);
   }
 
-  getProductsWithSort(products: Product[], sortType: SortType) {
+  private getProductsWithSort(products: Product[], sortType: SortType) {
     const collator = new Intl.Collator('en');
     switch (sortType) {
       case SortType.POPULARITY:

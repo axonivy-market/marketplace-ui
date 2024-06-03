@@ -43,7 +43,7 @@
       <select
         [(ngModel)]="selectedSortType"
         (ngModelChange)="onSortChange()"
-        class="form-select form-select-lg ms-2 w-100"
+        class="sort-type form-select form-select-lg ms-2 w-100"
         aria-label="sort"
         name="sort">
         @for (type of sortTypes; track $index) {
