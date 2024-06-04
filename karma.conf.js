@@ -23,20 +23,20 @@ module.exports = function (config) {
         // or set a specific seed with `seed: 4321`
         stopSpecOnExpectationFailure: true,
         failFast: true,
-        timeoutInterval: 60000,
+        timeoutInterval: 60000
       },
-      clearContext: false, // leave Jasmine Spec Runner output visible in browser
+      clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     jasmineHtmlReporter: {
-      suppressAll: true, // removes the duplicated traces
+      suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage/marketplace-ui'),
       subdir: '.',
-      reporters: [{ type: 'html' }, { type: 'text-summary' }],
+      reporters: [{ type: 'html' }, { type: 'text-summary' }]
     },
     angularCli: {
-      environment: 'dev',
+      environment: 'dev'
     },
     reporters: ['progress', 'sonarqube'],
     browsers: ['ChromeHeadlessNoSandbox'],
@@ -54,7 +54,7 @@ module.exports = function (config) {
       encoding: 'utf-8', // test files encoding
       outputFolder: 'reports', // report destination
       legacyMode: false, // report for Sonarqube < 6.2 (disabled)
-      reportName: function (metadata) {
+      reportName: (metadata) => {
         // report name callback, but accepts also a
         // string (file name) to generate a single file
         /**
@@ -65,7 +65,7 @@ module.exports = function (config) {
          * - metadata[3] = plataform version
          */
         return 'sonarqube_report.xml';
-      },
-    },
+      }
+    }
   });
 };

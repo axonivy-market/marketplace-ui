@@ -41,7 +41,7 @@ jobs:
           SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ env.SONAR_HOST_URL }}
         with:
-          scanMetadataReportFile: reports/sonarqube_report.xml
+          scanMetadataReportFile: marketplace-ui/reports/sonarqube_report.xml
           # args:
           #   -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
 
