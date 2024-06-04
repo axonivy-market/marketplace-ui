@@ -16,7 +16,7 @@ export class ProductService {
   }
 
   getProductById(productId: string): Observable<Product> {
-    const product = MOCK_PRODUCTS.find((product) => product.id === productId);
+    const product = MOCK_PRODUCTS.find((p) => p.id === productId);
     if (product) {
       return of(product);
     }

@@ -1,21 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HeaderComponent } from './header.component';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
-
-class TranslateServiceStub {
-  get(key: any): any {
-    return of(key);
-  }
-
-  setDefaultLang(lang: string) {}
-
-  use(lang: string) {
-    return of({});
-  }
-}
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;

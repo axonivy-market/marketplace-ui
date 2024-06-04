@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { ProductService } from './product.service';
 import {
   provideHttpClient,
   withInterceptorsFromDi
 } from '@angular/common/http';
-import { SortType } from '../../shared/enums/sort-type.enum';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { FilterType } from '../../shared/enums/filter-type.enum';
-import { Criteria } from '../../shared/models/criteria.model';
-import { MOCK_PRODUCT } from '../../shared/utils/common-test.util';
+import { SortType } from '../../shared/enums/sort-type.enum';
 import { MOCK_PRODUCTS } from '../../shared/mocks/mock-data';
+import { Criteria } from '../../shared/models/criteria.model';
+import { ProductService } from './product.service';
+import { Product } from '../../shared/models/product.model';
 
 const PRODUCT_ID = 'portal';
 const NOT_EXIST_ID = 'undefined';
@@ -48,7 +48,7 @@ describe('ProductService', () => {
 
   it('getProductById should return null product', () => {
     service.getProductById(NOT_EXIST_ID).subscribe((data) => {
-      expect(data).toEqual({} as any);
+      expect(data).toEqual({} as Product);
     });
   });
 

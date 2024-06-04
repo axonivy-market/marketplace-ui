@@ -5,17 +5,15 @@ import {
   tick
 } from '@angular/core/testing';
 
+import { provideHttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
+import { FilterType } from '../../shared/enums/filter-type.enum';
+import { SortType } from '../../shared/enums/sort-type.enum';
 import { MockProductService } from '../../shared/utils/common-test.util';
 import { ProductComponent } from './product.component';
 import { ProductService } from './product.service';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
-import { By } from '@angular/platform-browser';
-import { FilterType } from '../../shared/enums/filter-type.enum';
-import { SortType } from '../../shared/enums/sort-type.enum';
 
 const router = {
   navigate: jasmine.createSpy('navigate')
@@ -84,7 +82,7 @@ describe('ProductComponent', () => {
   });
 
   it('search should return match products name', fakeAsync(() => {
-    let productName = 'adobe';
+    const productName = 'adobe';
     component.onSearchChanged(productName);
     tick(500);
     component.products.forEach((product) => {

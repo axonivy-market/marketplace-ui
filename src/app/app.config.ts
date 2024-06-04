@@ -9,7 +9,7 @@ import { apiInterceptor } from './core/interceptors/api.interceptor';
 
 class TranslateYamlHttpLoader implements TranslateLoader {
   constructor(
-    private http: HttpClient,
+    private readonly http: HttpClient,
     public path: string = '/assets/i18n/',
   ) {}
 

@@ -8,7 +8,7 @@ import {
 import { ProductService } from '../product.service';
 import { ProductDetailComponent } from './product-detail.component';
 
-let PRODUCT_ID: string | undefined = '1';
+const PRODUCT_ID: string | undefined = '1';
 
 describe('ProductDetailComponent', () => {
   let component: ProductDetailComponent;

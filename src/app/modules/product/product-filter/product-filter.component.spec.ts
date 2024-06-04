@@ -26,7 +26,7 @@ describe('ProductFilterComponent', () => {
   });
 
   it('onSelectedFilterType should update selectedFilterType correctly', () => {
-    let filterElement = fixture.debugElement.queryAll(By.css('.filter-type'))[1]
+    const filterElement = fixture.debugElement.queryAll(By.css('.filter-type'))[1]
       .nativeElement as HTMLDivElement;
 
     filterElement.dispatchEvent(new Event('click'));
@@ -34,7 +34,7 @@ describe('ProductFilterComponent', () => {
   });
 
   it('onSortChange should update selectedSortType correctly', () => {
-    let select: HTMLSelectElement = fixture.debugElement.query(
+    const select: HTMLSelectElement = fixture.debugElement.query(
       By.css('.sort-type')
     ).nativeElement;
     select.value = select.options[2].value;
@@ -44,8 +44,8 @@ describe('ProductFilterComponent', () => {
   });
 
   it('search should update searchText correctly', () => {
-    let searchText = 'portal';
-    let input = fixture.debugElement.query(By.css('input')).nativeElement;
+    const searchText = 'portal';
+    const input = fixture.debugElement.query(By.css('input')).nativeElement;
     input.value = searchText;
     input.dispatchEvent(new Event('input'));
     expect(component.searchText).toEqual(searchText);
