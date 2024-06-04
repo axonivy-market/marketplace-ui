@@ -85,11 +85,13 @@
           </li>
 
           <!-- Collapse Search -->
-          <li class="m-2 header__search-button nav-item d-none d-lg-block">
-            <i class="bi bi-search" (click)="onClickSearchIcon()"></i>
+          <li class="m-2 nav-item d-none d-lg-block">
+            <div class="header__search-button">
+              <i class="bi bi-search" (click)="onClickSearchIcon()"></i>
+            </div>
 
             <div
-              class="input-group mb-5 position-absolute top-100 start-0"
+              class="header__search-input input-group mb-5 position-absolute top-100 start-0"
               [hidden]="!isSearchBarDisplayed">
               <div class="input-group-prepend">
                 <span class="input-group-text border-0 shadow">
