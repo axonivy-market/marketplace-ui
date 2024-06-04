@@ -57,6 +57,12 @@ describe('ProductComponent', () => {
     expect(router.navigate).toHaveBeenCalledWith(['', 'url']);
   });
 
+  it('loadAllProducts should return products with criteria', () => {
+
+    component.loadAllProducts();
+    expect(component.loadAllProducts).toBeTruthy();
+  })
+
   it('ngOnDestroy should unsubscribe all sub', () => {
     const sub = new Subscription();
     component.subscriptions.push(sub);

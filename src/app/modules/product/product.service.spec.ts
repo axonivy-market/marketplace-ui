@@ -53,7 +53,7 @@ describe('ProductService', () => {
   });
 
   it('getProductByCriteria with should return products properly', () => {
-    let searchString = 'amazon';
+    const searchString = 'amazon';
     const criteria: Criteria = {
       search: searchString,
       sort: SortType.ALPHABETICALLY,
