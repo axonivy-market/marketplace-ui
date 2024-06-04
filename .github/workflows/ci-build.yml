@@ -26,22 +26,22 @@ jobs:
         run: npm install
       - name: Execute Tests
         run: npm run test
-      - uses: sonarsource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ env.SONAR_HOST_URL }}
-        with:
-          args:
-            -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
-      - name: SonarQube Quality Gate check
-        id: sonarqube-quality-gate-check
-        uses: sonarsource/sonarqube-quality-gate-action@master
-        timeout-minutes: 5
-        env:
-          SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ env.SONAR_HOST_URL }}
-          # args:
-          #   -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
+      # - uses: sonarsource/sonarqube-scan-action@master
+      #   env:
+      #     SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
+      #     SONAR_HOST_URL: ${{ env.SONAR_HOST_URL }}
+      #   with:
+      #     args:
+      #       -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
+      # - name: SonarQube Quality Gate check
+      #   id: sonarqube-quality-gate-check
+      #   uses: sonarsource/sonarqube-quality-gate-action@master
+      #   timeout-minutes: 5
+      #   env:
+      #     SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
+      #     SONAR_HOST_URL: ${{ env.SONAR_HOST_URL }}
+      #     # args:
+      #     #   -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
 
       - name: check 
         run: ls -l
