@@ -41,8 +41,12 @@ jobs:
           SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ env.SONAR_HOST_URL }}
         with:
-          args:
-            -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
+          scanMetadataReportFile: reports/sonarqube_report.xml
+          # args:
+          #   -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
+
+      - name: "Example show SonarQube Quality Gate Status value"
+        run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}"
 
   build:
     name: Angular tests
