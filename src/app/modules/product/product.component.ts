@@ -73,18 +73,18 @@ export class ProductComponent implements OnDestroy {
     this.router.navigate(['', productId]);
   }
 
-  onFilterChange(type: FilterType) {
+  onFilterChange(filterType: FilterType) {
     this.criteria = {
       ...this.criteria,
-      type: type
+      type: filterType
     };
     this.loadAllProducts();
   }
 
-  onSortChange(type: SortType) {
+  onSortChange(sortType: SortType) {
     this.criteria = {
       ...this.criteria,
-      sort: type
+      sort: sortType
     };
     this.loadAllProducts();
   }
