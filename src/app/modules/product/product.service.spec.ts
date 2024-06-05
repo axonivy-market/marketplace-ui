@@ -79,7 +79,7 @@ describe('ProductService', () => {
       type: null
     };
     service.getProductsByCriteria(criteria).subscribe((products) => {
-      expect(products.length).toEqual(1);
+      expect(products.length).toEqual(MOCK_PRODUCTS.length);
     });
   });
 
