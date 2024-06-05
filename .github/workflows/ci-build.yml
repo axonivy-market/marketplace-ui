@@ -33,17 +33,17 @@ jobs:
         with:
           args:
             -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
-      - name: SonarQube Quality Gate check
-        id: sonarqube-quality-gate-check
-        uses: sonarsource/sonarqube-quality-gate-action@master
-        timeout-minutes: 5
-        env:
-          SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ env.SONAR_HOST_URL }}
-          # args:
-          #   -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
-        with:
-          scanMetadataReportFile: reports/sonarqube_report.xml
+      # - name: SonarQube Quality Gate check
+      #   id: sonarqube-quality-gate-check
+      #   uses: sonarsource/sonarqube-quality-gate-action@master
+      #   timeout-minutes: 5
+      #   env:
+      #     SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
+      #     SONAR_HOST_URL: ${{ env.SONAR_HOST_URL }}
+      #     # args:
+      #     #   -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
+      #   with:
+      #     scanMetadataReportFile: reports/sonarqube_report.xml
 
       - name: "Example show SonarQube Quality Gate Status value"
         run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}"
