@@ -20,9 +20,11 @@ $ivySecondaryColorDark: #383838;
   --bs-secondary-rgb: #{$ivySecondaryColorDark};
   --bs-tertiary-bg: #{$ivySecondaryColorDark};
 
-  --ivy-secondary: #{$ivySecondaryColorDark};
-
   .card {
     --bs-card-bg: #{$ivySecondaryColorDark};
+  }
+
+  .btn-secondary {
+    --bs-btn-bg: #{$ivySecondaryColorDark};
   }
 }
