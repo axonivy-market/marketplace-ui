@@ -75,7 +75,6 @@ export class ProductService {
           collator.compare(a.name, b.name)
         );
       case SortType.RECENT:
-        return products;
       default:
         return products;
     }
