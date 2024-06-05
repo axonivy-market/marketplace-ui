@@ -5,15 +5,9 @@ import { SortType } from '../enums/sort-type.enum';
 import { FilterType } from '../enums/filter-type.enum';
 import { MOCK_PRODUCTS } from './mock-data';
 
-export const MOCK_PRODUCT = {
-  id: 'portal',
-  name: 'product name',
-  description: 'product description'
-} as Product;
-
 export class MockProductService {
-  getProductById() {
-    return of(MOCK_PRODUCT);
+  getProductById(id: string) {
+    return of(MOCK_PRODUCTS.find(product => product.id === id));
   }
 
   getProductsByCriteria(criteria: Criteria) {
