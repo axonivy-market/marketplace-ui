@@ -3,7 +3,7 @@ import { Product } from '../models/product.model';
 import { Criteria } from '../models/criteria.model';
 import { SortType } from '../enums/sort-type.enum';
 import { FilterType } from '../enums/filter-type.enum';
-import { MOCK_PRODUCTS } from '../mocks/mock-data';
+import { MOCK_PRODUCTS } from './mock-data';
 
 export const MOCK_PRODUCT = {
   id: 'portal',

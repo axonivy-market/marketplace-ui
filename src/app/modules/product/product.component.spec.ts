@@ -11,9 +11,9 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { FilterType } from '../../shared/enums/filter-type.enum';
 import { SortType } from '../../shared/enums/sort-type.enum';
-import { MockProductService } from '../../shared/utils/common-test.util';
 import { ProductComponent } from './product.component';
 import { ProductService } from './product.service';
+import { MockProductService } from '../../shared/mocks/mock-services';
 
 const router = {
   navigate: jasmine.createSpy('navigate')
