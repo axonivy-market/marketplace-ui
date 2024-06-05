@@ -46,7 +46,7 @@ export class MockProductService {
     }
 
     return products.filter(
-      (product) =>
+      product =>
         product.name.toLowerCase().includes(searchText) ||
         product.description.toLocaleLowerCase().includes(searchText)
     );
@@ -59,7 +59,7 @@ export class MockProductService {
     if (productType === '' || productType === FilterType.All_TYPES) {
       return products;
     }
-    return products.filter((product) => product.type === productType);
+    return products.filter(product => product.type === productType);
   }
 
   private getProductsWithSort(products: Product[], sortType: SortType) {
