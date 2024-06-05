@@ -9,7 +9,7 @@ export class ThemeService {
   isDarkMode: WritableSignal<boolean> = signal(false);
   theme: WritableSignal<Theme> = signal(Theme.DARK);
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
+  constructor(@Inject(DOCUMENT) private readonly document: Document) {
     const localStorage = this.document.defaultView?.localStorage;
     if (localStorage) {
       this.loadDefaultTheme(localStorage);
@@ -28,12 +28,15 @@ export class ThemeService {
   setTheme(theme: Theme) {
     this.theme.set(theme);
     localStorage.setItem(DATA_THEME, theme);
-    document.querySelector('html')!.setAttribute(DATA_THEME, theme);
+    const html = this.document.querySelector('html')
+    if (html) {
+      html.setAttribute(DATA_THEME, theme);
+    }
     this.isDarkMode.set(this.theme() === Theme.DARK);
   }
 
   changeTheme() {
-    this.theme.update((value) =>
+    this.theme.update(value =>
       value === Theme.DARK ? Theme.LIGHT : Theme.DARK
     );
     this.setTheme(this.theme());
