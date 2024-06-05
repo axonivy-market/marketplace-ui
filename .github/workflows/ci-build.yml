@@ -25,6 +25,7 @@ jobs:
 
   analysis:
     name: Sonarqube
+    needs: build
     runs-on: self-hosted
     env:
       SONAR_PROJECT_KEY: 'AxonIvy-Market-UI'
