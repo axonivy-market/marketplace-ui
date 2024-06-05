@@ -11,10 +11,6 @@ import { Product } from '../../shared/models/product.model';
 export class ProductService {
   httpClient = inject(HttpClient);
 
-  getAllProducts(): Observable<Product[]> {
-    return of(MOCK_PRODUCTS);
-  }
-
   getProductById(productId: string): Observable<Product> {
     const product = MOCK_PRODUCTS.find(p => p.id === productId);
     if (product) {

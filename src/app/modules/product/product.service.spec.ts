@@ -34,12 +34,6 @@ describe('ProductService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('getAllProducts should return list of product', () => {
-    service.getAllProducts().subscribe(products => {
-      expect(products.length).toBeGreaterThan(0);
-    });
-  });
-
   it('getProductById should return a product', () => {
     service.getProductById(PRODUCT_ID).subscribe(data => {
       expect(data.id).toEqual(PRODUCT_ID);

@@ -12,10 +12,6 @@ export const MOCK_PRODUCT = {
 } as Product;
 
 export class MockProductService {
-  getAllProducts() {
-    return of([MOCK_PRODUCT]);
-  }
-
   getProductById() {
     return of(MOCK_PRODUCT);
   }
