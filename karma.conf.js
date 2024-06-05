@@ -30,14 +30,20 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/marketplace-ui'),
+      dir: require('path').join(__dirname, './coverage'),
       subdir: '.',
       reporters: [{ type: 'html' }, { type: 'text-summary' }, { type: 'lcov' }]
+    },
+    preprocessors: {
+      // source files, that you wanna generate coverage for
+      // do not include tests or libraries
+      // (these files will be instrumented by Istanbul)
+      'src/**/mocks/**': ['coverage']
     },
     angularCli: {
       environment: 'dev'
     },
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage'],
     browsers: ['ChromeHeadlessNoSandbox'],
     customLaunchers: {
       ChromeHeadlessNoSandbox: {
