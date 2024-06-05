@@ -107,7 +107,7 @@ describe('ProductService', () => {
   it('getProductByCriteria with default sort', () => {
     const criteria: Criteria = {
       search: '',
-      sort: null,
+      sort: SortType.RECENT,
       type: null
     };
     service.getProductsByCriteria(criteria).subscribe(products => {
