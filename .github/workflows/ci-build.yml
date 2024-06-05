@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Angular tests
+    name: Build
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
@@ -15,16 +15,13 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'npm'
       - name: Install Dependencies
         run: npm install
-      # - name: Clean up
-      #   run: |
-      #     rm -rf *
 
   analysis:
-    name: Sonarqube analysis
+    name: Sonarqube
     runs-on: self-hosted
     env:
       SONAR_PROJECT_KEY: 'AxonIvy-Market-UI'
@@ -51,5 +48,9 @@ jobs:
           # args:
           #   -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
 
-      - name: "Example show SonarQube Quality Gate Status value"
+      - name: "SonarQube Quality Gate Status"
         run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}"
+
+      - name: Clean up
+        run: |
+          rm -rf *
