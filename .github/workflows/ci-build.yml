@@ -22,6 +22,8 @@ jobs:
           cache: 'npm'
       - name: Install Dependencies
         run: npm install
+      - name: Build project
+        run: npm run build
 
   analysis:
     name: Sonarqube
