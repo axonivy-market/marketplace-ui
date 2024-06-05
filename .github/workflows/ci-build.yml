@@ -6,14 +6,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  analysis:
-    name: Sonarqube analysis
+  build:
+    name: Angular tests
     runs-on: self-hosted
-    env:
-      SONAR_PROJECT_KEY: 'AxonIvy-Market-UI'
-      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,6 +19,19 @@ jobs:
           cache: 'npm'
       - name: Install Dependencies
         run: npm install
+      # - name: Clean up
+      #   run: |
+      #     rm -rf *
+
+  analysis:
+    name: Sonarqube analysis
+    runs-on: self-hosted
+    env:
+      SONAR_PROJECT_KEY: 'AxonIvy-Market-UI'
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+    steps:
       - name: Execute Tests
         run: npm run test
       - uses: sonarsource/sonarqube-scan-action@master
@@ -45,20 +53,3 @@ jobs:
 
       - name: "Example show SonarQube Quality Gate Status value"
         run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}"
-
-  # build:
-  #   name: Angular tests
-  #   runs-on: self-hosted
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         node-version: '18'
-  #         cache: 'npm'
-  #     - name: Install Dependencies
-  #       run: npm install
-  #     - name: Execute Tests
-  #       run: npm run test
-  #     - name: Clean up
-  #       run: |
-  #         rm -rf *
