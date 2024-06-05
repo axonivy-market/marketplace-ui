@@ -22,15 +22,11 @@
   margin-right: 5px;
 }
 
-.nav-item.active .active-line {
-  display: block;
-}
-
 .active-line {
   display: none;
   position: relative;
   height: 2px;
-  width: auto;
+  width: inherit;
   background-color: var(--bs-highlight-color);
 }
 
