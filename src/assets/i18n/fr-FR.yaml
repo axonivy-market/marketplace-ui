@@ -34,6 +34,7 @@ common:
       recent: Recent
   search:
     placeholder: Rechercher un mot-clé
+  nothingFound: Rien n'a été trouvé
   footer:
     newVersionsInfo: TODO New version release available for Linux,<br /> Window and MacOS operating systems.
     downloadLatestLTSVersion: TODO Download V10.0.18
