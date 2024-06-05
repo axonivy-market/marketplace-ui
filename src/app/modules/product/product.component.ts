@@ -49,7 +49,7 @@ export class ProductComponent implements OnDestroy {
     this.subscriptions.push(
       this.searchTextChanged
         .pipe(debounceTime(SEARCH_DEBOUNCE_TIME))
-        .subscribe((value) => {
+        .subscribe(value => {
           this.criteria = {
             ...this.criteria,
             search: value
@@ -63,7 +63,7 @@ export class ProductComponent implements OnDestroy {
     this.subscriptions.push(
       this.productService
         .getProductsByCriteria(this.criteria)
-        .subscribe((products) => {
+        .subscribe(products => {
           this.products = products;
         })
     );
@@ -94,7 +94,7 @@ export class ProductComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((sub) => {
+    this.subscriptions.forEach(sub => {
       sub.unsubscribe();
     });
   }
