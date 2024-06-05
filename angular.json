@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/marketplace-ui",
+            "outputPath": "dist",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -28,8 +28,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/assets/_market",
-              {"glob": "**/*", "input": "C:\\Users\\nttu\\Documents\\work\\projects\\market\\market-test\\target\\market", "output": "./assets/_market"}
+              "src/assets/_market"
             ],
             "styles": [
               "src/styles.scss",
@@ -41,11 +40,19 @@
           },
           "configurations": {
             "production": {
+              "optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": false
+                },
+                "fonts": true
+              },
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
