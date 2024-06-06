@@ -23,7 +23,8 @@ module.exports = function (config) {
         // or set a specific seed with `seed: 4321`
         stopSpecOnExpectationFailure: true,
         failFast: true,
-        timeoutInterval: 60000
+        timeoutInterval: 60000,
+        random: false
       },
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
