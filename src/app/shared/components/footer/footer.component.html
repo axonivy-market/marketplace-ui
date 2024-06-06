@@ -22,14 +22,16 @@
           [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'">
           {{ 'common.footer.downloadLatestLTSVersion' | translate }}
         </button>
-        <button class="btn border-0 m-3" [ngClass]="{'btn-secondary': themeService.isDarkMode()}">
+        <button
+          class="btn border-0 m-3"
+          [ngClass]="{ 'btn-secondary': themeService.isDarkMode() }">
           {{ 'common.footer.downloadLatestDevVersion' | translate }}
         </button>
       </div>
     </div>
 
     <!-- Right -->
-    <div class="d-flex align-items-center d-none d-lg-block">
+    <div class="footer__navbar d-flex align-items-center d-none d-lg-block">
       <div class="navbar navbar-expand-lg">
         <ul class="navbar-nav me-auto mb-lg-0">
           @for (item of navItems; track $index) {

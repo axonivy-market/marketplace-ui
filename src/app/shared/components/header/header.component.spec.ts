@@ -2,6 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HeaderComponent } from './header.component';
+import { Viewport } from 'karma-viewport/dist/adapter/viewport';
+
+declare const viewport: Viewport;
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -28,7 +31,7 @@ describe('HeaderComponent', () => {
     expect(component.translateService.use).toHaveBeenCalled();
   });
 
-  fit('should toggle the search input visibility on search icon click', () => {
+  it('should toggle the search input visibility on search icon click', () => {
     const searchIcon = fixture.debugElement.query(
       By.css('.header__search-button i')
     );
@@ -87,50 +90,35 @@ describe('HeaderComponent', () => {
     expect(component.themeService.changeTheme).toHaveBeenCalled();
   });
 
-  it('mobile element should display in small screen', () => {
-    window.innerWidth = 480;
-    window.dispatchEvent(new Event('resize'));
-    fixture.detectChanges();
-    const desktopElements = fixture.debugElement.query(
-      By.css('.d-none.d-lg-block')
-    );
-    const mobileElements = fixture.debugElement.query(By.css('.d-lg-none'));
+  it('mobile search should display in small screen', () => {
+    viewport.set(540);
 
-    expect(getComputedStyle(mobileElements.nativeElement).display).not.toBe(
+    const desktopSearch = fixture.debugElement.query(
+      By.css('.header-desktop__search')
+    );
+    const mobileSearch = fixture.debugElement.query(
+      By.css('.header-mobile__search')
+    );
+
+    expect(getComputedStyle(mobileSearch.nativeElement).display).not.toBe(
       'none'
     );
-    expect(getComputedStyle(desktopElements.nativeElement).display).toBe(
+    expect(getComputedStyle(desktopSearch.nativeElement).display).toBe('none');
+  });
+
+  it('desktop search should display in large screen', () => {
+    viewport.set(1920);
+
+    const desktopSearch = fixture.debugElement.query(
+      By.css('.header-desktop__search')
+    );
+    const mobileSearch = fixture.debugElement.query(
+      By.css('.header-mobile__search')
+    );
+
+    expect(getComputedStyle(mobileSearch.nativeElement).display).toBe('none');
+    expect(getComputedStyle(desktopSearch.nativeElement).display).not.toBe(
       'none'
     );
   });
-
-  it('desktop element should display in large screen', () => {
-    console.log('before resize' + window.innerWidth);
-    setWindowWidth(1024);
-    fixture.detectChanges();
-    console.log('after reize' + window.innerWidth);
-
-    const desktopElements = fixture.debugElement.query(
-      By.css('.d-none.d-lg-block')
-    );
-    const mobileElements = fixture.debugElement.query(By.css('.d-lg-none'));
-
-    console.log(
-      'mobile ' + getComputedStyle(mobileElements.nativeElement).display
-    );
-    console.log(
-      'desktop ' + getComputedStyle(desktopElements.nativeElement).display
-    );
-
-    expect(getComputedStyle(mobileElements.nativeElement).display).toBe('none');
-    expect(getComputedStyle(desktopElements.nativeElement).display).not.toBe(
-      'none'
-    );
-  });
-
-  function setWindowWidth(width: number) {
-    spyOnProperty(window, 'innerWidth').and.returnValue(width);
-    window.dispatchEvent(new Event('resize'));
-    fixture.detectChanges();
-  }
 });
