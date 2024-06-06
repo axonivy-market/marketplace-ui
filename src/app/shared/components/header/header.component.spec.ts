@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { By } from '@angular/platform-browser';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HeaderComponent } from './header.component';
@@ -29,7 +28,7 @@ describe('HeaderComponent', () => {
     expect(component.translateService.use).toHaveBeenCalled();
   });
 
-  it('should toggle the search input visibility on search icon click', () => {
+  fit('should toggle the search input visibility on search icon click', () => {
     const searchIcon = fixture.debugElement.query(
       By.css('.header__search-button i')
     );
@@ -87,4 +86,51 @@ describe('HeaderComponent', () => {
 
     expect(component.themeService.changeTheme).toHaveBeenCalled();
   });
+
+  it('mobile element should display in small screen', () => {
+    window.innerWidth = 480;
+    window.dispatchEvent(new Event('resize'));
+    fixture.detectChanges();
+    const desktopElements = fixture.debugElement.query(
+      By.css('.d-none.d-lg-block')
+    );
+    const mobileElements = fixture.debugElement.query(By.css('.d-lg-none'));
+
+    expect(getComputedStyle(mobileElements.nativeElement).display).not.toBe(
+      'none'
+    );
+    expect(getComputedStyle(desktopElements.nativeElement).display).toBe(
+      'none'
+    );
+  });
+
+  it('desktop element should display in large screen', () => {
+    console.log('before resize' + window.innerWidth);
+    setWindowWidth(1024);
+    fixture.detectChanges();
+    console.log('after reize' + window.innerWidth);
+
+    const desktopElements = fixture.debugElement.query(
+      By.css('.d-none.d-lg-block')
+    );
+    const mobileElements = fixture.debugElement.query(By.css('.d-lg-none'));
+
+    console.log(
+      'mobile ' + getComputedStyle(mobileElements.nativeElement).display
+    );
+    console.log(
+      'desktop ' + getComputedStyle(desktopElements.nativeElement).display
+    );
+
+    expect(getComputedStyle(mobileElements.nativeElement).display).toBe('none');
+    expect(getComputedStyle(desktopElements.nativeElement).display).not.toBe(
+      'none'
+    );
+  });
+
+  function setWindowWidth(width: number) {
+    spyOnProperty(window, 'innerWidth').and.returnValue(width);
+    window.dispatchEvent(new Event('resize'));
+    fixture.detectChanges();
+  }
 });
