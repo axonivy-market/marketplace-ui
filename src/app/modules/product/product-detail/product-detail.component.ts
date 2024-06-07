@@ -2,11 +2,13 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../../shared/models/product.model';
 import { ProductService } from '../product.service';
+import { StarRatingCountingComponent } from '../star-rating-counting/star-rating-counting.component';
+
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [],
+  imports: [StarRatingCountingComponent],
   providers: [ProductService],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss',

@@ -1,0 +1,12 @@
+<div class="product-data-info">
+  @for (_ of fullStars; track $index) {
+  <i class="bi bi-star-fill"></i>
+  }
+  @if (isHalfStar) {
+  <i class="bi bi-star-half"></i>
+  }
+  @for (_ of emptyStars; track $index) {
+  <i class="bi bi-star"></i>
+  }
+  <span class="total-comments"> ({{ totalComments }})</span>
+</div>
