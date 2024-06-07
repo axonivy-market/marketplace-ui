@@ -1,0 +1,19 @@
+.grid-comments-container {
+  display: grid;
+  gap: 48px; // Adjust the gap between items as needed
+}
+
+// Large screens
+@media (min-width: 768px) {
+  .grid-comments-container {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-between;
+  }
+}
+
+// Small screens
+@media (max-width: 767px) {
+  .grid-comments-container {
+    grid-template-columns: 1fr;
+  }
+}
