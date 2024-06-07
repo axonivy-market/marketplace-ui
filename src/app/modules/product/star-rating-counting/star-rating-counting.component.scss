@@ -70,11 +70,24 @@
 .product-data-content {
     width: 101px;
     height: 70px;
+
     span {
         font-family: 'Inter';
         font-style: normal;
         font-weight: 600;
         font-size: 64px;
         line-height: 110%;
+        padding-left: 2px;
+    }
+}
+
+.product-data-info {
+    .connector-rate-link {
+        font-family: 'Inter';
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 16.8px;
+        text-align: left;        
+        color: #007095;
     }
 }
