@@ -72,7 +72,7 @@ describe('ProductComponent', () => {
 
   it('onFilterChange should filter products properly', () => {
     component.onFilterChange(FilterType.CONNECTORS);
-    component.products.forEach((product) => {
+    component.products().forEach((product) => {
       expect(product.type).toEqual(FilterType.CONNECTORS);
     });
   });
@@ -82,7 +82,7 @@ describe('ProductComponent', () => {
     component.onSortChange(SortType.ALPHABETICALLY);
     for (let i = 0; i < component.products.length - 1; i++) {
       expect(
-        component.products[i + 1].name.localeCompare(component.products[i].name)
+        component.products()[i + 1].name.localeCompare(component.products()[i].name)
       ).toEqual(1);
     }
   });
@@ -91,7 +91,7 @@ describe('ProductComponent', () => {
     const productName = 'adobe';
     component.onSearchChanged(productName);
     tick(500);
-    component.products.forEach((product) => {
+    component.products().forEach((product) => {
       expect(product.name.toLowerCase()).toContain(productName);
     });
   }));
