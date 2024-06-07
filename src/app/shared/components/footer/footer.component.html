@@ -17,12 +17,10 @@
       </div>
       <div [innerHtml]="'common.footer.newVersionsInfo' | translate"></div>
       <div class="flex-row">
-        <button
-          class="btn"
-          [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'">
+        <button class="btn btn-primary border-0">
           {{ 'common.footer.downloadLatestLTSVersion' | translate }}
         </button>
-        <button class="btn btn-secondary border-0 m-3" [ngClass]="{'text-dark': !themeService.isDarkMode()}">
+        <button class="btn btn-secondary border-0 m-3">
           {{ 'common.footer.downloadLatestDevVersion' | translate }}
         </button>
       </div>
