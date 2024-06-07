@@ -6,8 +6,7 @@ import {
 } from '@angular/common/http';
 import {
   ApplicationConfig,
-  importProvidersFrom,
-  provideExperimentalZonelessChangeDetection
+  importProvidersFrom
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -17,7 +16,6 @@ import { apiInterceptor } from './core/interceptors/api.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideExperimentalZonelessChangeDetection(),
     provideRouter(routes),
     provideHttpClient(withFetch(), withInterceptors([apiInterceptor])),
     importProvidersFrom(
