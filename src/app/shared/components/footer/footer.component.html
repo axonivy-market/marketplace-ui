@@ -22,9 +22,7 @@
           [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'">
           {{ 'common.footer.downloadLatestLTSVersion' | translate }}
         </button>
-        <button
-          class="btn border-0 m-3"
-          [ngClass]="{ 'btn-secondary': themeService.isDarkMode() }">
+        <button class="btn btn-secondary border-0 m-3" [ngClass]="{'text-dark': !themeService.isDarkMode()}">
           {{ 'common.footer.downloadLatestDevVersion' | translate }}
         </button>
       </div>

@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, inject } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  Signal,
+  WritableSignal,
+  inject,
+  signal
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -30,7 +37,7 @@ const SEARCH_DEBOUNCE_TIME = 500;
   styleUrl: './product.component.scss'
 })
 export class ProductComponent implements OnDestroy {
-  products: Product[] = [];
+  products: WritableSignal<Product[]> = signal([]);
   subscriptions: Subscription[] = [];
   searchTextChanged = new Subject<string>();
   criteria: Criteria = {
@@ -64,7 +71,7 @@ export class ProductComponent implements OnDestroy {
       this.productService
         .getProductsByCriteria(this.criteria)
         .subscribe(products => {
-          this.products = products;
+          this.products.update(() => products);
         })
     );
   }

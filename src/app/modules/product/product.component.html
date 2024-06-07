@@ -22,9 +22,9 @@
     (filterChange)="onFilterChange($event)"
     (sortChange)="onSortChange($event)"></app-product-filter>
 
-  @if (products.length > 0) {
+  @if (products().length > 0) {
     <div class="row product-container">
-      @for (product of products; track $index) {
+      @for (product of products(); track $index) {
         <div
           (click)="viewProductDetail(product.id)"
           class="col-sm-12 col-md-6 col-lg-4 mt-2 mb-2">

@@ -1,8 +1,15 @@
 $ivyPrimaryColorLightHEX: #007095;
 $ivyPrimaryColorLightRGB: 0, 112, 149;
+$ivySecondaryColorLight: #ebebeb;
+$ivySecondaryColorLightRGB: 235, 235, 235;
 
 [data-bs-theme='light'] {
   --bs-primary-rgb: #{$ivyPrimaryColorLightRGB};
+  --bs-secondary-rgb: #{$ivySecondaryColorLightRGB};
+
+  .card {
+    --bs-card-bg: #{$ivySecondaryColorLight};
+  }
 
   .btn {
     --bs-btn-border-radius: 0.5rem;
@@ -11,21 +18,25 @@ $ivyPrimaryColorLightRGB: 0, 112, 149;
   .btn-primary {
     --bs-btn-bg: #{$ivyPrimaryColorLightHEX};
   }
+
+  .btn-secondary {
+    --bs-btn-bg: #{$ivySecondaryColorLight};
+  }
 }
 
 $ivyPrimaryColorDark: 44, 44, 44;
-$ivySecondaryColorDark: 56, 56, 56;
+$ivySecondaryColorDarkRGB: 56, 56, 56;
 $ivyBodyBackgroundDark: #2c2c2c;
 $ivySecondaryColorDark: #383838;
 
 [data-bs-theme='dark'] {
   --bs-body-bg: #{$ivyBodyBackgroundDark};
   --bs-primary-rgb: #{$ivyPrimaryColorDark};
-  --bs-secondary-rgb: #{$ivySecondaryColorDark};
-  --bs-tertiary-bg: #{$ivySecondaryColorDark};
+  --bs-secondary-rgb: #{$ivySecondaryColorDarkRGB};
+  --bs-tertiary-bg: #{$ivySecondaryColorDarkRGB};
 
   .card {
-    --bs-card-bg: #{$ivySecondaryColorDark};
+    --bs-card-bg: #{$ivySecondaryColorDarkRGB};
   }
 
   .btn {
