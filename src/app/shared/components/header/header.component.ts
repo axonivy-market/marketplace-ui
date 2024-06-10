@@ -15,7 +15,7 @@ import { NavItem } from '../../models/nav-item.model';
   styleUrls: ['./header.component.scss', '../../../app.component.scss']
 })
 export class HeaderComponent {
-  selectedNav: string = '/';
+  selectedNav = '/';
   selectedLanguage: string = Language.EN_GB;
   languages = LANGUAGES;
   isSearchBarDisplayed = false;

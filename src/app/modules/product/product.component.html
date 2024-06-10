@@ -22,13 +22,19 @@
     (filterChange)="onFilterChange($event)"
     (sortChange)="onSortChange($event)"></app-product-filter>
 
-  <div class="row">
-    @for (product of products; track $index) {
-      <div
-        (click)="viewProductDetail(product.id)"
-        class="col-sm-12 col-md-6 col-lg-4 mt-2 mb-2">
-        <app-product-card [product]="product"></app-product-card>
-      </div>
-    }
-  </div>
+  @if (products().length > 0) {
+    <div class="row product-container">
+      @for (product of products(); track $index) {
+        <div
+          (click)="viewProductDetail(product.id)"
+          class="col-sm-12 col-md-6 col-lg-4 mt-2 mb-2">
+          <app-product-card [product]="product"></app-product-card>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="h1 product-container text-center align-items-center">
+      {{ 'common.nothingFound' | translate }}
+    </div>
+  }
 </div>

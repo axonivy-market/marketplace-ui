@@ -1,8 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { By } from '@angular/platform-browser';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HeaderComponent } from './header.component';
+import { Viewport } from 'karma-viewport/dist/adapter/viewport';
+
+declare const viewport: Viewport;
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -86,5 +88,37 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
 
     expect(component.themeService.changeTheme).toHaveBeenCalled();
+  });
+
+  it('mobile search should display in small screen', () => {
+    viewport.set(540);
+
+    const desktopSearch = fixture.debugElement.query(
+      By.css('.header-desktop__search')
+    );
+    const mobileSearch = fixture.debugElement.query(
+      By.css('.header-mobile__search')
+    );
+
+    expect(getComputedStyle(mobileSearch.nativeElement).display).not.toBe(
+      'none'
+    );
+    expect(getComputedStyle(desktopSearch.nativeElement).display).toBe('none');
+  });
+
+  it('desktop search should display in large screen', () => {
+    viewport.set(1920);
+
+    const desktopSearch = fixture.debugElement.query(
+      By.css('.header-desktop__search')
+    );
+    const mobileSearch = fixture.debugElement.query(
+      By.css('.header-mobile__search')
+    );
+
+    expect(getComputedStyle(mobileSearch.nativeElement).display).toBe('none');
+    expect(getComputedStyle(desktopSearch.nativeElement).display).not.toBe(
+      'none'
+    );
   });
 });

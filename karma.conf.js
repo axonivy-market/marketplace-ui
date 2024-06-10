@@ -4,7 +4,7 @@
 module.exports = function (config) {
   config.set({
     basePath: '',
-    frameworks: ['jasmine', '@angular-devkit/build-angular'],
+    frameworks: ['jasmine', '@angular-devkit/build-angular', 'viewport'],
     plugins: [
       require('karma-jasmine'),
       require('karma-webpack'),
@@ -12,7 +12,7 @@ module.exports = function (config) {
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
       require('@angular-devkit/build-angular/plugins/karma'),
-      require('karma-sonarqube-reporter')
+      require('karma-viewport')
     ],
 
     client: {
@@ -23,7 +23,8 @@ module.exports = function (config) {
         // or set a specific seed with `seed: 4321`
         stopSpecOnExpectationFailure: true,
         failFast: true,
-        timeoutInterval: 60000
+        timeoutInterval: 60000,
+        random: false
       },
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
@@ -31,14 +32,20 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/marketplace-ui'),
+      dir: require('path').join(__dirname, './coverage'),
       subdir: '.',
-      reporters: [{ type: 'html' }, { type: 'text-summary' }]
+      reporters: [{ type: 'html' }, { type: 'text-summary' }, { type: 'lcov' }]
+    },
+    preprocessors: {
+      // source files, that you wanna generate coverage for
+      // do not include tests or libraries
+      // (these files will be instrumented by Istanbul)
+      'src/**/mocks/**': ['coverage']
     },
     angularCli: {
       environment: 'dev'
     },
-    reporters: ['progress', 'sonarqube'],
+    reporters: ['progress', 'coverage'],
     browsers: ['ChromeHeadlessNoSandbox'],
     customLaunchers: {
       ChromeHeadlessNoSandbox: {
@@ -46,26 +53,6 @@ module.exports = function (config) {
         flags: ['--no-sandbox']
       }
     },
-    restartOnFileChange: true,
-
-    sonarqubeReporter: {
-      basePath: 'src/app', // test files folder
-      filePattern: '**/*spec.ts', // test files glob pattern
-      encoding: 'utf-8', // test files encoding
-      outputFolder: 'reports', // report destination
-      legacyMode: false, // report for Sonarqube < 6.2 (disabled)
-      reportName: (metadata) => {
-        // report name callback, but accepts also a
-        // string (file name) to generate a single file
-        /**
-         * Report metadata array:
-         * - metadata[0] = browser name
-         * - metadata[1] = browser version
-         * - metadata[2] = plataform name
-         * - metadata[3] = plataform version
-         */
-        return 'sonarqube_report.xml';
-      }
-    }
+    restartOnFileChange: true
   });
 };

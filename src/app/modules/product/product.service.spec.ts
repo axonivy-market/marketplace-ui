@@ -34,20 +34,14 @@ describe('ProductService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('getAllProducts should return list of product', () => {
-    service.getAllProducts().subscribe((products) => {
-      expect(products.length).toBeGreaterThan(0);
-    });
-  });
-
   it('getProductById should return a product', () => {
-    service.getProductById(PRODUCT_ID).subscribe((data) => {
+    service.getProductById(PRODUCT_ID).subscribe(data => {
       expect(data.id).toEqual(PRODUCT_ID);
     });
   });
 
   it('getProductById should return null product', () => {
-    service.getProductById(NOT_EXIST_ID).subscribe((data) => {
+    service.getProductById(NOT_EXIST_ID).subscribe(data => {
       expect(data).toEqual({} as Product);
     });
   });
@@ -59,7 +53,7 @@ describe('ProductService', () => {
       sort: SortType.ALPHABETICALLY,
       type: FilterType.CONNECTORS
     };
-    service.getProductsByCriteria(criteria).subscribe((products) => {
+    service.getProductsByCriteria(criteria).subscribe(products => {
       for (let i = 0; i < products.length; i++) {
         expect(products[i].type).toEqual(FilterType.CONNECTORS);
         expect(products[i].name.toLowerCase()).toContain(searchString);
@@ -78,7 +72,7 @@ describe('ProductService', () => {
       sort: null,
       type: null
     };
-    service.getProductsByCriteria(criteria).subscribe((products) => {
+    service.getProductsByCriteria(criteria).subscribe(products => {
       expect(products.length).toEqual(MOCK_PRODUCTS.length);
     });
   });
@@ -89,7 +83,7 @@ describe('ProductService', () => {
       sort: SortType.POPULARITY,
       type: null
     };
-    service.getProductsByCriteria(criteria).subscribe((products) => {
+    service.getProductsByCriteria(criteria).subscribe(products => {
       for (let i = 0; i < products.length; i++) {
         if (
           products[i].platformReview &&
@@ -101,6 +95,17 @@ describe('ProductService', () => {
           );
         }
       }
+    });
+  });
+
+  it('getProductByCriteria with default sort', () => {
+    const criteria: Criteria = {
+      search: '',
+      sort: SortType.RECENT,
+      type: null
+    };
+    service.getProductsByCriteria(criteria).subscribe(products => {
+      expect(products.length).toEqual(MOCK_PRODUCTS.length);
     });
   });
 });

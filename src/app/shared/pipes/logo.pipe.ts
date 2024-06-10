@@ -6,7 +6,7 @@ import { Product } from '../models/product.model';
   name: 'logo'
 })
 export class ProductLogoPipe implements PipeTransform {
-  transform(product: Product, args?: any): string {
+  transform(product: Product, _args?: []): string {
     return `/assets/_market/${product.id}/logo.png`;
   }
 }

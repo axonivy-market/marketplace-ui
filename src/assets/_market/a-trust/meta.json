@@ -1,4 +1,5 @@
 {
+    "$schema": "https://json-schema.axonivy.com/market/10.0.0/meta.json",
     "id": "a-trust",
     "name": "A-Trust",
     "description": "Clearly authenticate your customers with a mobile phone signature on the web.",
@@ -8,9 +9,7 @@
     "statusBadgeUrl": "https://github.com/axonivy-market/a-trust-connector/actions/workflows/ci.yml/badge.svg",
     "language": "English",
     "industry": "Cross-Industry",
-    "tags": [
-        "e-signature"
-    ],
+    "tags": [ "e-signature" ],
     "mavenArtifacts": [
         {
             "repoUrl": "https://maven.axonivy.com",
@@ -19,5 +18,5 @@
             "artifactId": "a-trust-connector-product",
             "type": "zip"
         }
-    ]
+    ]    
 }

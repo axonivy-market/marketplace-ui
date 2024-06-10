@@ -3,11 +3,31 @@ run-name: Build on branch ${{github.ref_name}} triggered by ${{github.actor}}
 
 on:
   push:
+    branches-ignore:
+      - develop
+      - master
   workflow_dispatch:
 
 jobs:
+  build:
+    name: Build
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install Dependencies
+        run: npm install
+      - name: Build project
+        run: npm run build
+
   analysis:
-    name: Sonarqube analysis
+    name: Sonarqube
+    needs: build
     runs-on: self-hosted
     env:
       SONAR_PROJECT_KEY: 'AxonIvy-Market-UI'
@@ -15,15 +35,6 @@ jobs:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
-      - name: Install Dependencies
-        run: npm install
       - name: Execute Tests
         run: npm run test
       - uses: sonarsource/sonarqube-scan-action@master
@@ -33,34 +44,14 @@ jobs:
         with:
           args:
             -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
-      # - name: SonarQube Quality Gate check
-      #   id: sonarqube-quality-gate-check
-      #   uses: sonarsource/sonarqube-quality-gate-action@master
-      #   timeout-minutes: 5
-      #   env:
-      #     SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
-      #     SONAR_HOST_URL: ${{ env.SONAR_HOST_URL }}
-      #     # args:
-      #     #   -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
-      #   with:
-      #     scanMetadataReportFile: reports/sonarqube_report.xml
+      - name: SonarQube Quality Gate check
+        id: sonarqube-quality-gate-check
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ env.SONAR_HOST_URL }}
 
-      - name: "Example show SonarQube Quality Gate Status value"
-        run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}"
-
-  # build:
-  #   name: Angular tests
-  #   runs-on: self-hosted
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         node-version: '18'
-  #         cache: 'npm'
-  #     - name: Install Dependencies
-  #       run: npm install
-  #     - name: Execute Tests
-  #       run: npm run test
-  #     - name: Clean up
-  #       run: |
-  #         rm -rf *
+      - name: Clean up
+        run: |
+          rm -rf *

@@ -11,12 +11,8 @@ import { Product } from '../../shared/models/product.model';
 export class ProductService {
   httpClient = inject(HttpClient);
 
-  getAllProducts(): Observable<Product[]> {
-    return of(MOCK_PRODUCTS);
-  }
-
   getProductById(productId: string): Observable<Product> {
-    const product = MOCK_PRODUCTS.find((p) => p.id === productId);
+    const product = MOCK_PRODUCTS.find(p => p.id === productId);
     if (product) {
       return of(product);
     }
@@ -47,7 +43,7 @@ export class ProductService {
     }
 
     return products.filter(
-      (product) =>
+      product =>
         product.name.toLowerCase().includes(searchText) ||
         product.description.toLocaleLowerCase().includes(searchText)
     );
@@ -60,7 +56,7 @@ export class ProductService {
     if (productType === '' || productType === FilterType.All_TYPES) {
       return products;
     }
-    return products.filter((product) => product.type === productType);
+    return products.filter(product => product.type === productType);
   }
 
   private getProductsWithSort(products: Product[], sortType: SortType) {
@@ -75,7 +71,6 @@ export class ProductService {
           collator.compare(a.name, b.name)
         );
       case SortType.RECENT:
-        return products;
       default:
         return products;
     }

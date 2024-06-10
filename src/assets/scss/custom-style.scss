@@ -1,28 +1,89 @@
 $ivyPrimaryColorLightHEX: #007095;
 $ivyPrimaryColorLightRGB: 0, 112, 149;
+$ivySecondaryColorLight: #ebebeb;
+$ivySecondaryColorLightRGB: 235, 235, 235;
 
 [data-bs-theme='light'] {
   --bs-primary-rgb: #{$ivyPrimaryColorLightRGB};
+  --bs-secondary-rgb: #{$ivySecondaryColorLightRGB};
+
+  .card {
+    background-color: #{$ivySecondaryColorLight};
+  }
+
+  .btn {
+    border-radius: 0.5rem;
+  }
 
   .btn-primary {
-    --bs-btn-bg: #{$ivyPrimaryColorLightHEX};
+    background-color: #{$ivyPrimaryColorLightHEX};
+  }
+
+  .btn-primary:hover {
+    background-color: #00445c;
+  }
+
+  .btn-secondary {
+    background-color: #{$ivySecondaryColorLight};
+    color: var(--bs-dark);
+  }
+
+  .btn-secondary:hover {
+    background-color: #{$ivySecondaryColorLight};
   }
 }
 
 $ivyPrimaryColorDark: 44, 44, 44;
-$ivySecondaryColorDark: 56, 56, 56;
+$ivySecondaryColorDarkRGB: 56, 56, 56;
 $ivyBodyBackgroundDark: #2c2c2c;
 $ivySecondaryColorDark: #383838;
 
 [data-bs-theme='dark'] {
   --bs-body-bg: #{$ivyBodyBackgroundDark};
   --bs-primary-rgb: #{$ivyPrimaryColorDark};
-  --bs-secondary-rgb: #{$ivySecondaryColorDark};
-  --bs-tertiary-bg: #{$ivySecondaryColorDark};
-
-  --ivy-secondary: #{$ivySecondaryColorDark};
+  --bs-secondary-rgb: #{$ivySecondaryColorDarkRGB};
+  --bs-tertiary-bg: #{$ivySecondaryColorDarkRGB};
 
   .card {
-    --bs-card-bg: #{$ivySecondaryColorDark};
+    background-color: #{$ivySecondaryColorDarkRGB};
   }
+
+  .btn {
+    border-radius: 0.5rem;
+  }
+
+  .btn-primary {
+    background-color: var(--bs-light);
+    color: var(--bs-dark);
+  }
+
+  .btn:hover {
+    background-color: #ececec;
+  }
+
+  .btn-secondary {
+    background-color: #{$ivySecondaryColorDark};
+  }
+
+  .btn-secondary:hover {
+    background-color: #202020;
+  }
+}
+
+input[type='text']:focus,
+input[type='password']:focus,
+input[type='datetime']:focus,
+input[type='datetime-local']:focus,
+input[type='date']:focus,
+input[type='month']:focus,
+input[type='time']:focus,
+input[type='week']:focus,
+input[type='number']:focus,
+input[type='email']:focus,
+input[type='url']:focus,
+input[type='search']:focus,
+input[type='tel']:focus,
+input[type='color']:focus {
+  box-shadow: none;
+  outline: 0 none;
 }
