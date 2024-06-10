@@ -3,10 +3,33 @@
   src: url(../fonts/inter.ttf) format('truetype');
 }
 
+h1 {
+  font-weight: 600;
+  font-size: 72px;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 22px;
+}
+
+h4 {
+  font-weight: 400;
+  font-size: 18px;
+}
+
+p {
+  font-weight: 400;
+  font-size: 14px;
+}
+
 $ivyPrimaryColorLight: #007095;
 $ivyPrimaryColorHover: #00445c;
 $ivySecondaryColorLight: #f8f8f8;
 $ivySecondaryButtonHoverLight: #ebebeb;
+$ivyBackgroundColorLight: #fafafa;
+
+$ivyTextColorLight: #fafafa;
 
 [data-bs-theme='light'] {
   body {
@@ -44,6 +67,15 @@ $ivySecondaryButtonHoverLight: #ebebeb;
   .btn-secondary:hover {
     background-color: #{$ivySecondaryButtonHoverLight};
   }
+
+  .card__description {
+    color: #4a4a4a;
+  }
+
+  .card__tag {
+    background-color: var(--ivy-primary-color-light);
+    color: var(--bs-light);
+  }
 }
 
 $ivyPrimaryColorDark: 44, 44, 44;
@@ -51,6 +83,7 @@ $ivySecondaryColorDarkRGB: 56, 56, 56;
 $ivyBodyBackgroundDark: #2c2c2c;
 $ivySecondaryColorDark: #383838;
 $ivySecondaryHoverDark: #202020;
+$ivyTextColorDark: #2c2c2c;
 
 [data-bs-theme='dark'] {
   body {
@@ -85,6 +118,15 @@ $ivySecondaryHoverDark: #202020;
 
   .btn-secondary:hover {
     background-color: #{$ivySecondaryHoverDark};
+  }
+
+  .card__description {
+    color: #a3a3a3;
+  }
+
+  .card__tag {
+    background-color: #{$ivyBackgroundColorLight};
+    color: #{$ivyTextColorDark};
   }
 }
 

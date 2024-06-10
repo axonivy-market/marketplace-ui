@@ -2,3 +2,35 @@ img {
   width: 75px;
   height: 75px;
 }
+
+.product-card {
+  height: 250px;
+  padding: 20px;
+  gap: 20px;
+  border-radius: 15px;
+  border: 1px;
+  opacity: 0px;
+  background-color: var(--ivy-primary-color-light);
+}
+
+.card__title {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.card__description {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+[data-bs-theme='light'] {
+  .card__tag {
+    background-color: var(--ivy-primary-color-light);
+  }
+}
+
+[data-bs-theme='dark'] {
+  .card__tag {
+    background-color: #fafafa;
+  }
+}
