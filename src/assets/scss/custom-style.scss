@@ -1,14 +1,27 @@
-$ivyPrimaryColorLightHEX: #007095;
-$ivyPrimaryColorLightRGB: 0, 112, 149;
-$ivySecondaryColorLight: #ebebeb;
-$ivySecondaryColorLightRGB: 235, 235, 235;
+@font-face {
+  font-family: Inter;
+  src: url(../fonts/inter.ttf) format('truetype');
+}
+
+$ivyPrimaryColorLight: #007095;
+$ivyPrimaryColorHover: #00445c;
+$ivySecondaryColorLight: #f8f8f8;
+$ivySecondaryButtonHoverLight: #ebebeb;
 
 [data-bs-theme='light'] {
-  --bs-primary-rgb: #{$ivyPrimaryColorLightRGB};
-  --bs-secondary-rgb: #{$ivySecondaryColorLightRGB};
+  body {
+    font-family: Inter;
+  }
 
-  .card {
-    background-color: #{$ivySecondaryColorLight};
+  --ivy-primary-color-light: #{$ivyPrimaryColorLight};
+  --ivy-secondary-color-light: #{$ivySecondaryColorLight};
+
+  .bg-primary {
+    background-color: #{$ivyPrimaryColorLight} !important;
+  }
+
+  .bg-secondary {
+    background-color: #{$ivySecondaryColorLight} !important;
   }
 
   .btn {
@@ -16,11 +29,11 @@ $ivySecondaryColorLightRGB: 235, 235, 235;
   }
 
   .btn-primary {
-    background-color: #{$ivyPrimaryColorLightHEX};
+    background-color: #{$ivyPrimaryColorLight};
   }
 
   .btn-primary:hover {
-    background-color: #00445c;
+    background-color: #{$ivyPrimaryColorHover};
   }
 
   .btn-secondary {
@@ -29,7 +42,7 @@ $ivySecondaryColorLightRGB: 235, 235, 235;
   }
 
   .btn-secondary:hover {
-    background-color: #{$ivySecondaryColorLight};
+    background-color: #{$ivySecondaryButtonHoverLight};
   }
 }
 
@@ -37,8 +50,13 @@ $ivyPrimaryColorDark: 44, 44, 44;
 $ivySecondaryColorDarkRGB: 56, 56, 56;
 $ivyBodyBackgroundDark: #2c2c2c;
 $ivySecondaryColorDark: #383838;
+$ivySecondaryHoverDark: #202020;
 
 [data-bs-theme='dark'] {
+  body {
+    font-family: Inter;
+  }
+
   --bs-body-bg: #{$ivyBodyBackgroundDark};
   --bs-primary-rgb: #{$ivyPrimaryColorDark};
   --bs-secondary-rgb: #{$ivySecondaryColorDarkRGB};
@@ -53,8 +71,8 @@ $ivySecondaryColorDark: #383838;
   }
 
   .btn-primary {
-    background-color: var(--bs-light);
-    color: var(--bs-dark);
+    background-color: #ffffff;
+    color: #2c2c2c;
   }
 
   .btn:hover {
@@ -66,7 +84,7 @@ $ivySecondaryColorDark: #383838;
   }
 
   .btn-secondary:hover {
-    background-color: #202020;
+    background-color: #{$ivySecondaryHoverDark};
   }
 }
 
