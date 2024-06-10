@@ -4,7 +4,7 @@
     <div
       class="rounded-3 lh-md px-2 py-1 text-light"
       [ngClass]="
-        themeSerivce.isDarkMode() ? 'bg-light text-dark' : 'bg-primary'
+        themeService.isDarkMode() ? 'bg-light text-dark' : 'bg-primary'
       ">
       {{ 'common.filter.value.' + product.type | translate }}
     </div>
