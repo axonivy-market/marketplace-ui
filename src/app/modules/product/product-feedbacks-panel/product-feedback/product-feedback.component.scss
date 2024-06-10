@@ -1,0 +1,21 @@
+.expandable-text {
+  position: relative;
+  overflow: hidden;
+
+  .collapsed {
+    display: -webkit-box;
+    -webkit-line-clamp: 6; // number of lines to show
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .expanded {
+    display: block;
+  }
+
+  .toggle-link {
+    cursor: pointer;
+    color: blue; // Customize the color as needed
+    text-decoration: underline;
+  }
+}

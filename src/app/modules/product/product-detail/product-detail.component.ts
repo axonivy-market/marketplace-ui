@@ -3,23 +3,26 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../../shared/models/product.model';
 import { ProductService } from '../product.service';
 import { ProductCommentComponent } from '../product-comment/product-comment.component';
-import { COMMENTS } from '../../../shared/constants/common.constant';
 import { ThemeService } from '../../../core/services/theme/theme.service';
 import { CommonModule } from '@angular/common';
 import { StarRatingCountingComponent } from '../star-rating-counting/star-rating-counting.component';
-
+import { ProductFeedbacksPanelComponent } from '../product-feedbacks-panel/product-feedbacks-panel.component';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [CommonModule, ProductCommentComponent, StarRatingCountingComponent],
+  imports: [
+    CommonModule,
+    ProductCommentComponent,
+    StarRatingCountingComponent,
+    ProductFeedbacksPanelComponent
+  ],
   providers: [ProductService],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })
 export class ProductDetailComponent {
   product!: Product;
-  comments: Object[] = COMMENTS;
 
   route = inject(ActivatedRoute);
   productService = inject(ProductService);

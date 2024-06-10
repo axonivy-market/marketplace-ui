@@ -112,30 +112,3 @@ export const SORT_TYPES = [
     label: 'common.sort.value.recent'
   }
 ];
-
-export const COMMENTS = [
-  {
-    userName: 'Khanh',
-    comment: "c1",
-  },
-  {
-    userName: 'Dinh',
-    comment: "c1",
-  },
-  {
-    userName: 'Khanh',
-    comment: "c1",
-  },
-  {
-    userName: 'Khanh',
-    comment: "c1",
-  },
-  {
-    userName: 'Khanh',
-    comment: "c1",
-  },
-  {
-    userName: 'Khanh',
-    comment: "c1",
-  }
-];
