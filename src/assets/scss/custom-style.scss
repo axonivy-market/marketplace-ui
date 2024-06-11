@@ -2,6 +2,8 @@ $ivyPrimaryColorLightHEX: #007095;
 $ivyPrimaryColorLightRGB: 0, 112, 149;
 $ivySecondaryColorLight: #ebebeb;
 $ivySecondaryColorLightRGB: 235, 235, 235;
+$ratingReviewTextColorLight: #4A4A4A;
+$ratingTextColorLight: #1B1B1B;
 
 [data-bs-theme='light'] {
   --bs-primary-rgb: #{$ivyPrimaryColorLightRGB};
@@ -32,13 +34,34 @@ $ivySecondaryColorLightRGB: 235, 235, 235;
     background-color: #{$ivySecondaryColorLight};
   }
 
+  /** Star Rating Summary **/
+  .rating-review-text-color {
+    color: #{$ratingReviewTextColorLight};
+  }
 
+  .rating-text-color {
+    color: #{$ratingTextColorLight};
+  }
+
+  .star-rating-counting-line {
+    background-color: #F8F8F8;
+    .star-rating-percent {
+      background-color: #007095;
+    }
+  }
+
+  .connector-rate-link {
+    color: #007095;
+  }
+  /** End Star Rating Summary **/
 }
 
 $ivyPrimaryColorDark: 44, 44, 44;
 $ivySecondaryColorDarkRGB: 56, 56, 56;
 $ivyBodyBackgroundDark: #2c2c2c;
 $ivySecondaryColorDark: #383838;
+$ratingReviewTextColorDark: #A3A3A3;
+$ratingTextColorDark: #FFFFFF;
 
 [data-bs-theme='dark'] {
   --bs-body-bg: #{$ivyBodyBackgroundDark};
@@ -71,7 +94,26 @@ $ivySecondaryColorDark: #383838;
     background-color: #202020;
   }
 
-  
+  /** Star Rating Summary **/
+  .rating-review-text-color {
+    color: #{$ratingReviewTextColorDark};
+  }
+
+  .rating-text-color {
+    color: #{$ratingTextColorDark};
+  }
+
+  .star-rating-counting-line {
+    background-color: #383838;
+    .star-rating-percent {
+      background-color: #FAFAFA;
+    }
+  }
+
+  .connector-rate-link {
+    color: #FAFAFA;
+  }
+  /** End Star Rating Summary **/
 }
 
 input[type='text']:focus,
