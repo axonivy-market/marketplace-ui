@@ -2,7 +2,7 @@
   <p class="h3 mb-4">
     {{ translateService.get('common.filter.label') | async }}
   </p>
-  <div class="filter-container mb-4">
+  <div class="filter-container col-12 w-auto mb-4">
     <!-- Filter type -->
     <div class="filter-container__button d-none d-md-flex">
       @for (type of filterTypes; track $index) {
@@ -23,11 +23,11 @@
         </div>
       }
     </div>
-    <div class="col-6 d-sm-block d-md-none">
+    <div class="col-6 d-md-block d-md-none">
       <select
         [(ngModel)]="selectedFilterType"
         (ngModelChange)="onSelectFilterType($event)"
-        class="form-select form-select-lg rounded-4 me-2 w-100"
+        class="form-select w-auto rounded-4"
         aria-label="sort"
         name="sort">
         @for (type of filterTypes; track $index) {
@@ -40,14 +40,14 @@
 
     <!-- Sort type -->
     <div
-      class="filter-container__sort col-sm-6 col-md-5 col-lg-3 align-items-center">
-      <h4 class="filter-container__sort__label d-none d-md-block">
+      class="col-6 col-md-4 filter-container__sort justify-content-end align-items-end">
+      <h4 class="filter-container__sort__label d-none d-lg-flex w-auto">
         {{ translateService.get('common.sort.label') | async }}:
       </h4>
       <select
         [(ngModel)]="selectedSortType"
         (ngModelChange)="onSortChange()"
-        class="form-select rounded-4"
+        class="form-select w-auto rounded-4 ms-2"
         aria-label="sort"
         name="sort">
         @for (type of sortTypes; track $index) {
@@ -63,8 +63,8 @@
   <div class="input-group mb-5">
     <div class="input-group-prepend">
       <span
-        class="input-group-text bg-secondary h-100 lh-lg border-0 rounded-start-4 rounded-end-0">
-        <i class="bi bi-search h-100"></i>
+        class="input-group-text bg-secondary h-100 border-0 rounded-start-4 rounded-end-0">
+        <i class="bi bi-search"></i>
       </span>
     </div>
     <input

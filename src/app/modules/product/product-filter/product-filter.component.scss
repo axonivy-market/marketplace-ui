@@ -1,21 +1,17 @@
 .filter-container {
   display: flex;
   justify-content: space-between;
-  width: 1270px;
   height: 37px;
 }
 
 .filter-container__button {
   display: flex;
   justify-content: space-between;
-  width: 399px;
   height: 37px;
 }
 
 .filter-container__sort {
   display: flex;
-  justify-content: space-between;
-  width: 209px;
   height: 37px;
   font-weight: 400;
   font-size: 14px;
@@ -26,11 +22,12 @@
 }
 
 .filter-type {
-  width: fit-content;
   height: 37px;
+  width: max-content;
   line-height: 16.8px;
   border-radius: 10px;
   padding: 10px 15px 10px 15px;
+  margin: 0 15px 0 0;
   gap: 10px;
   font-size: 14px;
   cursor: pointer;
@@ -41,7 +38,6 @@
 }
 
 .form-select {
-  width: 122px;
   height: 37px;
   line-height: 16.8px;
   font-weight: 400;
@@ -55,6 +51,18 @@
 
 .input__search {
   height: 43px;
+}
+
+@media only screen and (max-width: 768px) {
+  .form-select {
+    width: 100% !important;
+  }
+}
+
+@media only screen and (max-width: 996px) {
+  .filter-container__sort__label {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 1366px) {
