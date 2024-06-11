@@ -1,15 +1,45 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, firstValueFrom, of } from 'rxjs';
 import { FilterType } from '../../shared/enums/filter-type.enum';
 import { SortType } from '../../shared/enums/sort-type.enum';
 import { MOCK_PRODUCTS } from '../../shared/mocks/mock-data';
 import { Criteria } from '../../shared/models/criteria.model';
 import { Product } from '../../shared/models/product.model';
+import { error, log } from 'console';
 
 @Injectable()
 export class ProductService {
   httpClient = inject(HttpClient);
+
+  sendRequestToProductAPI(url: string, products: Product[]) {
+    firstValueFrom(this.httpClient.get(url)).then((response: any) => {
+      if (response) {
+        console.log("Content " + response._embedded.products);
+        console.log("Links " + response._links.next);
+        console.log("Page " + response.page);
+      }
+      if (products === undefined) {
+        products = response.content;
+      } else {
+        products = products.concat(response.content);
+      }
+      let nextLink = response._links.next;
+
+      if (nextLink != '') {
+        this.sendRequestToProductAPI(nextLink.href, products);
+      } else {
+        console.log('Finished');
+      }
+    }).catch(err => {
+      console.log(err.error.errorCode + err.error.message, err.error.helpText);
+    }).finally(() => console.log('Finish call'));
+  }
+
+  getAllProducts(criteria: Criteria) {
+    let dummyProduct: Product[] = [];
+    this.sendRequestToProductAPI("api/product/" + criteria.type, dummyProduct);
+  }
 
   getProductById(productId: string): Observable<Product> {
     const product = MOCK_PRODUCTS.find(p => p.id === productId);
@@ -20,6 +50,10 @@ export class ProductService {
   }
 
   getProductsByCriteria(criteria: Criteria): Observable<Product[]> {
+    // TODO
+    this.getAllProducts(criteria);
+    // END TODO
+
     let products = MOCK_PRODUCTS;
     products = this.getProductByNameOrDescription(products, criteria.search);
 
