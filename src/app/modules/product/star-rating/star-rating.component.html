@@ -1,12 +1,16 @@
 <div class="product-data-info rating-text-color">
   @for (_ of fullStars; track $index) {
-  <i class="bi bi-star-fill"></i>
+    <i class="bi bi-star-fill {{starFeedbackClassName}}"></i>
   }
   @if (isHalfStar) {
-  <i class="bi bi-star-half"></i>
+    <i class="bi bi-star-half {{starFeedbackClassName}}"></i>
   }
   @for (_ of emptyStars; track $index) {
-  <i class="bi bi-star"></i>
+    <i class="bi bi-star {{starFeedbackClassName}}"></i>
   }
-  <span class="total-comments rating-review-text-color"> ({{ totalComments }})</span>
+  @if (isTotalCommentsVisibility) {
+    <span class="total-comments rating-review-text-color">
+      ({{ totalComments }})
+    </span>
+  }
 </div>

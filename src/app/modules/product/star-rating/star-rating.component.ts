@@ -16,6 +16,9 @@ export class StarRatingComponent {
   @Input() rating: number = 0;
   @Input() maxStars: number = 5;
   @Input() totalComments: number = 0;
+  @Input() isTotalCommentsVisibility: boolean = true;
+  @Input() starFeedbackClassName: string = "star-feedback-default";
+
 
   fullStars: number[] = [];
   isHalfStar: boolean = false;
