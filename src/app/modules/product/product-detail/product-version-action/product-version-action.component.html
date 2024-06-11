@@ -30,7 +30,7 @@
           class="form-select form-select-sm"
           aria-label=".form-select-sm example">
           @for (item of artifacts; track $index) {
-            <option [value]="item">{{ item }}</option>
+            <option [value]="item">{{ item.name }}</option>
           }
         </select>
       </div>
