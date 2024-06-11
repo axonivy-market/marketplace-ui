@@ -1,7 +1,7 @@
 <div class="container mb-5">
   <h1 class="display-2 mb-3 d-flex d-inline-block">
-    <img class="logo__image" [src]="product | logo" alt="" />
-    {{ product.name }}
+    <img class="logo__image" [src]="productDetail().logoUrl" alt="" />
+    {{ productDetail().name }}
   </h1>
   <div class="row mb-4">
     <div class="d-flex align-items-start justify-content-start col-md-6">
@@ -10,10 +10,11 @@
           <span>Review</span>
         </div>
         <div class="product-data-content">
-          <span>{{ product.platformReview }}</span>
+          <span>{{ productDetail().platformReview }}</span>
         </div>
         <div class="product-data-info">
-          <app-star-rating [rating]="product.platformReview"></app-star-rating>
+          <app-star-rating
+            [rating]="productDetail().platformReview!"></app-star-rating>
         </div>
       </div>
       <div class="col-4 text-start d-lg-block">
@@ -35,11 +36,12 @@
           <i [className]="getTypeIcon()"></i>
         </div>
         <div class="product-data-info">
-          <span>{{ product.type }}</span>
+          <span>{{ productDetail().type }}</span>
         </div>
       </div>
     </div>
   </div>
+  <markdown class="markdown-content" [data]="productDetail().demo"></markdown>
   <div class="row mt-2">
     <div class="tab-group col-lg-7 col-md-7 col-sm-5">
       <div class="d-none d-sm-block">
@@ -105,22 +107,20 @@
           class="tab-pane"
           id="description"
           role="tabpanel"
-          aria-labelledby="description-tab">
-          {{ product.description }}
-        </li>
+          aria-labelledby="description-tab"></li>
         <li
           class="tab-pane"
           id="setup"
           role="tabpanel"
           aria-labelledby="setup-tab">
-          {{ product.name }}
+          {{ productDetail().name }}
         </li>
         <li
           class="tab-pane"
           id="maven"
           role="tabpanel"
           aria-labelledby="maven-tab">
-          {{ product.name }}
+          {{ productDetail().name }}
         </li>
       </ul>
     </div>
@@ -130,47 +130,49 @@
       <h4><span>Information</span></h4>
       <div class="product-meta-info mt-3">
         <span class="meta-type">Author/Support</span>
-        <span class="meta-data">{{ product.vendor }}</span>
+        <span class="meta-data">{{ productDetail().vendor }}</span>
       </div>
       <div class="product-meta-info">
         <span class="meta-type">Version</span>
-        <span class="meta-data">{{ product.version }}</span>
+        <span class="meta-data">{{ productDetail().version }}</span>
       </div>
 
       <div class="product-meta-info">
         <span class="meta-type">Compatibility</span>
-        <span class="meta-data">{{ product.compatibility }}</span>
+        <span class="meta-data">{{ productDetail().compatibility }}</span>
       </div>
 
       <div class="product-meta-info">
         <span class="meta-type">Cost</span>
-        <span class="meta-data capitalize">{{ product.cost }}</span>
+        <span class="meta-data capitalize">{{ productDetail().cost }}</span>
       </div>
 
       <div class="product-meta-info">
         <span class="meta-type">Language</span>
-        <span class="meta-data">{{ product.language }}</span>
+        <span class="meta-data">{{ productDetail().language }}</span>
       </div>
 
       <div class="product-meta-info">
         <span class="meta-type">Type</span>
-        <span class="meta-data capitalize">{{ product.type }}</span>
+        <span class="meta-data capitalize">{{ productDetail().type }}</span>
       </div>
 
       <div class="product-meta-info">
         <span class="meta-type">Industry</span>
-        <span class="meta-data capitalize">{{ product.industry }}</span>
+        <span class="meta-data capitalize">{{ productDetail().industry }}</span>
       </div>
 
       <div class="product-meta-info">
         <span class="meta-type">Tags</span>
-        <span class="meta-data">{{ product.tags.join(', ') }}</span>
+        <span class="meta-data">
+          {{ productDetail().tags ? productDetail().tags!.join(', ') : '' }}
+        </span>
       </div>
 
       <div class="product-meta-info">
         <span class="meta-type">Source</span>
         <span class="meta-data">
-          <a href="{{ product.sourceUrl }}">github.com</a>
+          <a href="{{ productDetail().sourceUrl }}">github.com</a>
         </span>
       </div>
 
@@ -186,7 +188,7 @@
         <span class="meta-data">
           <a
             href="https://www.axonivy.com/marketplace/contact/?market_solutions= + {{
-              product.id
+              productDetail().key
             }}">
             Contact us
           </a>
@@ -203,47 +205,51 @@
         <h4><span>Information</span></h4>
         <div class="product-meta-info">
           <span class="meta-type">Author/Support</span>
-          <span class="meta-data">{{ product.vendor }}</span>
+          <span class="meta-data">{{ productDetail().vendor }}</span>
         </div>
         <div class="product-meta-info">
           <span class="meta-type">Version</span>
-          <span class="meta-data">{{ product.version }}</span>
+          <span class="meta-data">{{ productDetail().version }}</span>
         </div>
 
         <div class="product-meta-info">
           <span class="meta-type">Compatibility</span>
-          <span class="meta-data">{{ product.compatibility }}</span>
+          <span class="meta-data">{{ productDetail().compatibility }}</span>
         </div>
 
         <div class="product-meta-info">
           <span class="meta-type">Cost</span>
-          <span class="meta-data capitalize">{{ product.cost }}</span>
+          <span class="meta-data capitalize">{{ productDetail().cost }}</span>
         </div>
 
         <div class="product-meta-info">
           <span class="meta-type">Language</span>
-          <span class="meta-data">{{ product.language }}</span>
+          <span class="meta-data">{{ productDetail().language }}</span>
         </div>
 
         <div class="product-meta-info">
           <span class="meta-type">Type</span>
-          <span class="meta-data capitalize">{{ product.type }}</span>
+          <span class="meta-data capitalize">{{ productDetail().type }}</span>
         </div>
 
         <div class="product-meta-info">
           <span class="meta-type">Industry</span>
-          <span class="meta-data capitalize">{{ product.industry }}</span>
+          <span class="meta-data capitalize">
+            {{ productDetail().industry }}
+          </span>
         </div>
 
         <div class="product-meta-info">
           <span class="meta-type">Tags</span>
-          <span class="meta-data">{{ product.tags.join(', ') }}</span>
+          <span class="meta-data">
+            {{ productDetail().tags ? productDetail().tags!.join(', ') : '' }}
+          </span>
         </div>
 
         <div class="product-meta-info">
           <span class="meta-type">Source</span>
           <span class="meta-data">
-            <a href="{{ product.sourceUrl }}">github.com</a>
+            <a href="{{ productDetail().sourceUrl }}">github.com</a>
           </span>
         </div>
 
@@ -259,7 +265,7 @@
           <span class="meta-data">
             <a
               href="https://www.axonivy.com/marketplace/contact/?market_solutions= + {{
-                product.id
+                productDetail().key
               }}">
               Contact us
             </a>

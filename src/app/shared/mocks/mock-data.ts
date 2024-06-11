@@ -3,7 +3,7 @@ import { Product } from '../models/product.model';
 export const MOCK_PRODUCTS = [
   {
     $schema: 'https://json-schema.axonivy.com/market/10.0.0/meta.json',
-    id: 'adobe-acrobat-sign-connector',
+    id: 'adobe-acrobat-connector',
     name: 'Adobe Acrobat Connector',
     description:
       'Use this connector to send, sign, track, and manage signature processes in Axon Ivy.',

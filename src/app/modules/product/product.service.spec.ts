@@ -13,6 +13,7 @@ import { ProductService } from './product.service';
 import { Product } from '../../shared/models/product.model';
 
 const PRODUCT_ID = 'portal';
+const PRODUCT_TYPE = 'util';
 const NOT_EXIST_ID = 'undefined';
 
 describe('ProductService', () => {
@@ -35,13 +36,13 @@ describe('ProductService', () => {
   });
 
   it('getProductById should return a product', () => {
-    service.getProductById(PRODUCT_ID).subscribe(data => {
+    service.getProductDetails(PRODUCT_ID, PRODUCT_TYPE).subscribe(data => {
       expect(data.id).toEqual(PRODUCT_ID);
     });
   });
 
   it('getProductById should return null product', () => {
-    service.getProductById(NOT_EXIST_ID).subscribe(data => {
+    service.getProductDetails(NOT_EXIST_ID, NOT_EXIST_ID).subscribe(data => {
       expect(data).toEqual({} as Product);
     });
   });

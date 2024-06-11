@@ -1,8 +1,8 @@
 import { HttpHeaders, HttpInterceptorFn } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
-export const REQUEST_BY = "X-Requested-By";
-export const IVY = "ivy";
+export const REQUEST_BY = 'X-Requested-By';
+export const IVY = 'ivy';
 
 export const apiInterceptor: HttpInterceptorFn = (req, next) => {
   if (req.url.includes('i18n')) {
@@ -13,7 +13,10 @@ export const apiInterceptor: HttpInterceptorFn = (req, next) => {
   if (!requestURL.startsWith(apiURL)) {
     requestURL = `${apiURL}/${req.url}`;
   }
-  const cloneReq = req.clone({ url: requestURL, headers: addIvyHeaders(req.headers) });
+  const cloneReq = req.clone({
+    url: requestURL,
+    headers: addIvyHeaders(req.headers)
+  });
   return next(cloneReq);
 };
 

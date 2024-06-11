@@ -75,8 +75,12 @@ export class ProductComponent implements OnDestroy {
     );
   }
 
-  viewProductDetail(productId: string) {
-    this.router.navigate(['', productId]);
+  viewProductDetail(productKey: string, productType: string) {
+    this.router.navigate(['', productKey], {
+      queryParams: {
+        type: productType
+      }
+    });
   }
 
   onFilterChange(filterType: FilterType) {

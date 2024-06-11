@@ -5,23 +5,14 @@ export interface Product {
   id: string;
   version: string;
   name: string;
-  description: string;
+  shortDescription: string;
   type: string;
-  cost: string;
   platformReview: string;
-  vendor: string;
-  vendorImage: string;
-  vendorUrl: string;
-  sourceUrl: string;
-  statusBadgeUrl: string;
-  language: string;
-  industry: string;
+  // vendorImage: string;
   listed: boolean;
-  compatibility: string;
   tags: string[];
-  validate: boolean;
   versionDisplay: string;
   installMatcher: string;
-  mavenArtifacts: MavenArtifact[];
-  contactUs: boolean;
+  logoUrl: string;
+  key: string;
 }
