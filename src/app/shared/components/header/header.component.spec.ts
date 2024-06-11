@@ -58,9 +58,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should toggle the mobile menu on click', () => {
-    const navbarToggler = fixture.debugElement.query(
-      By.css('.bi.bi-list')
-    );
+    const navbarToggler = fixture.debugElement.query(By.css('.bi.bi-list'));
 
     expect(component.isMobileMenuCollapsed()).toBeTrue();
 
@@ -119,6 +117,66 @@ describe('HeaderComponent', () => {
     expect(getComputedStyle(mobileSearch.nativeElement).display).toBe('none');
     expect(getComputedStyle(desktopSearch.nativeElement).display).not.toBe(
       'none'
+    );
+  });
+
+  // Responsive section
+  it('action section should display in the bottom of the view in mobile mode', () => {
+    viewport.set(540);
+
+    const headerNavigation = fixture.nativeElement.querySelector(
+      '.header__navigation'
+    );
+    const headerAction = fixture.nativeElement.querySelector('.header__action');
+
+    const headerNavigationBeforeShowNavBar =
+      headerNavigation.getBoundingClientRect();
+    const headerActionBeforeShowNavBar = headerAction.getBoundingClientRect();
+
+    const menuButton = fixture.debugElement.query(
+      By.css('.header__menu-button')
+    );
+    menuButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+    const headerNavigationAfterShowNavBar =
+      headerNavigation.getBoundingClientRect();
+    const headerActionAfterShowNavBar = headerAction.getBoundingClientRect();
+    expect(headerNavigationBeforeShowNavBar.top).toBeLessThan(
+      headerActionAfterShowNavBar.top
+    );
+    expect(headerActionBeforeShowNavBar.top).toBeLessThan(
+      headerNavigationAfterShowNavBar.top
+    );
+
+    expect(headerNavigationAfterShowNavBar.bottom).toBeLessThan(
+      headerActionAfterShowNavBar.top
+    );
+  });
+
+  it('navigation section should display in vertical', () => {
+    viewport.set(540);
+    const menuButton = fixture.debugElement.query(
+      By.css('.header__menu-button')
+    );
+    menuButton.triggerEventHandler('click', null);
+
+    fixture.detectChanges();
+    const navBar = fixture.debugElement.query(
+      By.css('.header__navbar-content')
+    );
+
+    expect(getComputedStyle(navBar.nativeElement).flexDirection).toBe('column');
+  });
+
+  it('menu button should be in the right side of mobile view', () => {
+    viewport.set(540);
+    const menuButton = fixture.nativeElement.querySelector(
+      '.header__menu-button'
+    );
+
+    const logo = fixture.nativeElement.querySelector('.logo__image');
+    expect(menuButton.getBoundingClientRect().left).toBeGreaterThan(
+      logo.getBoundingClientRect().right
     );
   });
 });
