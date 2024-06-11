@@ -22,15 +22,3 @@ img {
   font-weight: 400;
   font-size: 16px;
 }
-
-[data-bs-theme='light'] {
-  .card__tag {
-    background-color: var(--ivy-primary-color-light);
-  }
-}
-
-[data-bs-theme='dark'] {
-  .card__tag {
-    background-color: #fafafa;
-  }
-}

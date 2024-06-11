@@ -2,7 +2,7 @@
   <p class="h3 mb-4">
     {{ translateService.get('common.filter.label') | async }}
   </p>
-  <div class="filter-container col-12 w-auto mb-4">
+  <div class="filter-container d-flex justify-content-between w-auto mb-4">
     <!-- Filter type -->
     <div class="filter-container__button d-none d-md-flex">
       @for (type of filterTypes; track $index) {
@@ -40,8 +40,8 @@
 
     <!-- Sort type -->
     <div
-      class="col-6 col-md-4 filter-container__sort justify-content-end align-items-end">
-      <h4 class="filter-container__sort__label d-none d-lg-flex w-auto">
+      class="col-6 col-md-4 d-flex sort-container justify-content-end align-items-end">
+      <h4 class="sort-container__label d-none d-lg-flex w-auto">
         {{ translateService.get('common.sort.label') | async }}:
       </h4>
       <select
