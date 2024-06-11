@@ -39,42 +39,42 @@ describe('HeaderComponent', () => {
       By.css('.header__search-input')
     );
 
-    expect(component.isSearchBarDisplayed).toBeFalse();
+    expect(component.isSearchBarDisplayed()).toBeFalse();
     expect(searchInput.attributes['hidden']).toBeDefined();
 
     // Click the search icon
     searchIcon.triggerEventHandler('click', null);
     fixture.detectChanges();
 
-    expect(component.isSearchBarDisplayed).toBeTrue();
+    expect(component.isSearchBarDisplayed()).toBeTrue();
     expect(searchInput.attributes['hidden']).toBeUndefined();
 
     // Click the search icon again
     searchIcon.triggerEventHandler('click', null);
     fixture.detectChanges();
 
-    expect(component.isSearchBarDisplayed).toBeFalse();
+    expect(component.isSearchBarDisplayed()).toBeFalse();
     expect(searchInput.attributes['hidden']).toBeDefined();
   });
 
   it('should toggle the mobile menu on click', () => {
     const navbarToggler = fixture.debugElement.query(
-      By.css('.navbar-toggler span')
+      By.css('.bi.bi-list')
     );
 
-    expect(component.isMobileMenuCollapsed).toBeTrue();
+    expect(component.isMobileMenuCollapsed()).toBeTrue();
 
     // Click the mobile menu toggler
     navbarToggler.triggerEventHandler('click', null);
     fixture.detectChanges();
 
-    expect(component.isMobileMenuCollapsed).toBeFalse();
+    expect(component.isMobileMenuCollapsed()).toBeFalse();
 
     // Click the mobile menu toggler again
     navbarToggler.triggerEventHandler('click', null);
     fixture.detectChanges();
 
-    expect(component.isMobileMenuCollapsed).toBeTrue();
+    expect(component.isMobileMenuCollapsed()).toBeTrue();
   });
 
   it('should toggle the theme on theme button click', () => {

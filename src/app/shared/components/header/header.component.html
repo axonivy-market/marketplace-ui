@@ -11,25 +11,19 @@
         alt="Axon Ivy" />
     </a>
     <button
-      class="btn navbar-toggler rounded-3"
+      class="btn border-0 navbar-toggler rounded-3"
       data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
       aria-expanded="false"
       aria-label="Toggle navigation">
-      <span
-        class="navbar-toggler-icon"
-        [hidden]="!isMobileMenuCollapsed"
-        (click)="onCollapsedMobileMenu()"></span>
       <span>
         <i
-          class="bi bi-x-lg fs-2"
-          [hidden]="isMobileMenuCollapsed"
+          class="fs-2"
+          [ngClass]="isMobileMenuCollapsed() ? 'bi bi-list' : 'bi bi-x-lg'"
           (click)="onCollapsedMobileMenu()"></i>
       </span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" [ngClass]="{'show': !isMobileMenuCollapsed()}" id="navbarSupportedContent">
       <div
         class="d-flex flex-column flex-lg-row justify-content-between w-100 min-height-100 align-items-lg-center">
         <!-- dummy div for ui spacing in lg screen-->
@@ -37,15 +31,14 @@
         <div>
           <!-- Mobile Search Input -->
           <form class="d-lg-none header-mobile__search" role="search">
-            <div class="input-group mb-5">
+            <div class="input-group bg-secondary mb-5">
               <div class="input-group-prepend">
-                <span
-                  class="input-group-text h-100 border-0 rounded-start-3 rounded-end-0">
+                <span class="input-group-text h-100 border-0">
                   <i class="bi bi-search"></i>
                 </span>
               </div>
               <input
-                class="form-control me-2 border-0 rounded-start-0 rounded-end-3"
+                class="form-control bg-secondary me-2 border-0"
                 type="search"
                 [placeholder]="
                   translateService.get('common.search.placeholder') | async
@@ -91,16 +84,16 @@
             </div>
 
             <div
-              class="header__search-input input-group mb-5 position-absolute top-100 start-0"
-              [hidden]="!isSearchBarDisplayed">
+              class="header__search-input input-group bg-secondary mb-5 position-absolute top-100 start-0"
+              [hidden]="!isSearchBarDisplayed()">
               <div class="input-group-prepend">
                 <span
-                  class="input-group-text border-0 rounded-start-3 rounded-end-0 shadow">
+                  class="input-group-text border-0 shadow">
                   <i class="bi bi-search"></i>
                 </span>
               </div>
               <input
-                class="form-control me-2 border-0 rounded-start-0 rounded-end-3 search-input shadow"
+                class="form-control bg-secondary me-2 border-0 search-input shadow"
                 type="search"
                 [placeholder]="
                   translateService.get('common.search.placeholder') | async
