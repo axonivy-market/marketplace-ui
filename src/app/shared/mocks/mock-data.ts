@@ -1660,6 +1660,6 @@ export const MOCK_FEEDBACKS = [
   {
     userName: "StefCH47",
     userAvartarUrl: "https://s3-alpha-sig.figma.com/img/206c/4897/28b7b0c60958131808a8471ce60ce66c?Expires=1719187200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ti995zFAkdDw2dcguRUyTpYv7kNp7Nj~VYIcVObg7Z3k0tLNNELiQ2fmqO~oAPHaRdeLIm5qRZM5j25tmBSAe0iyMtYjxWueuN~37nw4qNvilc8sLaY9qb5F~N5wBYonPUhy-pJwx6AUQdl4DUVTE9sBPtBfG4d0q-wKZg7pv1bi~S8DsjspVmMnkI1ks~1jx33E2CQfXyI4MDL5R~ngQi1gMGgTFbe59DuOAITP0hDfSpy0OJ2jGD6ysnA2LNANDVeaF0fdJ3iUApt1Bs4gENzu5oTJybBJnifhtK4ATovmbSRapB2NtsMySpsSX2Juaeax~o6A7kG0IwG-xG~v7A__",
-    content: ""
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat."
   }
 ] as unknown as Feedback[];

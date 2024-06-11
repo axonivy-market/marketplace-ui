@@ -31,6 +31,8 @@ $ivySecondaryColorLightRGB: 235, 235, 235;
   .btn-secondary:hover {
     background-color: #{$ivySecondaryColorLight};
   }
+
+
 }
 
 $ivyPrimaryColorDark: 44, 44, 44;
@@ -68,6 +70,8 @@ $ivySecondaryColorDark: #383838;
   .btn-secondary:hover {
     background-color: #202020;
   }
+
+  
 }
 
 input[type='text']:focus,

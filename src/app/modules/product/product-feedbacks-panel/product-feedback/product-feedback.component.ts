@@ -21,9 +21,7 @@ export class ProductFeedbackComponent {
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngAfterViewInit() {
-    // Check if the content overflows after view initialization
     this.showToggle = this.contentElement.nativeElement.scrollHeight > this.contentElement.nativeElement.clientHeight;
-    // Mark for change detection after setting the showToggle value
     this.cdr.detectChanges();
   }
 
