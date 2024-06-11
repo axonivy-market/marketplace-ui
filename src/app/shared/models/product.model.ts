@@ -5,8 +5,9 @@ export interface Product {
   id: string;
   version: string;
   name: string;
-  description: string;
+  shortDescription: string;
   type: string;
+  logoUrl: string;
   cost: string;
   platformReview: string;
   vendor: string;

@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   Component,
+  ElementRef,
   OnDestroy,
+  ViewChild,
   WritableSignal,
   inject,
   signal
@@ -35,23 +38,27 @@ const SEARCH_DEBOUNCE_TIME = 500;
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })
-export class ProductComponent implements OnDestroy {
+export class ProductComponent implements AfterViewInit, OnDestroy {
   products: WritableSignal<Product[]> = signal([]);
   subscriptions: Subscription[] = [];
   searchTextChanged = new Subject<string>();
   criteria: Criteria = {
+    url: '',
     search: '',
     type: FilterType.All_TYPES,
     sort: SortType.POPULARITY
   };
+  links: any;
+  page: any;
 
   productService = inject(ProductService);
   themeService = inject(ThemeService);
   translateService = inject(TranslateService);
   router = inject(Router);
+  @ViewChild('observer', { static: true }) observerElement!: ElementRef;
 
   constructor() {
-    this.loadAllProducts();
+    this.loadProductItems();
     this.subscriptions.push(
       this.searchTextChanged
         .pipe(debounceTime(SEARCH_DEBOUNCE_TIME))
@@ -60,19 +67,13 @@ export class ProductComponent implements OnDestroy {
             ...this.criteria,
             search: value
           };
-          this.loadAllProducts();
+          this.loadProductItems(true);
         })
     );
   }
 
-  loadAllProducts() {
-    this.subscriptions.push(
-      this.productService
-        .getProductsByCriteria(this.criteria)
-        .subscribe(products => {
-          this.products.update(() => products);
-        })
-    );
+  ngAfterViewInit(): void {
+    this.setupIntersectionObserver();
   }
 
   viewProductDetail(productId: string) {
@@ -82,21 +83,58 @@ export class ProductComponent implements OnDestroy {
   onFilterChange(filterType: FilterType) {
     this.criteria = {
       ...this.criteria,
+      url: '',
       type: filterType
     };
-    this.loadAllProducts();
+    this.loadProductItems(true);
   }
 
   onSortChange(sortType: SortType) {
     this.criteria = {
       ...this.criteria,
+      url: '',
       sort: sortType
     };
-    this.loadAllProducts();
+    this.loadProductItems(true);
   }
 
   onSearchChanged(searchString: string) {
     this.searchTextChanged.next(searchString);
+  }
+
+  loadProductItems(shouldCleanData?: boolean) {
+    this.productService.findProductsByCriteria(this.criteria).subscribe((response: any) => {
+      let newProducts = response.products as Product[];
+      if (shouldCleanData) {
+        this.products.set(newProducts);
+      } else {
+        this.products.update(existingProducts => existingProducts.concat(newProducts));
+      }
+      this.links = response.links;
+      this.page = response.page;
+    });
+  }
+
+  setupIntersectionObserver() {
+    const options = { root: null, rootMargin: '0px', threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && this.hasMore()) {
+          this.criteria.url = this.links.next.href;
+          this.loadProductItems();
+        }
+      });
+    }, options);
+
+    observer.observe(this.observerElement.nativeElement);
+  }
+
+  hasMore() {
+    if (!this.page || !this.links) {
+      return false;
+    }
+    return this.page.number < this.page.totalPages
+      && this.links?.next != undefined;
   }
 
   ngOnDestroy(): void {

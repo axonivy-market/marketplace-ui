@@ -1,7 +1,7 @@
 export enum FilterType {
   All_TYPES = 'all',
-  CONNECTORS = 'connector',
-  UTILITIES = 'util',
+  CONNECTORS = 'connectors',
+  UTILITIES = 'utilities',
   DEMOS = 'demos',
-  SOLUTION = 'solution'
+  SOLUTION = 'solutions'
 }
