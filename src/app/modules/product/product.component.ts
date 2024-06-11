@@ -49,7 +49,7 @@ export class ProductComponent implements OnDestroy {
     this.subscriptions.push(
       this.searchTextChanged
         .pipe(debounceTime(SEARCH_DEBOUNCE_TIME))
-        .subscribe((value) => {
+        .subscribe(value => {
           this.criteria = {
             ...this.criteria,
             search: value
@@ -63,7 +63,7 @@ export class ProductComponent implements OnDestroy {
     this.subscriptions.push(
       this.productService
         .getProductsByCriteria(this.criteria)
-        .subscribe((products) => {
+        .subscribe(products => {
           this.products = products;
         })
     );
@@ -73,18 +73,18 @@ export class ProductComponent implements OnDestroy {
     this.router.navigate(['', productId]);
   }
 
-  onFilterChange(type: FilterType) {
+  onFilterChange(filterType: FilterType) {
     this.criteria = {
       ...this.criteria,
-      type: type
+      type: filterType
     };
     this.loadAllProducts();
   }
 
-  onSortChange(type: SortType) {
+  onSortChange(sortType: SortType) {
     this.criteria = {
       ...this.criteria,
-      sort: type
+      sort: sortType
     };
     this.loadAllProducts();
   }
@@ -94,7 +94,7 @@ export class ProductComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((sub) => {
+    this.subscriptions.forEach(sub => {
       sub.unsubscribe();
     });
   }

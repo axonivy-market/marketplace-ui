@@ -11,12 +11,8 @@ import { Product } from '../../shared/models/product.model';
 export class ProductService {
   httpClient = inject(HttpClient);
 
-  getAllProducts(): Observable<Product[]> {
-    return of(MOCK_PRODUCTS);
-  }
-
   getProductById(productId: string): Observable<Product> {
-    const product = MOCK_PRODUCTS.find((product) => product.id === productId);
+    const product = MOCK_PRODUCTS.find(p => p.id === productId);
     if (product) {
       return of(product);
     }
@@ -25,9 +21,7 @@ export class ProductService {
 
   getProductsByCriteria(criteria: Criteria): Observable<Product[]> {
     let products = MOCK_PRODUCTS;
-    if (criteria.search) {
-      products = this.getProductByNameOrDescription(products, criteria.search);
-    }
+    products = this.getProductByNameOrDescription(products, criteria.search);
 
     if (criteria.type) {
       products = this.getProductByType(products, criteria.type);
@@ -40,7 +34,7 @@ export class ProductService {
     return of(products);
   }
 
-  getProductByNameOrDescription(
+  private getProductByNameOrDescription(
     products: Product[],
     searchText: string
   ): Product[] {
@@ -49,20 +43,23 @@ export class ProductService {
     }
 
     return products.filter(
-      (product) =>
+      product =>
         product.name.toLowerCase().includes(searchText) ||
         product.description.toLocaleLowerCase().includes(searchText)
     );
   }
 
-  getProductByType(products: Product[], productType: string): Product[] {
+  private getProductByType(
+    products: Product[],
+    productType: string
+  ): Product[] {
     if (productType === '' || productType === FilterType.All_TYPES) {
       return products;
     }
-    return products.filter((product) => product.type === productType);
+    return products.filter(product => product.type === productType);
   }
 
-  getProductsWithSort(products: Product[], sortType: SortType) {
+  private getProductsWithSort(products: Product[], sortType: SortType) {
     const collator = new Intl.Collator('en');
     switch (sortType) {
       case SortType.POPULARITY:
@@ -74,7 +71,6 @@ export class ProductService {
           collator.compare(a.name, b.name)
         );
       case SortType.RECENT:
-        return products;
       default:
         return products;
     }

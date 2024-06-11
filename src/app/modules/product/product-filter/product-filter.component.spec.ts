@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { By } from '@angular/platform-browser';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FilterType } from '../../../shared/enums/filter-type.enum';
-import { ProductFilterComponent } from './product-filter.component';
 import { SortType } from '../../../shared/enums/sort-type.enum';
+import { ProductFilterComponent } from './product-filter.component';
 
 describe('ProductFilterComponent', () => {
   let component: ProductFilterComponent;
@@ -24,25 +25,29 @@ describe('ProductFilterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('onSelectFilterType should update selected type', () => {
-    spyOn(component.filterChange, 'emit').and.stub();
-    component.onSelectFilterType(FilterType.CONNECTORS);
-    expect(component.selectedFilterType).toBe(FilterType.CONNECTORS);
-    expect(component.filterChange.emit).toHaveBeenCalledWith(
-      FilterType.CONNECTORS
-    );
+  it('onSelectedFilterType should update selectedFilterType correctly', () => {
+    const filterElement = fixture.debugElement.queryAll(By.css('.filter-type'))[1]
+      .nativeElement as HTMLDivElement;
+
+    filterElement.dispatchEvent(new Event('click'));
+    expect(component.selectedFilterType).toEqual(FilterType.CONNECTORS);
   });
 
-  it('onSearchChanged should call searchChange', () => {
-    spyOn(component.searchChange, 'next').and.stub();
-    component.onSearchChanged('Product');
-    expect(component.searchChange.next).toHaveBeenCalledWith('Product');
+  it('onSortChange should update selectedSortType correctly', () => {
+    const select: HTMLSelectElement = fixture.debugElement.query(
+      By.css('.sort-type')
+    ).nativeElement;
+    select.value = select.options[2].value;
+    select.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+    expect(component.selectedSortType).toEqual(SortType.RECENT);
   });
 
-  it('onSortChange should call sortChange', () => {
-    component.selectedSortType = SortType.POPULARITY;
-    spyOn(component.sortChange, 'next').and.stub();
-    component.onSortChange();
-    expect(component.sortChange.next).toHaveBeenCalledWith(SortType.POPULARITY);
+  it('search should update searchText correctly', () => {
+    const searchText = 'portal';
+    const input = fixture.debugElement.query(By.css('input')).nativeElement;
+    input.value = searchText;
+    input.dispatchEvent(new Event('input'));
+    expect(component.searchText).toEqual(searchText);
   });
 });

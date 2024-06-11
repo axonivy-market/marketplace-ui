@@ -3,6 +3,6 @@ import { SortType } from '../enums/sort-type.enum';
 
 export interface Criteria {
   search: string;
-  sort: SortType;
-  type: FilterType;
+  sort: SortType | null;
+  type: FilterType | null;
 }

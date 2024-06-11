@@ -1,13 +1,19 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick
+} from '@angular/core/testing';
 
+import { provideHttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { MockProductService } from '../../shared/utils/common-test.util';
+import { FilterType } from '../../shared/enums/filter-type.enum';
+import { SortType } from '../../shared/enums/sort-type.enum';
 import { ProductComponent } from './product.component';
 import { ProductService } from './product.service';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { MockProductService } from '../../shared/mocks/mock-services';
 
 const router = {
   navigate: jasmine.createSpy('navigate')
@@ -30,12 +36,12 @@ describe('ProductComponent', () => {
         provideHttpClient()
       ]
     })
-      // .overrideComponent(ProductComponent, {
-      //   remove: { providers: [ProductService] },
-      //   add: {
-      //     providers: [{ provide: ProductService, useClass: MockProductService }]
-      //   }
-      // })
+      .overrideComponent(ProductComponent, {
+        remove: { providers: [ProductService] },
+        add: {
+          providers: [{ provide: ProductService, useClass: MockProductService }]
+        }
+      })
       .compileComponents();
     fixture = TestBed.createComponent(ProductComponent);
     component = fixture.componentInstance;
@@ -51,10 +57,42 @@ describe('ProductComponent', () => {
     expect(router.navigate).toHaveBeenCalledWith(['', 'url']);
   });
 
+  it('loadAllProducts should return products with criteria', () => {
+
+    component.loadAllProducts();
+    expect(component.loadAllProducts).toBeTruthy();
+  })
+
   it('ngOnDestroy should unsubscribe all sub', () => {
     const sub = new Subscription();
     component.subscriptions.push(sub);
     component.ngOnDestroy();
     expect(component.ngOnDestroy).toBeTruthy();
   });
+
+  it('onFilterChange should filter products properly', () => {
+    component.onFilterChange(FilterType.CONNECTORS);
+    component.products.forEach((product) => {
+      expect(product.type).toEqual(FilterType.CONNECTORS);
+    });
+  });
+
+  it('onSortChange should order products properly', () => {
+    component.onSearchChanged('cur');
+    component.onSortChange(SortType.ALPHABETICALLY);
+    for (let i = 0; i < component.products.length - 1; i++) {
+      expect(
+        component.products[i + 1].name.localeCompare(component.products[i].name)
+      ).toEqual(1);
+    }
+  });
+
+  it('search should return match products name', fakeAsync(() => {
+    const productName = 'adobe';
+    component.onSearchChanged(productName);
+    tick(500);
+    component.products.forEach((product) => {
+      expect(product.name.toLowerCase()).toContain(productName);
+    });
+  }));
 });

@@ -3,14 +3,27 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../../shared/models/product.model';
 import { ProductService } from '../product.service';
 import { ProductVersionActionComponent } from './product-version-action/product-version-action.component';
+import { ProductLogoPipe } from '../../../shared/pipes/logo.pipe';
+import { StarRatingComponent } from '../star-rating/star-rating.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { FilterType } from '../../../shared/enums/filter-type.enum';
+import { MarkdownModule, MarkdownService, provideMarkdown } from 'ngx-markdown';
+import { MarkdownComponent } from '../markdown/markdown.component';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [ProductVersionActionComponent],
-  providers: [ProductService],
+  imports: [
+    ProductLogoPipe,
+    StarRatingComponent,
+    TranslateModule,
+    MarkdownModule,
+    MarkdownComponent,
+    ProductVersionActionComponent
+  ],
+  providers: [ProductService, MarkdownService],
   templateUrl: './product-detail.component.html',
-  styleUrl: './product-detail.component.scss',
+  styleUrl: './product-detail.component.scss'
 })
 export class ProductDetailComponent {
   product!: Product;
@@ -21,9 +34,22 @@ export class ProductDetailComponent {
   constructor() {
     const productId = this.route.snapshot.params['id'];
     if (productId) {
-      this.productService.getProductById(productId).subscribe((product) => {
+      this.productService.getProductById(productId).subscribe(product => {
         this.product = product;
       });
+    }
+  }
+
+  getTypeIcon() {
+    switch (this.product.type) {
+      case FilterType.CONNECTORS:
+        return 'bi bi-puzzle';
+      case FilterType.SOLUTION:
+        return 'bi bi-star';
+      case FilterType.UTILITIES:
+        return 'bi bi-airplane-fill';
+      default:
+        return 'bi bi-info-circle';
     }
   }
 }

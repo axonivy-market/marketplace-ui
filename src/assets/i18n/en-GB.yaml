@@ -34,6 +34,7 @@ common:
       recent: Recent
   search:
     placeholder: Search a keyword
+  nothingFound: Nothing found
   footer:
     newVersionsInfo: New version release available for Linux,<br /> Window and MacOS operating systems.
     downloadLatestLTSVersion: Download V10.0.18

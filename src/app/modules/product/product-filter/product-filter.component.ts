@@ -27,7 +27,7 @@ export class ProductFilterComponent {
   selectedSortType: SortType = SortType.POPULARITY;
   sortTypes = SORT_TYPES;
 
-  searchText: string = '';
+  searchText = '';
 
   themeService = inject(ThemeService);
   translateService = inject(TranslateService);

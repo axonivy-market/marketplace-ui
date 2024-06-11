@@ -1,3 +1,271 @@
-<h1>{{ product.name }}</h1>
-<p>{{ product.description }}</p>
-<app-product-version-action></app-product-version-action>
+<div class="container mb-5">
+  <h1 class="display-2 mb-3 d-flex d-inline-block">
+    <img class="logo__image" [src]="product | logo" alt="" />
+    {{ product.name }}
+  </h1>
+  <div class="row mb-4">
+    <div class="d-flex align-items-start justify-content-start col-md-6">
+      <div class="col-4 text-start d-lg-block">
+        <div class="product-data-title">
+          <span>Review</span>
+        </div>
+        <div class="product-data-content">
+          <span>{{ product.platformReview }}</span>
+        </div>
+        <div class="product-data-info">
+          <app-star-rating [rating]="product.platformReview"></app-star-rating>
+        </div>
+      </div>
+      <div class="col-4 text-start d-lg-block">
+        <div>
+          <span class="product-data-title">Installations</span>
+        </div>
+        <div class="product-data-content">
+          <span>46</span>
+        </div>
+        <div class="product-data-info">
+          <span>Times</span>
+        </div>
+      </div>
+      <div class="col-4 text-start d-lg-block">
+        <div class="product-data-title">
+          <span>Type</span>
+        </div>
+        <div class="product-data-content w-md-100">
+          <i [className]="getTypeIcon()"></i>
+        </div>
+        <div class="product-data-info">
+          <span>{{ product.type }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="tab-group col-lg-7 col-md-7 col-sm-5">
+      <div class="d-none d-sm-block">
+        <ul class="nav nav-tabs mb-2 form-tabs" role="tablist">
+          <li class="nav-item active" role="presentation">
+            <h5>
+              <a
+                class="nav-link"
+                id="description-tab"
+                data-bs-toggle="tab"
+                href="#description"
+                role="tab"
+                aria-controls="description"
+                aria-selected="true">
+                Description
+              </a>
+            </h5>
+          </li>
+          <li class="nav-item active" role="presentation">
+            <h5>
+              <a
+                class="nav-link"
+                id="setup-tab"
+                data-bs-toggle="tab"
+                href="#setup"
+                role="tab"
+                aria-controls="setup"
+                aria-selected="false">
+                Setup
+              </a>
+            </h5>
+          </li>
+          <li class="nav-item active" role="presentation">
+            <h5>
+              <a
+                class="nav-link"
+                id="maven-tab"
+                data-bs-toggle="tab"
+                href="#maven"
+                role="tab"
+                aria-controls="maven"
+                aria-selected="false">
+                Maven
+              </a>
+            </h5>
+          </li>
+        </ul>
+      </div>
+
+      <div class="d-block d-sm-none">
+        <select class="form-select" id="nav_item">
+          <option value="0">Description</option>
+          <option value="1">Setup</option>
+          <option value="2">Maven</option>
+        </select>
+        <i
+          class="info-button bi bi-info-circle"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"></i>
+      </div>
+      <ul class="tab-content">
+        <li
+          class="tab-pane"
+          id="description"
+          role="tabpanel"
+          aria-labelledby="description-tab">
+          {{ product.description }}
+        </li>
+        <li
+          class="tab-pane"
+          id="setup"
+          role="tabpanel"
+          aria-labelledby="setup-tab">
+          {{ product.name }}
+        </li>
+        <li
+          class="tab-pane"
+          id="maven"
+          role="tabpanel"
+          aria-labelledby="maven-tab">
+          {{ product.name }}
+        </li>
+      </ul>
+    </div>
+    <!-- <app-markdown></app-markdown> -->
+    <div class="col-1 d-lg-block d-none"></div>
+    <div class="product-info col-lg-3 col-md-3 mt-2" id="info">
+      <h4><span>Information</span></h4>
+      <div class="product-meta-info mt-3">
+        <span class="meta-type">Author/Support</span>
+        <span class="meta-data">{{ product.vendor }}</span>
+      </div>
+      <div class="product-meta-info">
+        <span class="meta-type">Version</span>
+        <span class="meta-data">{{ product.version }}</span>
+      </div>
+
+      <div class="product-meta-info">
+        <span class="meta-type">Compatibility</span>
+        <span class="meta-data">{{ product.compatibility }}</span>
+      </div>
+
+      <div class="product-meta-info">
+        <span class="meta-type">Cost</span>
+        <span class="meta-data capitalize">{{ product.cost }}</span>
+      </div>
+
+      <div class="product-meta-info">
+        <span class="meta-type">Language</span>
+        <span class="meta-data">{{ product.language }}</span>
+      </div>
+
+      <div class="product-meta-info">
+        <span class="meta-type">Type</span>
+        <span class="meta-data capitalize">{{ product.type }}</span>
+      </div>
+
+      <div class="product-meta-info">
+        <span class="meta-type">Industry</span>
+        <span class="meta-data capitalize">{{ product.industry }}</span>
+      </div>
+
+      <div class="product-meta-info">
+        <span class="meta-type">Tags</span>
+        <span class="meta-data">{{ product.tags.join(', ') }}</span>
+      </div>
+
+      <div class="product-meta-info">
+        <span class="meta-type">Source</span>
+        <span class="meta-data">
+          <a href="{{ product.sourceUrl }}">github.com</a>
+        </span>
+      </div>
+
+      <div class="product-meta-info">
+        <span class="meta-type">Status</span>
+        <span class="meta-data">
+          <!-- <img src="{{ product.statusBadgeUrl }}" /> -->
+        </span>
+      </div>
+
+      <div class="product-meta-info">
+        <span class="meta-type">More Information</span>
+        <span class="meta-data">
+          <a
+            href="https://www.axonivy.com/marketplace/contact/?market_solutions= + {{
+              product.id
+            }}">
+            Contact us
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-sm">
+    <div class="modal-content">
+      <div class="modal-body" data-bs-target="#info">
+        <h4><span>Information</span></h4>
+        <div class="product-meta-info">
+          <span class="meta-type">Author/Support</span>
+          <span class="meta-data">{{ product.vendor }}</span>
+        </div>
+        <div class="product-meta-info">
+          <span class="meta-type">Version</span>
+          <span class="meta-data">{{ product.version }}</span>
+        </div>
+
+        <div class="product-meta-info">
+          <span class="meta-type">Compatibility</span>
+          <span class="meta-data">{{ product.compatibility }}</span>
+        </div>
+
+        <div class="product-meta-info">
+          <span class="meta-type">Cost</span>
+          <span class="meta-data capitalize">{{ product.cost }}</span>
+        </div>
+
+        <div class="product-meta-info">
+          <span class="meta-type">Language</span>
+          <span class="meta-data">{{ product.language }}</span>
+        </div>
+
+        <div class="product-meta-info">
+          <span class="meta-type">Type</span>
+          <span class="meta-data capitalize">{{ product.type }}</span>
+        </div>
+
+        <div class="product-meta-info">
+          <span class="meta-type">Industry</span>
+          <span class="meta-data capitalize">{{ product.industry }}</span>
+        </div>
+
+        <div class="product-meta-info">
+          <span class="meta-type">Tags</span>
+          <span class="meta-data">{{ product.tags.join(', ') }}</span>
+        </div>
+
+        <div class="product-meta-info">
+          <span class="meta-type">Source</span>
+          <span class="meta-data">
+            <a href="{{ product.sourceUrl }}">github.com</a>
+          </span>
+        </div>
+
+        <div class="product-meta-info">
+          <span class="meta-type">Status</span>
+          <span class="meta-data">
+            <!-- <img src="{{ product.statusBadgeUrl }}" /> -->
+          </span>
+        </div>
+
+        <div class="product-meta-info">
+          <span class="meta-type">More Information</span>
+          <span class="meta-data">
+            <a
+              href="https://www.axonivy.com/marketplace/contact/?market_solutions= + {{
+                product.id
+              }}">
+              Contact us
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

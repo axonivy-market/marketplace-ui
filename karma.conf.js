@@ -4,15 +4,15 @@
 module.exports = function (config) {
   config.set({
     basePath: '',
-    frameworks: ['jasmine', '@angular-devkit/build-angular'],
+    frameworks: ['jasmine', '@angular-devkit/build-angular', 'viewport'],
     plugins: [
       require('karma-jasmine'),
       require('karma-webpack'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
-      require('karma-junit-reporter'),
       require('@angular-devkit/build-angular/plugins/karma'),
+      require('karma-viewport')
     ],
 
     client: {
@@ -24,26 +24,28 @@ module.exports = function (config) {
         stopSpecOnExpectationFailure: true,
         failFast: true,
         timeoutInterval: 60000,
+        random: false
       },
-      clearContext: false, // leave Jasmine Spec Runner output visible in browser
+      clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     jasmineHtmlReporter: {
-      suppressAll: true, // removes the duplicated traces
+      suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/marketplace-ui'),
+      dir: require('path').join(__dirname, './coverage'),
       subdir: '.',
-      reporters: [{ type: 'html' }, { type: 'text-summary' }],
+      reporters: [{ type: 'html' }, { type: 'text-summary' }, { type: 'lcov' }]
+    },
+    preprocessors: {
+      // source files, that you wanna generate coverage for
+      // do not include tests or libraries
+      // (these files will be instrumented by Istanbul)
+      'src/**/mocks/**': ['coverage']
     },
     angularCli: {
-      environment: 'dev',
+      environment: 'dev'
     },
-    reporters: ['progress', 'junit'],
-    junitReporter: {
-      outputDir: 'reports',
-      outputFile: 'karma-junit.xml',
-      useBrowserName: false,
-    },
+    reporters: ['progress', 'coverage'],
     browsers: ['ChromeHeadlessNoSandbox'],
     customLaunchers: {
       ChromeHeadlessNoSandbox: {
@@ -51,6 +53,6 @@ module.exports = function (config) {
         flags: ['--no-sandbox']
       }
     },
-    restartOnFileChange: true,
+    restartOnFileChange: true
   });
 };

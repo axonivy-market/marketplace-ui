@@ -4,6 +4,10 @@ $ivyPrimaryColorLightRGB: 0, 112, 149;
 [data-bs-theme='light'] {
   --bs-primary-rgb: #{$ivyPrimaryColorLightRGB};
 
+  .btn {
+    --bs-btn-border-radius: 0.5rem;
+  }
+
   .btn-primary {
     --bs-btn-bg: #{$ivyPrimaryColorLightHEX};
   }
@@ -20,9 +24,33 @@ $ivySecondaryColorDark: #383838;
   --bs-secondary-rgb: #{$ivySecondaryColorDark};
   --bs-tertiary-bg: #{$ivySecondaryColorDark};
 
-  --ivy-secondary: #{$ivySecondaryColorDark};
-
   .card {
     --bs-card-bg: #{$ivySecondaryColorDark};
   }
+
+  .btn {
+    --bs-btn-border-radius: 0.5rem;
+  }
+
+  .btn-secondary {
+    --bs-btn-bg: #{$ivySecondaryColorDark};
+  }
+}
+
+input[type='text']:focus,
+input[type='password']:focus,
+input[type='datetime']:focus,
+input[type='datetime-local']:focus,
+input[type='date']:focus,
+input[type='month']:focus,
+input[type='time']:focus,
+input[type='week']:focus,
+input[type='number']:focus,
+input[type='email']:focus,
+input[type='url']:focus,
+input[type='search']:focus,
+input[type='tel']:focus,
+input[type='color']:focus {
+  box-shadow: none;
+  outline: 0 none;
 }
