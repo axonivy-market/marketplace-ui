@@ -1,4 +1,4 @@
-<div class="product-data-info">
+<div class="product-data-info rating-text-color">
   @for (_ of fullStars; track $index) {
   <i class="bi bi-star-fill"></i>
   }
@@ -8,5 +8,5 @@
   @for (_ of emptyStars; track $index) {
   <i class="bi bi-star"></i>
   }
-  <span class="total-comments"> ({{ totalComments }})</span>
+  <span class="total-comments rating-review-text-color"> ({{ totalComments }})</span>
 </div>

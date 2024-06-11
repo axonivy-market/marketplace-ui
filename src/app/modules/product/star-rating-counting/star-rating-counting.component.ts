@@ -16,7 +16,7 @@ import { DecimalPipe } from '@angular/common';
 })
 export class StarRatingCountingComponent {
   @Input() productId: string = "abc";
-  @Input() platformReview: string = "4.2";
+  @Input() platformReview: string = "3.5";
   totalComments: number = 0;
   reviewNumber: number = 0;
   starRatingCountings: StarRatingCounting[] = [];
