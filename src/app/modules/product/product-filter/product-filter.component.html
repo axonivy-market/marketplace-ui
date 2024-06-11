@@ -27,7 +27,7 @@
       <select
         [(ngModel)]="selectedFilterType"
         (ngModelChange)="onSelectFilterType($event)"
-        class="form-select w-auto"
+        class="form-select filter-type--select w-auto"
         aria-label="sort"
         name="sort">
         @for (type of filterTypes; track $index) {
@@ -47,7 +47,7 @@
       <select
         [(ngModel)]="selectedSortType"
         (ngModelChange)="onSortChange()"
-        class="form-select w-auto ms-2"
+        class="form-select sort-type w-auto ms-2"
         aria-label="sort"
         name="sort">
         @for (type of sortTypes; track $index) {

@@ -18,7 +18,7 @@ export class HeaderComponent {
   selectedNav = '/';
   selectedLanguage: string = Language.EN_GB;
   languages = LANGUAGES;
-  isSearchBarDisplayed = false;
+  isSearchBarDisplayed = signal(false);
   isMobileMenuCollapsed: WritableSignal<boolean> = signal(true);
 
   navItems: NavItem[] = NAV_ITEMS;
@@ -35,11 +35,10 @@ export class HeaderComponent {
   }
 
   onCollapsedMobileMenu() {
-    this.isMobileMenuCollapsed.update(value => !value)
-    console.log(this.isMobileMenuCollapsed())
+    this.isMobileMenuCollapsed.update(value => !value);
   }
 
   onClickSearchIcon() {
-    this.isSearchBarDisplayed = !this.isSearchBarDisplayed;
+    this.isSearchBarDisplayed.update(value => !value);
   }
 }

@@ -5,6 +5,9 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FilterType } from '../../../shared/enums/filter-type.enum';
 import { SortType } from '../../../shared/enums/sort-type.enum';
 import { ProductFilterComponent } from './product-filter.component';
+import { Viewport } from 'karma-viewport/dist/adapter/viewport';
+
+declare const viewport: Viewport;
 
 describe('ProductFilterComponent', () => {
   let component: ProductFilterComponent;
@@ -26,11 +29,31 @@ describe('ProductFilterComponent', () => {
   });
 
   it('onSelectedFilterType should update selectedFilterType correctly', () => {
-    const filterElement = fixture.debugElement.queryAll(By.css('.filter-type'))[1]
-      .nativeElement as HTMLDivElement;
+    const filterElement = fixture.debugElement.queryAll(
+      By.css('.filter-type')
+    )[1].nativeElement as HTMLDivElement;
 
     filterElement.dispatchEvent(new Event('click'));
     expect(component.selectedFilterType).toEqual(FilterType.CONNECTORS);
+  });
+
+  it('filter type should change to selectbox in small screen', () => {
+    viewport.set(540);
+    const filterSelect = fixture.debugElement.query(
+      By.css('.filter-type--select')
+    );
+
+    expect(getComputedStyle(filterSelect.nativeElement).display).not.toBe(
+      'none'
+    );
+  });
+
+  it('sort label should not display in small screen', () => {
+    viewport.set(900);
+    const sortLabel = fixture.debugElement.query(
+      By.css('.sort-container__label')
+    );
+    expect(getComputedStyle(sortLabel.nativeElement).display).toBe('none');
   });
 
   it('onSortChange should update selectedSortType correctly', () => {
