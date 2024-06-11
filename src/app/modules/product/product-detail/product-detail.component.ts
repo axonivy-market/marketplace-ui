@@ -6,6 +6,7 @@ import { ThemeService } from '../../../core/services/theme/theme.service';
 import { CommonModule } from '@angular/common';
 import { StarRatingCountingComponent } from '../star-rating-counting/star-rating-counting.component';
 import { ProductFeedbacksPanelComponent } from '../product-feedbacks-panel/product-feedbacks-panel.component';
+import { FeedbackDialogComponent } from '../product-feedbacs-panel/feedback-dialog/feedback-dialog.component';
 
 @Component({
   selector: 'app-product-detail',
@@ -13,7 +14,8 @@ import { ProductFeedbacksPanelComponent } from '../product-feedbacks-panel/produ
   imports: [
     CommonModule,
     StarRatingCountingComponent,
-    ProductFeedbacksPanelComponent
+    ProductFeedbacksPanelComponent,
+    FeedbackDialogComponent
   ],
   providers: [ProductService],
   templateUrl: './product-detail.component.html',

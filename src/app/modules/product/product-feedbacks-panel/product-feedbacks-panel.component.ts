@@ -4,11 +4,12 @@ import { ProductFeedbackComponent } from './product-feedback/product-feedback.co
 import { ProductFeedbackService } from './product-feedback.service';
 import { Feedback } from '../../../shared/models/feedback.model';
 import { Subscription } from 'rxjs';
+import { FeedbackFilterComponent } from './feedback-filter/feedback-filter.component';
 
 @Component({
   selector: 'app-product-feedbacks-panel',
   standalone: true,
-  imports: [ProductFeedbackComponent],
+  imports: [ProductFeedbackComponent, FeedbackFilterComponent],
   providers: [ProductFeedbackService],
   templateUrl: './product-feedbacks-panel.component.html',
   styleUrl: './product-feedbacks-panel.component.scss'

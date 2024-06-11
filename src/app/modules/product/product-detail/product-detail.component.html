@@ -2,3 +2,14 @@
 <p>{{ product.description }}</p>
 <app-star-rating-counting productId="{{ product.id }}" platformReview="{{product.platformReview}}"/>
 <app-product-feedbacks-panel></app-product-feedbacks-panel>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Launch static backdrop modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog bg-light">
+    <app-feedback-dialog></app-feedback-dialog>
+  </div>
+</div>

@@ -32,6 +32,10 @@ common:
       popularity: Popularity
       alphabetically: Alphabetically
       recent: Recent
+      newest: Newest
+      oldest: Oldest
+      highest: Highest
+      lowest: Lowest
   search:
     placeholder: Search a keyword
   nothingFound: Nothing found
