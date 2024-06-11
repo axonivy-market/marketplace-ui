@@ -15,8 +15,8 @@ export class ProductService {
   sendRequestToProductAPI(url: string, products: Product[]) {
     firstValueFrom(this.httpClient.get(url)).then((response: any) => {
       if (response) {
-        console.log("Content " + response.content);
-        console.log("Links " + response.links);
+        console.log("Content " + response._embedded.products);
+        console.log("Links " + response._links.next);
         console.log("Page " + response.page);
       }
       if (products === undefined) {
@@ -24,16 +24,10 @@ export class ProductService {
       } else {
         products = products.concat(response.content);
       }
-      let nextLink = '';
-      response.links.forEach((link:any) => {
-        if (link.rel === 'next') {
-          nextLink = link.href;
-          return;
-        }
-      })
+      let nextLink = response._links.next;
 
       if (nextLink != '') {
-        this.sendRequestToProductAPI(nextLink, products);
+        this.sendRequestToProductAPI(nextLink.href, products);
       } else {
         console.log('Finished');
       }
