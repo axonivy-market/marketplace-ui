@@ -6,11 +6,40 @@ import { SortType } from '../../shared/enums/sort-type.enum';
 import { MOCK_PRODUCTS } from '../../shared/mocks/mock-data';
 import { Criteria } from '../../shared/models/criteria.model';
 import { Product } from '../../shared/models/product.model';
-import { apiInterceptor } from '../../core/interceptors/api.interceptor';
+import { error, log } from 'console';
 
 @Injectable()
 export class ProductService {
   httpClient = inject(HttpClient);
+
+  sendRequestToProductAPI(url: string, products: Product[]) {
+    firstValueFrom(this.httpClient.get(url)).then((response: any) => {
+      if (response) {
+        console.log("Content " + response._embedded.products);
+        console.log("Links " + response._links.next);
+        console.log("Page " + response.page);
+      }
+      if (products === undefined) {
+        products = response.content;
+      } else {
+        products = products.concat(response.content);
+      }
+      let nextLink = response._links.next;
+
+      if (nextLink != '') {
+        this.sendRequestToProductAPI(nextLink.href, products);
+      } else {
+        console.log('Finished');
+      }
+    }).catch(err => {
+      console.log(err.error.errorCode + err.error.message, err.error.helpText);
+    }).finally(() => console.log('Finish call'));
+  }
+
+  getAllProducts(criteria: Criteria) {
+    let dummyProduct: Product[] = [];
+    this.sendRequestToProductAPI("api/product/" + criteria.type, dummyProduct);
+  }
 
   getProductById(productId: string): Observable<Product> {
     const product = MOCK_PRODUCTS.find(p => p.id === productId);
@@ -21,6 +50,10 @@ export class ProductService {
   }
 
   getProductsByCriteria(criteria: Criteria): Observable<Product[]> {
+    // TODO
+    this.getAllProducts(criteria);
+    // END TODO
+
     let products = MOCK_PRODUCTS;
     products = this.getProductByNameOrDescription(products, criteria.search);
 
@@ -87,8 +120,6 @@ export class ProductService {
       .append('showDevVersion', showDevVersion);
 
     const headers = new HttpHeaders();
-    let apiInterceptorHeader = inject(apiInterceptor);
-    apiInterceptorHeader.addIvyHeaders(headers);
     let url = prductId + '/versions';
     firstValueFrom(
       this.httpClient.get(url, { headers: headers, params: params })

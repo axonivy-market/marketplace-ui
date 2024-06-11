@@ -1,7 +1,9 @@
 import { HttpHeaders, HttpInterceptorFn } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+
 export const REQUEST_BY = 'X-Requested-By';
 export const IVY = 'ivy';
+
 export const apiInterceptor: HttpInterceptorFn = (req, next) => {
   if (req.url.includes('i18n')) {
     return next(req);

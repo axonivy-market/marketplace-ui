@@ -59,7 +59,7 @@
           <!-- Navigation -->
           <ul class="navbar-nav mr-auto">
             @for (item of navItems; track $index) {
-              <li class="nav-item">
+              <li class="nav-item" [ngClass]="{ 'fw-bold': item.link === '/' }">
                 <a class="nav-link" aria-current="page" [href]="item.link">
                   {{ item.label | translate }}
                 </a>
@@ -128,11 +128,7 @@
           </li>
           <!-- Download Latest LTS Version -->
           <li class="nav-item m-2 header__download-button">
-            <button
-              class="btn w-md-100 rounded-3"
-              [ngClass]="
-                themeService.isDarkMode() ? 'btn-light' : 'btn-primary'
-              ">
+            <button class="btn btn-primary border-0 w-md-100 rounded-3">
               {{ 'common.footer.downloadLatestLTSVersion' | translate }}
             </button>
           </li>

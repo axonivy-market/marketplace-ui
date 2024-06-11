@@ -1,39 +1,132 @@
-$ivyPrimaryColorLightHEX: #007095;
-$ivyPrimaryColorLightRGB: 0, 112, 149;
+@font-face {
+  font-family: Inter;
+  src: url(../fonts/inter.ttf) format('truetype');
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 72px;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 22px;
+}
+
+h4 {
+  font-weight: 400;
+  font-size: 18px;
+}
+
+p {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+$ivyPrimaryColorLight: #007095;
+$ivyPrimaryColorHover: #00445c;
+$ivySecondaryColorLight: #f8f8f8;
+$ivySecondaryButtonHoverLight: #ebebeb;
+$ivyBackgroundColorLight: #fafafa;
+
+$ivyTextColorLight: #fafafa;
 
 [data-bs-theme='light'] {
-  --bs-primary-rgb: #{$ivyPrimaryColorLightRGB};
+  body {
+    font-family: Inter;
+  }
+
+  --ivy-primary-color-light: #{$ivyPrimaryColorLight};
+  --ivy-secondary-color-light: #{$ivySecondaryColorLight};
+
+  .bg-primary {
+    background-color: #{$ivyPrimaryColorLight} !important;
+  }
+
+  .bg-secondary {
+    background-color: #{$ivySecondaryColorLight} !important;
+  }
 
   .btn {
-    --bs-btn-border-radius: 0.5rem;
+    border-radius: 0.5rem;
   }
 
   .btn-primary {
-    --bs-btn-bg: #{$ivyPrimaryColorLightHEX};
+    background-color: #{$ivyPrimaryColorLight};
+  }
+
+  .btn-primary:hover {
+    background-color: #{$ivyPrimaryColorHover};
+  }
+
+  .btn-secondary {
+    background-color: #{$ivySecondaryColorLight};
+    color: var(--bs-dark);
+  }
+
+  .btn-secondary:hover {
+    background-color: #{$ivySecondaryButtonHoverLight};
+  }
+
+  .card__description {
+    color: #4a4a4a;
+  }
+
+  .card__tag {
+    background-color: var(--ivy-primary-color-light);
+    color: var(--bs-light);
   }
 }
 
 $ivyPrimaryColorDark: 44, 44, 44;
-$ivySecondaryColorDark: 56, 56, 56;
+$ivySecondaryColorDarkRGB: 56, 56, 56;
 $ivyBodyBackgroundDark: #2c2c2c;
 $ivySecondaryColorDark: #383838;
+$ivySecondaryHoverDark: #202020;
+$ivyTextColorDark: #2c2c2c;
 
 [data-bs-theme='dark'] {
+  body {
+    font-family: Inter;
+  }
+
   --bs-body-bg: #{$ivyBodyBackgroundDark};
   --bs-primary-rgb: #{$ivyPrimaryColorDark};
-  --bs-secondary-rgb: #{$ivySecondaryColorDark};
-  --bs-tertiary-bg: #{$ivySecondaryColorDark};
+  --bs-secondary-rgb: #{$ivySecondaryColorDarkRGB};
+  --bs-tertiary-bg: #{$ivySecondaryColorDarkRGB};
 
   .card {
-    --bs-card-bg: #{$ivySecondaryColorDark};
+    background-color: #{$ivySecondaryColorDarkRGB};
   }
 
   .btn {
-    --bs-btn-border-radius: 0.5rem;
+    border-radius: 0.5rem;
+  }
+
+  .btn-primary {
+    background-color: #ffffff;
+    color: #2c2c2c;
+  }
+
+  .btn:hover {
+    background-color: #ececec;
   }
 
   .btn-secondary {
-    --bs-btn-bg: #{$ivySecondaryColorDark};
+    background-color: #{$ivySecondaryColorDark};
+  }
+
+  .btn-secondary:hover {
+    background-color: #{$ivySecondaryHoverDark};
+  }
+
+  .card__description {
+    color: #a3a3a3;
+  }
+
+  .card__tag {
+    background-color: #{$ivyBackgroundColorLight};
+    color: #{$ivyTextColorDark};
   }
 }
 
