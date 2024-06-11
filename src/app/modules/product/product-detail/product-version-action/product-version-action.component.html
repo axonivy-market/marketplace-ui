@@ -1,25 +1,29 @@
-<!-- <section class="justify-content-between">
+<div class="d-flex justify-content-between">
   <button
     class="btn"
     [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'">
     {{ 'common.product.detail.install.buttonLabel' | translate }}
   </button>
   <button
-    class="btn bg-secondary border-0 dropdown-toggle"
-    (click)="onClickDownLoadButton()"
-    type="button">
+    class="btn btn-secondary dropdown-toggle"
+    type="button"
+    id="dropdownMenuButton"
+    data-bs-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false">
     {{ 'common.product.detail.download.buttonLabel' | translate }}
   </button>
 
-  <div class="col-md-6" [hidden]="!isVersionDropDownDisplayed">
-    <form class="m-3">
+  <div class="dropdown-menu p-0 col-2" aria-labelledby="dropdownMenuButton">
+    <form class="m-2">
       <div class="form-group">
-        <label for="fm2" class="form-label">
+        <label for="artifacts-selector" class="form-label font-size__small">
           {{
             'common.product.detail.download.artifactSelector.label' | translate
           }}
         </label>
         <select
+          id="artifacts-selector"
           [(ngModel)]="selectedArtifact"
           name="Artifact"
           class="form-select form-select-sm"
@@ -30,12 +34,13 @@
         </select>
       </div>
       <div class="form-group">
-        <label for="fm3" class="form-label">
+        <label for="verions-selector" class="form-label mt-3 font-size__small">
           {{
             'common.product.detail.download.versionSelector.label' | translate
           }}
         </label>
         <select
+          id="verions-selector"
           [(ngModel)]="selectedVersion"
           name="Version"
           class="form-select form-select-sm"
@@ -45,12 +50,13 @@
           }
         </select>
       </div>
-      <a href="">
+      <a href="" class="font-size__small">
         {{ 'common.product.detail.download.hideDevVersions' | translate }}
       </a>
-      <div class="form-group py-2">
+      <div class="form-group py-2 d-flex justify-content-end">
         <button
-          class="btn d-inline-block bg-primary border-0"
+          class="btn"
+          [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'"
           (click)="downloadArifact()"
           type="button"
           id="downloadButton">
@@ -58,15 +64,5 @@
         </button>
       </div>
     </form>
-  </div>
-</section> -->
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
   </div>
 </div>
