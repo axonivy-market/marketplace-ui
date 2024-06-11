@@ -1,8 +1,12 @@
 <div class="container mb-5">
-  <h1 class="display-2 mb-3 d-flex d-inline-block">
-    <img class="logo__image" [src]="product | logo" alt="" />
-    {{ product.name }}
-  </h1>
+  <div class="d-flex justify-content-between" >
+    <h1 class="display-2 mb-3 d-inline-block">
+      <img class="logo__image" [src]="product | logo" alt="" />
+       {{ product.name }}
+    </h1>
+    <app-product-version-action></app-product-version-action>
+
+  </div>
   <div class="row mb-4">
     <div class="d-flex align-items-start justify-content-start col-md-6">
       <div class="col-4 text-start d-lg-block">

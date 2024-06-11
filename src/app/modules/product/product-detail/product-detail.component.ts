@@ -7,7 +7,7 @@ import { ProductLogoPipe } from '../../../shared/pipes/logo.pipe';
 import { StarRatingComponent } from '../star-rating/star-rating.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FilterType } from '../../../shared/enums/filter-type.enum';
-import { MarkdownModule, MarkdownService, provideMarkdown } from 'ngx-markdown';
+import { MarkdownModule, MarkdownService } from 'ngx-markdown';
 import { MarkdownComponent } from '../markdown/markdown.component';
 
 @Component({
