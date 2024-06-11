@@ -13,7 +13,7 @@ import { ProductLogoPipe } from '../../../shared/pipes/logo.pipe';
   styleUrl: './product-card.component.scss'
 })
 export class ProductCardComponent {
-  themeSerivce = inject(ThemeService);
+  themeService = inject(ThemeService);
 
   @Input() product!: Product;
 }

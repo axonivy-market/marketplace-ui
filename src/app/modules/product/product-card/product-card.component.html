@@ -1,18 +1,14 @@
-<div
-  class="card rounded-4 product-card w-100 h-100 p-3"
-  [ngClass]="themeSerivce.isDarkMode() ? 'dark border-0' : 'border-light-subtle'">
-  <div class="d-flex justify-content-between align-items-start card-body">
-    <img class="card-img-top bg-light rounded" [src]="product | logo" alt="" />
-    <div
-      class="rounded-3 lh-md px-2 py-1 text-light"
-      [ngClass]="
-        themeSerivce.isDarkMode() ? 'bg-light text-dark' : 'bg-primary'
-      ">
+<div class="card product-card bg-secondary border-0 rounded-4 w-100">
+  <div class="d-flex justify-content-between align-items-start">
+    <img class="card-img-top rounded" [src]="product | logo" alt="" />
+    <div class="card__tag rounded-3 lh-md px-2 py-1">
       {{ 'common.filter.value.' + product.type | translate }}
     </div>
   </div>
-  <div class="card-body mt-100">
-    <h5 class="card-title font-weight-bold">{{ product.name }}</h5>
-    <p class="card-text font-weight-light">{{ product.description }}</p>
+  <div>
+    <h5 class="card__title">{{ product.name }}</h5>
+    <p class="card__description">
+      {{ product.description }}
+    </p>
   </div>
 </div>
