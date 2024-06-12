@@ -24,18 +24,14 @@ p {
 }
 
 $ivyPrimaryColorLight: #007095;
-$ivyPrimaryColorHover: #00445c;
+$ivyPrimaryColorHoverLight: #00445c;
 $ivySecondaryColorLight: #f8f8f8;
 $ivySecondaryButtonHoverLight: #ebebeb;
 $ivyBackgroundColorLight: #fafafa;
-
+$ivyCardDescriptionColorLight: #4a4a4a;
 $ivyTextColorLight: #fafafa;
 
 [data-bs-theme='light'] {
-  body {
-    font-family: Inter;
-  }
-
   --ivy-primary-color-light: #{$ivyPrimaryColorLight};
   --ivy-secondary-color-light: #{$ivySecondaryColorLight};
 
@@ -56,7 +52,7 @@ $ivyTextColorLight: #fafafa;
   }
 
   .btn-primary:hover {
-    background-color: #{$ivyPrimaryColorHover};
+    background-color: #{$ivyPrimaryColorHoverLight};
   }
 
   .btn-secondary {
@@ -69,7 +65,7 @@ $ivyTextColorLight: #fafafa;
   }
 
   .card__description {
-    color: #4a4a4a;
+    color: #{$ivyCardDescriptionColorLight};
   }
 
   .card__tag {
@@ -84,12 +80,10 @@ $ivyBodyBackgroundDark: #2c2c2c;
 $ivySecondaryColorDark: #383838;
 $ivySecondaryHoverDark: #202020;
 $ivyTextColorDark: #2c2c2c;
+$ivyPrimaryButtonHoverDark: #ececec;
+$ivyCardDescriptionColorDark: #a3a3a3;
 
 [data-bs-theme='dark'] {
-  body {
-    font-family: Inter;
-  }
-
   --bs-body-bg: #{$ivyBodyBackgroundDark};
   --bs-primary-rgb: #{$ivyPrimaryColorDark};
   --bs-secondary-rgb: #{$ivySecondaryColorDarkRGB};
@@ -104,12 +98,12 @@ $ivyTextColorDark: #2c2c2c;
   }
 
   .btn-primary {
-    background-color: #ffffff;
-    color: #2c2c2c;
+    background-color: var(--bs-white);
+    color: #{$ivyCardDescriptionColorLight};
   }
 
-  .btn:hover {
-    background-color: #ececec;
+  .btn-primary:hover {
+    background-color: #{$ivyPrimaryButtonHoverDark};
   }
 
   .btn-secondary {
@@ -121,7 +115,7 @@ $ivyTextColorDark: #2c2c2c;
   }
 
   .card__description {
-    color: #a3a3a3;
+    color: #{$ivyCardDescriptionColorDark};
   }
 
   .card__tag {
@@ -130,20 +124,31 @@ $ivyTextColorDark: #2c2c2c;
   }
 }
 
-input[type='text']:focus,
-input[type='password']:focus,
-input[type='datetime']:focus,
-input[type='datetime-local']:focus,
-input[type='date']:focus,
-input[type='month']:focus,
-input[type='time']:focus,
-input[type='week']:focus,
-input[type='number']:focus,
-input[type='email']:focus,
-input[type='url']:focus,
-input[type='search']:focus,
-input[type='tel']:focus,
-input[type='color']:focus {
-  box-shadow: none;
-  outline: 0 none;
+*:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+@media (min-width: 1400px) {
+  .col-xxl-3 {
+      flex: 0 0 auto;
+      width: 33.33333333%;
+  }
+}
+
+@media (min-width: 2560px) {
+  .container {
+    min-width: 1440px;
+  }
+}
+
+@media (min-width: 3840px) {
+  .container {
+    min-width: 2160px;
+  }
+
+  .col-xxl-3 {
+    flex: 0 0 auto;
+    width: 25% !important;
+  }
 }
