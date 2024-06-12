@@ -128,3 +128,27 @@ $ivyCardDescriptionColorDark: #a3a3a3;
   box-shadow: none !important;
   outline: none !important;
 }
+
+@media (min-width: 1400px) {
+  .col-xxl-3 {
+      flex: 0 0 auto;
+      width: 33.33333333%;
+  }
+}
+
+@media (min-width: 2560px) {
+  .container {
+    min-width: 1440px;
+  }
+}
+
+@media (min-width: 3840px) {
+  .container {
+    min-width: 2160px;
+  }
+
+  .col-xxl-3 {
+    flex: 0 0 auto;
+    width: 25% !important;
+  }
+}

@@ -47,11 +47,11 @@
       <select
         [(ngModel)]="selectedSortType"
         (ngModelChange)="onSortChange()"
-        class="form-select sort-type w-auto ms-2"
+        class="form-select sort-type w-50 ms-2"
         aria-label="sort"
         name="sort">
         @for (type of sortTypes; track $index) {
-          <option [value]="type.value">
+          <option class="border-danger" [value]="type.value">
             {{ type.label | translate }}
           </option>
         }
