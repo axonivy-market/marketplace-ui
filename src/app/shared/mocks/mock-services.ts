@@ -1,8 +1,9 @@
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Product } from '../models/product.model';
 import { Criteria } from '../models/criteria.model';
 import { FilterType } from '../enums/filter-type.enum';
 import { MOCK_PRODUCTS, MOCK_PRODUCTS_FILTER_CONNECTOR } from './mock-data';
+import { ProductApiResponse } from '../models/apis/product-response.model';
 
 const products = MOCK_PRODUCTS._embedded.products as Product[];
 export class MockProductService {
@@ -11,15 +12,11 @@ export class MockProductService {
     return of(products.find(product => product.id === id));
   }
 
-  findProductsByCriteria(criteria: Criteria) {
-    let products = MOCK_PRODUCTS._embedded.products;
+  findProductsByCriteria(criteria: Criteria): Observable<ProductApiResponse> {
+    let response = MOCK_PRODUCTS;
     if (criteria.type == FilterType.CONNECTORS) {
-      products = MOCK_PRODUCTS_FILTER_CONNECTOR._embedded.products;
+      response = MOCK_PRODUCTS_FILTER_CONNECTOR;
     }
-    return of({
-      products: products,
-      links: MOCK_PRODUCTS._links,
-      page: MOCK_PRODUCTS.page
-    });
+    return of(response);
   }
 }

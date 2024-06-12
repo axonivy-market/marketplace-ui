@@ -5,31 +5,29 @@ import { MOCK_PRODUCTS } from '../../shared/mocks/mock-data';
 import { Criteria } from '../../shared/models/criteria.model';
 import { Product } from '../../shared/models/product.model';
 import { RequestParam } from '../../shared/enums/request-param';
+import { ProductApiResponse } from '../../shared/models/apis/product-response.model';
 
-const PRODUCT_REQUEST_PATH = 'api/product';
+const PRODUCT_API_URL = 'api/product';
 @Injectable()
 export class ProductService {
 
   httpClient = inject(HttpClient);
 
-  findProductsByCriteria(criteria: Criteria) {
-    let requestURL = criteria.url || '';
-    if (requestURL === '') {
-      requestURL = `${PRODUCT_REQUEST_PATH}/${criteria.type}`;
+  findProductsByCriteria(criteria: Criteria): Observable<ProductApiResponse> {
+    let requestParams = new HttpParams();
+    let requestURL = PRODUCT_API_URL;
+    if (criteria.nextPageHref) {
+      requestURL = criteria.nextPageHref;
+    } else {
+      requestParams = requestParams
+        .set(RequestParam.TYPE, `${criteria.type}`)
+        .set(RequestParam.SORT, `${criteria.sort}`)
+        .set(RequestParam.KEYWORD, `${criteria.search}`);
     }
-    let requestParams = new HttpParams()
-      .set(RequestParam.SORT, `${criteria.sort}`)
-      .set(RequestParam.KEYWORD, `${criteria.search}`);
-    return this.httpClient.get(requestURL, { params: requestParams }).pipe(
-      map((response: any) => {
-        return {
-          products: response._embedded.products,
-          links: response._links,
-          page: response.page
-        };
-      }),
-      catchError(this.handleError)
-    );
+    return this.httpClient.get<ProductApiResponse>(requestURL, { params: requestParams })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -42,6 +40,7 @@ export class ProductService {
     return throwError(() => new Error(errorMessage));
   }
 
+  // TODO MARP-358
   getProductById(productId: string): Observable<Product> {
     let products = MOCK_PRODUCTS._embedded.products as Product[];
     const product = products.find(p => p.id === productId);

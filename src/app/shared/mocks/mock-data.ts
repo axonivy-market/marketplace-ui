@@ -1,3 +1,5 @@
+import { ProductApiResponse } from "../models/apis/product-response.model";
+
 export const MOCK_PRODUCTS = {
   _embedded: {
     products: [
@@ -38,7 +40,7 @@ export const MOCK_PRODUCTS = {
     totalPages: 4,
     number: 0
   }
-} as any;
+} as ProductApiResponse;
 
 export const MOCK_PRODUCTS_FILTER_CONNECTOR = {
   _embedded: {
@@ -111,5 +113,5 @@ export const MOCK_PRODUCTS_FILTER_CONNECTOR = {
     totalPages: 4,
     number: 0
   }
-} as any;
+} as ProductApiResponse;
 

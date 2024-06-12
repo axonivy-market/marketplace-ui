@@ -21,6 +21,9 @@ import { Product } from '../../shared/models/product.model';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ProductFilterComponent } from './product-filter/product-filter.component';
 import { ProductService } from './product.service';
+import { ProductApiResponse } from '../../shared/models/apis/product-response.model';
+import { Link } from '../../shared/models/apis/link.model';
+import { Page } from '../../shared/models/apis/page.model';
 
 const SEARCH_DEBOUNCE_TIME = 500;
 
@@ -47,8 +50,8 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
     type: FilterType.All_TYPES,
     sort: SortType.POPULARITY
   };
-  links: any;
-  page: any;
+  links!: Link;
+  page!: Page;
 
   productService = inject(ProductService);
   themeService = inject(ThemeService);
@@ -82,7 +85,7 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
   onFilterChange(filterType: FilterType) {
     this.criteria = {
       ...this.criteria,
-      url: '',
+      nextPageHref: undefined,
       type: filterType
     };
     this.loadProductItems(true);
@@ -91,7 +94,7 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
   onSortChange(sortType: SortType) {
     this.criteria = {
       ...this.criteria,
-      url: '',
+      nextPageHref: undefined,
       sort: sortType
     };
     this.loadProductItems(true);
@@ -103,14 +106,14 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
 
   loadProductItems(shouldCleanData?: boolean) {
     this.subscriptions.push(
-      this.productService.findProductsByCriteria(this.criteria).subscribe((response: any) => {
-        let newProducts = response.products as Product[];
+      this.productService.findProductsByCriteria(this.criteria).subscribe((response: ProductApiResponse) => {
+        let newProducts = response._embedded.products as Product[];
         if (shouldCleanData) {
           this.products.set(newProducts);
         } else {
           this.products.update(existingProducts => existingProducts.concat(newProducts));
         }
-        this.links = response.links;
+        this.links = response._links;
         this.page = response.page;
       })
     );
@@ -121,7 +124,7 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && this.hasMore()) {
-          this.criteria.url = this.links.next.href;
+          this.criteria.nextPageHref = this.links?.next?.href;
           this.loadProductItems();
         }
       });

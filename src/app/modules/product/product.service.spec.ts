@@ -55,7 +55,7 @@ describe('ProductService', () => {
       type: FilterType.CONNECTORS
     };
     service.findProductsByCriteria(criteria).subscribe(response => {
-      let products = response.products;
+      let products = response._embedded.products;
       for (let i = 0; i < products.length; i++) {
         expect(products[i].type).toEqual(FilterType.CONNECTORS);
         expect(products[i].name.toLowerCase()).toContain(searchString);
@@ -75,7 +75,7 @@ describe('ProductService', () => {
       type: null
     };
     service.findProductsByCriteria(criteria).subscribe(response => {
-      expect(response.products.length).toEqual(products.length);
+      expect(response._embedded.products.length).toEqual(products.length);
     });
   });
 
@@ -86,7 +86,7 @@ describe('ProductService', () => {
       type: null
     };
     service.findProductsByCriteria(criteria).subscribe(response => {
-      let products = response.products;
+      let products = response._embedded.products;
       for (let i = 0; i < products.length; i++) {
         if (
           products[i].platformReview &&
@@ -108,7 +108,7 @@ describe('ProductService', () => {
       type: null
     };
     service.findProductsByCriteria(criteria).subscribe(response => {
-      expect(response.products.length).toEqual(products.length);
+      expect(response._embedded.products.length).toEqual(products.length);
     });
   });
 });
