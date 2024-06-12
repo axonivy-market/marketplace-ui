@@ -17,7 +17,7 @@
       aria-label="Toggle navigation">
       <span>
         <i
-          class="fs-2"
+          class="fs-2 header__menu-button"
           [ngClass]="isMobileMenuCollapsed() ? 'bi bi-list' : 'bi bi-x-lg'"
           (click)="onCollapsedMobileMenu()"></i>
       </span>
@@ -25,10 +25,10 @@
 
     <div class="collapse navbar-collapse" [ngClass]="{'show': !isMobileMenuCollapsed()}" id="navbarSupportedContent">
       <div
-        class="d-flex flex-column flex-lg-row justify-content-between w-100 min-height-100 align-items-lg-center">
+        class="header__navbar-content d-flex flex-column flex-lg-row justify-content-between w-100 min-height-100 align-items-lg-center">
         <!-- dummy div for ui spacing in lg screen-->
         <div class="d-lg-block d-none"></div>
-        <div>
+        <div class="header__navigation">
           <!-- Mobile Search Input -->
           <form class="d-lg-none header-mobile__search" role="search">
             <div class="input-group bg-secondary mb-5">
@@ -65,7 +65,7 @@
         </div>
 
         <ul
-          class="navbar-nav mr-auto flex-lg-row flex-column-reverse align-items-lg-center align-items-sm-stretch">
+          class="navbar-nav mr-auto flex-lg-row flex-column-reverse align-items-lg-center align-items-sm-stretch header__action">
           <!-- Theme Mode -->
           <li class="m-2 header__theme-button border-top-md-gray">
             <div class="text-center m-t-5" (click)="themeService.changeTheme()">
@@ -88,12 +88,12 @@
               [hidden]="!isSearchBarDisplayed()">
               <div class="input-group-prepend">
                 <span
-                  class="input-group-text border-0 shadow">
+                  class="input-group-text border-0 bg-secondary">
                   <i class="bi bi-search"></i>
                 </span>
               </div>
               <input
-                class="form-control bg-secondary me-2 border-0 search-input shadow"
+                class="form-control bg-secondary me-2 border-0 search-input bg-secondary"
                 type="search"
                 [placeholder]="
                   translateService.get('common.search.placeholder') | async

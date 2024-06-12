@@ -51,15 +51,15 @@ export const SOCIAL_MEDIA_LINK = [
 
 export const IVY_FOOTER_LINKS = [
   {
-    containerStyleClass: 'p-2 w-md-100',
+    containerStyleClass: 'p-2 w-md-100 footer__ivy-tag',
     label: 'common.footer.ivyCompanyInfo'
   },
   {
-    containerStyleClass: 'p-2',
+    containerStyleClass: 'p-2 footer__ivy-policy-tag',
     label: 'common.footer.privayPolicy'
   },
   {
-    containerStyleClass: 'p-2',
+    containerStyleClass: 'p-2 footer__ivy-term-of-service-tag',
     label: 'common.footer.termsOfService'
   }
 ];
