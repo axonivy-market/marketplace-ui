@@ -43,7 +43,6 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
   subscriptions: Subscription[] = [];
   searchTextChanged = new Subject<string>();
   criteria: Criteria = {
-    url: '',
     search: '',
     type: FilterType.All_TYPES,
     sort: SortType.POPULARITY
@@ -103,16 +102,18 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
   }
 
   loadProductItems(shouldCleanData?: boolean) {
-    this.productService.findProductsByCriteria(this.criteria).subscribe((response: any) => {
-      let newProducts = response.products as Product[];
-      if (shouldCleanData) {
-        this.products.set(newProducts);
-      } else {
-        this.products.update(existingProducts => existingProducts.concat(newProducts));
-      }
-      this.links = response.links;
-      this.page = response.page;
-    });
+    this.subscriptions.push(
+      this.productService.findProductsByCriteria(this.criteria).subscribe((response: any) => {
+        let newProducts = response.products as Product[];
+        if (shouldCleanData) {
+          this.products.set(newProducts);
+        } else {
+          this.products.update(existingProducts => existingProducts.concat(newProducts));
+        }
+        this.links = response.links;
+        this.page = response.page;
+      })
+    );
   }
 
   setupIntersectionObserver() {

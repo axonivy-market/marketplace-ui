@@ -1,7 +1,6 @@
 import { MavenArtifact } from './maven-artifact.model';
 
 export interface Product {
-  $schema: string;
   id: string;
   version: string;
   name: string;

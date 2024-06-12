@@ -47,7 +47,7 @@
       <select
         [(ngModel)]="selectedSortType"
         (ngModelChange)="onSortChange()"
-        class="form-select rounded-4"
+        class="form-select rounded-4 sort-type"
         aria-label="sort"
         name="sort">
         @for (type of sortTypes; track $index) {

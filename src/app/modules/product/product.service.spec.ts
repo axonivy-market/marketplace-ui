@@ -12,10 +12,11 @@ import { Criteria } from '../../shared/models/criteria.model';
 import { ProductService } from './product.service';
 import { Product } from '../../shared/models/product.model';
 
-const PRODUCT_ID = 'portal';
+const PRODUCT_ID = 'amazon-comprehend';
 const NOT_EXIST_ID = 'undefined';
 
 describe('ProductService', () => {
+  let products = MOCK_PRODUCTS._embedded.products as Product[];
   let service: ProductService;
 
   beforeEach(() => {
@@ -46,14 +47,15 @@ describe('ProductService', () => {
     });
   });
 
-  it('getProductByCriteria with should return products properly', () => {
-    const searchString = 'amazon';
+  it('findProductsByCriteria with should return products properly', () => {
+    const searchString = 'amazon-comprehend';
     const criteria: Criteria = {
       search: searchString,
       sort: SortType.ALPHABETICALLY,
       type: FilterType.CONNECTORS
     };
-    service.getProductsByCriteria(criteria).subscribe(products => {
+    service.findProductsByCriteria(criteria).subscribe(response => {
+      let products = response.products;
       for (let i = 0; i < products.length; i++) {
         expect(products[i].type).toEqual(FilterType.CONNECTORS);
         expect(products[i].name.toLowerCase()).toContain(searchString);
@@ -72,8 +74,8 @@ describe('ProductService', () => {
       sort: null,
       type: null
     };
-    service.getProductsByCriteria(criteria).subscribe(products => {
-      expect(products.length).toEqual(MOCK_PRODUCTS.length);
+    service.findProductsByCriteria(criteria).subscribe(response => {
+      expect(response.products.length).toEqual(products.length);
     });
   });
 
@@ -83,7 +85,8 @@ describe('ProductService', () => {
       sort: SortType.POPULARITY,
       type: null
     };
-    service.getProductsByCriteria(criteria).subscribe(products => {
+    service.findProductsByCriteria(criteria).subscribe(response => {
+      let products = response.products;
       for (let i = 0; i < products.length; i++) {
         if (
           products[i].platformReview &&
@@ -104,8 +107,8 @@ describe('ProductService', () => {
       sort: SortType.RECENT,
       type: null
     };
-    service.getProductsByCriteria(criteria).subscribe(products => {
-      expect(products.length).toEqual(MOCK_PRODUCTS.length);
+    service.findProductsByCriteria(criteria).subscribe(response => {
+      expect(response.products.length).toEqual(products.length);
     });
   });
 });

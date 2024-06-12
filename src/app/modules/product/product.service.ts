@@ -13,7 +13,7 @@ export class ProductService {
   httpClient = inject(HttpClient);
 
   findProductsByCriteria(criteria: Criteria) {
-    let requestURL = criteria.url;
+    let requestURL = criteria.url || '';
     if (requestURL === '') {
       requestURL = `${PRODUCT_REQUEST_PATH}/${criteria.type}`;
     }
@@ -43,7 +43,8 @@ export class ProductService {
   }
 
   getProductById(productId: string): Observable<Product> {
-    const product = MOCK_PRODUCTS.find(p => p.id === productId);
+    let products = MOCK_PRODUCTS._embedded.products as Product[];
+    const product = products.find(p => p.id === productId);
     if (product) {
       return of(product);
     }

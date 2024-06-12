@@ -57,10 +57,10 @@ describe('ProductComponent', () => {
     expect(router.navigate).toHaveBeenCalledWith(['', 'url']);
   });
 
-  it('loadAllProducts should return products with criteria', () => {
+  it('loadProductItems should return products with criteria', () => {
 
-    component.loadAllProducts();
-    expect(component.loadAllProducts).toBeTruthy();
+    component.loadProductItems();
+    expect(component.loadProductItems).toBeTruthy();
   })
 
   it('ngOnDestroy should unsubscribe all sub', () => {
@@ -73,7 +73,7 @@ describe('ProductComponent', () => {
   it('onFilterChange should filter products properly', () => {
     component.onFilterChange(FilterType.CONNECTORS);
     component.products().forEach((product) => {
-      expect(product.type).toEqual(FilterType.CONNECTORS);
+      expect(product.type).toEqual('connector');
     });
   });
 
@@ -88,7 +88,7 @@ describe('ProductComponent', () => {
   });
 
   it('search should return match products name', fakeAsync(() => {
-    const productName = 'adobe';
+    const productName = 'amazon comprehend';
     component.onSearchChanged(productName);
     tick(500);
     component.products().forEach((product) => {
