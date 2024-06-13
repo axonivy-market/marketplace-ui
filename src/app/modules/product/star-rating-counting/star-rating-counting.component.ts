@@ -50,6 +50,13 @@ export class StarRatingCountingComponent {
     this.starRatingCountings.sort((a, b) => b.starRating - a.starRating);
   }
 
+  onClickRateThisConnector(): void {
+    let redirectUri = "http://localhost:4200/auth/callback";
+    let clientId = '';
+    let githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}`;
+    window.location.href = githubAuthUrl;
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach((sub) => {
       sub.unsubscribe();
