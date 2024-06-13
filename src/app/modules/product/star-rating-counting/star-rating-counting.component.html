@@ -11,7 +11,7 @@
         <app-star-rating
           [rating]="reviewNumber"
           [totalComments]="totalComments"></app-star-rating>
-        <a class="connector-rate-link" href="#">Rate this connector</a>
+        <a class="connector-rate-link" (click)="onClickRateThisConnector()">Rate this connector</a>
       </div>
     </div>
     <div class="col-sm-9 col-6 text-start d-lg-block">
