@@ -32,10 +32,6 @@ $ivyCardDescriptionColorLight: #4a4a4a;
 $ivyTextColorLight: #fafafa;
 
 [data-bs-theme='light'] {
-  body {
-    font-family: Inter;
-  }
-
   --ivy-primary-color-light: #{$ivyPrimaryColorLight};
   --ivy-secondary-color-light: #{$ivySecondaryColorLight};
 
@@ -88,10 +84,6 @@ $ivyPrimaryButtonHoverDark: #ececec;
 $ivyCardDescriptionColorDark: #a3a3a3;
 
 [data-bs-theme='dark'] {
-  body {
-    font-family: Inter;
-  }
-
   --bs-body-bg: #{$ivyBodyBackgroundDark};
   --bs-primary-rgb: #{$ivyPrimaryColorDark};
   --bs-secondary-rgb: #{$ivySecondaryColorDarkRGB};
@@ -110,7 +102,7 @@ $ivyCardDescriptionColorDark: #a3a3a3;
     color: #{$ivyCardDescriptionColorLight};
   }
 
-  .btn:hover {
+  .btn-primary:hover {
     background-color: #{$ivyPrimaryButtonHoverDark};
   }
 
@@ -134,4 +126,29 @@ $ivyCardDescriptionColorDark: #a3a3a3;
 
 *:focus {
   box-shadow: none !important;
+  outline: none !important;
+}
+
+@media (min-width: 1400px) {
+  .col-xxl-3 {
+      flex: 0 0 auto;
+      width: 33.33333333%;
+  }
+}
+
+@media (min-width: 2560px) {
+  .container {
+    min-width: 1440px;
+  }
+}
+
+@media (min-width: 3840px) {
+  .container {
+    min-width: 2160px;
+  }
+
+  .col-xxl-3 {
+    flex: 0 0 auto;
+    width: 25% !important;
+  }
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, WritableSignal, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ThemeService } from '../../../core/services/theme/theme.service';
@@ -18,8 +18,8 @@ export class HeaderComponent {
   selectedNav = '/';
   selectedLanguage: string = Language.EN_GB;
   languages = LANGUAGES;
-  isSearchBarDisplayed = false;
-  isMobileMenuCollapsed = true;
+  isSearchBarDisplayed = signal(false);
+  isMobileMenuCollapsed: WritableSignal<boolean> = signal(true);
 
   navItems: NavItem[] = NAV_ITEMS;
 
@@ -35,10 +35,10 @@ export class HeaderComponent {
   }
 
   onCollapsedMobileMenu() {
-    this.isMobileMenuCollapsed = !this.isMobileMenuCollapsed;
+    this.isMobileMenuCollapsed.update(value => !value);
   }
 
   onClickSearchIcon() {
-    this.isSearchBarDisplayed = !this.isSearchBarDisplayed;
+    this.isSearchBarDisplayed.update(value => !value);
   }
 }

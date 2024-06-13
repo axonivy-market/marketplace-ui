@@ -32,4 +32,50 @@ describe('FooterComponent', () => {
 
     expect(getComputedStyle(mobileSearch.nativeElement).display).toBe('none');
   });
+
+  it('social media section should be in the bottom of mobile screen', () => {
+    viewport.set(540);
+
+    const footerSocialMedia = fixture.nativeElement.querySelector(
+      '.footer__social-media'
+    );
+    const footerIvyPolicy = fixture.nativeElement.querySelector(
+      '.footer__ivy-policy'
+    );
+
+    expect(footerSocialMedia.getBoundingClientRect().top).toBeGreaterThan(
+      footerIvyPolicy.getBoundingClientRect().top
+    );
+  });
+
+  it('Ivy tag in ivy policy section should be display in higher row', () => {
+    viewport.set(540);
+
+    const ivyTag = fixture.nativeElement.querySelector('.footer__ivy-tag');
+
+    const ivyTermOfService = fixture.nativeElement.querySelector(
+      '.footer__ivy-term-of-service-tag'
+    );
+
+    const ivyPolicyTag = fixture.nativeElement.querySelector(
+      '.footer__ivy-policy-tag'
+    );
+
+    expect(ivyTag.getBoundingClientRect().top).toBeLessThan(
+      ivyTermOfService.getBoundingClientRect().top
+    );
+
+    expect(ivyPolicyTag.getBoundingClientRect().top).toEqual(
+      ivyTermOfService.getBoundingClientRect().top
+    );
+  });
+
+  it('content layout should be displayed in the center', () => {
+    viewport.set(480);
+
+    const logo = fixture.debugElement.query(By.css('.logo__image'));
+    const ivyPolicy = fixture.debugElement.query(By.css('.footer__ivy-policy'));
+    expect(getComputedStyle(logo.nativeElement).textAlign).toBe('center');
+    expect(getComputedStyle(ivyPolicy.nativeElement).textAlign).toBe('center');
+  });
 });
