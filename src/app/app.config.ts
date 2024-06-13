@@ -26,6 +26,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideExperimentalZonelessChangeDetection(),
     provideRouter(routes),
     provideHttpClient(withFetch(), withInterceptors([apiInterceptor])),
     importProvidersFrom(
