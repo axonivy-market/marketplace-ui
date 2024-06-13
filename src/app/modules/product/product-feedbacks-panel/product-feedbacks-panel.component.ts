@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { ThemeService } from '../../../core/services/theme/theme.service';
 import { ProductFeedbackComponent } from './product-feedback/product-feedback.component';
 import { ProductFeedbackService } from './product-feedback.service';
@@ -15,13 +15,16 @@ import { FeedbackFilterComponent } from './feedback-filter/feedback-filter.compo
   styleUrl: './product-feedbacks-panel.component.scss'
 })
 export class ProductFeedbacksPanelComponent {
+  @Input() isBtnShowMoreVisible = true;
+  @Input() isScrollable = false;
+
   productFeedbacks: Feedback[] = [];
   subscriptions: Subscription[] = [];
   themeService = inject(ThemeService);
   productFeedbackService = inject(ProductFeedbackService);
 
   constructor() {
-    this.loadAllProductFeedback("");
+    this.loadAllProductFeedback('');
   }
 
   loadAllProductFeedback(productId: string): void {

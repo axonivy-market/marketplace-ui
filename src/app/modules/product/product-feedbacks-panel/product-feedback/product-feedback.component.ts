@@ -23,6 +23,8 @@ export class ProductFeedbackComponent {
 
   ngAfterViewInit() {
     this.showToggle = this.contentElement.nativeElement.scrollHeight > this.contentElement.nativeElement.clientHeight;
+    console.log("scrollHeight: " + this.contentElement.nativeElement.scrollHeight);
+    console.log("clientHeight: " + this.contentElement.nativeElement.clientHeight);
     this.cdr.detectChanges();
   }
 

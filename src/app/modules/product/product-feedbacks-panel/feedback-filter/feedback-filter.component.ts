@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FEEDBACK_SORT_TYPES } from '../../../../shared/constants/common.constant';
 import { TranslateModule } from '@ngx-translate/core';
 

@@ -3,6 +3,13 @@
   gap: 48px; // Adjust the gap between items as needed
 }
 
+.grid-feedbacks-container-dialog {
+  display: grid;
+  gap: 34px;
+  grid-template-columns: 1fr;
+  padding-bottom: 34px;
+}
+
 // Large screens
 @media (min-width: 768px) {
   .grid-feedbacks-container {
@@ -16,3 +23,4 @@
     grid-template-columns: 1fr;
   }
 }
+

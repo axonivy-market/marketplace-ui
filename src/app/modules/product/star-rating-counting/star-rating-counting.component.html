@@ -1,6 +1,5 @@
 <div class="star-rating-summary row mb-4">
-  <div class="d-flex align-items-start justify-content-start">
-    <div class="col-sm-3 col-6 text-start d-lg-block">
+    <div [ngClass]="{'col-sm-3 col-6': !isDisplayInDialog, 'col-12': isDisplayInDialog}" class="text-start d-lg-block" [style.margin-bottom.px]="isDisplayInDialog ? 40 : 0">
       <div class="product-data-title rating-review-text-color">
         <span>Review</span>
       </div>
@@ -11,10 +10,10 @@
         <app-star-rating
           [rating]="reviewNumber"
           [totalComments]="totalComments"></app-star-rating>
-        <a class="connector-rate-link" href="#">Rate this connector</a>
+        <a class="connector-rate-link" data-bs-target="#addFeedbackModal" data-bs-toggle="modal" style="cursor: pointer;">Rate this connector</a>
       </div>
     </div>
-    <div class="col-sm-9 col-6 text-start d-lg-block">
+    <div [ngClass]="{'col-sm-9 col-6': !isDisplayInDialog, 'col-12': isDisplayInDialog}" class="text-start d-lg-block">
       <div>
         <span class="detailed-reviews rating-review-text-color">
           Detailed reviews
@@ -40,6 +39,5 @@
           </div>
         }
       </div>
-    </div>
   </div>
 </div>

@@ -4,12 +4,12 @@ import { StarRatingCounting } from '../../../shared/models/star-rating-counting.
 import { StarRatingCountingService } from './star-rating-counting.service';
 import { StarRatingHighlightDirective } from './star-rating-highlight.directive';
 import { StarRatingComponent } from '../star-rating/star-rating.component';
-import { DecimalPipe } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-star-rating-counting',
   standalone: true,
-  imports: [StarRatingHighlightDirective, StarRatingComponent, DecimalPipe],
+  imports: [StarRatingHighlightDirective, StarRatingComponent, DecimalPipe, CommonModule],
   providers: [StarRatingCountingService],
   templateUrl: './star-rating-counting.component.html',
   styleUrl: './star-rating-counting.component.scss'
@@ -17,6 +17,7 @@ import { DecimalPipe } from '@angular/common';
 export class StarRatingCountingComponent {
   @Input() productId: string = "abc";
   @Input() platformReview: string = "3.5";
+  @Input() isDisplayInDialog: boolean = false;
   totalComments: number = 0;
   reviewNumber: number = 0;
   starRatingCountings: StarRatingCounting[] = [];
