@@ -4,7 +4,6 @@ import { Criteria } from '../models/criteria.model';
 import { FilterType } from '../enums/filter-type.enum';
 import { MOCK_PRODUCTS, MOCK_PRODUCTS_FILTER_CONNECTOR, MOCK_PRODUCTS_NEXT_PAGE } from './mock-data';
 import { ProductApiResponse } from '../models/apis/product-response.model';
-import { ProductApiResponse } from '../models/apis/product-response.model';
 
 const products = MOCK_PRODUCTS._embedded.products as Product[];
 export class MockProductService {

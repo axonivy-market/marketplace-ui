@@ -22,6 +22,23 @@ const router = {
 describe('ProductComponent', () => {
   let component: ProductComponent;
   let fixture: ComponentFixture<ProductComponent>;
+  let mockIntersectionObserver: any;
+
+  beforeAll(() => {
+    mockIntersectionObserver = jasmine.createSpyObj('IntersectionObserver', ['observe', 'unobserve', 'disconnect']);
+    mockIntersectionObserver.observe.and.callFake(() => { });
+    mockIntersectionObserver.unobserve.and.callFake(() => { });
+    mockIntersectionObserver.disconnect.and.callFake(() => { });
+
+    (window as any).IntersectionObserver = function (callback: IntersectionObserverCallback) {
+      mockIntersectionObserver.callback = callback;
+      return mockIntersectionObserver;
+    };
+  });
+
+  afterAll(() => {
+    delete (window as any).IntersectionObserver;
+  });
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -99,5 +116,44 @@ describe('ProductComponent', () => {
   it('setupIntersectionObserver should not trigger when init page', () => {
     component.ngAfterViewInit();
     expect(component.criteria.nextPageHref).toBeUndefined();
+  });
+
+  it('should call loadProductItems when observerElement is intersecting and has more products', () => {
+    spyOn(component, 'loadProductItems').and.callThrough();
+    spyOn(component, 'hasMore').and.returnValue(true);
+
+    const entries = [{ isIntersecting: true }];
+    const callback = mockIntersectionObserver.callback;
+
+    callback(entries as IntersectionObserverEntry[]);
+
+    expect(component.hasMore).toHaveBeenCalled();
+    expect(component.loadProductItems).toHaveBeenCalled();
+  });
+
+  it('should not call loadProductItems when observerElement is not intersecting', () => {
+    spyOn(component, 'loadProductItems').and.callThrough();
+    spyOn(component, 'hasMore').and.returnValue(true);
+
+    const entries = [{ isIntersecting: false }];
+    const callback = mockIntersectionObserver.callback;
+
+    callback(entries as IntersectionObserverEntry[]);
+
+    expect(component.hasMore).not.toHaveBeenCalled();
+    expect(component.loadProductItems).not.toHaveBeenCalled();
+  });
+
+  it('should not call loadProductItems when there are no more products', () => {
+    spyOn(component, 'loadProductItems').and.callThrough();
+    spyOn(component, 'hasMore').and.returnValue(false);
+
+    const entries = [{ isIntersecting: true }];
+    const callback = mockIntersectionObserver.callback;
+
+    callback(entries as IntersectionObserverEntry[]);
+
+    expect(component.hasMore).toHaveBeenCalled();
+    expect(component.loadProductItems).not.toHaveBeenCalled();
   });
 });
