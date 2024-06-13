@@ -1,15 +1,156 @@
-<div class="modal fade" id="addFeedbackModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Hide this modal and show the first with the button below.
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-primary" data-bs-target="#showFeedbacksModal" data-bs-toggle="modal">Back to first</button>
+<div
+  class="modal fade"
+  id="addFeedbackModal"
+  aria-hidden="true"
+  aria-labelledby="addFeedbackModal"
+  tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 627px">
+    <div
+      class="modal-content"
+      style="
+        border-radius: 10px;
+        height: 622px;
+        border: 0;
+        box-shadow: 0px 0px 26px 5px rgba(0, 0, 0, 0.25);
+      ">
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+        style="position: absolute; right: 18px; top: 18px"></button>
+      <div
+        class="d-flex flex-column"
+        style="margin: 0 auto; margin-top: 52px; width: 525px; gap: 20px">
+        <div
+          class="feedback-color"
+          style="
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 140%;
+            height: 25px;
+          ">
+          Give your feedback!
+        </div>
+        <div
+          class="feedback-secondary-color"
+          style="
+            font-weight: 400;
+            font-size: 17px;
+            line-height: 140%;
+            height: 66px;
+          ">
+          By giving your feedback you are enabling us to constantly improve our
+          products and always deliver the best quality to both you and your
+          team.
+        </div>
+        <div class="d-flex flex-column" style="gap: 10px">
+          <div
+            class="feedback-secondary-color"
+            style="
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 120%;
+              height: 17px;
+            ">
+            Currently reviewing
+          </div>
+          <div>
+            <select
+              class="form-select feedback-color"
+              aria-label="item"
+              name="item"
+              style="
+                border-radius: 10px;
+                font-size: 14px;
+                line-height: 120%;
+                font-weight: 400;
+                padding: 10px 35px 10px 15px;
+                height: 37px;
+                cursor: pointer;
+                width: fit-content;
+                opacity: 0.8;
+                border: 1px solid #1b1b1b;
+              ">
+              <option>Microsoft 365 connector</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <div
+            class="feedback-secondary-color"
+            style="
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 120%;
+              height: 17px;
+            ">
+            Stars rating
+          </div>
+          <div style="margin-top: 10px; height: 48px">Rating</div>
+          <div
+            class="feedback-secondary-color"
+            style="
+              margin-top: 30px;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 120%;
+              height: 17px;
+            ">
+            Let a comment
+          </div>
+          <textarea
+            class="feedback-color"
+            style="
+              height: 90px;
+              padding: 10px;
+              margin-top: 10px;
+              width: 100%;
+              resize: none;
+              background: #fafafa;
+              border: 0.5px solid #e7e7e7;
+              border-radius: 5px;
+              font-family: 'Inter';
+              font-style: normal;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 120%;
+              scrollbar-width: none;
+            "></textarea>
+        </div>
+        <button
+          class="btn btn-primary border-0"
+          style="
+            width: 100%;
+            padding: 12px 32px;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 120%;
+          ">
+          Submit review
+        </button>
+        <div
+          style="
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 120%;
+            height: 17px;
+            margin: 0 auto;
+          "
+          class="feedback-secondary-color">
+          Logged in Github as:
+          <span
+            style="
+              margin-left: 3px;
+              text-align: center;
+              text-decoration-line: underline;
+              color: #007095;
+              cursor: pointer;
+            ">
+            StefCH47
+          </span>
+        </div>
       </div>
     </div>
   </div>
