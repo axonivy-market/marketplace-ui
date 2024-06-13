@@ -24,24 +24,10 @@ export class ProductService {
         .set(RequestParam.SORT, `${criteria.sort}`)
         .set(RequestParam.KEYWORD, `${criteria.search}`);
     }
-    return this.httpClient.get<ProductApiResponse>(requestURL, { params: requestParams })
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'An unknown error occurred!';
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(() => new Error(errorMessage));
+    return this.httpClient.get<ProductApiResponse>(requestURL, { params: requestParams });
   }
 
   getProductById(productId: string): Observable<Product> {
-    // TODO Integrated by MARP-358
     const products = MOCK_PRODUCTS._embedded.products;
     const product = products.find(p => p.id === productId);
     if (product) {
