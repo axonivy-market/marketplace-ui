@@ -49,7 +49,7 @@ describe('FooterComponent', () => {
   });
 
   it('Ivy tag in ivy policy section should be display in higher row', () => {
-    viewport.set(480);
+    viewport.set(540);
 
     const ivyTag = fixture.nativeElement.querySelector('.footer__ivy-tag');
 
