@@ -50,8 +50,8 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
     type: FilterType.All_TYPES,
     sort: SortType.POPULARITY
   };
-  links!: Link;
-  page!: Page;
+  responseLink!: Link;
+  responsePage!: Page;
 
   productService = inject(ProductService);
   themeService = inject(ThemeService);
@@ -85,7 +85,7 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
   onFilterChange(filterType: FilterType) {
     this.criteria = {
       ...this.criteria,
-      nextPageHref: undefined,
+      nextPageHref: '',
       type: filterType
     };
     this.loadProductItems(true);
@@ -94,7 +94,7 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
   onSortChange(sortType: SortType) {
     this.criteria = {
       ...this.criteria,
-      nextPageHref: undefined,
+      nextPageHref: '',
       sort: sortType
     };
     this.loadProductItems(true);
@@ -104,27 +104,27 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
     this.searchTextChanged.next(searchString);
   }
 
-  loadProductItems(shouldCleanData?: boolean) {
+  loadProductItems(shouldCleanData = false) {
     this.subscriptions.push(
       this.productService.findProductsByCriteria(this.criteria).subscribe((response: ProductApiResponse) => {
-        let newProducts = response._embedded.products as Product[];
+        const newProducts = response._embedded.products;
         if (shouldCleanData) {
           this.products.set(newProducts);
         } else {
           this.products.update(existingProducts => existingProducts.concat(newProducts));
         }
-        this.links = response._links;
-        this.page = response.page;
+        this.responseLink = response._links;
+        this.responsePage = response.page;
       })
     );
   }
 
   setupIntersectionObserver() {
     const options = { root: null, rootMargin: '0px', threshold: 0.1 };
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting && this.hasMore()) {
-          this.criteria.nextPageHref = this.links?.next?.href;
+          this.criteria.nextPageHref = this.responseLink?.next?.href;
           this.loadProductItems();
         }
       });
@@ -134,11 +134,11 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
   }
 
   hasMore() {
-    if (!this.page || !this.links) {
+    if (!this.responsePage || !this.responseLink) {
       return false;
     }
-    return this.page.number < this.page.totalPages
-      && this.links?.next != undefined;
+    return this.responsePage.number < this.responsePage.totalPages
+      && this.responseLink?.next !== undefined;
   }
 
   ngOnDestroy(): void {

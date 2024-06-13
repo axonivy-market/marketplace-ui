@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, catchError, map, of, throwError } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { MOCK_PRODUCTS } from '../../shared/mocks/mock-data';
 import { Criteria } from '../../shared/models/criteria.model';
 import { Product } from '../../shared/models/product.model';
@@ -24,25 +24,12 @@ export class ProductService {
         .set(RequestParam.SORT, `${criteria.sort}`)
         .set(RequestParam.KEYWORD, `${criteria.search}`);
     }
-    return this.httpClient.get<ProductApiResponse>(requestURL, { params: requestParams })
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'An unknown error occurred!';
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(() => new Error(errorMessage));
+    return this.httpClient.get<ProductApiResponse>(requestURL, { params: requestParams });
   }
 
   // TODO MARP-358
   getProductById(productId: string): Observable<Product> {
-    let products = MOCK_PRODUCTS._embedded.products as Product[];
+    const products = MOCK_PRODUCTS._embedded.products;
     const product = products.find(p => p.id === productId);
     if (product) {
       return of(product);

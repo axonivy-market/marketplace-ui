@@ -95,4 +95,9 @@ describe('ProductComponent', () => {
       expect(product.name.toLowerCase()).toContain(productName);
     });
   }));
+
+  it('setupIntersectionObserver should not trigger when init page', () => {
+    component.ngAfterViewInit();
+    expect(component.criteria.nextPageHref).toBeUndefined();
+  });
 });

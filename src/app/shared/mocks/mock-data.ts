@@ -115,3 +115,23 @@ export const MOCK_PRODUCTS_FILTER_CONNECTOR = {
   }
 } as ProductApiResponse;
 
+
+export const MOCK_PRODUCTS_NEXT_PAGE = {
+  _embedded: {
+    products: []
+  },
+  _links: {
+    first: {
+      href: "http://localhost:8080/marketplace-service/api/product?type=all&page=0&size=20"
+    },
+    self: {
+      href: "http://localhost:8080/marketplace-service/api/product?type=all&page=1&size=20"
+    }
+  },
+  page: {
+    size: 20,
+    totalElements: 1,
+    totalPages: 1,
+    number: 1
+  }
+} as ProductApiResponse;
