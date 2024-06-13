@@ -2,11 +2,12 @@ import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@ang
 import { Feedback } from '../../../../shared/models/feedback.model';
 import { CommonModule } from '@angular/common';
 import { log } from 'console';
+import { StarRatingComponent } from '../../star-rating/star-rating.component';
 
 @Component({
   selector: 'app-product-feedback',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, StarRatingComponent],
   templateUrl: './product-feedback.component.html',
   styleUrl: './product-feedback.component.scss'
 })
@@ -21,9 +22,7 @@ export class ProductFeedbackComponent {
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngAfterViewInit() {
-    // Check if the content overflows after view initialization
     this.showToggle = this.contentElement.nativeElement.scrollHeight > this.contentElement.nativeElement.clientHeight;
-    // Mark for change detection after setting the showToggle value
     this.cdr.detectChanges();
   }
 

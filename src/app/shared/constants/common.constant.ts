@@ -1,3 +1,4 @@
+import { FeedbackSortType } from '../enums/feedback-sort-type';
 import { FilterType } from '../enums/filter-type.enum';
 import { Language } from '../enums/language.enum';
 import { SortType } from '../enums/sort-type.enum';
@@ -110,5 +111,24 @@ export const SORT_TYPES = [
   {
     value: SortType.RECENT,
     label: 'common.sort.value.recent'
+  }
+];
+
+export const FEEDBACK_SORT_TYPES = [
+  {
+    value: FeedbackSortType.NEWEST,
+    label: 'common.sort.value.newest'
+  },
+  {
+    value: FeedbackSortType.OLDEST,
+    label: 'common.sort.value.oldest'
+  },
+  {
+    value: FeedbackSortType.HIGHEST,
+    label: 'common.sort.value.highest'
+  },
+  {
+    value: FeedbackSortType.LOWEST,
+    label: 'common.sort.value.lowest'
   }
 ];

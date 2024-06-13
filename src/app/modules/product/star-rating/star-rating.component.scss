@@ -1,8 +1,15 @@
 .product-data-info {
-  i {
+  .star-feedback-default {
     display: inline-block;
     width: 25.64px;
     height: 25.64px;
+    text-align: center;
+  }
+
+  .star-feedback-panel {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
     text-align: center;
   }
 

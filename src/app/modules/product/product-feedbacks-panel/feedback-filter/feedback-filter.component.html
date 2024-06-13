@@ -1,0 +1,15 @@
+<div class="d-flex flex-row align-items-center" style="gap: 20px; font-size: 14px; line-height: 120%; font-weight: 400; height: 17px;">
+  <span style="white-space: nowrap">Sort by:</span>
+  <select
+    class="form-select"
+    aria-label="sort"
+    name="sort"
+    style="border-radius: 10px; font-size: 14px; line-height: 120%; font-weight: 400; padding: 10px 15px 10px auto; height: 37px; cursor: pointer;">
+    @for (type of feedbackSortTypes; track $index) {
+      <option [value]="type.value">
+        {{ type.label | translate }}
+      </option>
+    }
+  </select>
+</div>
+

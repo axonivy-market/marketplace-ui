@@ -1,6 +1,6 @@
 export interface Feedback {
   userName: string;
-  userAvartarUrl: string;
+  userAvatarUrl: string;
   createdDate: Date;
   updatedDate?: Date;
   content: string;

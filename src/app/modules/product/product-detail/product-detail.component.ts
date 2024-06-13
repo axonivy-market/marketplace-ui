@@ -2,20 +2,22 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../../shared/models/product.model';
 import { ProductService } from '../product.service';
-import { ProductCommentComponent } from '../product-comment/product-comment.component';
 import { ThemeService } from '../../../core/services/theme/theme.service';
 import { CommonModule } from '@angular/common';
 import { StarRatingCountingComponent } from '../star-rating-counting/star-rating-counting.component';
 import { ProductFeedbacksPanelComponent } from '../product-feedbacks-panel/product-feedbacks-panel.component';
+import { ShowFeedbacksDialogComponent } from '../product-feedbacks-panel/show-feedbacks-dialog/show-feedbacks-dialog.component';
+import { AddFeedbackDialogComponent } from '../product-feedbacks-panel/add-feedback-dialog/add-feedback-dialog.component';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
   imports: [
     CommonModule,
-    ProductCommentComponent,
     StarRatingCountingComponent,
-    ProductFeedbacksPanelComponent
+    ProductFeedbacksPanelComponent,
+    ShowFeedbacksDialogComponent,
+    AddFeedbackDialogComponent
   ],
   providers: [ProductService],
   templateUrl: './product-detail.component.html',
