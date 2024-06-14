@@ -33,7 +33,6 @@ export class HeaderComponent {
   onSelectLanguage(language: string) {
     this.translateService.setDefaultLang(language);
     this.translateService.use(language);
-    console.log(this.translateService.getDefaultLang());
   }
 
   onCollapsedMobileMenu() {
