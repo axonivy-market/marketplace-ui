@@ -31,26 +31,25 @@
         class="header__navbar-content d-flex flex-column flex-lg-row justify-content-between w-100 min-height-100 align-items-lg-center">
         <!-- dummy div for ui spacing in lg screen-->
         <div class="d-lg-block d-none"></div>
-        <div class="header__navigation">
+        <div class="header__navigation d-lg-none">
           <!-- Mobile Search Input -->
-          <form class="d-lg-none" role="search">
-            <div class="input-group header-mobile__search bg-secondary">
-              <div class="input-group-prepend">
-                <span class="input-group-text h-100 border-0">
-                  <i class="bi bi-search"></i>
-                </span>
-              </div>
-              <input
-                class="form-control bg-secondary me-2 border-0"
-                type="search"
-                [placeholder]="
-                  translateService.get('common.search.placeholder') | async
-                "
-                [ariaLabel]="
-                  translateService.get('common.search.placeholder') | async
-                " />
+          <div class="input-group header-mobile__search bg-secondary">
+            <div class="input-group-prepend">
+              <span
+                class="input-group-text h-100 rounded-start-4 rounded-end-0 border-0">
+                <i class="bi bi-search"></i>
+              </span>
             </div>
-          </form>
+            <input
+              class="form-control bg-secondary me-2 border-0"
+              type="search"
+              [placeholder]="
+                translateService.get('common.search.placeholder') | async
+              "
+              [ariaLabel]="
+                translateService.get('common.search.placeholder') | async
+              " />
+          </div>
 
           <!-- Navigation -->
           <ul class="navbar-nav">
@@ -107,7 +106,7 @@
             class="navbar-nav navbar-nav--right mr-auto flex-lg-row flex-column-reverse align-items-lg-center align-items-sm-stretch header__action">
             <!-- Language Selection -->
             <div
-              class="d-flex flex-sm-row-reverse flex-lg-row justify-content-between mt-3 border-top-md-gray">
+              class="d-flex flex-row-reverse flex-lg-row justify-content-between mt-3 border-top-md-gray">
               <li class="header___language-select-container">
                 @for (language of languages; track $index) {
                   <button
