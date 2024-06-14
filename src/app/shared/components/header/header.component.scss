@@ -37,8 +37,8 @@
   background-color: var(--ivy-active-color);
 }
 
-.input-group {
-  border-radius: 10px;
+.header___language-select-container {
+  padding-bottom: 1rem;
 }
 
 .header__select-language {
@@ -53,6 +53,18 @@
   height: 22px;
 }
 
+.header-mobile__search {
+  height: 43px;
+  border-radius: 10px;
+}
+.header__search-input {
+  border-radius: 10px;
+}
+
+.header__theme-button {
+  padding-top: 0.55rem;
+}
+
 .header__download-button {
   height: 35px;
   border-radius: 7px;
@@ -64,10 +76,6 @@
 
 .header__select-language.inactive {
   color: #757575;
-}
-
-.header-mobile__search {
-  height: 43px;
 }
 
 .search-input {
@@ -107,11 +115,6 @@
     border-radius: 5px;
     opacity: 0px;
     background-color: var(--ivy-secondary-background);
-  }
-
-  .header__select-language {
-    padding: 0 10px;
-    margin: 12px 0;
   }
 
   .header__theme-button {
