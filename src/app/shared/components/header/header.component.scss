@@ -1,3 +1,9 @@
+.navbar {
+  gap: 77px;
+  border-bottom: 0.5px solid var(--header-border-color);
+  opacity: 0px;
+}
+
 .logo__image {
   width: 200px;
   height: 3rem;
@@ -13,7 +19,6 @@
 }
 
 .active-line {
-  display: none;
   position: relative;
   height: 2px;
   top: 1.6rem;
@@ -29,7 +34,7 @@
   font-family: Inter;
   font-size: 16px;
   font-weight: 600;
-  margin-top: 3px;
+  margin-top: 0.2rem;
 }
 
 .header__theme-button,
@@ -56,7 +61,24 @@
     min-height: 85lvh;
   }
 
+  .nav-link {
+    height: 45px;
+    padding: 10px 0px 10px 15px;
+    gap: 0px;
+    border-radius: 5px;
+    opacity: 0px;
+  }
+
+  .nav-link.active {
+    height: 45px;
+    padding: 10px 15px 10px -15px;
+    gap: 0px;
+    border-radius: 5px;
+    opacity: 0px;
+    background-color: var(--ivy-secondary-background);
+  }
+
   .border-top-md-gray {
-    border-top: gray solid 1px;
+    border-top: #757575 solid 1px;
   }
 }

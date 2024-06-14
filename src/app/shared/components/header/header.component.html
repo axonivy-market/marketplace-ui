@@ -60,7 +60,7 @@
                   class="nav-link"
                   [ngClass]="
                     item.link === '/'
-                      ? 'text-primary fw-bold'
+                      ? 'text-primary fw-bold active'
                       : 'text-secondary'
                   "
                   aria-current="page"
@@ -68,8 +68,8 @@
                   {{ item.label | translate }}
                 </a>
                 <div
-                  class="active-line d-sm-none"
-                  [ngClass]="{ 'd-md-block': item.link === '/' }"></div>
+                  class="active-line d-none"
+                  [ngClass]="{ 'd-lg-block': item.link === '/' }"></div>
               </li>
             }
           </ul>
