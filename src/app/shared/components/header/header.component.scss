@@ -5,16 +5,48 @@
   vertical-align: initial;
 }
 
+.nav-link {
+  height: 22px;
+  line-height: 22.4px;
+  font-weight: 400;
+  font-size: 16px;
+}
+
 .active-line {
   display: none;
   position: relative;
   height: 2px;
+  top: 1.6rem;
   width: inherit;
-  background-color: var(--bs-highlight-color);
+  background-color: var(--ivy-active-color);
 }
 
 .input-group {
   border-radius: 10px;
+}
+
+.header__select-language {
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.header__theme-button,
+.header-desktop__search {
+  height: 22px;
+}
+
+.header__download-button {
+  height: 35px;
+  border-radius: 7px;
+}
+
+.header__select-language.active {
+  color: var(--ivy-active-color);
+}
+
+.header__select-language.inactive {
+  color: #757575;
 }
 
 @media all and (max-width: 992px) {

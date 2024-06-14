@@ -66,16 +66,12 @@ export const IVY_FOOTER_LINKS = [
 
 export const LANGUAGES = [
   {
-    value: Language.EN_GB,
-    label: 'common.language.english'
-  },
-  {
-    value: Language.FR_FR,
-    label: 'common.language.french'
-  },
-  {
     value: Language.DE_DE,
-    label: 'common.language.german'
+    label: 'DE'
+  },
+  {
+    value: Language.EN_GB,
+    label: 'EN'
   }
 ];
 

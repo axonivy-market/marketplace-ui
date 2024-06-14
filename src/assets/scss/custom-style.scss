@@ -28,12 +28,17 @@ $ivyPrimaryColorHoverLight: #00445c;
 $ivySecondaryColorLight: #f8f8f8;
 $ivySecondaryButtonHoverLight: #ebebeb;
 $ivyBackgroundColorLight: #fafafa;
-$ivyCardDescriptionColorLight: #4a4a4a;
+$ivyPrimaryTextColorLight: #1b1b1b;
+$ivySecondaryTextLight: #4a4a4a;
 $ivyTextColorLight: #fafafa;
 
 [data-bs-theme='light'] {
   --ivy-primary-color-light: #{$ivyPrimaryColorLight};
   --ivy-secondary-color-light: #{$ivySecondaryColorLight};
+
+  --ivy-active-color: #{$ivyPrimaryColorLight};
+
+  --header-border-color: #ebebeb;
 
   .bg-primary {
     background-color: #{$ivyPrimaryColorLight} !important;
@@ -64,8 +69,16 @@ $ivyTextColorLight: #fafafa;
     background-color: #{$ivySecondaryButtonHoverLight};
   }
 
+  .text-primary {
+    color: #{$ivyPrimaryTextColorLight} !important;
+  }
+
+  .text-secondary {
+    color: #{$ivySecondaryTextLight} !important;
+  }
+
   .card__description {
-    color: #{$ivyCardDescriptionColorLight};
+    color: #{$ivySecondaryTextLight};
   }
 
   .card__tag {
@@ -81,13 +94,22 @@ $ivySecondaryColorDark: #383838;
 $ivySecondaryHoverDark: #202020;
 $ivyTextColorDark: #2c2c2c;
 $ivyPrimaryButtonHoverDark: #ececec;
-$ivyCardDescriptionColorDark: #a3a3a3;
+$ivySecondaryTextDark: #a3a3a3;
+
+.spinner-border {
+  width: 100px;
+  height: 100px;
+}
 
 [data-bs-theme='dark'] {
   --bs-body-bg: #{$ivyBodyBackgroundDark};
   --bs-primary-rgb: #{$ivyPrimaryColorDark};
   --bs-secondary-rgb: #{$ivySecondaryColorDarkRGB};
   --bs-tertiary-bg: #{$ivySecondaryColorDarkRGB};
+
+  --ivy-active-color: var(--bs-light);
+
+  --header-border-color: #4a4a4a;
 
   .card {
     background-color: #{$ivySecondaryColorDarkRGB};
@@ -99,7 +121,7 @@ $ivyCardDescriptionColorDark: #a3a3a3;
 
   .btn-primary {
     background-color: var(--bs-white);
-    color: #{$ivyCardDescriptionColorLight};
+    color: #{$ivySecondaryTextLight};
   }
 
   .btn-primary:hover {
@@ -114,8 +136,16 @@ $ivyCardDescriptionColorDark: #a3a3a3;
     background-color: #{$ivySecondaryHoverDark};
   }
 
+  .text-primary {
+    color: #fff !important;
+  }
+
+  .text-secondary {
+    color: #{$ivySecondaryTextDark} !important;
+  }
+
   .card__description {
-    color: #{$ivyCardDescriptionColorDark};
+    color: #{$ivySecondaryTextDark};
   }
 
   .card__tag {
@@ -131,8 +161,8 @@ $ivyCardDescriptionColorDark: #a3a3a3;
 
 @media (min-width: 1400px) {
   .col-xxl-3 {
-      flex: 0 0 auto;
-      width: 33.33333333%;
+    flex: 0 0 auto;
+    width: 33.33333333%;
   }
 }
 

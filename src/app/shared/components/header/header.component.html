@@ -23,7 +23,10 @@
       </span>
     </button>
 
-    <div class="collapse navbar-collapse" [ngClass]="{'show': !isMobileMenuCollapsed()}" id="navbarSupportedContent">
+    <div
+      class="collapse navbar-collapse"
+      [ngClass]="{ show: !isMobileMenuCollapsed() }"
+      id="navbarSupportedContent">
       <div
         class="header__navbar-content d-flex flex-column flex-lg-row justify-content-between w-100 min-height-100 align-items-lg-center">
         <!-- dummy div for ui spacing in lg screen-->
@@ -52,8 +55,16 @@
           <!-- Navigation -->
           <ul class="navbar-nav mr-auto">
             @for (item of navItems; track $index) {
-              <li class="nav-item" [ngClass]="{ 'fw-bold': item.link === '/' }">
-                <a class="nav-link" aria-current="page" [href]="item.link">
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  [ngClass]="
+                    item.link === '/'
+                      ? 'text-primary fw-bold'
+                      : 'text-secondary'
+                  "
+                  aria-current="page"
+                  [href]="item.link">
                   {{ item.label | translate }}
                 </a>
                 <div
@@ -66,8 +77,24 @@
 
         <ul
           class="navbar-nav mr-auto flex-lg-row flex-column-reverse align-items-lg-center align-items-sm-stretch header__action">
+          <!-- Language Selection -->
+          <li>
+            @for (language of languages; track $index) {
+              <button
+                [ngClass]="
+                  language.value === translateService.getDefaultLang()
+                    ? 'active'
+                    : 'inactive'
+                "
+                class="btn header__select-language border-0"
+                (click)="onSelectLanguage(language.value)">
+                {{ language.label }}
+              </button>
+            }
+          </li>
+
           <!-- Theme Mode -->
-          <li class="m-2 header__theme-button border-top-md-gray">
+          <li class="mx-2 header__theme-button border-top-md-gray">
             <div class="text-center m-t-5" (click)="themeService.changeTheme()">
               @if (themeService.isDarkMode()) {
                 <i class="bi bi-sun"></i>
@@ -78,7 +105,7 @@
           </li>
 
           <!-- Collapse Search -->
-          <li class="m-2 nav-item d-none d-lg-block header-desktop__search">
+          <li class="mx-2 nav-item d-none d-lg-block header-desktop__search">
             <div class="header__search-button">
               <i class="bi bi-search" (click)="onClickSearchIcon()"></i>
             </div>
@@ -87,8 +114,7 @@
               class="header__search-input input-group bg-secondary mb-5 position-absolute top-100 start-0"
               [hidden]="!isSearchBarDisplayed()">
               <div class="input-group-prepend">
-                <span
-                  class="input-group-text border-0 bg-secondary">
+                <span class="input-group-text border-0 bg-secondary">
                   <i class="bi bi-search"></i>
                 </span>
               </div>
@@ -104,23 +130,8 @@
             </div>
           </li>
 
-          <!-- Language Selection -->
-          <li>
-            <select
-              class="nav-item m-2 form-select form-select-sm rounded-3 w-auto d-none d-lg-block"
-              aria-label="Language"
-              [(ngModel)]="selectedLanguage"
-              (ngModelChange)="onSelectLanguage($event)"
-              name="language">
-              @for (language of languages; track $index) {
-                <option [value]="language.value">
-                  {{ language.label | translate }}
-                </option>
-              }
-            </select>
-          </li>
           <!-- Download Latest LTS Version -->
-          <li class="nav-item m-2 header__download-button">
+          <li class="nav-item header__download-button mx-2">
             <button class="btn btn-primary border-0 w-md-100 rounded-3">
               {{ 'common.footer.downloadLatestLTSVersion' | translate }}
             </button>
