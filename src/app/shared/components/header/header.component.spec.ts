@@ -47,9 +47,6 @@ describe('HeaderComponent', () => {
     const cancelIcon = fixture.debugElement.query(
       By.css('.input-group-prepend.search__cancel-button')
     );
-    const searchInput = fixture.debugElement.query(
-      By.css('.header__search-input')
-    );
 
     // Click the cancel icon
     cancelIcon.triggerEventHandler('click', null);
