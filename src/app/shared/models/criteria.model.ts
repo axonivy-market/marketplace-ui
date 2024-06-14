@@ -5,4 +5,5 @@ export interface Criteria {
   search: string;
   sort: SortType | null;
   type: FilterType | null;
+  nextPageHref?: string;
 }

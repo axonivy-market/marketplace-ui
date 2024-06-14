@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   Component,
+  ElementRef,
   OnDestroy,
+  ViewChild,
   WritableSignal,
   inject,
   signal
@@ -18,6 +21,9 @@ import { Product } from '../../shared/models/product.model';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ProductFilterComponent } from './product-filter/product-filter.component';
 import { ProductService } from './product.service';
+import { ProductApiResponse } from '../../shared/models/apis/product-response.model';
+import { Link } from '../../shared/models/apis/link.model';
+import { Page } from '../../shared/models/apis/page.model';
 
 const SEARCH_DEBOUNCE_TIME = 500;
 
@@ -35,7 +41,7 @@ const SEARCH_DEBOUNCE_TIME = 500;
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })
-export class ProductComponent implements OnDestroy {
+export class ProductComponent implements AfterViewInit, OnDestroy {
   products: WritableSignal<Product[]> = signal([]);
   subscriptions: Subscription[] = [];
   searchTextChanged = new Subject<string>();
@@ -44,14 +50,17 @@ export class ProductComponent implements OnDestroy {
     type: FilterType.All_TYPES,
     sort: SortType.POPULARITY
   };
+  responseLink!: Link;
+  responsePage!: Page;
 
   productService = inject(ProductService);
   themeService = inject(ThemeService);
   translateService = inject(TranslateService);
   router = inject(Router);
+  @ViewChild('observer', { static: true }) observerElement!: ElementRef;
 
   constructor() {
-    this.loadAllProducts();
+    this.loadProductItems();
     this.subscriptions.push(
       this.searchTextChanged
         .pipe(debounceTime(SEARCH_DEBOUNCE_TIME))
@@ -60,19 +69,13 @@ export class ProductComponent implements OnDestroy {
             ...this.criteria,
             search: value
           };
-          this.loadAllProducts();
+          this.loadProductItems(true);
         })
     );
   }
 
-  loadAllProducts() {
-    this.subscriptions.push(
-      this.productService
-        .getProductsByCriteria(this.criteria)
-        .subscribe(products => {
-          this.products.update(() => products);
-        })
-    );
+  ngAfterViewInit(): void {
+    this.setupIntersectionObserver();
   }
 
   viewProductDetail(productKey: string, productType: string) {
@@ -86,21 +89,60 @@ export class ProductComponent implements OnDestroy {
   onFilterChange(filterType: FilterType) {
     this.criteria = {
       ...this.criteria,
+      nextPageHref: '',
       type: filterType
     };
-    this.loadAllProducts();
+    this.loadProductItems(true);
   }
 
   onSortChange(sortType: SortType) {
     this.criteria = {
       ...this.criteria,
+      nextPageHref: '',
       sort: sortType
     };
-    this.loadAllProducts();
+    this.loadProductItems(true);
   }
 
   onSearchChanged(searchString: string) {
     this.searchTextChanged.next(searchString);
+  }
+
+  loadProductItems(shouldCleanData = false) {
+    this.subscriptions.push(
+      this.productService.findProductsByCriteria(this.criteria).subscribe((response: ProductApiResponse) => {
+        const newProducts = response._embedded.products;
+        if (shouldCleanData) {
+          this.products.set(newProducts);
+        } else {
+          this.products.update(existingProducts => existingProducts.concat(newProducts));
+        }
+        this.responseLink = response._links;
+        this.responsePage = response.page;
+      })
+    );
+  }
+
+  setupIntersectionObserver() {
+    const options = { root: null, rootMargin: '0px', threshold: 0.1 };
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && this.hasMore()) {
+          this.criteria.nextPageHref = this.responseLink?.next?.href;
+          this.loadProductItems();
+        }
+      });
+    }, options);
+
+    observer.observe(this.observerElement.nativeElement);
+  }
+
+  hasMore() {
+    if (!this.responsePage || !this.responseLink) {
+      return false;
+    }
+    return this.responsePage.number < this.responsePage.totalPages
+      && this.responseLink?.next !== undefined;
   }
 
   ngOnDestroy(): void {
