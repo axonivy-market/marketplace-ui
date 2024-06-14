@@ -1,13 +1,24 @@
 .navbar {
-  gap: 77px;
   border-bottom: 0.5px solid var(--header-border-color);
   opacity: 0px;
 }
 
+.navbar-brand {
+  padding-top: 0.8rem;
+}
+
+.navbar-nav {
+  height: 59px;
+  padding-top: 0.8rem;
+}
+
+.navbar-nav--right {
+  padding: 0;
+}
+
 .logo__image {
-  width: 200px;
-  height: 3rem;
-  margin-top: 1rem;
+  width: 130.5px;
+  height: 20.08px;
   vertical-align: initial;
 }
 
@@ -21,7 +32,7 @@
 .active-line {
   position: relative;
   height: 2px;
-  top: 1.6rem;
+  top: 2rem;
   width: inherit;
   background-color: var(--ivy-active-color);
 }
@@ -55,10 +66,30 @@
   color: #757575;
 }
 
+.header-mobile__search {
+  height: 43px;
+}
+
+.search-input {
+  height: 43px;
+}
+
 @media all and (max-width: 992px) {
   .show,
   .min-height-100 {
     min-height: 85lvh;
+  }
+
+  .form-control {
+    height: 43px;
+  }
+
+  .navbar {
+    border: none;
+  }
+
+  .navbar-brand {
+    padding: 14.42px 0;
   }
 
   .nav-link {
@@ -76,6 +107,15 @@
     border-radius: 5px;
     opacity: 0px;
     background-color: var(--ivy-secondary-background);
+  }
+
+  .header__select-language {
+    padding: 0 10px;
+    margin: 12px 0;
+  }
+
+  .header__theme-button {
+    padding: 10px 0;
   }
 
   .border-top-md-gray {

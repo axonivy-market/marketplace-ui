@@ -42,4 +42,8 @@ export class HeaderComponent {
   onClickSearchIcon() {
     this.isSearchBarDisplayed.update(value => !value);
   }
+
+  onHideSearch() {
+    this.isSearchBarDisplayed.set(false);
+  }
 }

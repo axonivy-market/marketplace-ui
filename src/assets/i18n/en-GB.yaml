@@ -35,9 +35,11 @@ common:
   search:
     placeholder: Search a keyword
   nothingFound: Nothing found
+  header:
+    download: Download
   footer:
     newVersionsInfo: New version release available for Linux,<br /> Window and MacOS operating systems.
-    downloadLatestLTSVersion: Download
+    downloadLatestLTSVersion: Download V10.0.18
     downloadLatestDevVersion: Download V11.2.1
     ivyCompanyInfo: © 2023 Axon Ivy Inc
     privayPolicy: Privacy Policy
