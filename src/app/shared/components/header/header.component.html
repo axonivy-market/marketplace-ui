@@ -93,7 +93,9 @@
                     translateService.get('common.search.placeholder') | async
                   " />
 
-                <div class="input-group-prepend" (click)="onHideSearch()">
+                <div
+                  class="input-group-prepend search__cancel-button"
+                  (click)="onHideSearch()">
                   <span class="input-group-text h-100 border-0 bg-secondary">
                     <i class="bi bi-x-lg"></i>
                   </span>
