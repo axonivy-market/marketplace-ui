@@ -36,8 +36,6 @@ export class ProductDetailComponent {
         .getProductDetails(productKey, productType)
         .subscribe(productDetail => {
           this.productDetail.update(value => productDetail);
-          console.log('API return:');
-          console.log(this.productDetail);
         });
     }
   }
@@ -45,9 +43,9 @@ export class ProductDetailComponent {
   getTypeIcon() {
     switch (this.productDetail().type) {
       case FilterType.CONNECTORS:
-        return 'bi bi-puzzle';
+        return 'fa-solid fa-plug';
       case FilterType.SOLUTION:
-        return 'bi bi-star';
+        return 'fa fa-flask';
       case FilterType.UTILITIES:
         return 'bi bi-airplane-fill';
       default:

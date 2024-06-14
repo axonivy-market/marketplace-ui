@@ -1,275 +1,182 @@
-<div class="container mb-5">
-  <h1 class="display-2 mb-3 d-flex d-inline-block">
-    <img class="logo__image" [src]="productDetail().logoUrl" alt="" />
-    {{ productDetail().name }}
-  </h1>
-  <div class="row mb-4">
-    <div class="d-flex align-items-start justify-content-start col-md-6">
-      <div class="col-4 text-start d-lg-block">
-        <div class="product-data-title">
-          <span>Review</span>
+<div
+  class="d-flex flex-column justify-content-center align-items-start p-0"
+  style="gap: 96px">
+  <div
+    class="d-flex flex-column justify-content-center align-items-start p-0"
+    style="gap: 72px">
+    <div
+      class="d-flex flex-column justify-content-center align-items-start p-0"
+      style="gap: 72px">
+      <div
+        class="d-flex flex-column justify-content-between align-items-start p-0"
+        style="gap: 10px">
+        Back to home
+      </div>
+      <div
+        class="d-flex flex-row justify-content-between align-items-center p-0"
+        style="gap: 32px">
+        <div
+          class="d-flex flex-row align-items-center p-0"
+          style="gap: 20px; margin: 0 auto">
+          <div
+            class="d-flex flex-row justify-content-center align-items-center p-0"
+            style="gap: 10px">
+            <img style="width: 70px" [src]="productDetail().logoUrl" alt="" />
+          </div>
+          <div>
+            <h1 class="text-primary">{{ productDetail().name }}</h1>
+          </div>
         </div>
-        <div class="product-data-content">
-          <span>{{ productDetail().platformReview }}</span>
-        </div>
-        <div class="product-data-info">
-          <app-star-rating
-            [rating]="productDetail().platformReview!"></app-star-rating>
+        <div
+          class="d-flex flex-row align-items-center p-0"
+          style="gap: 10px; margin: 0 auto">
+          version
         </div>
       </div>
-      <div class="col-4 text-start d-lg-block">
-        <div>
-          <span class="product-data-title">Installations</span>
-        </div>
-        <div class="product-data-content">
-          <span>46</span>
-        </div>
-        <div class="product-data-info">
-          <span>Times</span>
-        </div>
+    </div>
+    <div class="d-flex flex-row align-items-start p-0" style="gap: 72px">
+      <div class="d-flex flex-column align-items-start p-0" style="gap: 10px">
+        <h4 class="text-secondary">Review</h4>
+        <h2 class="text-primary">{{ productDetail().platformReview }}</h2>
+        <app-star-rating
+          class="d-flex flex-row justify-content-center align-items-start p-0"
+          style="gap: 3.2px"
+          [rating]="productDetail().platformReview"></app-star-rating>
       </div>
-      <div class="col-4 text-start d-lg-block">
-        <div class="product-data-title">
-          <span>Type</span>
-        </div>
-        <div class="product-data-content w-md-100">
+      <div class="d-flex flex-column align-items-start p-0" style="gap: 10px">
+        <h4 class="text-secondary">Installations</h4>
+        <h2 class="text-primary">46</h2>
+        <h4 class="text-primary">Times</h4>
+      </div>
+      <div class="d-flex flex-column align-items-start p-0" style="gap: 10px">
+        <h4 class="text-secondary">Type</h4>
+        <h2>
           <i [className]="getTypeIcon()"></i>
-        </div>
-        <div class="product-data-info">
-          <span>{{ productDetail().type }}</span>
-        </div>
+        </h2>
+        <h4 class="text-primary">{{ productDetail().type }}</h4>
       </div>
     </div>
   </div>
-  <markdown class="markdown-content" [data]="productDetail().demo"></markdown>
-  <div class="row mt-2">
-    <div class="tab-group col-lg-7 col-md-7 col-sm-5">
-      <div class="d-none d-sm-block">
-        <ul class="nav nav-tabs mb-2 form-tabs" role="tablist">
-          <li class="nav-item active" role="presentation">
-            <h5>
-              <a
-                class="nav-link"
-                id="description-tab"
-                data-bs-toggle="tab"
-                href="#description"
-                role="tab"
-                aria-controls="description"
-                aria-selected="true">
-                Description
-              </a>
-            </h5>
-          </li>
-          <li class="nav-item active" role="presentation">
-            <h5>
-              <a
-                class="nav-link"
-                id="setup-tab"
-                data-bs-toggle="tab"
-                href="#setup"
-                role="tab"
-                aria-controls="setup"
-                aria-selected="false">
-                Setup
-              </a>
-            </h5>
-          </li>
-          <li class="nav-item active" role="presentation">
-            <h5>
-              <a
-                class="nav-link"
-                id="maven-tab"
-                data-bs-toggle="tab"
-                href="#maven"
-                role="tab"
-                aria-controls="maven"
-                aria-selected="false">
-                Maven
-              </a>
-            </h5>
-          </li>
-        </ul>
+  <div class="d-flex flex-row align-items-start p-0" style="gap: 64px">
+    <div
+      class="d-flex flex-column align-items-start p-0"
+      style="gap: 40px; width: 704px">
+      <div
+        class="d-flex flex-column justify-content-center align-items-start p-0"
+        style="gap: 1px">
+        <div
+          class="d-flex flex-row justify-content-center align-items-start p-0"
+          style="gap: 32px">
+          each tab names
+        </div>
       </div>
 
-      <div class="d-block d-sm-none">
-        <select class="form-select" id="nav_item">
-          <option value="0">Description</option>
-          <option value="1">Setup</option>
-          <option value="2">Maven</option>
-        </select>
-        <i
-          class="info-button bi bi-info-circle"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"></i>
-      </div>
-      <ul class="tab-content">
-        <li
-          class="tab-pane"
-          id="description"
-          role="tabpanel"
-          aria-labelledby="description-tab"></li>
-        <li
-          class="tab-pane"
-          id="setup"
-          role="tabpanel"
-          aria-labelledby="setup-tab">
-          {{ productDetail().name }}
-        </li>
-        <li
-          class="tab-pane"
-          id="maven"
-          role="tabpanel"
-          aria-labelledby="maven-tab">
-          {{ productDetail().name }}
-        </li>
-      </ul>
+      <div class="content"></div>
     </div>
-    <!-- <app-markdown></app-markdown> -->
-    <div class="col-1 d-lg-block d-none"></div>
-    <div class="product-info col-lg-3 col-md-3 mt-2" id="info">
-      <h4><span>Information</span></h4>
-      <div class="product-meta-info mt-3">
-        <span class="meta-type">Author/Support</span>
-        <span class="meta-data">{{ productDetail().vendor }}</span>
-      </div>
-      <div class="product-meta-info">
-        <span class="meta-type">Version</span>
-        <span class="meta-data">{{ productDetail().version }}</span>
-      </div>
 
-      <div class="product-meta-info">
-        <span class="meta-type">Compatibility</span>
-        <span class="meta-data">{{ productDetail().compatibility }}</span>
-      </div>
-
-      <div class="product-meta-info">
-        <span class="meta-type">Cost</span>
-        <span class="meta-data capitalize">{{ productDetail().cost }}</span>
-      </div>
-
-      <div class="product-meta-info">
-        <span class="meta-type">Language</span>
-        <span class="meta-data">{{ productDetail().language }}</span>
-      </div>
-
-      <div class="product-meta-info">
-        <span class="meta-type">Type</span>
-        <span class="meta-data capitalize">{{ productDetail().type }}</span>
-      </div>
-
-      <div class="product-meta-info">
-        <span class="meta-type">Industry</span>
-        <span class="meta-data capitalize">{{ productDetail().industry }}</span>
-      </div>
-
-      <div class="product-meta-info">
-        <span class="meta-type">Tags</span>
-        <span class="meta-data">
-          {{ productDetail().tags ? productDetail().tags!.join(', ') : '' }}
-        </span>
-      </div>
-
-      <div class="product-meta-info">
-        <span class="meta-type">Source</span>
-        <span class="meta-data">
-          <a href="{{ productDetail().sourceUrl }}">github.com</a>
-        </span>
-      </div>
-
-      <div class="product-meta-info">
-        <span class="meta-type">Status</span>
-        <span class="meta-data">
-          <!-- <img src="{{ product.statusBadgeUrl }}" /> -->
-        </span>
-      </div>
-
-      <div class="product-meta-info">
-        <span class="meta-type">More Information</span>
-        <span class="meta-data">
+    <div
+      class="d-flex flex-column align-items-start"
+      style="padding: 15px; gap: 16px; flex-grow: 1">
+      <h3 class="text-primary">Information</h3>
+      <div class="d-flex flex-column align-items-start p-0" style="gap: 8px">
+        <div
+          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
+          style="gap: 16px">
+          <h5 class="text-secondary" style="margin: 0 auto">Author/Support</h5>
+          <h5 class="text-primary" style="margin: 0 auto">
+            {{ productDetail().vendor }}
+          </h5>
+        </div>
+        <hr />
+        <div
+          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
+          style="gap: 16px">
+          <h5 class="text-secondary" style="margin: 0 auto">Version</h5>
+          <h5 class="text-primary" style="margin: 0 auto">
+            {{ productDetail().newestReleaseVersion }}
+          </h5>
+        </div>
+        <div
+          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
+          style="gap: 16px">
+          <h5 class="text-secondary" style="margin: 0 auto">Compability</h5>
+          <h5 class="text-primary" style="margin: 0 auto">
+            {{ productDetail().compatibility }}
+          </h5>
+        </div>
+        <div
+          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
+          style="gap: 16px">
+          <h5 class="text-secondary" style="margin: 0 auto">Cost</h5>
+          <h5 class="text-primary" style="margin: 0 auto">
+            {{ productDetail().cost }}
+          </h5>
+        </div>
+        <div
+          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
+          style="gap: 16px">
+          <h5 class="text-secondary" style="margin: 0 auto">Language</h5>
+          <h5 class="text-primary" style="margin: 0 auto">
+            {{ productDetail().language }}
+          </h5>
+        </div>
+        <div
+          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
+          style="gap: 16px">
+          <h5 class="text-secondary" style="margin: 0 auto">Type</h5>
+          <h5 class="text-primary" style="margin: 0 auto">
+            {{ productDetail().type }}
+          </h5>
+        </div>
+        <div
+          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
+          style="gap: 16px">
+          <h5 class="text-secondary" style="margin: 0 auto">Industry</h5>
+          <h5 class="text-primary" style="margin: 0 auto">
+            {{ productDetail().industry }}
+          </h5>
+        </div>
+        <div
+          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
+          style="gap: 16px">
+          <h5 class="text-secondary" style="margin: 0 auto">Tag</h5>
+          <h5 class="text-primary" style="margin: 0 auto">
+            {{ productDetail().tags ? productDetail().tags!.join(', ') : '' }}
+          </h5>
+        </div>
+        <div
+          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
+          style="gap: 16px">
+          <h5 class="text-secondary" style="margin: 0 auto">Source</h5>
           <a
+            class="text-primary"
+            style="margin: 0 auto"
+            href="{{ productDetail().sourceUrl }}">
+            github.com
+          </a>
+        </div>
+        <div
+          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
+          style="gap: 16px">
+          <h5 class="text-secondary" style="margin: 0 auto">Status</h5>
+          <img
+            style="height: 20.36px; border-radius: 2px"
+            src="{{ productDetail().statusBadgeUrl }}" />
+        </div>
+        <div
+          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
+          style="gap: 16px">
+          <h5 class="text-secondary" style="margin: 0 auto">
+            More Information
+          </h5>
+          <a
+            class="text-primary"
+            style="margin: 0 auto"
             href="https://www.axonivy.com/marketplace/contact/?market_solutions= + {{
               productDetail().key
             }}">
             Contact us
           </a>
-        </span>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-sm">
-    <div class="modal-content">
-      <div class="modal-body" data-bs-target="#info">
-        <h4><span>Information</span></h4>
-        <div class="product-meta-info">
-          <span class="meta-type">Author/Support</span>
-          <span class="meta-data">{{ productDetail().vendor }}</span>
-        </div>
-        <div class="product-meta-info">
-          <span class="meta-type">Version</span>
-          <span class="meta-data">{{ productDetail().version }}</span>
-        </div>
-
-        <div class="product-meta-info">
-          <span class="meta-type">Compatibility</span>
-          <span class="meta-data">{{ productDetail().compatibility }}</span>
-        </div>
-
-        <div class="product-meta-info">
-          <span class="meta-type">Cost</span>
-          <span class="meta-data capitalize">{{ productDetail().cost }}</span>
-        </div>
-
-        <div class="product-meta-info">
-          <span class="meta-type">Language</span>
-          <span class="meta-data">{{ productDetail().language }}</span>
-        </div>
-
-        <div class="product-meta-info">
-          <span class="meta-type">Type</span>
-          <span class="meta-data capitalize">{{ productDetail().type }}</span>
-        </div>
-
-        <div class="product-meta-info">
-          <span class="meta-type">Industry</span>
-          <span class="meta-data capitalize">
-            {{ productDetail().industry }}
-          </span>
-        </div>
-
-        <div class="product-meta-info">
-          <span class="meta-type">Tags</span>
-          <span class="meta-data">
-            {{ productDetail().tags ? productDetail().tags!.join(', ') : '' }}
-          </span>
-        </div>
-
-        <div class="product-meta-info">
-          <span class="meta-type">Source</span>
-          <span class="meta-data">
-            <a href="{{ productDetail().sourceUrl }}">github.com</a>
-          </span>
-        </div>
-
-        <div class="product-meta-info">
-          <span class="meta-type">Status</span>
-          <span class="meta-data">
-            <!-- <img src="{{ product.statusBadgeUrl }}" /> -->
-          </span>
-        </div>
-
-        <div class="product-meta-info">
-          <span class="meta-type">More Information</span>
-          <span class="meta-data">
-            <a
-              href="https://www.axonivy.com/marketplace/contact/?market_solutions= + {{
-                productDetail().key
-              }}">
-              Contact us
-            </a>
-          </span>
         </div>
       </div>
     </div>
