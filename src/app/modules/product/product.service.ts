@@ -27,6 +27,7 @@ export class ProductService {
     return this.httpClient.get<ProductApiResponse>(requestURL, { params: requestParams });
   }
 
+  // TODO MARP-358
   getProductById(productId: string): Observable<Product> {
     const products = MOCK_PRODUCTS._embedded.products;
     const product = products.find(p => p.id === productId);
