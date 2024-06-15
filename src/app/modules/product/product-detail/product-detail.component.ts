@@ -2,7 +2,6 @@ import { Component, WritableSignal, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../../shared/models/product.model';
 import { ProductService } from '../product.service';
-import { ProductLogoPipe } from '../../../shared/pipes/logo.pipe';
 import { StarRatingComponent } from '../star-rating/star-rating.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FilterType } from '../../../shared/enums/filter-type.enum';
@@ -12,12 +11,7 @@ import { ProductDetail } from '../../../shared/models/product-detail.model';
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [
-    ProductLogoPipe,
-    StarRatingComponent,
-    TranslateModule,
-    MarkdownModule
-  ],
+  imports: [StarRatingComponent, TranslateModule, MarkdownModule],
   providers: [ProductService, MarkdownService],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'

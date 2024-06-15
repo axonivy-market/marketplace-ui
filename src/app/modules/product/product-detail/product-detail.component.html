@@ -41,7 +41,7 @@
         <app-star-rating
           class="d-flex flex-row justify-content-center align-items-start p-0"
           style="gap: 3.2px"
-          [rating]="productDetail().platformReview"></app-star-rating>
+          [rating]="productDetail().platformReview!"></app-star-rating>
       </div>
       <div class="d-flex flex-column align-items-start p-0" style="gap: 10px">
         <h4 class="text-secondary">Installations</h4>
@@ -57,7 +57,9 @@
       </div>
     </div>
   </div>
-  <div class="d-flex flex-row align-items-start p-0" style="gap: 64px">
+  <div
+    class="d-flex flex-row align-items-start p-0"
+    style="gap: 64px; width: 100%">
     <div
       class="d-flex flex-column align-items-start p-0"
       style="gap: 40px; width: 704px">
@@ -65,9 +67,113 @@
         class="d-flex flex-column justify-content-center align-items-start p-0"
         style="gap: 1px">
         <div
-          class="d-flex flex-row justify-content-center align-items-start p-0"
+          class="tab-group d-flex flex-column justify-content-center align-items-start p-0"
           style="gap: 32px">
-          each tab names
+          <ul class="nav nav-tabs form-tabs" role="tablist">
+            <li
+              class="nav-item active d-flex flex-row justify-content-center align-items-start"
+              style="padding: 15px; gap: 10px; border: 0 0 1 0"
+              role="presentation">
+              <a
+                class="nav-link"
+                id="description-tab"
+                data-bs-toggle="tab"
+                href="#description"
+                role="tab">
+                Description
+              </a>
+            </li>
+            <li
+              class="nav-item active d-flex flex-row justify-content-center align-items-start"
+              style="padding: 15px; gap: 10px"
+              role="presentation">
+              <a
+                class="nav-link"
+                id="setup-tab"
+                data-bs-toggle="tab"
+                href="#setup"
+                role="tab"
+                aria-controls="setup"
+                aria-selected="false">
+                Installation guide
+              </a>
+            </li>
+            <li
+              class="nav-item active d-flex flex-row justify-content-center align-items-start"
+              style="padding: 15px; gap: 10px"
+              role="presentation">
+              <a
+                class="nav-link"
+                id="demo-tab"
+                data-bs-toggle="tab"
+                href="#demo"
+                role="tab"
+                aria-controls="demo"
+                aria-selected="false">
+                Demo
+              </a>
+            </li>
+            <li
+              class="nav-item active d-flex flex-row justify-content-center align-items-start"
+              style="padding: 15px; gap: 10px"
+              role="presentation">
+              <a
+                class="nav-link"
+                id="dependency-tab"
+                data-bs-toggle="tab"
+                href="#dependency"
+                role="tab"
+                aria-controls="dependency"
+                aria-selected="true">
+                Maven
+              </a>
+            </li>
+          </ul>
+
+          <ul class="tab-content">
+            @if (productDetail().description) {
+              <li
+                class="tab-pane show active"
+                id="description"
+                role="tabpanel"
+                aria-labelledby="description-tab">
+                <markdown
+                  class="readme-content col-lg-7 col-md-7 col-sm-5"
+                  [data]="productDetail().description"></markdown>
+              </li>
+            }
+            @if (productDetail().demo) {
+              <li
+                class="tab-pane"
+                id="demo"
+                role="tabpanel"
+                aria-labelledby="demo-tab">
+                <markdown
+                  class="readme-content col-lg-7 col-md-7 col-sm-5"
+                  [data]="productDetail().demo"></markdown>
+              </li>
+            }
+            @if (productDetail().setup) {
+              <li
+                class="tab-pane"
+                id="setup"
+                role="tabpanel"
+                aria-labelledby="setup-tab">
+                <markdown
+                  class="readme-content col-lg-7 col-md-7 col-sm-5"
+                  [data]="productDetail().setup"></markdown>
+              </li>
+            }
+
+            <li
+              class="tab-pane"
+              id="dependency"
+              role="tabpanel"
+              aria-labelledby="contact-tab">
+              You can consume it as maven artifact in your
+              <i>pom.xml</i>
+            </li>
+          </ul>
         </div>
       </div>
 
@@ -78,105 +184,82 @@
       class="d-flex flex-column align-items-start"
       style="padding: 15px; gap: 16px; flex-grow: 1">
       <h3 class="text-primary">Information</h3>
-      <div class="d-flex flex-column align-items-start p-0" style="gap: 8px">
-        <div
-          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
-          style="gap: 16px">
-          <h5 class="text-secondary" style="margin: 0 auto">Author/Support</h5>
-          <h5 class="text-primary" style="margin: 0 auto">
-            {{ productDetail().vendor }}
-          </h5>
+      <div class="d-flex flex-column p-0" style="gap: 8px; width: 100%">
+        <div class="d-flex flex-row justify-content-between p-0">
+          <span class="text-secondary">Author/Support</span>
+          <span class="text-primary">Axon Ivy</span>
         </div>
         <hr />
-        <div
-          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
-          style="gap: 16px">
-          <h5 class="text-secondary" style="margin: 0 auto">Version</h5>
-          <h5 class="text-primary" style="margin: 0 auto">
+        <div class="d-flex flex-row justify-content-between p-0">
+          <span class="text-secondary">Version</span>
+          <span class="text-primary">
             {{ productDetail().newestReleaseVersion }}
-          </h5>
+          </span>
         </div>
-        <div
-          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
-          style="gap: 16px">
-          <h5 class="text-secondary" style="margin: 0 auto">Compability</h5>
-          <h5 class="text-primary" style="margin: 0 auto">
-            {{ productDetail().compatibility }}
-          </h5>
+        <hr />
+        <div class="d-flex flex-row justify-content-between p-0">
+          <span class="text-secondary">Compability</span>
+          <span class="text-primary">{{ productDetail().compatibility }}</span>
         </div>
-        <div
-          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
-          style="gap: 16px">
-          <h5 class="text-secondary" style="margin: 0 auto">Cost</h5>
-          <h5 class="text-primary" style="margin: 0 auto">
-            {{ productDetail().cost }}
-          </h5>
+        <hr />
+        <div class="d-flex flex-row justify-content-between p-0">
+          <span class="text-secondary">Cost</span>
+          <span class="text-primary">{{ productDetail().cost }}</span>
         </div>
-        <div
-          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
-          style="gap: 16px">
-          <h5 class="text-secondary" style="margin: 0 auto">Language</h5>
-          <h5 class="text-primary" style="margin: 0 auto">
-            {{ productDetail().language }}
-          </h5>
+        <hr />
+        <div class="d-flex flex-row justify-content-between p-0">
+          <span class="text-secondary">Language</span>
+          <span class="text-primary">{{ productDetail().language }}</span>
         </div>
-        <div
-          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
-          style="gap: 16px">
-          <h5 class="text-secondary" style="margin: 0 auto">Type</h5>
-          <h5 class="text-primary" style="margin: 0 auto">
-            {{ productDetail().type }}
-          </h5>
+        <hr />
+        <div class="d-flex flex-row justify-content-between p-0">
+          <span class="text-secondary">Type</span>
+          <span class="text-primary">{{ productDetail().type }}</span>
         </div>
-        <div
-          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
-          style="gap: 16px">
-          <h5 class="text-secondary" style="margin: 0 auto">Industry</h5>
-          <h5 class="text-primary" style="margin: 0 auto">
-            {{ productDetail().industry }}
-          </h5>
+        <hr />
+        <div class="d-flex flex-row justify-content-between p-0">
+          <span class="text-secondary">Industry</span>
+          <span class="text-primary">{{ productDetail().industry }}</span>
         </div>
-        <div
-          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
-          style="gap: 16px">
-          <h5 class="text-secondary" style="margin: 0 auto">Tag</h5>
-          <h5 class="text-primary" style="margin: 0 auto">
+        <hr />
+        <div class="d-flex flex-row justify-content-between p-0">
+          <span class="text-secondary">Tag</span>
+          <span class="text-primary">
             {{ productDetail().tags ? productDetail().tags!.join(', ') : '' }}
-          </h5>
+          </span>
         </div>
-        <div
-          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
-          style="gap: 16px">
-          <h5 class="text-secondary" style="margin: 0 auto">Source</h5>
-          <a
-            class="text-primary"
-            style="margin: 0 auto"
-            href="{{ productDetail().sourceUrl }}">
-            github.com
-          </a>
+        <hr />
+        <div class="d-flex flex-row justify-content-between p-0">
+          <span class="text-secondary">Source</span>
+          <span>
+            <a
+              class="text-primary"
+              style="margin: 0 auto"
+              href="{{ productDetail().sourceUrl }}">
+              github.com
+            </a>
+          </span>
         </div>
-        <div
-          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
-          style="gap: 16px">
-          <h5 class="text-secondary" style="margin: 0 auto">Status</h5>
+        <hr />
+        <div class="d-flex flex-row justify-content-between p-0">
+          <span class="text-secondary">Status</span>
           <img
             style="height: 20.36px; border-radius: 2px"
             src="{{ productDetail().statusBadgeUrl }}" />
         </div>
-        <div
-          class="d-flex flex-row justify-content-between align-items-end justify-content-end p-0"
-          style="gap: 16px">
-          <h5 class="text-secondary" style="margin: 0 auto">
-            More Information
-          </h5>
-          <a
-            class="text-primary"
-            style="margin: 0 auto"
-            href="https://www.axonivy.com/marketplace/contact/?market_solutions= + {{
-              productDetail().key
-            }}">
-            Contact us
-          </a>
+        <hr />
+        <div class="d-flex flex-row justify-content-between p-0">
+          <span class="text-secondary">More Information</span>
+          <span>
+            <a
+              class="text-primary"
+              style="margin: 0 auto"
+              href="https://www.axonivy.com/marketplace/contact/?market_solutions= + {{
+                productDetail().id
+              }}">
+              Contact us
+            </a>
+          </span>
         </div>
       </div>
     </div>

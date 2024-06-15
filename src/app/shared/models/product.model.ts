@@ -6,27 +6,16 @@ export interface Product {
   name: string;
   shortDescription: string;
   type: string;
-<<<<<<< HEAD
-=======
   logoUrl: string;
-  cost: string;
->>>>>>> origin/feature/MARP-394-MP-API-to-fetch-all-artifacts-and-search
-  platformReview: string;
-  // vendorImage: string;
   listed: boolean;
   tags: string[];
+  validate: boolean;
   versionDisplay: string;
   installMatcher: string;
-<<<<<<< HEAD
-  logoUrl: string;
-  key: string;
-=======
   mavenArtifacts: MavenArtifact[];
-  contactUs: boolean;
   _links?: {
     self: {
       href: string;
     };
   };
->>>>>>> origin/feature/MARP-394-MP-API-to-fetch-all-artifacts-and-search
 }

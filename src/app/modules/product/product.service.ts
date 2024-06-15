@@ -11,7 +11,6 @@ import { ProductDetail } from '../../shared/models/product-detail.model';
 const PRODUCT_API_URL = 'api/product';
 @Injectable()
 export class ProductService {
-
   httpClient = inject(HttpClient);
 
   findProductsByCriteria(criteria: Criteria): Observable<ProductApiResponse> {
@@ -25,15 +24,17 @@ export class ProductService {
         .set(RequestParam.SORT, `${criteria.sort}`)
         .set(RequestParam.KEYWORD, `${criteria.search}`);
     }
-    return this.httpClient.get<ProductApiResponse>(requestURL, { params: requestParams });
+    return this.httpClient.get<ProductApiResponse>(requestURL, {
+      params: requestParams
+    });
   }
 
   getProductDetails(
-    productKey: string,
+    productId: string,
     productType: string
   ): Observable<ProductDetail> {
     return this.httpClient.get<ProductDetail>(
-      `api/product-details/${productKey}?type=${productType}`
+      `api/product-details/${productId}?type=${productType}`
     );
   }
 }

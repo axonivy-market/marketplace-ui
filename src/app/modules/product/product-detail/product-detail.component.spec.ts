@@ -8,9 +8,9 @@ import { Product } from '../../../shared/models/product.model';
 
 const products = MOCK_PRODUCTS._embedded.products as Product[];
 
-// describe('ProductDetailComponent', () => {
-//   let component: ProductDetailComponent;
-//   let fixture: ComponentFixture<ProductDetailComponent>;
+describe('ProductDetailComponent', () => {
+  let component: ProductDetailComponent;
+  let fixture: ComponentFixture<ProductDetailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -37,11 +37,11 @@ const products = MOCK_PRODUCTS._embedded.products as Product[];
       .compileComponents();
   });
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(ProductDetailComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ProductDetailComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
   it('should create', () => {
     expect(component.product.name).toEqual(products[0].name);

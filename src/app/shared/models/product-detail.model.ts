@@ -14,4 +14,5 @@ export interface ProductDetail extends Product {
   description?: string;
   setup?: string;
   demo?: string;
+  platformReview?: string;
 }

@@ -78,8 +78,8 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
     this.setupIntersectionObserver();
   }
 
-  viewProductDetail(productKey: string, productType: string) {
-    this.router.navigate(['', productKey], {
+  viewProductDetail(productId: string, productType: string) {
+    this.router.navigate(['', productId], {
       queryParams: {
         type: productType
       }
@@ -110,16 +110,20 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
 
   loadProductItems(shouldCleanData = false) {
     this.subscriptions.push(
-      this.productService.findProductsByCriteria(this.criteria).subscribe((response: ProductApiResponse) => {
-        const newProducts = response._embedded.products;
-        if (shouldCleanData) {
-          this.products.set(newProducts);
-        } else {
-          this.products.update(existingProducts => existingProducts.concat(newProducts));
-        }
-        this.responseLink = response._links;
-        this.responsePage = response.page;
-      })
+      this.productService
+        .findProductsByCriteria(this.criteria)
+        .subscribe((response: ProductApiResponse) => {
+          const newProducts = response._embedded.products;
+          if (shouldCleanData) {
+            this.products.set(newProducts);
+          } else {
+            this.products.update(existingProducts =>
+              existingProducts.concat(newProducts)
+            );
+          }
+          this.responseLink = response._links;
+          this.responsePage = response.page;
+        })
     );
   }
 
@@ -141,8 +145,10 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
     if (!this.responsePage || !this.responseLink) {
       return false;
     }
-    return this.responsePage.number < this.responsePage.totalPages
-      && this.responseLink?.next !== undefined;
+    return (
+      this.responsePage.number < this.responsePage.totalPages &&
+      this.responseLink?.next !== undefined
+    );
   }
 
   ngOnDestroy(): void {
