@@ -1,0 +1,55 @@
+.search-icon {
+  width: 22px;
+  height: 22px;
+  margin: 0 10px 4px 0;
+}
+
+.navbar-nav {
+  height: 59px;
+  padding-top: 0.8rem;
+}
+
+.navbar-nav--right {
+  padding: 0;
+}
+
+.header__theme {
+  padding-top: 0.55rem;
+}
+
+.input-group {
+  border-radius: 10px;
+}
+
+.header__search-input {
+  height: 37px;
+}
+
+.header-desktop__search {
+  height: 22px;
+  width: 22px;
+}
+
+.header__download-button {
+  height: 35px;
+  border-radius: 7px;
+}
+
+.search-input {
+  height: 43px;
+}
+
+@media all and (max-width: 992px) {
+  .header__theme-button {
+    padding: 10px 0;
+  }
+
+  .header__button {
+    padding: 10px 0;
+    margin: 20px 0 0 0;
+  }
+
+  .border-top-md-gray {
+    border-top: 1px solid var(--header-border-color);
+  }
+}

@@ -1,0 +1,12 @@
+@for (language of languages; track $index) {
+  <span
+    [ngClass]="
+      language.value === translateService.getDefaultLang()
+        ? 'active'
+        : 'inactive'
+    "
+    class="language-item border-0"
+    (click)="onSelectLanguage(language.value)">
+    {{ language.label }}
+  </span>
+}
