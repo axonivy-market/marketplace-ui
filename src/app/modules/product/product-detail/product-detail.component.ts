@@ -1,4 +1,11 @@
-import { Component, WritableSignal, inject, signal } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  WritableSignal,
+  inject,
+  signal
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../../shared/models/product.model';
 import { ProductService } from '../product.service';
@@ -7,6 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FilterType } from '../../../shared/enums/filter-type.enum';
 import { MarkdownModule, MarkdownService } from 'ngx-markdown';
 import { ProductDetail } from '../../../shared/models/product-detail.model';
+import { Readme } from '../../../shared/models/readme.model';
 
 @Component({
   selector: 'app-product-detail',
@@ -18,7 +26,8 @@ import { ProductDetail } from '../../../shared/models/product-detail.model';
 })
 export class ProductDetailComponent {
   productDetail: WritableSignal<ProductDetail> = signal({} as ProductDetail);
-
+  readme: WritableSignal<Readme> = signal({} as Readme);
+  @Output() versionChanged = new EventEmitter<any>();
   route = inject(ActivatedRoute);
   productService = inject(ProductService);
 
@@ -32,6 +41,19 @@ export class ProductDetailComponent {
           this.productDetail.update(value => productDetail);
         });
     }
+  }
+
+  onVersionChange(selectedVersion: string): void {
+    const productId = this.route.snapshot.params['id'];
+    this.productService
+      .getReadmeFile(productId, selectedVersion)
+      .subscribe(readme => {
+        this.versionChanged.emit({
+          description: readme.description,
+          demo: readme.demo,
+          setup: readme.setup
+        });
+      });
   }
 
   getTypeIcon() {

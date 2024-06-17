@@ -11,8 +11,4 @@ export interface ProductDetail extends Product {
   industry?: string;
   compatibility?: string;
   contactUs?: string;
-  description?: string;
-  setup?: string;
-  demo?: string;
-  platformReview?: string;
 }

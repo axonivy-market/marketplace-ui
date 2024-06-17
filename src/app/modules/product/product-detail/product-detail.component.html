@@ -131,7 +131,7 @@
           </ul>
 
           <ul class="tab-content">
-            @if (productDetail().description) {
+            @if (readme().description) {
               <li
                 class="tab-pane show active"
                 id="description"
@@ -139,10 +139,10 @@
                 aria-labelledby="description-tab">
                 <markdown
                   class="readme-content col-lg-7 col-md-7 col-sm-5"
-                  [data]="productDetail().description"></markdown>
+                  [data]="readme().description"></markdown>
               </li>
             }
-            @if (productDetail().demo) {
+            @if (readme().demo) {
               <li
                 class="tab-pane"
                 id="demo"
@@ -150,10 +150,10 @@
                 aria-labelledby="demo-tab">
                 <markdown
                   class="readme-content col-lg-7 col-md-7 col-sm-5"
-                  [data]="productDetail().demo"></markdown>
+                  [data]="readme().demo"></markdown>
               </li>
             }
-            @if (productDetail().setup) {
+            @if (readme().setup) {
               <li
                 class="tab-pane"
                 id="setup"
@@ -161,7 +161,7 @@
                 aria-labelledby="setup-tab">
                 <markdown
                   class="readme-content col-lg-7 col-md-7 col-sm-5"
-                  [data]="productDetail().setup"></markdown>
+                  [data]="readme().setup"></markdown>
               </li>
             }
 

@@ -8,6 +8,7 @@ export interface Product {
   type: string;
   logoUrl: string;
   listed: boolean;
+  platformReview: string;
   tags: string[];
   validate: boolean;
   versionDisplay: string;

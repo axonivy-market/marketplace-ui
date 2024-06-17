@@ -7,6 +7,7 @@ import { Product } from '../../shared/models/product.model';
 import { RequestParam } from '../../shared/enums/request-param';
 import { ProductApiResponse } from '../../shared/models/apis/product-response.model';
 import { ProductDetail } from '../../shared/models/product-detail.model';
+import { Readme } from '../../shared/models/readme.model';
 
 const PRODUCT_API_URL = 'api/product';
 @Injectable()
@@ -35,6 +36,12 @@ export class ProductService {
   ): Observable<ProductDetail> {
     return this.httpClient.get<ProductDetail>(
       `api/product-details/${productId}?type=${productType}`
+    );
+  }
+
+  getReadmeFile(productId: string, tag: string): Observable<Readme> {
+    return this.httpClient.get<Readme>(
+      `api/product-details/${productId}?tag=${tag}`
     );
   }
 }
