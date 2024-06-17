@@ -1,9 +1,10 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { MOCK_PRODUCTS } from '../../shared/mocks/mock-data';
 import { Criteria } from '../../shared/models/criteria.model';
 import { Product } from '../../shared/models/product.model';
+import { VersionData } from '../../shared/models/vesion-artifact.model';
 import { RequestParam } from '../../shared/enums/request-param';
 import { ProductApiResponse } from '../../shared/models/apis/product-response.model';
 import { ProductDetail } from '../../shared/models/product-detail.model';
@@ -43,5 +44,38 @@ export class ProductService {
     return this.httpClient.get<Readme>(
       `api/product-details/${productId}?tag=${tag}`
     );
+  }
+
+  sendRequestToProductDetailVersionAPI(
+    productId: string,
+    showDevVersion: boolean,
+    designerVersion: string
+  ) {
+    const params = new HttpParams()
+      .append('designerVersion', designerVersion)
+      .append('showDevVersion', showDevVersion);
+
+    const headers = new HttpHeaders();
+    let url = 'api/product-details/' + productId + '/versions';
+    return firstValueFrom(
+      this.httpClient.get(url, { headers: headers, params: params })
+    )
+      .then((response: any) => {
+        return response;
+      })
+      .catch()
+      .finally();
+  }
+
+  sendRequestToProductDetailVersionAPITest(
+    productId: string,
+    showDevVersion: boolean,
+    designerVersion: string
+  ): Observable<VersionData> {
+    let url = 'api/product-details/' + productId + '/versions';
+    const params = new HttpParams()
+      .append('designerVersion', designerVersion)
+      .append('showDevVersion', showDevVersion);
+    return this.httpClient.get<VersionData>(url, { params: params });
   }
 }
