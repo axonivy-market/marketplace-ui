@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { FilterType } from '../../shared/enums/filter-type.enum';
@@ -12,7 +12,7 @@ export class ProductService {
   httpClient = inject(HttpClient);
 
   getProductById(productId: string): Observable<Product> {
-    const product = MOCK_PRODUCTS.find(p => p.id === productId);
+    const product = MOCK_PRODUCTS.find((p) => p.id === productId);
     if (product) {
       return of(product);
     }
@@ -20,24 +20,18 @@ export class ProductService {
   }
 
   getProductsByCriteria(criteria: Criteria): Observable<Product[]> {
-    // let products = MOCK_PRODUCTS;
-    // products = this.getProductByNameOrDescription(products, criteria.search);
+    let products = MOCK_PRODUCTS;
+    products = this.getProductByNameOrDescription(products, criteria.search);
 
-    // if (criteria.type) {
-    //   products = this.getProductByType(products, criteria.type);
-    // }
+    if (criteria.type) {
+      products = this.getProductByType(products, criteria.type);
+    }
 
-    // if (criteria.sort) {
-    //   products = this.getProductsWithSort(products, criteria.sort);
-    // }
+    if (criteria.sort) {
+      products = this.getProductsWithSort(products, criteria.sort);
+    }
 
-    // return of(products);
-
-    let params = new HttpParams();
-    params.set('type', '');
-    return this.httpClient.get<Product[]>('api/product', {
-      params: { type: 'all' }
-    });
+    return of(products);
   }
 
   private getProductByNameOrDescription(
@@ -49,7 +43,7 @@ export class ProductService {
     }
 
     return products.filter(
-      product =>
+      (product) =>
         product.name.toLowerCase().includes(searchText) ||
         product.description.toLocaleLowerCase().includes(searchText)
     );
@@ -62,7 +56,7 @@ export class ProductService {
     if (productType === '' || productType === FilterType.All_TYPES) {
       return products;
     }
-    return products.filter(product => product.type === productType);
+    return products.filter((product) => product.type === productType);
   }
 
   private getProductsWithSort(products: Product[], sortType: SortType) {
