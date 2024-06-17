@@ -9,11 +9,9 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../../shared/models/product.model';
 import { ProductService } from '../product.service';
-import { ProductVersionActionComponent } from './product-version-action/product-version-action.component';
 import { StarRatingComponent } from '../star-rating/star-rating.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FilterType } from '../../../shared/enums/filter-type.enum';
-
 import { MarkdownModule, MarkdownService } from 'ngx-markdown';
 import { ProductDetail } from '../../../shared/models/product-detail.model';
 import { Readme } from '../../../shared/models/readme.model';
@@ -21,12 +19,7 @@ import { Readme } from '../../../shared/models/readme.model';
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [
-    StarRatingComponent,
-    TranslateModule,
-    MarkdownModule,
-    ProductVersionActionComponent
-  ],
+  imports: [StarRatingComponent, TranslateModule, MarkdownModule],
   providers: [ProductService, MarkdownService],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'

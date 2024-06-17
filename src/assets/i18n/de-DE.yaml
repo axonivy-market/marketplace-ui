@@ -42,14 +42,3 @@ common:
     ivyCompanyInfo: © 2023 Axon Ivy Inc
     privayPolicy: Datenschutzrichtlinie
     termsOfService: Nutzungsbedingungen
-  product:
-    detail:
-      install:
-        buttonLabel: TODO Install Now
-      download:
-        buttonLabel: TODO Download
-        artifactSelector:
-          label: TODO Choose Artifact
-        versionSelector:
-          label: TODO Choose target platform
-        hideDevVersions: TODO Hide development versions
