@@ -31,25 +31,31 @@ export class ProductVersionActionComponent {
   selectedVersion: string = 'portal';
   productService = inject(ProductService);
 
-  onShowDevVersion() {
+  onShowDevVersion(event: Event) {
+    event.preventDefault();
     this.isDevVersionsDisplayed.set(this.isDevVersionsDisplayed());
+    this.getVersionWithArtifact();
   }
 
   onShowVersionAndArtifact() {
     console.log('asd');
     this.isDropDownDisplayed.set(!this.isDropDownDisplayed());
-    this.productService
-      .sendRequestToProductDetailVersionAPITest(this.productId, this.isDevVersionsDisplayed(), this.designerVersion)
-      .subscribe((data: VersionData) => {
-        console.log(data);
+    this.getVersionWithArtifact();
+  }
 
-        this.versions = Object.keys(data);
-        if (this.versions.length > 0) {
-          this.selectedVersion = this.versions[0];
-          this.artifacts = data[this.selectedVersion];
-          this.selectedArtifact = this.artifacts[0];
-        }
-      });
+  getVersionWithArtifact() {
+    this.productService
+    .sendRequestToProductDetailVersionAPITest(this.productId, this.isDevVersionsDisplayed(), this.designerVersion)
+    .subscribe((data: VersionData) => {
+      console.log(data);
+
+      this.versions = Object.keys(data);
+      if (this.versions.length > 0) {
+        this.selectedVersion = this.versions[0];
+        this.artifacts = data[this.selectedVersion];
+        this.selectedArtifact = this.artifacts[0];
+      }
+    });
   }
 
   downloadArifact() {
