@@ -145,10 +145,6 @@ p {
     background-color: #{$white} !important;
   }
 
-  .border-light {
-    border-color: #{$white} !important;
-  }
-
   .btn {
     border-radius: 0.5rem;
   }
@@ -188,7 +184,7 @@ p {
   }
 
   .border-light {
-    border-color: #{$white};
+    border-color: #{$white} !important;
   }
 }
 
