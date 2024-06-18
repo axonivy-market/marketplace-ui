@@ -1,15 +1,26 @@
-.navbar {
-  opacity: 0px;
-}
-
-.navbar-brand {
+.navbar-nav {
+  height: 60px;
   padding-top: 0.8rem;
 }
 
-.logo__image {
-  width: 130.5px;
-  height: 20.08px;
-  vertical-align: initial;
+.nav-link {
+  height: 22px;
+  line-height: 22.4px;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.active-line {
+  position: relative;
+  height: 2px;
+  top: 2rem;
+  width: inherit;
+  background-color: var(--ivy-active-color);
+}
+
+.header-mobile__search {
+  height: 43px;
+  border-radius: 10px;
 }
 
 @media all and (max-width: 992px) {
@@ -24,10 +35,6 @@
 
   .navbar {
     border: none;
-  }
-
-  .navbar-brand {
-    padding: 14.42px 0;
   }
 
   .nav-link {

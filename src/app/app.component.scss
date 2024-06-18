@@ -6,10 +6,15 @@ body {
 }
 
 header {
-  height: 77px;
-  gap: 77px;
   border-bottom: 0.5px solid var(--header-border-color);
   opacity: 0px;
+}
+
+footer {
+  height: 409px;
+  padding: 0 0 56px 0;
+  border-top: 1px solid var(--footer-border-color);
+  margin-top: 64.14px;
 }
 
 @media all and (max-width: 992px) {

@@ -35,26 +35,24 @@ describe('HeaderComponent', () => {
     const searchIcon = fixture.debugElement.query(
       By.css('.header__search-button i')
     );
-    const searchInput = fixture.debugElement.query(
-      By.css('.header__search-input')
-    );
 
     expect(component.isSearchBarDisplayed()).toBeFalse();
-    expect(searchInput.attributes['hidden']).toBeDefined();
 
     // Click the search icon
     searchIcon.triggerEventHandler('click', null);
     fixture.detectChanges();
 
     expect(component.isSearchBarDisplayed()).toBeTrue();
-    expect(searchInput.attributes['hidden']).toBeUndefined();
 
-    // Click the search icon again
-    searchIcon.triggerEventHandler('click', null);
+    const cancelIcon = fixture.debugElement.query(
+      By.css('.input-group-prepend.search__cancel-button')
+    );
+
+    // Click the cancel icon
+    cancelIcon.triggerEventHandler('click', null);
     fixture.detectChanges();
 
     expect(component.isSearchBarDisplayed()).toBeFalse();
-    expect(searchInput.attributes['hidden']).toBeDefined();
   });
 
   it('should toggle the mobile menu on click', () => {

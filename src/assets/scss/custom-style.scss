@@ -49,6 +49,7 @@ $ivyTextColorLight: #fafafa;
   --ivy-active-color: #{$ivyPrimaryColorLight};
 
   --header-border-color: #ebebeb;
+  --footer-border-color: #e7e7e7;
 
   .bg-primary {
     background-color: #{$ivyPrimaryColorLight} !important;
@@ -117,9 +118,15 @@ $ivySecondaryTextDark: #a3a3a3;
   --bs-secondary-rgb: #{$ivySecondaryColorDarkRGB};
   --bs-tertiary-bg: #{$ivySecondaryColorDarkRGB};
 
+  --ivy-secondary-background: #{$ivySecondaryColorDark};
   --ivy-active-color: var(--bs-light);
 
   --header-border-color: #4a4a4a;
+  --footer-border-color: #4f4e4e;
+
+  a {
+    color: var(--bs-white);
+  }
 
   .card {
     background-color: #{$ivySecondaryColorDarkRGB};
@@ -147,7 +154,7 @@ $ivySecondaryTextDark: #a3a3a3;
   }
 
   .text-primary {
-    color: #fff !important;
+    color: var(--bs-white) !important;
   }
 
   .text-secondary {
