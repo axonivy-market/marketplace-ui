@@ -1,12 +1,17 @@
 .logo__image {
   width: 200px;
-  height: 3rem;
+  height: 20px;
   margin-top: 1rem;
   vertical-align: initial;
 }
 
+.nav-item {
+  margin: 0 30px 0 0;
+}
+
 .nav-link {
   font-weight: 600;
+  padding: 0 15px;
 }
 
 .link-icon {
@@ -16,4 +21,10 @@
 
 .link--left {
   margin: 0 2rem 0 0;
+}
+
+@media all and (max-width: 990px) {
+  .link--left {
+    margin: 0;
+  }
 }
