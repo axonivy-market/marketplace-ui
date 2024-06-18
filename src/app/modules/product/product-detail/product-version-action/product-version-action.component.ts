@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, signal } from '@angular/core';
 import { ThemeService } from '../../../../core/services/theme/theme.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
@@ -24,16 +24,22 @@ export class ProductVersionActionComponent {
   artifacts: Artifact[] = [];
   themeService = inject(ThemeService);
   translateService = inject(TranslateService);
-  isDevVersionsDisplayed = false;
+  @Input() isDevVersionsDisplayed= signal(false);
+  @Input() isDropDownDisplayed = signal(false);
   designerVersion: string = '';
   selectedArtifact!: Artifact;
   selectedVersion: string = 'portal';
   productService = inject(ProductService);
 
+  onShowDevVersion() {
+    this.isDevVersionsDisplayed.set(this.isDevVersionsDisplayed());
+  }
+
   onShowVersionAndArtifact() {
     console.log('asd');
+    this.isDropDownDisplayed.set(!this.isDropDownDisplayed());
     this.productService
-      .sendRequestToProductDetailVersionAPITest(this.productId, false, '')
+      .sendRequestToProductDetailVersionAPITest(this.productId, this.isDevVersionsDisplayed(), this.designerVersion)
       .subscribe((data: VersionData) => {
         console.log(data);
 
