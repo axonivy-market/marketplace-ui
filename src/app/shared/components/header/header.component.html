@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-xl">
   <div class="container-fluid">
     <a href="/" class="logo navbar-brand">
       <img
@@ -11,7 +11,7 @@
         alt="Axon Ivy" />
     </a>
     <button
-      class="btn border-0 navbar-toggler rounded-3"
+      class="btn btn-primary border-0 navbar-toggler rounded-3"
       data-bs-toggle="collapse"
       aria-expanded="false"
       aria-label="Toggle navigation">
@@ -28,8 +28,8 @@
       [ngClass]="{ show: !isMobileMenuCollapsed() }"
       id="navbarSupportedContent">
       <div
-        class="header__navbar-content d-flex flex-column flex-lg-row justify-content-between w-100 min-height-100 align-items-lg-center">
-        <div class="d-lg-block d-none"></div>
+        class="header__navbar-content d-none d-xl-flex flex-column flex-lg-row justify-content-between w-100 min-height-100 align-items-lg-center">
+        <div class="d-md-block d-none"></div>
         <app-navigation></app-navigation>
         <app-search-bar></app-search-bar>
       </div>

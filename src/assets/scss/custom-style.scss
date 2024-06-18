@@ -24,7 +24,6 @@ $ivySecondaryColorDarkRGB: 56, 56, 56;
 $ivyBodyBackgroundDark: #2c2c2c;
 $ivySecondaryColorDark: #383838;
 $ivySecondaryHoverDark: #202020;
-$ivyNormalTextDark: #2c2c2c;
 $ivyPrimaryButtonHoverDark: #ececec;
 $ivySecondaryTextDark: #a3a3a3;
 
@@ -79,6 +78,7 @@ p {
 
   .btn-primary {
     background-color: #{$ivyPrimaryColorLight};
+    color: #{$ivyNormalTextColorLight} !important;
   }
 
   .btn-primary:hover {
@@ -150,8 +150,8 @@ p {
   }
 
   .btn-primary {
-    background-color: var(--bs-white);
-    color: #{$ivySecondaryTextLight};
+    background-color: #{$ivyNormalTextColorLight};
+    color: #{$ivyBodyBackgroundDark} !important;
   }
 
   .btn-primary:hover {
