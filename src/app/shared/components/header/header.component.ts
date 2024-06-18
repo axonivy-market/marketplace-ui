@@ -1,27 +1,44 @@
 import { CommonModule } from '@angular/common';
-import { Component, WritableSignal, inject, signal } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  WritableSignal,
+  inject,
+  signal
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ThemeService } from '../../../core/services/theme/theme.service';
-import { LANGUAGES, NAV_ITEMS } from '../../constants/common.constant';
+import { NAV_ITEMS } from '../../constants/common.constant';
 import { Language } from '../../enums/language.enum';
 import { NavItem } from '../../models/nav-item.model';
+import { ThemeSelectionComponent } from './theme-selection/theme-selection.component';
+import { LanguageSelectionComponent } from './language-selection/language-selection.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, FormsModule, TranslateModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    TranslateModule,
+    NavigationComponent,
+    ThemeSelectionComponent,
+    LanguageSelectionComponent,
+    SearchBarComponent
+  ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss', '../../../app.component.scss']
 })
 export class HeaderComponent {
   selectedNav = '/';
   selectedLanguage: string = Language.EN_GB;
-  languages = LANGUAGES;
-  isSearchBarDisplayed = signal(false);
-  isMobileMenuCollapsed: WritableSignal<boolean> = signal(true);
 
-  navItems: NavItem[] = NAV_ITEMS;
+  isMobileMenuCollapsed: WritableSignal<boolean> = signal(true);
 
   themeService = inject(ThemeService);
   translateService = inject(TranslateService);
@@ -30,15 +47,7 @@ export class HeaderComponent {
     this.translateService.use(this.selectedLanguage);
   }
 
-  onSelectLanguage(language: string) {
-    this.translateService.use(language);
-  }
-
   onCollapsedMobileMenu() {
     this.isMobileMenuCollapsed.update(value => !value);
-  }
-
-  onClickSearchIcon() {
-    this.isSearchBarDisplayed.update(value => !value);
   }
 }

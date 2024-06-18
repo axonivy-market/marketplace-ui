@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { AppComponent } from './app.component';
 import { By } from '@angular/platform-browser';
-import { NAV_ITEMS } from './shared/constants/common.constant';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -23,10 +22,9 @@ describe('AppComponent', () => {
   });
 
   it('default active nav should be Market', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(
-      compiled.querySelector('li.nav-item div.d-md-block')?.parentElement
-        ?.innerHTML
-    ).toContain('common.nav.market');
+    const activeNav = fixture.debugElement.query(
+      By.css('a.nav-link.text-primary.fw-bold.active')
+    ).nativeElement;
+    expect(activeNav.innerHTML).toContain('common.nav.market');
   });
 });

@@ -1,16 +1,11 @@
 img {
-  width: 75px;
-  height: 75px;
+  width: 70px;
+  height: 70px;
 }
 
-.product-card {
-  height: 250px;
-  padding: 20px;
-  gap: 20px;
-  border-radius: 15px;
-  border: 1px;
-  opacity: 0px;
-  background-color: var(--ivy-primary-color-light);
+.card {
+  background-color: var(--ivy-secondary-bg);
+  border: 1px solid var(--ivy-border-color);
 }
 
 .card__title {
@@ -18,7 +13,13 @@ img {
   font-size: 20px;
 }
 
+.card__tag {
+  border-radius: 5px;
+  background-color: var(--ivy-primary-bg);
+}
+
 .card__description {
   font-weight: 400;
   font-size: 16px;
+  color: var(--ivy-secondary-text-dark-color);
 }

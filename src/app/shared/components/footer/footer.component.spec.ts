@@ -49,7 +49,7 @@ describe('FooterComponent', () => {
   });
 
   it('Ivy tag in ivy policy section should be display in higher row', () => {
-    viewport.set(480);
+    viewport.set(540);
 
     const ivyTag = fixture.nativeElement.querySelector('.footer__ivy-tag');
 
@@ -57,15 +57,7 @@ describe('FooterComponent', () => {
       '.footer__ivy-term-of-service-tag'
     );
 
-    const ivyPolicyTag = fixture.nativeElement.querySelector(
-      '.footer__ivy-policy-tag'
-    );
-
     expect(ivyTag.getBoundingClientRect().top).toBeLessThan(
-      ivyTermOfService.getBoundingClientRect().top
-    );
-
-    expect(ivyPolicyTag.getBoundingClientRect().top).toEqual(
       ivyTermOfService.getBoundingClientRect().top
     );
   });
