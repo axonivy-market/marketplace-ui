@@ -1,7 +1,32 @@
+// Required
+@import '../../../node_modules/bootstrap/scss/functions';
+
+// Required
+@import '../../../node_modules/bootstrap/scss/variables';
+@import '../../../node_modules/bootstrap/scss/mixins';
 @font-face {
   font-family: Inter;
   src: url(../fonts/inter.ttf) format('truetype');
 }
+
+// Light
+$ivyPrimaryColorLight: #007095;
+$ivyPrimaryColorHoverLight: #00445c;
+$ivySecondaryColorLight: #f8f8f8;
+$ivySecondaryButtonHoverLight: #ebebeb;
+$ivyPrimaryTextColorLight: #1b1b1b;
+$ivySecondaryTextLight: #4a4a4a;
+$ivyNormalTextColorLight: #fafafa;
+
+// Dark
+$ivyPrimaryColorDark: 44, 44, 44;
+$ivySecondaryColorDarkRGB: 56, 56, 56;
+$ivyBodyBackgroundDark: #2c2c2c;
+$ivySecondaryColorDark: #383838;
+$ivySecondaryHoverDark: #202020;
+$ivyNormalTextDark: #2c2c2c;
+$ivyPrimaryButtonHoverDark: #ececec;
+$ivySecondaryTextDark: #a3a3a3;
 
 h1 {
   font-weight: 600;
@@ -23,21 +48,15 @@ p {
   font-size: 14px;
 }
 
-$ivyPrimaryColorLight: #007095;
-$ivyPrimaryColorHoverLight: #00445c;
-$ivySecondaryColorLight: #f8f8f8;
-$ivySecondaryButtonHoverLight: #ebebeb;
-$ivyBackgroundColorLight: #fafafa;
-$ivyPrimaryTextColorLight: #1b1b1b;
-$ivySecondaryTextLight: #4a4a4a;
-$ivyTextColorLight: #fafafa;
-
 [data-bs-theme='light'] {
-  --ivy-primary-color-light: #{$ivyPrimaryColorLight};
-  --ivy-secondary-color-light: #{$ivySecondaryColorLight};
-
+  --ivy-primary-bg: #{$ivyPrimaryColorLight};
+  --ivy-secondary-bg: #{$ivySecondaryColorLight};
   --ivy-active-color: #{$ivyPrimaryColorLight};
 
+  --ivy-text-normal-color: #{$ivyNormalTextColorLight};
+  --ivy-text-primary-color: $ivyPrimaryTextColorLight;
+  --ivy-text-secondary-color: $ivySecondaryTextLight;
+  --ivy-border-color: #{$ivySecondaryButtonHoverLight};
   --header-border-color: #ebebeb;
   --footer-border-color: #e7e7e7;
 
@@ -47,6 +66,11 @@ $ivyTextColorLight: #fafafa;
 
   .bg-secondary {
     background-color: #{$ivySecondaryColorLight} !important;
+  }
+
+  .card {
+    background-color: #{$ivySecondaryColorLight};
+    border: 1px solid #{$ivySecondaryTextLight};
   }
 
   .btn {
@@ -63,7 +87,7 @@ $ivyTextColorLight: #fafafa;
 
   .btn-secondary {
     background-color: #{$ivySecondaryColorLight};
-    color: var(--bs-dark);
+    color: #{$ivyPrimaryTextColorLight};
   }
 
   .btn-secondary:hover {
@@ -78,24 +102,18 @@ $ivyTextColorLight: #fafafa;
     color: #{$ivySecondaryTextLight} !important;
   }
 
-  .card__description {
-    color: #{$ivySecondaryTextLight};
+  .text-dark {
+    color: #{$ivyPrimaryTextColorLight} !important;
   }
 
-  .card__tag {
-    background-color: var(--ivy-primary-color-light);
-    color: var(--bs-light);
+  .border-dark {
+    border-color: #{$ivyPrimaryTextColorLight};
+  }
+
+  .border-primary {
+    border-color: #{$ivyPrimaryTextColorLight} !important;
   }
 }
-
-$ivyPrimaryColorDark: 44, 44, 44;
-$ivySecondaryColorDarkRGB: 56, 56, 56;
-$ivyBodyBackgroundDark: #2c2c2c;
-$ivySecondaryColorDark: #383838;
-$ivySecondaryHoverDark: #202020;
-$ivyTextColorDark: #2c2c2c;
-$ivyPrimaryButtonHoverDark: #ececec;
-$ivySecondaryTextDark: #a3a3a3;
 
 .spinner-border {
   width: 100px;
@@ -108,18 +126,23 @@ $ivySecondaryTextDark: #a3a3a3;
   --bs-secondary-rgb: #{$ivySecondaryColorDarkRGB};
   --bs-tertiary-bg: #{$ivySecondaryColorDarkRGB};
 
-  --ivy-secondary-background: #{$ivySecondaryColorDark};
-  --ivy-active-color: var(--bs-light);
+  --ivy-primary-bg: #{$white};
+  --ivy-secondary-bg: #{$ivySecondaryColorDark};
+  --ivy-active-color: #{$white};
 
-  --header-border-color: #4a4a4a;
+  --ivy-text-normal-color: #{$ivyBodyBackgroundDark};
+  --ivy-text-secondary-color: #{$ivySecondaryTextDark};
+
+  --ivy-border-color: #{$ivySecondaryTextLight};
+  --header-border-color: #{$ivySecondaryTextLight};
   --footer-border-color: #4f4e4e;
 
   a {
-    color: var(--bs-white);
+    color: #{$white};
   }
 
-  .card {
-    background-color: #{$ivySecondaryColorDarkRGB};
+  .bg-light {
+    background-color: #{$white} !important;
   }
 
   .btn {
@@ -137,6 +160,7 @@ $ivySecondaryTextDark: #a3a3a3;
 
   .btn-secondary {
     background-color: #{$ivySecondaryColorDark};
+    border: 0.5px solid #{$ivySecondaryTextLight} !important;
   }
 
   .btn-secondary:hover {
@@ -144,26 +168,45 @@ $ivySecondaryTextDark: #a3a3a3;
   }
 
   .text-primary {
-    color: var(--bs-white) !important;
+    color: #{$white} !important;
   }
 
   .text-secondary {
     color: #{$ivySecondaryTextDark} !important;
   }
 
-  .card__description {
-    color: #{$ivySecondaryTextDark};
+  .text-dark {
+    color: #{$ivyBodyBackgroundDark} !important;
   }
 
-  .card__tag {
-    background-color: #{$ivyBackgroundColorLight};
-    color: #{$ivyTextColorDark};
+  .border-primary {
+    border-color: #{$white} !important;
+  }
+
+  .border-light {
+    border-color: #{$white} !important;
   }
 }
 
 *:focus {
   box-shadow: none !important;
   outline: none !important;
+}
+
+.card {
+  height: 250px;
+  padding: 20px;
+  margin: 0 32px 8px 0;
+  gap: 20px;
+  border-radius: 15px;
+}
+
+.text-light {
+  color: #{$white} !important;
+}
+
+.text-muted {
+  color: #858585 !important;
 }
 
 @media (min-width: 1400px) {
