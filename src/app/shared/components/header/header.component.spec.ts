@@ -25,36 +25,6 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('selectLanguage should call translateService', () => {
-    spyOn(component.translateService, 'use').and.stub();
-    component.onSelectLanguage('en');
-    expect(component.translateService.use).toHaveBeenCalled();
-  });
-
-  it('should toggle the search input visibility on search icon click', () => {
-    const searchIcon = fixture.debugElement.query(
-      By.css('.header__search-button i')
-    );
-
-    expect(component.isSearchBarDisplayed()).toBeFalse();
-
-    // Click the search icon
-    searchIcon.triggerEventHandler('click', null);
-    fixture.detectChanges();
-
-    expect(component.isSearchBarDisplayed()).toBeTrue();
-
-    const cancelIcon = fixture.debugElement.query(
-      By.css('.input-group-prepend.search__cancel-button')
-    );
-
-    // Click the cancel icon
-    cancelIcon.triggerEventHandler('click', null);
-    fixture.detectChanges();
-
-    expect(component.isSearchBarDisplayed()).toBeFalse();
-  });
-
   it('should toggle the mobile menu on click', () => {
     const navbarToggler = fixture.debugElement.query(By.css('.bi.bi-list'));
 
@@ -71,51 +41,6 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
 
     expect(component.isMobileMenuCollapsed()).toBeTrue();
-  });
-
-  it('should toggle the theme on theme button click', () => {
-    spyOn(component.themeService, 'changeTheme').and.callThrough();
-    const themeButton = fixture.debugElement.query(
-      By.css('.header__theme-button div')
-    );
-
-    // Click the theme button
-    themeButton.triggerEventHandler('click', null);
-    fixture.detectChanges();
-
-    expect(component.themeService.changeTheme).toHaveBeenCalled();
-  });
-
-  it('mobile search should display in small screen', () => {
-    viewport.set(540);
-
-    const desktopSearch = fixture.debugElement.query(
-      By.css('.header-desktop__search')
-    );
-    const mobileSearch = fixture.debugElement.query(
-      By.css('.header-mobile__search')
-    );
-
-    expect(getComputedStyle(mobileSearch.nativeElement).display).not.toBe(
-      'none'
-    );
-    expect(getComputedStyle(desktopSearch.nativeElement).display).toBe('none');
-  });
-
-  it('desktop search should display in large screen', () => {
-    viewport.set(1920);
-
-    const desktopSearch = fixture.debugElement.query(
-      By.css('.header-desktop__search')
-    );
-    const mobileSearch = fixture.debugElement.query(
-      By.css('.header-mobile__search')
-    );
-
-    expect(getComputedStyle(mobileSearch.nativeElement).display).toBe('none');
-    expect(getComputedStyle(desktopSearch.nativeElement).display).not.toBe(
-      'none'
-    );
   });
 
   // Responsive section

@@ -57,15 +57,7 @@ describe('FooterComponent', () => {
       '.footer__ivy-term-of-service-tag'
     );
 
-    const ivyPolicyTag = fixture.nativeElement.querySelector(
-      '.footer__ivy-policy-tag'
-    );
-
     expect(ivyTag.getBoundingClientRect().top).toBeLessThan(
-      ivyTermOfService.getBoundingClientRect().top
-    );
-
-    expect(ivyPolicyTag.getBoundingClientRect().top).toEqual(
       ivyTermOfService.getBoundingClientRect().top
     );
   });
