@@ -1,4 +1,21 @@
-<div class="card w-100 h-100 p-3">
-  <p class="h2">{{ product.name }}</p>
-  <p class="text">{{ product.description }}</p>
+<div class="card product-card w-100">
+  <div class="d-flex justify-content-between align-items-start">
+    <img
+      class="card-img-top rounded"
+      width="70"
+      height="70"
+      [ngSrc]="product | logo"
+      [alt]="product.name" />
+    <div
+      class="card__tag lh-md px-2 py-1"
+      [ngClass]="themeService.isDarkMode() ? 'text-dark' : 'text-light'">
+      {{ 'common.filter.value.' + product.type | translate }}
+    </div>
+  </div>
+  <div>
+    <h5 class="card__title text-primary">{{ product.name }}</h5>
+    <p class="card__description text-secondary">
+      {{ product.description }}
+    </p>
+  </div>
 </div>

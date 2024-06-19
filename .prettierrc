@@ -10,5 +10,6 @@
   "singleQuote": true,
   "htmlWhitespaceSensitivity": "ignore",
   "bracketSameLine": true,
-  "trailingComma": "none"
+  "trailingComma": "none",
+  "arrowParens": "avoid"
 }

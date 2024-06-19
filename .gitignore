@@ -44,3 +44,5 @@ Thumbs.db
 # Coverage
 /coverage
 /reports
+
+**/assets/market-cache
