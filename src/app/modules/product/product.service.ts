@@ -140,11 +140,11 @@ export class ProductService {
     productId: string,
     showDevVersion: boolean,
     designerVersion: string
-  ): Observable<VersionData> {
+  ): Observable<VersionData[]> {
     let url = 'api/product-details/' + productId + '/versions';
     const params = new HttpParams()
       .append('designerVersion', designerVersion)
-      .append('showDevVersion', showDevVersion);
-    return this.httpClient.get<VersionData>(url, { params: params });
+      .append('isShowDevVersion', showDevVersion);
+    return this.httpClient.get<VersionData[]>(url, { params: params });
   }
 }

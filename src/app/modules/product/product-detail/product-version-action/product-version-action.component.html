@@ -45,6 +45,7 @@
             id="verions-selector"
             [(ngModel)]="selectedVersion"
             name="Version"
+            (change)="onSelectVersion()"
             class="form-select form-select-sm"
             aria-label=".form-select-sm example">
             @for (item of versions; track $index) {

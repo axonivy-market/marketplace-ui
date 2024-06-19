@@ -19,7 +19,7 @@ import {
 export class ProductVersionActionComponent {
   @Input()
   productId!: string;
-  versions: string[] = ['10', '11'];
+  versions: string[] = [];
   artifacts: Artifact[] = [];
   themeService = inject(ThemeService);
   translateService = inject(TranslateService);
@@ -29,13 +29,26 @@ export class ProductVersionActionComponent {
   isInvalidInstallationEnvironment = signal(false);
   designerVersion: string = '';
   selectedArtifact!: Artifact;
-  selectedVersion: string = 'portal';
+  selectedVersion: string = '';
   productService = inject(ProductService);
+  versionMap: Map<string, Artifact[]> = new Map();
+
 
   onInstallArtifact() {
     if (!this.isDesignerEnvironment) {
       this.isInvalidInstallationEnvironment.set(true);
       setTimeout(() => this.isInvalidInstallationEnvironment.set(false), 2000);
+    }
+  }
+
+  onSelectVersion(){
+    this.artifacts = this.versionMap.get(this.selectedVersion) || [];
+    console.log(this.artifacts.length);
+    
+    if(this.artifacts.length != 0){
+      
+      this.selectedArtifact = this.artifacts[0];
+      console.log(this.selectedArtifact);
     }
   }
 
@@ -46,30 +59,42 @@ export class ProductVersionActionComponent {
   }
 
   onShowVersionAndArtifact() {
-    console.log('asd');
     this.isDropDownDisplayed.set(!this.isDropDownDisplayed());
     this.getVersionWithArtifact();
   }
 
   getVersionWithArtifact() {
+    this.sanitizeDataBeforFetching();
+    console.log(this.artifacts.length)
     this.productService
       .sendRequestToProductDetailVersionAPITest(
         this.productId,
         this.isDevVersionsDisplayed(),
         this.designerVersion
       )
-      .subscribe((data: VersionData) => {
+      .subscribe(data => {
         console.log(data);
 
-        this.versions = Object.keys(data);
-        if (this.versions.length > 0) {
+        data.forEach(item => {
+          this.versions.push(item.version);
+          this.versionMap.set(item.version, item.artifactsByVersion);
+        });
+
+        if(this.versions.length !=0){
           this.selectedVersion = this.versions[0];
-          this.artifacts = data[this.selectedVersion];
-          this.selectedArtifact = this.artifacts[0];
+          console.log(this.selectedVersion)
+          this.onSelectVersion();
         }
       });
   }
 
+  sanitizeDataBeforFetching() {
+    this.versions = [];
+    this.artifacts = [];
+    this.selectedArtifact = {} as Artifact;
+    this.selectedVersion = '';
+  }
+  
   downloadArifact() {
     window.open(this.selectedArtifact.downloadUrl, '_blank');
   }
