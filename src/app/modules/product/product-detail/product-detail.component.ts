@@ -9,7 +9,7 @@ import { ProductService } from '../product.service';
   imports: [],
   providers: [ProductService],
   templateUrl: './product-detail.component.html',
-  styleUrl: './product-detail.component.scss',
+  styleUrl: './product-detail.component.scss'
 })
 export class ProductDetailComponent {
   product!: Product;
@@ -20,7 +20,7 @@ export class ProductDetailComponent {
   constructor() {
     const productId = this.route.snapshot.params['id'];
     if (productId) {
-      this.productService.getProductById(productId).subscribe((product) => {
+      this.productService.getProductById(productId).subscribe(product => {
         this.product = product;
       });
     }

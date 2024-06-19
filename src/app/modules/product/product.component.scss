@@ -1,6 +1,3 @@
-.grid-container {
-  display: grid;
-  justify-content: center;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 400px));
-  grid-gap: 50px;
+.product-container {
+  min-height: 6em;
 }
