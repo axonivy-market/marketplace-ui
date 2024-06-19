@@ -7,7 +7,7 @@
     {{ 'common.product.detail.install.buttonLabel' | translate }}
   </button>
   <button
-    class="btn btn__download btn-secondary dropdown-toggle"
+    class="btn btn__download btn-secondary dropdown-toggle primary-bg"
     type="button"
     (click)="onShowVersionAndArtifact()"
     aria-expanded="false">
@@ -54,7 +54,7 @@
         </div>
         <a
           href="#"
-          class="fs-small text-primary text-decoration-none"
+          class="fs-small primary-color text-decoration-none"
           (click)="onShowDevVersion($event)">
           {{ 'common.product.detail.download.hideDevVersions' | translate }}
         </a>
@@ -76,8 +76,15 @@
     <div
       class="dropdown-menu show mt-5 invalid-installation-environment__warning">
       <p class="fs-small mb-0">
-        Please open the Axon Ivy Market inside your Axon Ivy Designer (minimum
-        version 9.2.0)
+        Please open the
+        <a href="https://market.axonivy.com/" class="primary-color">
+          Axon Ivy Market
+        </a>
+        inside your
+        <a class="primary-color" href="https://developer.axonivy.com/download">
+          Axon Ivy Designer
+        </a>
+        (minimum version 9.2.0)
       </p>
     </div>
   }
