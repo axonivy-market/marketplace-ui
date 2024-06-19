@@ -56,7 +56,7 @@ export const IVY_FOOTER_LINKS = [
   },
   {
     containerStyleClass: 'footer__ivy-policy-tag',
-    label: 'common.footer.privayPolicy'
+    label: 'common.footer.privacyPolicy'
   },
   {
     containerStyleClass: 'footer__ivy-term-of-service-tag',

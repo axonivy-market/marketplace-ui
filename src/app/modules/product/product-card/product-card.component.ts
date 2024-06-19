@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { ThemeService } from '../../../core/services/theme/theme.service';
@@ -8,7 +8,7 @@ import { ProductLogoPipe } from '../../../shared/pipes/logo.pipe';
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [CommonModule, ProductLogoPipe, TranslateModule],
+  imports: [CommonModule, ProductLogoPipe, TranslateModule, NgOptimizedImage],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss'
 })

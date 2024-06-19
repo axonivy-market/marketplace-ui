@@ -28,7 +28,7 @@ export class ThemeService {
   setTheme(theme: Theme) {
     this.theme.set(theme);
     localStorage.setItem(DATA_THEME, theme);
-    const html = this.document.querySelector('html')
+    const html = this.document.querySelector('html');
     if (html) {
       html.setAttribute(DATA_THEME, theme);
     }
@@ -36,9 +36,11 @@ export class ThemeService {
   }
 
   changeTheme() {
-    this.theme.update(value =>
-      value === Theme.DARK ? Theme.LIGHT : Theme.DARK
-    );
+    if (this.theme() === Theme.DARK) {
+      this.theme.set(Theme.LIGHT);
+    } else {
+      this.theme.set(Theme.DARK);
+    }
     this.setTheme(this.theme());
   }
 }
