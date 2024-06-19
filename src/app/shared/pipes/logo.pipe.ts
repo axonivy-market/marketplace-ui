@@ -7,6 +7,9 @@ import { Product } from '../models/product.model';
 })
 export class ProductLogoPipe implements PipeTransform {
   transform(product: Product, _args?: []): string {
-    return `/assets/_market/${product.id}/logo.png`;
+    if (product.logoUrl) {
+      return product.logoUrl;
+    }
+    return `/assets/images/misc/axonivy-logo-round.png`;
   }
 }
