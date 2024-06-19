@@ -10,8 +10,8 @@
           (click)="onSelectFilterType(type.value)"
           class="filter-type border"
           [ngClass]="{
-            'border-light': themeService.isDarkMode(),
-            'border-dark': !themeService.isDarkMode(),
+            'border-light text-light': themeService.isDarkMode(),
+            'border-dark text-dark': !themeService.isDarkMode(),
             'bg-light text-dark':
               selectedFilterType === type.value && themeService.isDarkMode(),
             'bg-primary border-0 text-light':
@@ -27,7 +27,7 @@
       <select
         [(ngModel)]="selectedFilterType"
         (ngModelChange)="onSelectFilterType($event)"
-        class="form-select filter-type--select w-auto"
+        class="form-select border-primary filter-type--select w-auto"
         aria-label="sort"
         name="sort">
         @for (type of filterTypes; track $index) {
@@ -41,13 +41,13 @@
     <!-- Sort type -->
     <div
       class="col-6 col-md-4 d-flex sort-container justify-content-end align-items-end">
-      <h4 class="sort-container__label d-none d-lg-flex w-auto">
+      <h4 class="sort-container__label text-primary d-none d-lg-flex w-auto">
         {{ translateService.get('common.sort.label') | async }}:
       </h4>
       <select
         [(ngModel)]="selectedSortType"
         (ngModelChange)="onSortChange()"
-        class="form-select sort-type w-50 ms-2"
+        class="form-select text-primary border-primary sort-type w-50 ms-2"
         aria-label="sort"
         name="sort">
         @for (type of sortTypes; track $index) {
@@ -63,7 +63,7 @@
   <div class="input-group mb-5">
     <div class="input-group-prepend">
       <span
-        class="input-group-text bg-secondary h-100 border-0 rounded-start-4 rounded-end-0">
+        class="input-group-text text-primary bg-secondary h-100 border-0 rounded-start-4 rounded-end-0">
         <i class="bi bi-search"></i>
       </span>
     </div>

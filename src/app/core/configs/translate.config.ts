@@ -6,7 +6,7 @@ import { parse } from 'yaml';
 class TranslateYamlHttpLoader implements TranslateLoader {
   constructor(
     private readonly http: HttpClient,
-    public path: string = '/assets/i18n/'
+    public path = '/assets/i18n/'
   ) {}
 
   public getTranslation(lang: string): Observable<Object> {
@@ -16,6 +16,6 @@ class TranslateYamlHttpLoader implements TranslateLoader {
   }
 }
 
-export function HttpLoaderFactory(httpClient: HttpClient) {
+export function httpLoaderFactory(httpClient: HttpClient) {
   return new TranslateYamlHttpLoader(httpClient);
 }

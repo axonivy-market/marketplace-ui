@@ -1,7 +1,31 @@
+// Required
+@import '../../../node_modules/bootstrap/scss/functions';
+
+// Required
+@import '../../../node_modules/bootstrap/scss/variables';
+@import '../../../node_modules/bootstrap/scss/mixins';
 @font-face {
   font-family: Inter;
   src: url(../fonts/inter.ttf) format('truetype');
 }
+
+// Light
+$ivyPrimaryColorLight: #007095;
+$ivyPrimaryColorHoverLight: #00445c;
+$ivySecondaryColorLight: #f8f8f8;
+$ivySecondaryButtonHoverLight: #ebebeb;
+$ivyPrimaryTextColorLight: #1b1b1b;
+$ivySecondaryTextLight: #4a4a4a;
+$ivyNormalTextColorLight: #fafafa;
+
+// Dark
+$ivyPrimaryColorDark: 44, 44, 44;
+$ivySecondaryColorDarkRGB: 56, 56, 56;
+$ivyBodyBackgroundDark: #2c2c2c;
+$ivySecondaryColorDark: #383838;
+$ivySecondaryHoverDark: #202020;
+$ivyPrimaryButtonHoverDark: #ececec;
+$ivySecondaryTextDark: #a3a3a3;
 
 h1 {
   font-weight: 600;
@@ -23,17 +47,17 @@ p {
   font-size: 14px;
 }
 
-$ivyPrimaryColorLight: #007095;
-$ivyPrimaryColorHoverLight: #00445c;
-$ivySecondaryColorLight: #f8f8f8;
-$ivySecondaryButtonHoverLight: #ebebeb;
-$ivyBackgroundColorLight: #fafafa;
-$ivyCardDescriptionColorLight: #4a4a4a;
-$ivyTextColorLight: #fafafa;
-
 [data-bs-theme='light'] {
-  --ivy-primary-color-light: #{$ivyPrimaryColorLight};
-  --ivy-secondary-color-light: #{$ivySecondaryColorLight};
+  --ivy-primary-bg: #{$ivyPrimaryColorLight};
+  --ivy-secondary-bg: #{$ivySecondaryColorLight};
+  --ivy-active-color: #{$ivyPrimaryColorLight};
+
+  --ivy-text-normal-color: #{$ivyNormalTextColorLight};
+  --ivy-text-primary-color: $ivyPrimaryTextColorLight;
+  --ivy-text-secondary-color: $ivySecondaryTextLight;
+  --ivy-border-color: #{$ivySecondaryButtonHoverLight};
+  --header-border-color: #ebebeb;
+  --footer-border-color: #e7e7e7;
 
   .bg-primary {
     background-color: #{$ivyPrimaryColorLight} !important;
@@ -43,12 +67,18 @@ $ivyTextColorLight: #fafafa;
     background-color: #{$ivySecondaryColorLight} !important;
   }
 
+  .card {
+    background-color: #{$ivySecondaryColorLight};
+    border: 1px solid #{$ivySecondaryTextLight};
+  }
+
   .btn {
     border-radius: 0.5rem;
   }
 
   .btn-primary {
     background-color: #{$ivyPrimaryColorLight};
+    color: #{$ivyNormalTextColorLight} !important;
   }
 
   .btn-primary:hover {
@@ -57,31 +87,38 @@ $ivyTextColorLight: #fafafa;
 
   .btn-secondary {
     background-color: #{$ivySecondaryColorLight};
-    color: var(--bs-dark);
+    color: #{$ivyPrimaryTextColorLight};
   }
 
   .btn-secondary:hover {
     background-color: #{$ivySecondaryButtonHoverLight};
   }
 
-  .card__description {
-    color: #{$ivyCardDescriptionColorLight};
+  .text-primary {
+    color: #{$ivyPrimaryTextColorLight} !important;
   }
 
-  .card__tag {
-    background-color: var(--ivy-primary-color-light);
-    color: var(--bs-light);
+  .text-secondary {
+    color: #{$ivySecondaryTextLight} !important;
+  }
+
+  .text-dark {
+    color: #{$ivyPrimaryTextColorLight} !important;
+  }
+
+  .border-dark {
+    border-color: #{$ivyPrimaryTextColorLight};
+  }
+
+  .border-primary {
+    border-color: #{$ivyPrimaryTextColorLight} !important;
   }
 }
 
-$ivyPrimaryColorDark: 44, 44, 44;
-$ivySecondaryColorDarkRGB: 56, 56, 56;
-$ivyBodyBackgroundDark: #2c2c2c;
-$ivySecondaryColorDark: #383838;
-$ivySecondaryHoverDark: #202020;
-$ivyTextColorDark: #2c2c2c;
-$ivyPrimaryButtonHoverDark: #ececec;
-$ivyCardDescriptionColorDark: #a3a3a3;
+.spinner-border {
+  width: 100px;
+  height: 100px;
+}
 
 [data-bs-theme='dark'] {
   --bs-body-bg: #{$ivyBodyBackgroundDark};
@@ -89,8 +126,23 @@ $ivyCardDescriptionColorDark: #a3a3a3;
   --bs-secondary-rgb: #{$ivySecondaryColorDarkRGB};
   --bs-tertiary-bg: #{$ivySecondaryColorDarkRGB};
 
-  .card {
-    background-color: #{$ivySecondaryColorDarkRGB};
+  --ivy-primary-bg: #{$ivyNormalTextColorLight};
+  --ivy-secondary-bg: #{$ivySecondaryColorDark};
+  --ivy-active-color: #{$white};
+
+  --ivy-text-normal-color: #{$ivyBodyBackgroundDark};
+  --ivy-text-secondary-color: #{$ivySecondaryTextDark};
+
+  --ivy-border-color: #{$ivySecondaryTextLight};
+  --header-border-color: #{$ivySecondaryTextLight};
+  --footer-border-color: #4f4e4e;
+
+  a {
+    color: #{$white};
+  }
+
+  .bg-light {
+    background-color: #{$ivyNormalTextColorLight} !important;
   }
 
   .btn {
@@ -98,8 +150,8 @@ $ivyCardDescriptionColorDark: #a3a3a3;
   }
 
   .btn-primary {
-    background-color: var(--bs-white);
-    color: #{$ivyCardDescriptionColorLight};
+    background-color: #{$ivyNormalTextColorLight};
+    color: #{$ivyBodyBackgroundDark} !important;
   }
 
   .btn-primary:hover {
@@ -108,19 +160,31 @@ $ivyCardDescriptionColorDark: #a3a3a3;
 
   .btn-secondary {
     background-color: #{$ivySecondaryColorDark};
+    border: 0.5px solid #{$ivySecondaryTextLight} !important;
   }
 
   .btn-secondary:hover {
     background-color: #{$ivySecondaryHoverDark};
   }
 
-  .card__description {
-    color: #{$ivyCardDescriptionColorDark};
+  .text-primary {
+    color: #{$white} !important;
   }
 
-  .card__tag {
-    background-color: #{$ivyBackgroundColorLight};
-    color: #{$ivyTextColorDark};
+  .text-secondary {
+    color: #{$ivySecondaryTextDark} !important;
+  }
+
+  .text-dark {
+    color: #{$ivyBodyBackgroundDark} !important;
+  }
+
+  .border-primary {
+    border-color: #{$white} !important;
+  }
+
+  .border-light {
+    border-color: #{$white} !important;
   }
 }
 
@@ -129,26 +193,51 @@ $ivyCardDescriptionColorDark: #a3a3a3;
   outline: none !important;
 }
 
-@media (min-width: 1400px) {
+.card {
+  height: 250px;
+  padding: 20px;
+  margin: 0 32px 8px 0;
+  gap: 20px;
+  border-radius: 15px;
+}
+
+.text-light {
+  color: #{$white} !important;
+}
+
+.text-muted {
+  color: #858585 !important;
+}
+
+@media (min-width: 1440px) {
+  .container {
+    min-width: 1120px;
+  }
+
   .col-xxl-3 {
-      flex: 0 0 auto;
-      width: 33.33333333%;
+    flex: 0 0 auto;
+    width: 33.33333333% !important;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container {
+    min-width: 1505px;
+  }
+  .col-xxl-3 {
+    flex: 0 0 auto;
+    width: 25% !important;
   }
 }
 
 @media (min-width: 2560px) {
   .container {
-    min-width: 1440px;
+    min-width: 1505px;
   }
 }
 
 @media (min-width: 3840px) {
   .container {
     min-width: 2160px;
-  }
-
-  .col-xxl-3 {
-    flex: 0 0 auto;
-    width: 25% !important;
   }
 }

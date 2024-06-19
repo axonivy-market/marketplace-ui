@@ -51,31 +51,27 @@ export const SOCIAL_MEDIA_LINK = [
 
 export const IVY_FOOTER_LINKS = [
   {
-    containerStyleClass: 'p-2 w-md-100 footer__ivy-tag',
+    containerStyleClass: 'w-md-100 footer__ivy-tag',
     label: 'common.footer.ivyCompanyInfo'
   },
   {
-    containerStyleClass: 'p-2 footer__ivy-policy-tag',
-    label: 'common.footer.privayPolicy'
+    containerStyleClass: 'footer__ivy-policy-tag',
+    label: 'common.footer.privacyPolicy'
   },
   {
-    containerStyleClass: 'p-2 footer__ivy-term-of-service-tag',
+    containerStyleClass: 'footer__ivy-term-of-service-tag',
     label: 'common.footer.termsOfService'
   }
 ];
 
 export const LANGUAGES = [
   {
-    value: Language.EN_GB,
-    label: 'common.language.english'
-  },
-  {
-    value: Language.FR_FR,
-    label: 'common.language.french'
-  },
-  {
     value: Language.DE_DE,
-    label: 'common.language.german'
+    label: 'DE'
+  },
+  {
+    value: Language.EN_GB,
+    label: 'EN'
   }
 ];
 
