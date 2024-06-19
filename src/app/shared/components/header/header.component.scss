@@ -47,3 +47,9 @@
     background-color: var(--ivy-secondary-background);
   }
 }
+
+@media all and (max-width: 1200px) {
+  .header__navbar-content {
+    height: 90vh;
+  }
+}
