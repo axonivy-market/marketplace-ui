@@ -209,26 +209,35 @@ p {
   color: #858585 !important;
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1440px) {
+  .container {
+    min-width: 1120px;
+  }
+
   .col-xxl-3 {
     flex: 0 0 auto;
-    width: 33.33333333%;
+    width: 33.33333333% !important;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container {
+    min-width: 1505px;
+  }
+  .col-xxl-3 {
+    flex: 0 0 auto;
+    width: 25% !important;
   }
 }
 
 @media (min-width: 2560px) {
   .container {
-    min-width: 1440px;
+    min-width: 1505px;
   }
 }
 
 @media (min-width: 3840px) {
   .container {
     min-width: 2160px;
-  }
-
-  .col-xxl-3 {
-    flex: 0 0 auto;
-    width: 25% !important;
   }
 }
