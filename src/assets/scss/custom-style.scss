@@ -57,7 +57,7 @@ p {
   --ivy-text-secondary-color: $ivySecondaryTextLight;
   --ivy-border-color: #{$ivySecondaryButtonHoverLight};
   --header-border-color: #ebebeb;
-  --footer-border-color: #e7e7e7;
+  --ivy-seconadary-border-color: #e7e7e7;
 
   .bg-primary {
     background-color: #{$ivyPrimaryColorLight} !important;
@@ -135,7 +135,7 @@ p {
 
   --ivy-border-color: #{$ivySecondaryTextLight};
   --header-border-color: #{$ivySecondaryTextLight};
-  --footer-border-color: #4f4e4e;
+  --ivy-seconadary-border-color: #4f4e4e;
 
   a {
     color: #{$white};

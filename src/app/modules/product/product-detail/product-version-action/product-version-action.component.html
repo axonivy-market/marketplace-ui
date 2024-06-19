@@ -1,25 +1,27 @@
-<div class="d-flex justify-content-around">
+<div
+  class="product-detail__versions-action position-relative d-flex justify-content-center">
   <button
-    class="btn"
-    style="min-width: 149px"
-    [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'">
+    class="btn btn__install"
+    [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'"
+    (click)="onInstallArtifact()">
     {{ 'common.product.detail.install.buttonLabel' | translate }}
   </button>
   <button
-    class="btn btn-secondary dropdown-toggle"
+    class="btn btn__download btn-secondary dropdown-toggle"
     type="button"
-    style="min-width: 141px"
     (click)="onShowVersionAndArtifact()"
     aria-expanded="false">
     {{ 'common.product.detail.download.buttonLabel' | translate }}
   </button>
-@if (isDropDownDisplayed()) {
-    <div class="dropdown-menu  p-0 show" style="width: 400px; height: 204px;transform: translate3d(80px, 55px, 0px);">
-      <form class="mx-2 mt-1">
-        <div class="form-group ">
-          <label for="artifacts-selector" class="form-label font-size__small">
+  @if (isDropDownDisplayed()) {
+    <div class="up-arrow up-arrow__action"></div>
+    <div class="dropdown-menu show mt-5 maven-artifact-version__action">
+      <form>
+        <div class="form-group">
+          <label for="artifacts-selector" class="form-label fs-small">
             {{
-              'common.product.detail.download.artifactSelector.label' | translate
+              'common.product.detail.download.artifactSelector.label'
+                | translate
             }}
           </label>
           <select
@@ -34,7 +36,7 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="verions-selector" class="form-label mt-2 font-size__small">
+          <label for="verions-selector" class="form-label mt-2 fs-small">
             {{
               'common.product.detail.download.versionSelector.label' | translate
             }}
@@ -50,7 +52,10 @@
             }
           </select>
         </div>
-        <a href="#" class="font-size__small" (click)="onShowDevVersion($event)">
+        <a
+          href="#"
+          class="fs-small text-primary text-decoration-none"
+          (click)="onShowDevVersion($event)">
           {{ 'common.product.detail.download.hideDevVersions' | translate }}
         </a>
         <div class="form-group d-flex justify-content-end">
@@ -64,6 +69,16 @@
           </button>
         </div>
       </form>
+    </div>
+  }
+  @if (isInvalidInstallationEnvironment()) {
+    <div class="up-arrow up-arrow__warning"></div>
+    <div
+      class="dropdown-menu show mt-5 invalid-installation-environment__warning">
+      <p class="fs-small mb-0">
+        Please open the Axon Ivy Market inside your Axon Ivy Designer (minimum
+        version 9.2.0)
+      </p>
     </div>
   }
 </div>

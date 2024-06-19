@@ -1,3 +1,75 @@
-.font-size__small{
-    font-size: small;
+.product-detail__versions-action {
+  min-width: 300px;
+
+  .btn__install {
+    min-width: 149px;
+    margin-right: 10px;
+  }
+
+  .btn__download {
+    min-width: 141px;
+  }
+
+  .fs-small {
+    font-size: 12px;
+  }
+
+  .dev-version__toggle {
+    color: var(--ivy-primary-bg);
+  }
+
+  .dropdown-menu {
+    padding: 10px;
+    border-radius: 5px;
+    gap: 15px;
+    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.1);
+    border: 0.5px solid var(--ivy-seconadary-border-color);
+    &.maven-artifact-version__action {
+      left: 2rem;
+      min-width: 400px;
+      min-height: 204px;
+    }
+    &.invalid-installation-environment__warning {
+      left: -7.5rem;
+      min-width: 371px;
+      min-height: 50px;
+      @media (max-width: 767px) {
+        left: 4.5rem;
+      }
+    }
+  }
+}
+
+.up-arrow {
+  position: absolute;
+  transform: rotate(45deg);
+  top: 0.75rem;
+  z-index: 1001;
+  width: 10px;
+  height: 10px;
+  border-left: 1px solid var(--ivy-seconadary-border-color);
+  border-right: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid var(--ivy-seconadary-border-color);
+  margin: 2rem;
+  background-color: var(--bs-body-bg);
+  &.up-arrow__action {
+    left: 11rem;
+    @media (max-width: 992px) {
+      left: 11.5rem;
+    }
+    @media (max-width: 767px) {
+      left: 17.5rem;
+    }
+  }
+
+  &.up-arrow__warning {
+    left: 2rem;
+    @media (max-width: 992px) {
+      left: 2.5rem;
+    }
+    @media (max-width: 767px) {
+      left: 8.5rem;
+    }
+  }
 }
