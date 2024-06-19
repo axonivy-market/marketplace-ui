@@ -10,4 +10,6 @@ import { StarRatingCountingComponent } from '../../star-rating-counting/star-rat
   templateUrl: './show-feedbacks-dialog.component.html',
   styleUrl: './show-feedbacks-dialog.component.scss'
 })
-export class ShowFeedbacksDialogComponent {}
+export class ShowFeedbacksDialogComponent {
+  
+}

@@ -116,7 +116,7 @@
               font-size: 14px;
               line-height: 120%;
               scrollbar-width: none;
-            "></textarea>
+            " [value]="feedback.content"></textarea>
         </div>
         <button
           class="btn btn-primary border-0"
@@ -148,7 +148,7 @@
               color: #007095;
               cursor: pointer;
             ">
-            StefCH47
+            {{ feedback.userName }}
           </span>
         </div>
       </div>
