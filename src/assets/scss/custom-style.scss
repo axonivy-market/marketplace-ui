@@ -126,7 +126,7 @@ p {
   --bs-secondary-rgb: #{$ivySecondaryColorDarkRGB};
   --bs-tertiary-bg: #{$ivySecondaryColorDarkRGB};
 
-  --ivy-primary-bg: #{$white};
+  --ivy-primary-bg: #{$ivyNormalTextColorLight};
   --ivy-secondary-bg: #{$ivySecondaryColorDark};
   --ivy-active-color: #{$white};
 
@@ -142,7 +142,7 @@ p {
   }
 
   .bg-light {
-    background-color: #{$white} !important;
+    background-color: #{$ivyNormalTextColorLight} !important;
   }
 
   .btn {
