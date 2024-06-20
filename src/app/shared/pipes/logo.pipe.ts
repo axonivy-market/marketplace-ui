@@ -7,9 +7,10 @@ import { Product } from '../models/product.model';
 })
 export class ProductLogoPipe implements PipeTransform {
   transform(product: Product, _args?: []): string {
-    if (product.logoUrl) {
-      return product.logoUrl;
+    let logoUrl = product.logoUrl;
+    if (logoUrl === undefined || logoUrl === '') {
+      logoUrl = `/assets/images/misc/axonivy-logo-round.png`;
     }
-    return `/assets/images/misc/axonivy-logo-round.png`;
+    return logoUrl;
   }
 }
