@@ -13,10 +13,10 @@ import {
   selector: 'app-product-version-action',
   standalone: true,
   imports: [CommonModule, TranslateModule, FormsModule],
-  templateUrl: './product-version-action.component.html',
-  styleUrl: './product-version-action.component.scss'
+  templateUrl: './product-detail-version-action.component.html',
+  styleUrl: './product-detail-version-action.component.scss'
 })
-export class ProductVersionActionComponent {
+export class ProductDetailVersionActionComponent {
   @Input()
   productId!: string;
   versions: string[] = [];
@@ -33,7 +33,6 @@ export class ProductVersionActionComponent {
   productService = inject(ProductService);
   versionMap: Map<string, Artifact[]> = new Map();
 
-
   onInstallArtifact() {
     if (!this.isDesignerEnvironment) {
       this.isInvalidInstallationEnvironment.set(true);
@@ -41,12 +40,11 @@ export class ProductVersionActionComponent {
     }
   }
 
-  onSelectVersion(){
+  onSelectVersion() {
     this.artifacts = this.versionMap.get(this.selectedVersion) || [];
     console.log(this.artifacts.length);
-    
-    if(this.artifacts.length != 0){
-      
+
+    if (this.artifacts.length != 0) {
       this.selectedArtifact = this.artifacts[0];
       console.log(this.selectedArtifact);
     }
@@ -65,7 +63,7 @@ export class ProductVersionActionComponent {
 
   getVersionWithArtifact() {
     this.sanitizeDataBeforFetching();
-    console.log(this.artifacts.length)
+    console.log(this.artifacts.length);
     this.productService
       .sendRequestToProductDetailVersionAPITest(
         this.productId,
@@ -80,9 +78,9 @@ export class ProductVersionActionComponent {
           this.versionMap.set(item.version, item.artifactsByVersion);
         });
 
-        if(this.versions.length !=0){
+        if (this.versions.length != 0) {
           this.selectedVersion = this.versions[0];
-          console.log(this.selectedVersion)
+          console.log(this.selectedVersion);
           this.onSelectVersion();
         }
       });
@@ -94,7 +92,7 @@ export class ProductVersionActionComponent {
     this.selectedArtifact = {} as Artifact;
     this.selectedVersion = '';
   }
-  
+
   downloadArifact() {
     window.open(this.selectedArtifact.downloadUrl, '_blank');
   }
