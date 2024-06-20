@@ -35,10 +35,3 @@ export const apiInterceptor: HttpInterceptorFn = (req, next) => {
     })
   );
 };
-
-function addIvyHeaders(headers: HttpHeaders): HttpHeaders {
-  if (headers.has(REQUEST_BY)) {
-    return headers;
-  }
-  return headers.append(REQUEST_BY, IVY);
-}
