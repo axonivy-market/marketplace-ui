@@ -1,4 +1,5 @@
 common:
+  branch: Axon Ivy Market
   language:
     english: English
     french: Français
@@ -42,16 +43,5 @@ common:
     downloadLatestLTSVersion: Download V10.0.18
     downloadLatestDevVersion: Download V11.2.1
     ivyCompanyInfo: © 2023 Axon Ivy Inc
-    privayPolicy: Privacy Policy
+    privacyPolicy: Privacy Policy
     termsOfService: Terms of Service
-  product:
-    detail:
-      install:
-        buttonLabel: Install Now
-      download:
-        buttonLabel: Download
-        artifactSelector:
-          label: Choose Artifact
-        versionSelector:
-          label: Choose target platform
-        hideDevVersions: Hide development versions

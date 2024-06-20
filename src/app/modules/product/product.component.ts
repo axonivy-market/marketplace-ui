@@ -10,7 +10,6 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subject, Subscription, debounceTime } from 'rxjs';
-import { ThemeService } from '../../core/services/theme/theme.service';
 import { FilterType } from '../../shared/enums/filter-type.enum';
 import { SortType } from '../../shared/enums/sort-type.enum';
 import { Criteria } from '../../shared/models/criteria.model';
@@ -46,7 +45,6 @@ export class ProductComponent implements OnDestroy {
   };
 
   productService = inject(ProductService);
-  themeService = inject(ThemeService);
   translateService = inject(TranslateService);
   router = inject(Router);
 

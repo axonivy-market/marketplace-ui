@@ -31,18 +31,18 @@
     <!-- Language Selection -->
     <div 
       class="d-flex flex-row-reverse flex-lg-row justify-content-between border-top-md-gray header__button">
-      <li class="header__button-right">
+      <li class="header__button--right">
         <app-language-selection></app-language-selection>
       </li>
 
       <!-- Theme Mode -->
-      <li class="header__button-right">
+      <li class="header__button--right">
         <app-theme-selection></app-theme-selection>
       </li>
     </div>
 
     <!-- Collapse Search -->
-    <li class="d-none d-lg-flex header__button-right">
+    <li class="d-none d-lg-flex header__button--right">
       @if (isSearchBarDisplayed()) {
         <div class="header-desktop__search">
           <div class="input-group-prepend h-100">

@@ -55,10 +55,6 @@ export class ProductService {
   }
 
   getProductsByCriteria(criteria: Criteria): Observable<Product[]> {
-    // TODO
-    this.getAllProducts(criteria);
-    // END TODO
-
     let products = MOCK_PRODUCTS;
     products = this.getProductByNameOrDescription(products, criteria.search);
 
