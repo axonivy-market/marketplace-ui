@@ -5,6 +5,7 @@ import { MOCK_PRODUCTS } from '../../../shared/mocks/mock-data';
 import { MockProductService } from '../../../shared/mocks/mock-services';
 import { ProductService } from '../product.service';
 import { ProductDetailComponent } from './product-detail.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('ProductDetailComponent', () => {
   let component: ProductDetailComponent;
@@ -12,25 +13,23 @@ describe('ProductDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProductDetailComponent],
+      imports: [ProductDetailComponent, TranslateModule.forRoot()],
       providers: [
         {
           provide: ActivatedRoute,
           useValue: {
             snapshot: {
-              params: { id: MOCK_PRODUCTS[0].id },
-            },
-          },
-        },
-      ],
+              params: { id: MOCK_PRODUCTS[0].id }
+            }
+          }
+        }
+      ]
     })
       .overrideComponent(ProductDetailComponent, {
         remove: { providers: [ProductService] },
         add: {
-          providers: [
-            { provide: ProductService, useClass: MockProductService },
-          ],
-        },
+          providers: [{ provide: ProductService, useClass: MockProductService }]
+        }
       })
       .compileComponents();
   });

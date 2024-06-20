@@ -14,7 +14,6 @@ import { ProductDetailVersionActionComponent } from './product-detail-version-ac
 })
 export class ProductDetailComponent {
   product!: Product;
-
   route = inject(ActivatedRoute);
   productService = inject(ProductService);
 
