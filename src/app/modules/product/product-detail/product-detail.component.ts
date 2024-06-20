@@ -46,7 +46,6 @@ export class ProductDetailComponent {
   }
 
   receiveInstallationCountData(data: number) {
-    console.log(data);
     this.installationCount = data;
   }
 

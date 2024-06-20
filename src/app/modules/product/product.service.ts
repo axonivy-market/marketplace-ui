@@ -148,8 +148,8 @@ export class ProductService {
     return this.httpClient.get<VersionData[]>(url, { params: params });
   }
 
-  sendRequestToUpdateInstallationCount( productId: string){
+  sendRequestToUpdateInstallationCount(productId: string) {
     let url = 'api/product/installationcount/' + productId;
-    return this.httpClient.post<number>(url, {}, {headers: {'X-Requested-By':'ivy'}});
+    return this.httpClient.post<number>(url, {}, {headers: {'X-Requested-By': 'ivy'}});
   }
 }

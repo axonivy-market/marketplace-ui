@@ -4,7 +4,7 @@ import {
   provideHttpClient,
   withInterceptorsFromDi
 } from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import {HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
 import { FilterType } from '../../shared/enums/filter-type.enum';
 import { SortType } from '../../shared/enums/sort-type.enum';
 import { MOCK_PRODUCTS } from '../../shared/mocks/mock-data';
@@ -17,6 +17,7 @@ const NOT_EXIST_ID = 'undefined';
 
 describe('ProductService', () => {
   let service: ProductService;
+  let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -28,6 +29,11 @@ describe('ProductService', () => {
       ]
     });
     service = TestBed.inject(ProductService);
+    httpMock = TestBed.inject(HttpTestingController);
+  });
+
+  afterEach(() => {
+    httpMock.verify(); // Verify that there are no outstanding requests
   });
 
   it('should be created', () => {
@@ -108,4 +114,18 @@ describe('ProductService', () => {
       expect(products.length).toEqual(MOCK_PRODUCTS.length);
     });
   });
+
+  it('sendRequestToUpdateInstallationCount', () => {
+    const productId = "google-maps-connector";
+
+    service.sendRequestToUpdateInstallationCount(productId).subscribe(response => {
+      expect(response).toBe(3);
+    });
+
+    const req = httpMock.expectOne(`api/product/installationcount/${productId}`);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.headers.get('X-Requested-By')).toBe('ivy');
+    req.flush(3);
+  })
+
 });
