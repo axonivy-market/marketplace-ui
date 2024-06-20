@@ -9,8 +9,6 @@ import { finalize } from 'rxjs';
  */
 export const SkipLoading = new HttpContextToken<boolean>(() => false);
 
-export const REQUEST_BY = 'X-Requested-By';
-export const IVY = 'ivy';
 
 export const apiInterceptor: HttpInterceptorFn = (req, next) => {
   const loadingService = inject(LoadingService);
