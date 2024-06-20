@@ -116,7 +116,7 @@
               font-size: 14px;
               line-height: 120%;
               scrollbar-width: none;
-            " [value]="feedback.content"></textarea>
+            ">{{ feedback?.content }}</textarea>
         </div>
         <button
           class="btn btn-primary border-0"
@@ -127,7 +127,8 @@
             font-weight: 500;
             font-size: 16px;
             line-height: 120%;
-          ">
+          "
+          (click)="onSubmit()">
           Submit review
         </button>
         <div
@@ -148,7 +149,7 @@
               color: #007095;
               cursor: pointer;
             ">
-            {{ feedback.userName }}
+            {{ username }}
           </span>
         </div>
       </div>

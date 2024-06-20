@@ -24,7 +24,7 @@ export class ProductFeedbacksPanelComponent {
   productFeedbackService = inject(ProductFeedbackService);
 
   constructor() {
-    this.loadAllProductFeedback('');
+    this.loadAllProductFeedback('667109f11666e1352a072f8a');
   }
 
   loadAllProductFeedback(productId: string): void {
@@ -32,6 +32,10 @@ export class ProductFeedbacksPanelComponent {
       this.productFeedbackService
         .getAllProductFeedbacks(productId)
         .subscribe(productFeedbacks => {
+          console.log("results:");
+          console.log(productFeedbacks);
+          
+          
           this.productFeedbacks = productFeedbacks;
         })
     );
