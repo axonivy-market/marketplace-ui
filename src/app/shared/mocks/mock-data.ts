@@ -171,6 +171,7 @@ export const MOCK_PRODUCTS = [
       'Clearly authenticate your customers with a mobile phone signature on the web.',
     type: 'connector',
     platformReview: '4.5',
+    installationCount: 10,
     sourceUrl: 'https://github.com/axonivy-market/a-trust-connector',
     statusBadgeUrl:
       'https://github.com/axonivy-market/a-trust-connector/actions/workflows/ci.yml/badge.svg',

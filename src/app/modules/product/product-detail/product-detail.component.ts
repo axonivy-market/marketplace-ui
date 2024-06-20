@@ -9,6 +9,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FilterType } from '../../../shared/enums/filter-type.enum';
 import { MarkdownModule, MarkdownService } from 'ngx-markdown';
 import { MarkdownComponent } from '../markdown/markdown.component';
+import {
+  ProductInstallationCountActionComponent
+} from "./product-installation-count-action/product-installation-count-action.component";
 
 @Component({
   selector: 'app-product-detail',
@@ -19,7 +22,8 @@ import { MarkdownComponent } from '../markdown/markdown.component';
     TranslateModule,
     MarkdownModule,
     MarkdownComponent,
-    ProductVersionActionComponent
+    ProductVersionActionComponent,
+    ProductInstallationCountActionComponent,
   ],
   providers: [ProductService, MarkdownService],
   templateUrl: './product-detail.component.html',
@@ -27,7 +31,7 @@ import { MarkdownComponent } from '../markdown/markdown.component';
 })
 export class ProductDetailComponent {
   product!: Product;
-
+  installationCount!: number;
   route = inject(ActivatedRoute);
   productService = inject(ProductService);
 
@@ -36,8 +40,14 @@ export class ProductDetailComponent {
     if (productId) {
       this.productService.getProductById(productId).subscribe(product => {
         this.product = product;
+        this.installationCount = product.installationCount;
       });
     }
+  }
+
+  receiveInstallationCountData(data: number) {
+    console.log(data);
+    this.installationCount = data;
   }
 
   getTypeIcon() {

@@ -1,4 +1,4 @@
-import { Component, inject, Input, signal } from '@angular/core';
+import {Component, EventEmitter, inject, Input, Output, signal} from '@angular/core';
 import { ThemeService } from '../../../../core/services/theme/theme.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
@@ -17,6 +17,8 @@ import {
   styleUrl: './product-version-action.component.scss'
 })
 export class ProductVersionActionComponent {
+  @Output() installationCount= new EventEmitter<number>();
+
   @Input()
   productId!: string;
   versions: string[] = [];
@@ -44,9 +46,9 @@ export class ProductVersionActionComponent {
   onSelectVersion(){
     this.artifacts = this.versionMap.get(this.selectedVersion) || [];
     console.log(this.artifacts.length);
-    
+
     if(this.artifacts.length != 0){
-      
+
       this.selectedArtifact = this.artifacts[0];
       console.log(this.selectedArtifact);
     }
@@ -94,8 +96,17 @@ export class ProductVersionActionComponent {
     this.selectedArtifact = {} as Artifact;
     this.selectedVersion = '';
   }
-  
+
   downloadArifact() {
     window.open(this.selectedArtifact.downloadUrl, '_blank');
+  }
+
+  onUpdateInstallationCount() {
+    this.productService
+      .sendRequestToUpdateInstallationCount(this.productId)
+      .subscribe((data: number) => {
+        console.log(data);
+        this.installationCount.emit(data);
+      });
   }
 }
