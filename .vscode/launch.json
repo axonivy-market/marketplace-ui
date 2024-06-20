@@ -3,11 +3,11 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch Chrome Debug",
-      "request": "launch",
+      "name": "ng serve",
       "type": "chrome",
-      "url": "http://localhost:4200",
-      "webRoot": "${workspaceFolder}"
+      "request": "launch",
+      "preLaunchTask": "npm: start",
+      "url": "http://localhost:4200/"
     },
     {
       "name": "ng test",
