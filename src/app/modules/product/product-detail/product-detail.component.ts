@@ -10,18 +10,12 @@ import { StarRatingCountingComponent } from '../star-rating-counting/star-rating
 import { AddFeedbackDialogComponent } from "../product-feedbacks-panel/add-feedback-dialog/add-feedback-dialog.component";
 
 @Component({
-    selector: 'app-product-detail',
-    standalone: true,
-    providers: [ProductService],
-    templateUrl: './product-detail.component.html',
-    styleUrl: './product-detail.component.scss',
-    imports: [
-        CommonModule,
-        StarRatingCountingComponent,
-        ProductFeedbacksPanelComponent,
-        ShowFeedbacksDialogComponent,
-        AddFeedbackDialogComponent
-    ]
+  selector: 'app-product-detail',
+  standalone: true,
+  imports: [],
+  providers: [ProductService],
+  templateUrl: './product-detail.component.html',
+  styleUrl: './product-detail.component.scss'
 })
 export class ProductDetailComponent {
   product!: Product;

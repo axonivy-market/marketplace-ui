@@ -1,38 +1,19 @@
-.header {
-  display: flex;
-  justify-content: space-between;
+.navbar {
+  opacity: 0px;
 }
 
-.header__logo {
-  margin-left: 1rem;
+.navbar-brand {
+  padding-top: 0.8rem;
 }
 
 .logo__image {
-  width: 200px;
-  height: 3rem;
-  margin-top: 1rem;
+  width: 130.5px;
+  height: 20px;
   vertical-align: initial;
 }
 
-.header__nav {
-  margin-left: 20rem;
-}
-
-.header__menu--right {
-  margin-right: 5px;
-}
-
-.active-line {
-  display: none;
-  position: relative;
-  height: 2px;
-  width: inherit;
-  background-color: var(--bs-highlight-color);
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: 1rem 58rem 30rem;
+.header__menu-button {
+  font-size: 24px;
 }
 
 @media all and (max-width: 992px) {
@@ -41,7 +22,38 @@
     min-height: 85lvh;
   }
 
-  .border-top-md-gray {
-    border-top: gray solid 1px;
+  .form-control {
+    height: 43px;
+  }
+
+  .navbar {
+    border: none;
+  }
+
+  .navbar-brand {
+    padding: 14.42px 0;
+  }
+
+  .nav-link {
+    height: 45px;
+    padding: 10px 0px 10px 15px;
+    gap: 0px;
+    border-radius: 5px;
+    opacity: 0px;
+  }
+
+  .nav-link.active {
+    height: 45px;
+    padding: 10px 15px 10px -15px;
+    gap: 0px;
+    border-radius: 5px;
+    opacity: 0px;
+    background-color: var(--ivy-secondary-background);
+  }
+}
+
+@media all and (max-width: 1200px) {
+  .header__navbar-content {
+    height: 90vh;
   }
 }

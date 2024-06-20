@@ -1,27 +1,39 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import {
+  Component,
+  WritableSignal,
+  inject,
+  signal
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ThemeService } from '../../../core/services/theme/theme.service';
-import { LANGUAGES, NAV_ITEMS } from '../../constants/common.constant';
 import { Language } from '../../enums/language.enum';
-import { NavItem } from '../../models/nav-item.model';
+import { LanguageSelectionComponent } from './language-selection/language-selection.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { ThemeSelectionComponent } from './theme-selection/theme-selection.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, FormsModule, TranslateModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    TranslateModule,
+    NavigationComponent,
+    ThemeSelectionComponent,
+    LanguageSelectionComponent,
+    SearchBarComponent
+  ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss', '../../../app.component.scss']
 })
 export class HeaderComponent {
   selectedNav = '/';
   selectedLanguage: string = Language.EN_GB;
-  languages = LANGUAGES;
-  isSearchBarDisplayed = false;
-  isMobileMenuCollapsed = true;
 
-  navItems: NavItem[] = NAV_ITEMS;
+  isMobileMenuCollapsed: WritableSignal<boolean> = signal(true);
 
   themeService = inject(ThemeService);
   translateService = inject(TranslateService);
@@ -30,15 +42,7 @@ export class HeaderComponent {
     this.translateService.use(this.selectedLanguage);
   }
 
-  onSelectLanguage(language: string) {
-    this.translateService.use(language);
-  }
-
   onCollapsedMobileMenu() {
-    this.isMobileMenuCollapsed = !this.isMobileMenuCollapsed;
-  }
-
-  onClickSearchIcon() {
-    this.isSearchBarDisplayed = !this.isSearchBarDisplayed;
+    this.isMobileMenuCollapsed.update(value => !value);
   }
 }
