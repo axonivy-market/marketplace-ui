@@ -6,7 +6,6 @@ import { ThemeService } from '../../../core/services/theme/theme.service';
 import { CommonModule } from '@angular/common';
 import { ProductFeedbacksPanelComponent } from '../product-feedbacks-panel/product-feedbacks-panel.component';
 import { ShowFeedbacksDialogComponent } from '../product-feedbacks-panel/show-feedbacks-dialog/show-feedbacks-dialog.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StarRatingCountingComponent } from '../star-rating-counting/star-rating-counting.component';
 import { AddFeedbackDialogComponent } from "../product-feedbacks-panel/add-feedback-dialog/add-feedback-dialog.component";
 
@@ -30,7 +29,6 @@ export class ProductDetailComponent {
   route = inject(ActivatedRoute);
   productService = inject(ProductService);
   themeService = inject(ThemeService);
-  modalService = inject(NgbModal);
   renderer = inject(Renderer2);
   showPopup!: boolean;
 

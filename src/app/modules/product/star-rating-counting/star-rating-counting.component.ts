@@ -5,7 +5,6 @@ import { StarRatingCountingService } from './star-rating-counting.service';
 import { StarRatingHighlightDirective } from './star-rating-highlight.directive';
 import { StarRatingComponent } from '../star-rating/star-rating.component';
 import { CommonModule, DecimalPipe } from '@angular/common';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddFeedbackDialogComponent } from '../product-feedbacks-panel/add-feedback-dialog/add-feedback-dialog.component';
 
 @Component({
@@ -18,7 +17,7 @@ import { AddFeedbackDialogComponent } from '../product-feedbacks-panel/add-feedb
     DecimalPipe,
     CommonModule
   ],
-  providers: [StarRatingCountingService, NgbModal],
+  providers: [StarRatingCountingService],
   templateUrl: './star-rating-counting.component.html',
   styleUrl: './star-rating-counting.component.scss'
 })
@@ -33,7 +32,6 @@ export class StarRatingCountingComponent {
   starRatingCountings: StarRatingCounting[] = [];
   subscriptions: Subscription[] = [];
   starRatingCountingService = inject(StarRatingCountingService);
-  modalService = inject(NgbModal);
 
   constructor() {
     this.loadAllStarRatingCountings();
@@ -115,10 +113,5 @@ export class StarRatingCountingComponent {
       console.error('Error parsing JWT token:', error);
       return false;
     }
-  }
-
-  openModalDialog() {
-    const modalRef = this.modalService.open(AddFeedbackDialogComponent);
-    console.log(modalRef)
   }
 }
