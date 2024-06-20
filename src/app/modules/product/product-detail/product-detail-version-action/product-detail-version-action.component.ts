@@ -4,10 +4,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../product.service';
-import {
-  VersionData,
-  Artifact
-} from '../../../../shared/models/vesion-artifact.model';
+import { Artifact } from '../../../../shared/models/vesion-artifact.model';
 
 @Component({
   selector: 'app-product-version-action',
