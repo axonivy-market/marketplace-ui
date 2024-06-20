@@ -24,4 +24,5 @@ export interface Product {
   installMatcher: string;
   mavenArtifacts: MavenArtifact[];
   contactUs: boolean;
+  installationCount: number;
 }
