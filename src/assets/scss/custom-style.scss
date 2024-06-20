@@ -116,34 +116,34 @@ p {
 
   /** Star Rating Summary **/
   .rating-review-text-color {
-    color: #{$ivySecondaryTextLight};
+    color: #{$ivySecondaryTextLight} !important;
   }
 
   .rating-text-color {
-    color: #{$ivyPrimaryTextColorLight};
+    color: #{$ivyPrimaryTextColorLight} !important;
   }
 
   .star-rating-counting-line {
-    background-color: #{$ivySecondaryColorLight};
+    background-color: #{$ivySecondaryColorLight} !important;
     .star-rating-percent {
-      background-color: #{$ivySecondaryButtonHoverLight};
+      background-color: #{$ivyPrimaryColorLight} !important;
     }
   }
 
   .connector-rate-link {
-    color: #{$ivyPrimaryColorLight};
+    color: #{$ivyPrimaryColorLight} !important;
   }
 
   .expand-toggle-link-color {
-    color: #{$ivyPrimaryColorLight};
+    color: #{$ivyPrimaryColorLight} !important;
   }
 
   .feedback-color {
-    color: #{$ivyPrimaryTextColorLight};
+    color: #{$ivyPrimaryTextColorLight} !important;
   }
 
   .feedback-secondary-color {
-    color: #{$ivySecondaryTextLight};
+    color: #{$ivySecondaryTextLight} !important;
   }
   /** End Star Rating Summary **/
 }
@@ -222,34 +222,34 @@ p {
 
   /** Star Rating Summary **/
   .rating-review-text-color {
-    color: #{$ivySecondaryTextDark};
+    color: #{$ivySecondaryTextDark} !important;
   }
 
   .rating-text-color {
-    color: #{$white};
+    color: #{$white} !important;
   }
 
   .star-rating-counting-line {
-    background-color: #383838;
+    background-color: #383838 !important;
     .star-rating-percent {
-      background-color: #FAFAFA;
+      background-color: #FAFAFA !important;
     }
   }
 
   .connector-rate-link {
-    color: #FAFAFA;
+    color: #FAFAFA !important;
   }
 
   .expand-toggle-link-color {
-    color: #{$ivyPrimaryColorDark};
+    color: #{$ivyPrimaryColorDark} !important;
   }
 
   .feedback-color {
-    color: #{$white};
+    color: #{$white} !important;
   }
 
   .feedback-secondary-color {
-    color: #{$ivySecondaryTextDark};
+    color: #{$ivySecondaryTextDark} !important;
   }
   /** End Star Rating Summary **/
 }

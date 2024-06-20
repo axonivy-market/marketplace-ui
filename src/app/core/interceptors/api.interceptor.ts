@@ -1,9 +1,11 @@
-import { HttpContextToken, HttpInterceptorFn } from '@angular/common/http';
+import { HttpContextToken, HttpHeaders, HttpInterceptorFn } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { LoadingService } from '../services/loading/loading.service';
 import { inject } from '@angular/core';
 import { finalize } from 'rxjs';
 
+export const REQUEST_BY = 'X-Requested-By';
+export const IVY = 'ivy';
 /** This is option for exclude loading api
  * @Example return httpClient.get('apiEndPoint', { context: new HttpContext().set(SkipLoading, true) })
  */
