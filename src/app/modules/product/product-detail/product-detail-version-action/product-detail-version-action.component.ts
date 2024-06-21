@@ -53,34 +53,35 @@ export class ProductDetailVersionActionComponent {
     this.getVersionWithArtifact();
   }
 
-  onShowVersionAndArtifact() {
+  async onShowVersionAndArtifact() {
+    if(!this.isDropDownDisplayed() && this.artifacts.length == 0){
+      await this.getVersionWithArtifact();
+    }
     this.isDropDownDisplayed.set(!this.isDropDownDisplayed());
-    this.getVersionWithArtifact();
   }
 
-  getVersionWithArtifact() {
+  async getVersionWithArtifact() {
     this.sanitizeDataBeforFetching();
-    console.log(this.artifacts.length);
-    this.productService
-      .sendRequestToProductDetailVersionAPITest(
-        this.productId,
-        this.isDevVersionsDisplayed(),
-        this.designerVersion
-      )
-      .subscribe(data => {
-        console.log(data);
-
-        data.forEach(item => {
-          this.versions.push(item.version);
-          this.versionMap.set(item.version, item.artifactsByVersion);
+    try {
+      this.productService
+        .sendRequestToProductDetailVersionAPITest(
+          this.productId,
+          this.isDevVersionsDisplayed(),
+          this.designerVersion
+        )
+        .subscribe(data => {
+          data.forEach(item => {
+            this.versions.push(item.version);
+            this.versionMap.set(item.version, item.artifactsByVersion);
+          });
+          if (this.versions.length != 0) {
+            this.selectedVersion = this.versions[0];
+            this.onSelectVersion();
+          }
         });
-
-        if (this.versions.length != 0) {
-          this.selectedVersion = this.versions[0];
-          console.log(this.selectedVersion);
-          this.onSelectVersion();
-        }
-      });
+    } catch(error) {
+      console.error('API call failed', error);
+    }
   }
 
   sanitizeDataBeforFetching() {

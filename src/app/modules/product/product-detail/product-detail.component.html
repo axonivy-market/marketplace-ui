@@ -1,3 +1,7 @@
-<h1>{{ product.name }}</h1>
-<p>{{ product.description }}</p>
-<app-product-version-action class="align-self-center" [productId]="product.id"></app-product-version-action>
+<section class="d-md-flex d-flex-collumn justify-content-md-between">
+    <div>
+        <h1>{{ product.name }}</h1>
+        <p>{{ product.description }}</p>
+    </div>
+    <app-product-version-action class="align-self-center" [productId]="product.id"></app-product-version-action>
+</section>

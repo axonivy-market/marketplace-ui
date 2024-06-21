@@ -1,15 +1,18 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, firstValueFrom, of } from 'rxjs';
+import { Observable, firstValueFrom, of, tap } from 'rxjs';
 import { FilterType } from '../../shared/enums/filter-type.enum';
 import { SortType } from '../../shared/enums/sort-type.enum';
 import { MOCK_PRODUCTS } from '../../shared/mocks/mock-data';
 import { Criteria } from '../../shared/models/criteria.model';
 import { Product } from '../../shared/models/product.model';
 import { VersionData } from '../../shared/models/vesion-artifact.model';
+import { LoadingService } from '../../core/services/loading/loading.service';
+
 @Injectable()
 export class ProductService {
   httpClient = inject(HttpClient);
+  loadingService = inject(LoadingService);
 
   getProductById(productId: string): Observable<Product> {
     const product = MOCK_PRODUCTS.find(p => p.id === productId);
@@ -76,36 +79,20 @@ export class ProductService {
     }
   }
 
-  sendRequestToProductDetailVersionAPI(
-    productId: string,
-    showDevVersion: boolean,
-    designerVersion: string
-  ) {
-    const params = new HttpParams()
-      .append('designerVersion', designerVersion)
-      .append('showDevVersion', showDevVersion);
-
-    const headers = new HttpHeaders();
-    let url = 'api/product-details/' + productId + '/versions';
-    return firstValueFrom(
-      this.httpClient.get(url, { headers: headers, params: params })
-    )
-      .then((response: any) => {
-        return response;
-      })
-      .catch()
-      .finally();
-  }
-
   sendRequestToProductDetailVersionAPITest(
     productId: string,
     showDevVersion: boolean,
     designerVersion: string
   ): Observable<VersionData[]> {
+    this.loadingService.show();
     let url = 'api/product-details/' + productId + '/versions';
     const params = new HttpParams()
       .append('designerVersion', designerVersion)
       .append('isShowDevVersion', showDevVersion);
-    return this.httpClient.get<VersionData[]>(url, { params: params });
+    return this.httpClient.get<VersionData[]>(url, { params: params }).pipe(
+      tap(()=> {
+        this.loadingService.hide();
+      })
+    );
   }
 }

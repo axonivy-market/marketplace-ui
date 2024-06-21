@@ -45,3 +45,14 @@ common:
     ivyCompanyInfo: © 2023 Axon Ivy Inc
     privacyPolicy: Privacy Policy
     termsOfService: Terms of Service
+  product:
+    detail:
+      install:
+        buttonLabel: Install Now
+      download:
+        buttonLabel: Download
+        hideDevVersions: Hide developement versions
+        versionSelector:
+          label: Choose target platform
+        artifactSelector:
+          label: Choose artifact
