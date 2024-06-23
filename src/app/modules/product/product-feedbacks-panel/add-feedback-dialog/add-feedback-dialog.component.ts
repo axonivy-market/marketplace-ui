@@ -1,27 +1,45 @@
-import { ChangeDetectorRef, Component, Input, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, ViewEncapsulation, inject } from '@angular/core';
 import { Feedback } from '../../../../shared/models/feedback.model';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { JwtService } from '../../../../shared/services/jwt.service';
 import { Observable, catchError, of, switchMap } from 'rxjs';
+import { NgbActiveModal, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-feedback-dialog',
   standalone: true,
   providers: [JwtService],
+  imports: [FormsModule, NgbModule],
   templateUrl: './add-feedback-dialog.component.html',
-  styleUrl: './add-feedback-dialog.component.scss'
+  styleUrl: './add-feedback-dialog.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class AddFeedbackDialogComponent {
-  @Input() productId: string = '667109f11666e1352a072f8a';
+  @Input() productId: string = '6674a23283c3194d33fb8da2';
+  @Input() productName!: string;
   jwtService = inject(JwtService);
   http = inject(HttpClient);
   cd = inject(ChangeDetectorRef);
-  feedback!: Feedback;
-  username: string | null | undefined;
+  feedback = {
+    content: '',
+    rating: 0
+  } as unknown as Feedback;
+  username!: string | null;
+  activeModal = inject(NgbActiveModal);
+  private modalService = inject(NgbModal);
+  private route = inject(ActivatedRoute);
 
   constructor() { }
 
   ngOnInit(): void {
+    this.username = this.jwtService.getCustomFieldFromToken('name');
+    
+    if (!this.username) {
+      this.username = this.jwtService.getCustomFieldFromToken('username');
+    }
     this.fetchFeedbackData().subscribe(() => {
       console.log('Next operations after fetching feedback data');
     });
@@ -30,14 +48,13 @@ export class AddFeedbackDialogComponent {
   fetchFeedbackData() {
     const headers = new HttpHeaders().set('x-requested-by', 'ivy');
     const userId = this.jwtService.getUserIdFromToken();
-    this.username = this.jwtService.getCustomFieldFromToken('name');
     
     let params = new HttpParams().set('productId', this.productId);
     if (userId) {
       params = params.set('userId', userId);
     }
 
-    return this.http.get<Feedback>('http://localhost:8080/api/feedback', { headers, params })
+    return this.http.get<Feedback>('api/feedback', { headers, params })
       .pipe(
         catchError(error => {
           if (error.status === 404) {
@@ -50,8 +67,8 @@ export class AddFeedbackDialogComponent {
           if (response) {
             console.log('Response data:', response);
             this.feedback = response;
-            if (this.feedback.username?.trim() !== '') {
-              this.username = this.feedback.username;
+            if (!this.feedback.username) {
+              this.username = this.feedback.username!;
             }
             console.log('Feedback data:', this.feedback);
           } else {
@@ -67,11 +84,12 @@ export class AddFeedbackDialogComponent {
     // Assume you have a method to get the JWT token from your authentication service
     const token = this.jwtService.getTokenFromCookie('token');
     
-    this.submitFeedback(this.productId, 4, "Ban tuyet voi lam", token!)
+    this.submitFeedback(this.productId, this.feedback.rating, this.feedback.content, token!)
       .subscribe(
         (response) => {
           console.log('Review submitted successfully:', response);
-          // Handle success as needed
+          this.activeModal.dismiss('Cross click');
+          this.modalService.open(SuccessDialogComponent, { centered: true, modalDialogClass: 'add-feedback-modal-dialog' });
         },
         (error) => {
           console.error('Error submitting review:', error);
@@ -92,6 +110,6 @@ export class AddFeedbackDialogComponent {
       content: content
     };
 
-    return this.http.post<any>('http://localhost:8080/api/feedback', feedback, { headers });
+    return this.http.post<any>('api/feedback', feedback, { headers });
   }
 }

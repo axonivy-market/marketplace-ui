@@ -7,6 +7,7 @@ import { ProductFeedbacksPanelComponent } from '../product-feedbacks-panel/produ
 import { ShowFeedbacksDialogComponent } from '../product-feedbacks-panel/show-feedbacks-dialog/show-feedbacks-dialog.component';
 import { StarRatingCountingComponent } from '../star-rating-counting/star-rating-counting.component';
 import { AddFeedbackDialogComponent } from "../product-feedbacks-panel/add-feedback-dialog/add-feedback-dialog.component";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-product-detail',
@@ -24,6 +25,7 @@ export class ProductDetailComponent {
   themeService = inject(ThemeService);
   renderer = inject(Renderer2);
   showPopup!: boolean;
+  private modalService = inject(NgbModal);
 
   @ViewChild(StarRatingCountingComponent) starRatingCountingComponent!: StarRatingCountingComponent;
 
@@ -38,7 +40,7 @@ export class ProductDetailComponent {
     }
     this.route.queryParams.subscribe(params => {
       this.showPopup = params['showPopup'];
-  });
+    });
   }
 
   ngAfterViewInit(): void {
@@ -46,5 +48,9 @@ export class ProductDetailComponent {
       const ratingLinkElement = this.starRatingCountingComponent.ratingLink.nativeElement;
       ratingLinkElement.click();
     }
+  }
+
+  openShowFeedbacksDialog() {
+    this.modalService.open(ShowFeedbacksDialogComponent, { centered: true, modalDialogClass: 'show-feedbacks-modal-dialog' });
   }
 }

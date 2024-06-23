@@ -31,15 +31,16 @@ export class GitAuthComponent {
   }
 
   exchangeCodeForToken(code: string): void {
-    const endpoint = 'http://localhost:8080/auth/exchange-code';
+    const endpoint = 'auth/exchange-code';
     const body = { code };
 
-    const headers = new HttpHeaders().set('x-requested-by', 'ivy').set('withCredentials', 'true');
+    const headers = new HttpHeaders().set('x-requested-by', 'ivy');
 
     // Define an observer with next and error methods
     const observer: Observer<any> = {
       next: response => {
-        console.log('Server response:', response);
+        console.log('Server response:', response.token);
+        document.cookie = 'token=' + response.token +';path=/;max-age=' + (365 * 86400);
         this.router.navigate([`/${this.productId}`], { queryParams: { showPopup: 'true' } });
       },
       error: error => {

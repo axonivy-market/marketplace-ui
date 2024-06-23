@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FEEDBACK_SORT_TYPES } from '../../../../shared/constants/common.constant';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -11,4 +11,11 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class FeedbackFilterComponent {
   feedbackSortTypes = FEEDBACK_SORT_TYPES;
+
+  @Output() sortChange = new EventEmitter<string>();
+
+  onSortChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    this.sortChange.emit(selectElement.value);
+  }
 }

@@ -113,18 +113,22 @@ export const SORT_TYPES = [
 export const FEEDBACK_SORT_TYPES = [
   {
     value: FeedbackSortType.NEWEST,
-    label: 'common.sort.value.newest'
+    label: 'common.sort.value.newest',
+    sortFn: 'updatedAt,desc'
   },
   {
     value: FeedbackSortType.OLDEST,
-    label: 'common.sort.value.oldest'
+    label: 'common.sort.value.oldest',
+    sortFn: 'updatedAt,asc'
   },
   {
     value: FeedbackSortType.HIGHEST,
-    label: 'common.sort.value.highest'
+    label: 'common.sort.value.highest',
+    sortFn: 'rating,desc'
   },
   {
     value: FeedbackSortType.LOWEST,
-    label: 'common.sort.value.lowest'
+    label: 'common.sort.value.lowest',
+    sortFn: 'rating,asc'
   }
 ];

@@ -7,7 +7,7 @@ import {
 import {
   ApplicationConfig,
   importProvidersFrom,
-  provideExperimentalZonelessChangeDetection
+  provideZoneChangeDetection
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -17,7 +17,7 @@ import { apiInterceptor } from './core/interceptors/api.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideExperimentalZonelessChangeDetection(),
+    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(withFetch(), withInterceptors([apiInterceptor])),
     importProvidersFrom(

@@ -10,12 +10,7 @@
         <app-star-rating
           [rating]="reviewNumber"
           [totalComments]="totalComments"></app-star-rating>
-        @if (openRateConnectorDialog()) {
-          <a #ratingLink class="connector-rate-link" data-bs-target="#addFeedbackModal" data-bs-toggle="modal" style="cursor: pointer;">Rate this connector</a>
-        }
-        @else {
-          <a #ratingLink class="connector-rate-link" style="cursor: pointer;" (click)="onClickRateThisConnector()">Rate this connector</a>
-        }
+          <a #ratingLink class="connector-rate-link" (click)="openRateConnectorDialog()" style="cursor: pointer;">Rate this connector</a>
       </div>
     </div>
     <div [ngClass]="{'col-sm-9 col-6': !isDisplayInDialog, 'col-12': isDisplayInDialog}" class="text-start d-lg-block">

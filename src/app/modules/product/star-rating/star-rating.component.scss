@@ -1,26 +1,35 @@
-.product-data-info {
-  .star-feedback-default {
-    display: inline-block;
-    width: 25.64px;
-    height: 25.64px;
-    text-align: center;
-  }
+i {
+  position: relative;
+  display: inline-block;
+  color: #b0b0b0;
+  line-height: 110%;
+}
 
-  .star-feedback-panel {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    text-align: center;
-  }
+.filled {
+  color: #1b1b1b;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
-  .total-comments {
-    display: inline-block;
-    width: 36px;
-    height: 25px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 140%;
-  }
+.total-comments {
+  display: inline-block;
+  width: 36px;
+  height: 25px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+}
+
+.star-feedback-default {
+  font-size: 17px;
+  padding-right: 10px;
+}
+
+.star-feedback-panel {
+  font-size: 10px;
+  padding-right: 3px;
 }

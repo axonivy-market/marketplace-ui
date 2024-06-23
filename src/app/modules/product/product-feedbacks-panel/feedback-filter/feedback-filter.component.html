@@ -4,9 +4,10 @@
     class="form-select"
     aria-label="sort"
     name="sort"
+    (change)="onSortChange($event)"
     style="border-radius: 10px; font-size: 14px; line-height: 120%; font-weight: 400; padding: 10px 15px 10px auto; height: 37px; cursor: pointer;">
     @for (type of feedbackSortTypes; track $index) {
-      <option [value]="type.value">
+      <option [value]="type.sortFn">
         {{ type.label | translate }}
       </option>
     }

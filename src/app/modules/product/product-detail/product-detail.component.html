@@ -1,10 +1,21 @@
 <h1>{{ product.name }}</h1>
 <p>{{ product.description }}</p>
 <app-star-rating-counting
-  productId="{{ product.id }}"
+  [productName]="product.name"
   platformReview="{{ product.platformReview }}" />
 <app-product-feedbacks-panel></app-product-feedbacks-panel>
-
-<!-- Modal -->
-<app-show-feedbacks-dialog />
-<app-add-feedback-dialog />
+<div class="d-flex flex-row justify-content-center hide-on-small">
+  <button
+    class="btn border-0 btn-secondary"
+    style="
+      margin-top: 48px;
+      border-radius: 10px;
+      padding: 12px 50px;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 120%;
+    "
+    (click)="openShowFeedbacksDialog()">
+    Show more
+  </button>
+</div>

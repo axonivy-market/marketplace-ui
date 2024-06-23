@@ -1,13 +1,12 @@
-<div class="product-data-info rating-text-color">
-  @for (_ of fullStars; track $index) {
-    <i class="bi bi-star-fill {{starFeedbackClassName}}"></i>
-  }
-  @if (isHalfStar) {
-    <i class="bi bi-star-half {{starFeedbackClassName}}"></i>
-  }
-  @for (_ of emptyStars; track $index) {
-    <i class="bi bi-star {{starFeedbackClassName}}"></i>
-  }
+<div>
+  <ng-template #t let-fill="fill">
+    <i class="bi-star-fill {{starFeedbackClassName}}">
+      @if (fill > 0) {
+        <i class="bi-star-fill filled" [style.width.%]="fill"></i>
+      }
+    </i>
+  </ng-template>
+  <ngb-rating [(rate)]="rating" [max]="5" [starTemplate]="t" [readonly]="true" ></ngb-rating>
   @if (isTotalCommentsVisibility) {
     <span class="total-comments rating-review-text-color">
       ({{ totalComments }})

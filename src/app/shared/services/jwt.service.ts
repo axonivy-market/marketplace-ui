@@ -19,6 +19,7 @@ export class JwtService {
     const token = this.getTokenFromCookie('token');
     if (token) {
       const decoded: any = jwtDecode(token);
+      
       return decoded[fieldName] ?? null;
     }
     return null;

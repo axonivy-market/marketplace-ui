@@ -6,6 +6,7 @@ import { StarRatingHighlightDirective } from './star-rating-highlight.directive'
 import { StarRatingComponent } from '../star-rating/star-rating.component';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { AddFeedbackDialogComponent } from '../product-feedbacks-panel/add-feedback-dialog/add-feedback-dialog.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-star-rating-counting',
@@ -23,6 +24,7 @@ import { AddFeedbackDialogComponent } from '../product-feedbacks-panel/add-feedb
 })
 export class StarRatingCountingComponent {
   @Input() productId: string = 'abc';
+  @Input() productName!: string;
   @Input() platformReview: string = '3.5';
   @Input() isDisplayInDialog: boolean = false;
   @ViewChild('ratingLink', { static: false }) ratingLink!: ElementRef;
@@ -32,6 +34,7 @@ export class StarRatingCountingComponent {
   starRatingCountings: StarRatingCounting[] = [];
   subscriptions: Subscription[] = [];
   starRatingCountingService = inject(StarRatingCountingService);
+  private modalService = inject(NgbModal);
 
   constructor() {
     this.loadAllStarRatingCountings();
@@ -61,7 +64,7 @@ export class StarRatingCountingComponent {
   }
 
   onClickRateThisConnector(): void {
-    let redirectUri = `http://localhost:4200/auth/callback?productId=${this.productId}`;
+    let redirectUri = `http://localhost:4200/auth/callback?productId=${this.productName}`;
     let clientId = 'Ov23liUzb36JCQIfEBGn';
     let githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}`;
     window.location.href = githubAuthUrl;
@@ -80,7 +83,13 @@ export class StarRatingCountingComponent {
     const tokenExpiryValid = this.isTokenValid(token); // Implement this method to check token validity
     console.log(tokenExpiryValid);
 
-    return token && tokenExpiryValid;
+    if (token && tokenExpiryValid) {
+      const modalRef = this.modalService.open(AddFeedbackDialogComponent, {centered: true, modalDialogClass: 'add-feedback-modal-dialog'});
+      modalRef.componentInstance.productName = this.productName;
+    }
+    else {
+      this.onClickRateThisConnector();
+    }
   }
 
   getTokenFromCookie(): string {

@@ -7,7 +7,7 @@
       style="font-size: 18px; font-weight: 400; line-height: 140%">
       Feedbacks
     </span>
-    <app-feedback-filter />
+    <app-feedback-filter (sortChange)="onSortChange($event)" />
   </div>
   @if (isScrollable) {
     <div
@@ -27,21 +27,3 @@
     </div>
   }
 </div>
-@if (isBtnShowMoreVisible) {
-  <div class="d-flex flex-row justify-content-center">
-    <button
-      class="btn border-0 btn-secondary"
-      style="
-        margin-top: 48px;
-        border-radius: 10px;
-        padding: 12px 50px;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 120%;
-      "
-      data-bs-toggle="modal"
-      data-bs-target="#showFeedbacksModal">
-      Show more
-    </button>
-  </div>
-}
