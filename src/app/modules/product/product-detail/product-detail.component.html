@@ -30,13 +30,19 @@
         <div
           class="d-flex flex-row align-items-center p-0"
           style="gap: 10px; margin: 0 auto">
-          version
+          <app-product-version-action
+            [productId]="productDetail().id"
+            (versionChanged)="
+              loadDetailTabs($event)
+            "></app-product-version-action>
         </div>
       </div>
     </div>
     <div class="d-flex flex-row align-items-start p-0" style="gap: 72px">
       <div class="d-flex flex-column align-items-start p-0" style="gap: 10px">
-        <h4 class="text-secondary">Review</h4>
+        <h4 class="text-secondary">
+          {{ 'common.product.detail.review' | translate }}
+        </h4>
         <h2 class="text-primary">{{ productDetail().platformReview }}</h2>
         <app-star-rating
           class="d-flex flex-row justify-content-center align-items-start p-0"
@@ -44,14 +50,20 @@
           [rating]="productDetail().platformReview!"></app-star-rating>
       </div>
       <div class="d-flex flex-column align-items-start p-0" style="gap: 10px">
-        <h4 class="text-secondary">Installations</h4>
+        <h4 class="text-secondary">
+          {{ 'common.product.detail.installation' | translate }}
+        </h4>
         <h2 class="text-primary">46</h2>
-        <h4 class="text-primary">Times</h4>
+        <h4 class="text-primary">
+          {{ 'common.product.detail.times' | translate }}
+        </h4>
       </div>
       <div class="d-flex flex-column align-items-start p-0" style="gap: 10px">
-        <h4 class="text-secondary">Type</h4>
+        <h4 class="text-secondary">
+          {{ 'common.product.detail.type' | translate }}
+        </h4>
         <h2>
-          <i [className]="getTypeIcon()"></i>
+          <i [class]="getTypeIcon()"></i>
         </h2>
         <h4 class="text-primary">{{ productDetail().type }}</h4>
       </div>
@@ -71,35 +83,22 @@
           style="gap: 32px">
           <ul class="nav nav-tabs form-tabs" role="tablist">
             <li
-              class="nav-item active d-flex flex-row justify-content-center align-items-start"
+              class="nav-item d-flex flex-row justify-content-center align-items-start"
               style="padding: 15px; gap: 10px; border: 0 0 1 0"
               role="presentation">
               <a
-                class="nav-link"
+                class="nav-link active"
                 id="description-tab"
                 data-bs-toggle="tab"
                 href="#description"
-                role="tab">
-                Description
-              </a>
-            </li>
-            <li
-              class="nav-item active d-flex flex-row justify-content-center align-items-start"
-              style="padding: 15px; gap: 10px"
-              role="presentation">
-              <a
-                class="nav-link"
-                id="setup-tab"
-                data-bs-toggle="tab"
-                href="#setup"
                 role="tab"
-                aria-controls="setup"
-                aria-selected="false">
-                Installation guide
+                aria-controls="description"
+                aria-selected="true">
+                {{ 'common.product.detail.description' | translate }}
               </a>
             </li>
             <li
-              class="nav-item active d-flex flex-row justify-content-center align-items-start"
+              class="nav-item d-flex flex-row justify-content-center align-items-start"
               style="padding: 15px; gap: 10px"
               role="presentation">
               <a
@@ -110,70 +109,86 @@
                 role="tab"
                 aria-controls="demo"
                 aria-selected="false">
-                Demo
+                {{ 'common.product.detail.demo' | translate }}
               </a>
             </li>
             <li
-              class="nav-item active d-flex flex-row justify-content-center align-items-start"
+              class="nav-item d-flex flex-row justify-content-center align-items-start"
               style="padding: 15px; gap: 10px"
               role="presentation">
               <a
                 class="nav-link"
-                id="dependency-tab"
+                id="setup-tab"
                 data-bs-toggle="tab"
-                href="#dependency"
+                href="#setup"
                 role="tab"
-                aria-controls="dependency"
-                aria-selected="true">
-                Maven
+                aria-controls="setup"
+                aria-selected="false">
+                {{ 'common.product.detail.installationGuide' | translate }}
               </a>
             </li>
+            @if (readme().isDependency) {
+              <li
+                class="nav-item d-flex flex-row justify-content-center align-items-start"
+                style="padding: 15px; gap: 10px"
+                role="presentation">
+                <a
+                  class="nav-link"
+                  id="dependency-tab"
+                  data-bs-toggle="tab"
+                  href="#dependency"
+                  role="tab"
+                  aria-controls="dependency"
+                  aria-selected="false">
+                  {{ 'common.product.detail.maven.label' | translate }}
+                </a>
+              </li>
+            }
           </ul>
 
-          <ul class="tab-content">
-            @if (readme().description) {
-              <li
-                class="tab-pane show active"
-                id="description"
-                role="tabpanel"
-                aria-labelledby="description-tab">
-                <markdown
-                  class="readme-content col-lg-7 col-md-7 col-sm-5"
-                  [data]="readme().description"></markdown>
-              </li>
-            }
-            @if (readme().demo) {
-              <li
-                class="tab-pane"
-                id="demo"
-                role="tabpanel"
-                aria-labelledby="demo-tab">
-                <markdown
-                  class="readme-content col-lg-7 col-md-7 col-sm-5"
-                  [data]="readme().demo"></markdown>
-              </li>
-            }
-            @if (readme().setup) {
-              <li
-                class="tab-pane"
-                id="setup"
-                role="tabpanel"
-                aria-labelledby="setup-tab">
-                <markdown
-                  class="readme-content col-lg-7 col-md-7 col-sm-5"
-                  [data]="readme().setup"></markdown>
-              </li>
-            }
-
-            <li
-              class="tab-pane"
+          <div class="tab-content">
+            <div
+              class="tab-pane fade show active"
+              id="description"
+              role="tabpanel"
+              aria-labelledby="description-tab">
+              <markdown
+                class="readme-content col-lg-7 col-md-7 col-sm-5"
+                [data]="readme().description"></markdown>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="demo"
+              role="tabpanel"
+              aria-labelledby="demo-tab">
+              <markdown
+                class="readme-content col-lg-7 col-md-7 col-sm-5"
+                [data]="readme().demo"></markdown>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="setup"
+              role="tabpanel"
+              aria-labelledby="setup-tab">
+              <markdown
+                class="readme-content col-lg-7 col-md-7 col-sm-5"
+                [data]="readme().setup"></markdown>
+            </div>
+            <div
+              class="tab-pane fade"
               id="dependency"
               role="tabpanel"
-              aria-labelledby="contact-tab">
-              You can consume it as maven artifact in your
-              <i>pom.xml</i>
-            </li>
-          </ul>
+              aria-labelledby="dependency-tab">
+              <p>{{ 'common.product.detail.maven.description' | translate }}</p>
+              <pre><code>&lt;!-- {{ readme().name }} --&gt;
+      &lt;dependency&gt;
+        &lt;groupId&gt;{{ readme().groupId }}&lt;/groupId&gt;
+        &lt;artifactId&gt;{{ readme().artifactId }}&lt;/artifactId&gt;
+        &lt;version&gt;{{ readme().tag }}&lt;/version&gt;
+        &lt;type&gt;{{ readme().type }}&lt;/type&gt;
+      &lt;/dependency&gt;</code></pre>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -183,54 +198,77 @@
     <div
       class="d-flex flex-column align-items-start"
       style="padding: 15px; gap: 16px; flex-grow: 1">
-      <h3 class="text-primary">Information</h3>
+      <h3 class="text-primary">
+        {{ 'common.product.detail.information.label' | translate }}
+      </h3>
       <div class="d-flex flex-column p-0" style="gap: 8px; width: 100%">
         <div class="d-flex flex-row justify-content-between p-0">
-          <span class="text-secondary">Author/Support</span>
-          <span class="text-primary">Axon Ivy</span>
+          <span class="text-secondary">
+            {{ 'common.product.detail.information.value.author' | translate }}
+          </span>
+          <span class="text-primary">{{ productDetail().vendor }}</span>
         </div>
         <hr />
         <div class="d-flex flex-row justify-content-between p-0">
-          <span class="text-secondary">Version</span>
+          <span class="text-secondary">
+            {{ 'common.product.detail.information.value.version' | translate }}
+          </span>
           <span class="text-primary">
             {{ productDetail().newestReleaseVersion }}
           </span>
         </div>
         <hr />
         <div class="d-flex flex-row justify-content-between p-0">
-          <span class="text-secondary">Compability</span>
+          <span class="text-secondary">
+            {{
+              'common.product.detail.information.value.compatibility'
+                | translate
+            }}
+          </span>
           <span class="text-primary">{{ productDetail().compatibility }}</span>
         </div>
         <hr />
         <div class="d-flex flex-row justify-content-between p-0">
-          <span class="text-secondary">Cost</span>
+          <span class="text-secondary">
+            {{ 'common.product.detail.information.value.cost' | translate }}
+          </span>
           <span class="text-primary">{{ productDetail().cost }}</span>
         </div>
         <hr />
         <div class="d-flex flex-row justify-content-between p-0">
-          <span class="text-secondary">Language</span>
+          <span class="text-secondary">
+            {{ 'common.product.detail.information.value.language' | translate }}
+          </span>
           <span class="text-primary">{{ productDetail().language }}</span>
         </div>
         <hr />
         <div class="d-flex flex-row justify-content-between p-0">
-          <span class="text-secondary">Type</span>
+          <span class="text-secondary">
+            {{ 'common.product.detail.type' | translate }}
+          </span>
           <span class="text-primary">{{ productDetail().type }}</span>
         </div>
         <hr />
         <div class="d-flex flex-row justify-content-between p-0">
-          <span class="text-secondary">Industry</span>
+          <span class="text-secondary">
+            {{ 'common.product.detail.information.value.industry' | translate }}
+          </span>
           <span class="text-primary">{{ productDetail().industry }}</span>
         </div>
         <hr />
         <div class="d-flex flex-row justify-content-between p-0">
-          <span class="text-secondary">Tag</span>
+          <span class="text-secondary">
+            {{ 'common.product.detail.information.value.tag' | translate }}
+          </span>
           <span class="text-primary">
             {{ productDetail().tags ? productDetail().tags!.join(', ') : '' }}
           </span>
         </div>
         <hr />
         <div class="d-flex flex-row justify-content-between p-0">
-          <span class="text-secondary">Source</span>
+          <span class="text-secondary">
+            {{ 'common.product.detail.information.value.source' | translate }}
+          </span>
           <span>
             <a
               class="text-primary"
@@ -242,14 +280,21 @@
         </div>
         <hr />
         <div class="d-flex flex-row justify-content-between p-0">
-          <span class="text-secondary">Status</span>
+          <span class="text-secondary">
+            {{ 'common.product.detail.information.value.status' | translate }}
+          </span>
           <img
             style="height: 20.36px; border-radius: 2px"
             src="{{ productDetail().statusBadgeUrl }}" />
         </div>
         <hr />
         <div class="d-flex flex-row justify-content-between p-0">
-          <span class="text-secondary">More Information</span>
+          <span class="text-secondary">
+            {{
+              'common.product.detail.information.value.moreInformation'
+                | translate
+            }}
+          </span>
           <span>
             <a
               class="text-primary"
@@ -257,7 +302,9 @@
               href="https://www.axonivy.com/marketplace/contact/?market_solutions= + {{
                 productDetail().id
               }}">
-              Contact us
+              {{
+                'common.product.detail.information.value.contactUs' | translate
+              }}
             </a>
           </span>
         </div>

@@ -21,18 +21,17 @@ describe('ProductDetailComponent', () => {
           useValue: {
             snapshot: {
               params: { id: products[0].id },
-            },
-          },
-        },
-      ],
+              queryParams: { type: products[0].type }
+            }
+          }
+        }
+      ]
     })
       .overrideComponent(ProductDetailComponent, {
         remove: { providers: [ProductService] },
         add: {
-          providers: [
-            { provide: ProductService, useClass: MockProductService },
-          ],
-        },
+          providers: [{ provide: ProductService, useClass: MockProductService }]
+        }
       })
       .compileComponents();
   });
@@ -44,6 +43,6 @@ describe('ProductDetailComponent', () => {
   });
 
   it('should create', () => {
-    expect(component.product.name).toEqual(products[0].name);
+    expect(component.productDetail.name).toEqual(products[0].name);
   });
 });

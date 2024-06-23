@@ -44,3 +44,29 @@ common:
     ivyCompanyInfo: © 2023 Axon Ivy Inc
     privayPolicy: Privacy Policy
     termsOfService: Terms of Service
+  product:
+    detail:
+      review: Review
+      installation: Installations
+      times: Times
+      type: Type
+      description: Description
+      installationGuide: Installation Guide
+      demo: Demo
+      maven:
+        label: Maven
+        description: You can consume it as maven artifact in your <i>pom.xml</i>
+      information:
+        label: Information
+        value:
+          author: Author/Support
+          version: Version
+          compatibility: Compatibility
+          cost: Cost
+          language: Language
+          industry: Industry
+          tag: Tag
+          source: Source
+          status: Status
+          moreInformation: More Information
+          contactUs: Contact Us

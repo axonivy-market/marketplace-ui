@@ -44,3 +44,29 @@ common:
     ivyCompanyInfo: © 2023 Axon Ivy Inc
     privayPolicy: Datenschutzrichtlinie
     termsOfService: Nutzungsbedingungen
+  product:
+    detail:
+      review: TODO Review
+      installation: TODO Installations
+      times: TODO Times
+      type: TODO Type
+      description: TODO Description
+      installationGuide: TODO Installation Guide
+      demo: TODO Demo
+      maven:
+        label: TODO Maven
+        description: TODO You can consume it as maven artifact in your <i>pom.xml</i>
+      information:
+        label: TODO Information
+        value:
+          author: TODO Author/Support
+          version: TODO Version
+          compatibility: TODO Compatibility
+          cost: TODO Cost
+          language: TODO Language
+          industry: TODO Industry
+          tag: TODO Tag
+          source: TODO Source
+          status: TODO Status
+          moreInformation: TODO More Information
+          contactUs: TODO Contact Us

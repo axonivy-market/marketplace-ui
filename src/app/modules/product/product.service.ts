@@ -1,9 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { MOCK_PRODUCTS } from '../../shared/mocks/mock-data';
+import { Observable } from 'rxjs';
 import { Criteria } from '../../shared/models/criteria.model';
-import { Product } from '../../shared/models/product.model';
 import { RequestParam } from '../../shared/enums/request-param';
 import { ProductApiResponse } from '../../shared/models/apis/product-response.model';
 import { ProductDetail } from '../../shared/models/product-detail.model';
@@ -39,9 +37,12 @@ export class ProductService {
     );
   }
 
-  getReadmeFile(productId: string, tag: string): Observable<Readme> {
+  getReadmeAndProductContentsFromTag(
+    productId: string,
+    tag: string
+  ): Observable<Readme> {
     return this.httpClient.get<Readme>(
-      `api/product-details/${productId}?tag=${tag}`
+      `api/product-details/${productId}/readme?tag=${tag}`
     );
   }
 }
