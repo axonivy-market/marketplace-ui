@@ -88,7 +88,10 @@
               role="presentation">
               <a
                 class="nav-link active"
+                [class.active]="activeTab === 'description'"
                 id="description-tab"
+                (click)="setActiveTab('description')"
+                fragment="tab-description"
                 data-bs-toggle="tab"
                 href="#description"
                 role="tab"
@@ -103,7 +106,10 @@
               role="presentation">
               <a
                 class="nav-link"
+                [class.active]="activeTab === 'demo'"
                 id="demo-tab"
+                (click)="setActiveTab('demo')"
+                fragment="tab-demo"
                 data-bs-toggle="tab"
                 href="#demo"
                 role="tab"
@@ -118,7 +124,10 @@
               role="presentation">
               <a
                 class="nav-link"
+                [class.active]="activeTab === 'setup'"
                 id="setup-tab"
+                (click)="setActiveTab('setup')"
+                fragment="tab-setup"
                 data-bs-toggle="tab"
                 href="#setup"
                 role="tab"
@@ -134,7 +143,10 @@
                 role="presentation">
                 <a
                   class="nav-link"
+                  [class.active]="activeTab === 'dependency'"
                   id="dependency-tab"
+                  (click)="setActiveTab('dependency')"
+                  fragment="tab-dependency"
                   data-bs-toggle="tab"
                   href="#dependency"
                   role="tab"
@@ -148,7 +160,7 @@
 
           <div class="tab-content">
             <div
-              class="tab-pane fade show active"
+              class="tab-pane fade show in active"
               id="description"
               role="tabpanel"
               aria-labelledby="description-tab">
