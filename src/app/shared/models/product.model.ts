@@ -1,12 +1,12 @@
 import { MavenArtifact } from './maven-artifact.model';
 
 export interface Product {
-  $schema: string;
   id: string;
   version: string;
   name: string;
-  description: string;
+  shortDescription: string;
   type: string;
+  logoUrl: string;
   cost: string;
   platformReview: string;
   vendor: string;
@@ -24,4 +24,9 @@ export interface Product {
   installMatcher: string;
   mavenArtifacts: MavenArtifact[];
   contactUs: boolean;
+  _links?: {
+    self: {
+      href: string;
+    };
+  };
 }

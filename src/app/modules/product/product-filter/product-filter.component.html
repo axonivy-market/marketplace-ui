@@ -5,17 +5,17 @@
   <div class="filter-container d-flex justify-content-between w-auto mb-4">
     <!-- Filter type -->
     <div class="filter-container__button d-none d-md-flex">
-      @for (type of filterTypes; track $index) {
+      @for (type of types; track $index) {
         <div
-          (click)="onSelectFilterType(type.value)"
+          (click)="onSelectType(type.value)"
           class="filter-type border"
           [ngClass]="{
             'border-light text-light': themeService.isDarkMode(),
             'border-dark text-dark': !themeService.isDarkMode(),
             'bg-light text-dark':
-              selectedFilterType === type.value && themeService.isDarkMode(),
+              selectedType === type.value && themeService.isDarkMode(),
             'bg-primary border-0 text-light':
-              selectedFilterType === type.value && !themeService.isDarkMode()
+              selectedType === type.value && !themeService.isDarkMode()
           }">
           <p>
             {{ type.label | translate }}
@@ -25,12 +25,12 @@
     </div>
     <div class="col-6 d-md-block d-md-none">
       <select
-        [(ngModel)]="selectedFilterType"
-        (ngModelChange)="onSelectFilterType($event)"
+        [(ngModel)]="selectedType"
+        (ngModelChange)="onSelectType($event)"
         class="form-select border-primary filter-type--select w-auto"
         aria-label="sort"
         name="sort">
-        @for (type of filterTypes; track $index) {
+        @for (type of types; track $index) {
           <option [value]="type.value">
             {{ type.label | translate }}
           </option>
@@ -45,12 +45,12 @@
         {{ translateService.get('common.sort.label') | async }}:
       </h4>
       <select
-        [(ngModel)]="selectedSortType"
+        [(ngModel)]="selectedSort"
         (ngModelChange)="onSortChange()"
         class="form-select text-primary border-primary sort-type w-50 ms-2"
         aria-label="sort"
         name="sort">
-        @for (type of sortTypes; track $index) {
+        @for (type of sorts; track $index) {
           <option class="border-danger" [value]="type.value">
             {{ type.label | translate }}
           </option>

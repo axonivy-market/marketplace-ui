@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { By } from '@angular/platform-browser';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { FilterType } from '../../../shared/enums/filter-type.enum';
-import { SortType } from '../../../shared/enums/sort-type.enum';
+import { TypeOption } from '../../../shared/enums/type-option.enum';
+import { SortOption } from '../../../shared/enums/sort-option.enum';
 import { ProductFilterComponent } from './product-filter.component';
 import { Viewport } from 'karma-viewport/dist/adapter/viewport';
 
@@ -28,13 +28,13 @@ describe('ProductFilterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('onSelectedFilterType should update selectedFilterType correctly', () => {
+  it('onSelectedType should update selectedTypeOption correctly', () => {
     const filterElement = fixture.debugElement.queryAll(
       By.css('.filter-type')
     )[1].nativeElement as HTMLDivElement;
 
     filterElement.dispatchEvent(new Event('click'));
-    expect(component.selectedFilterType).toEqual(FilterType.CONNECTORS);
+    expect(component.selectedType).toEqual(TypeOption.CONNECTORS);
   });
 
   it('filter type should change to selectbox in small screen', () => {
@@ -56,14 +56,14 @@ describe('ProductFilterComponent', () => {
     expect(getComputedStyle(sortLabel.nativeElement).display).toBe('none');
   });
 
-  it('onSortChange should update selectedSortType correctly', () => {
+  it('onSortChange should update selectedSortOption correctly', () => {
     const select: HTMLSelectElement = fixture.debugElement.query(
       By.css('.sort-type')
     ).nativeElement;
     select.value = select.options[2].value;
     select.dispatchEvent(new Event('change'));
     fixture.detectChanges();
-    expect(component.selectedSortType).toEqual(SortType.RECENT);
+    expect(component.selectedSort).toEqual(SortOption.RECENT);
   });
 
   it('search should update searchText correctly', () => {
