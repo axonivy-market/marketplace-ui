@@ -1,9 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
-  EventEmitter,
-  Input,
-  Output,
   WritableSignal,
   inject,
   signal
@@ -11,13 +8,11 @@ import {
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ThemeService } from '../../../core/services/theme/theme.service';
-import { NAV_ITEMS } from '../../constants/common.constant';
 import { Language } from '../../enums/language.enum';
-import { NavItem } from '../../models/nav-item.model';
-import { ThemeSelectionComponent } from './theme-selection/theme-selection.component';
 import { LanguageSelectionComponent } from './language-selection/language-selection.component';
-import { SearchBarComponent } from './search-bar/search-bar.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { ThemeSelectionComponent } from './theme-selection/theme-selection.component';
 
 @Component({
   selector: 'app-header',

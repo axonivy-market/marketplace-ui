@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
+  ElementRef,
   EventEmitter,
+  HostListener,
   Input,
   Output,
   inject,
@@ -28,6 +30,14 @@ export class SearchBarComponent {
   @Output() isShowSearchBarChange = new EventEmitter<boolean>();
 
   translateService = inject(TranslateService);
+  elementRef = inject(ElementRef);
+
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: MouseEvent) {
+    if (!this.elementRef.nativeElement.contains(event.target)) {
+      this.isSearchBarDisplayed.set(false);
+    }
+  }
 
   onClickSearchIcon() {
     this.isSearchBarDisplayed.set(true);

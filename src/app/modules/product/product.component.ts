@@ -14,8 +14,8 @@ import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subject, Subscription, debounceTime } from 'rxjs';
 import { ThemeService } from '../../core/services/theme/theme.service';
-import { FilterType } from '../../shared/enums/filter-type.enum';
-import { SortType } from '../../shared/enums/sort-type.enum';
+import { TypeOption } from '../../shared/enums/type-option.enum';
+import { SortOption } from '../../shared/enums/sort-option.enum';
 import { Criteria } from '../../shared/models/criteria.model';
 import { Product } from '../../shared/models/product.model';
 import { ProductCardComponent } from './product-card/product-card.component';
@@ -47,8 +47,8 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
   searchTextChanged = new Subject<string>();
   criteria: Criteria = {
     search: '',
-    type: FilterType.All_TYPES,
-    sort: SortType.POPULARITY
+    type: TypeOption.All_TYPES,
+    sort: SortOption.POPULARITY
   };
   responseLink!: Link;
   responsePage!: Page;
@@ -149,6 +149,65 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
       this.responsePage.number < this.responsePage.totalPages &&
       this.responseLink?.next !== undefined
     );
+  }
+
+  onFilterChange(selectedType: TypeOption) {
+    this.criteria = {
+      ...this.criteria,
+      nextPageHref: '',
+      type: selectedType
+    };
+    this.loadProductItems(true);
+  }
+
+  onSortChange(selectedSort: SortOption) {
+    this.criteria = {
+      ...this.criteria,
+      nextPageHref: '',
+      sort: selectedSort
+    };
+    this.loadProductItems(true);
+  }
+
+  onSearchChanged(searchString: string) {
+    this.searchTextChanged.next(searchString);
+  }
+
+  loadProductItems(shouldCleanData = false) {
+    this.subscriptions.push(
+      this.productService.findProductsByCriteria(this.criteria).subscribe((response: ProductApiResponse) => {
+        const newProducts = response._embedded.products;
+        if (shouldCleanData) {
+          this.products.set(newProducts);
+        } else {
+          this.products.update(existingProducts => existingProducts.concat(newProducts));
+        }
+        this.responseLink = response._links;
+        this.responsePage = response.page;
+      })
+    );
+  }
+
+  setupIntersectionObserver() {
+    const options = { root: null, rootMargin: '0px', threshold: 0.1 };
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && this.hasMore()) {
+          this.criteria.nextPageHref = this.responseLink?.next?.href;
+          this.loadProductItems();
+        }
+      });
+    }, options);
+
+    observer.observe(this.observerElement.nativeElement);
+  }
+
+  hasMore() {
+    if (!this.responsePage || !this.responseLink) {
+      return false;
+    }
+    return this.responsePage.number < this.responsePage.totalPages
+      && this.responseLink?.next !== undefined;
   }
 
   ngOnDestroy(): void {

@@ -1,11 +1,10 @@
-.theme {
+.header__theme-button {
   height: 22px;
   width: 22px;
-  margin: 0 8px 0 5px;
+  margin: 0 0 0 16px;
+  text-align: center;
 }
 
-@media all and (max-width: 992px) {
-  .header__theme-button {
-    padding: 10px 0;
-  }
+i {
+  font-size: 16.5px;
 }

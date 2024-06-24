@@ -2,7 +2,7 @@
 <div class="mt-5">
   <!-- Section: Ivy Information -->
   <section
-    class="d-flex justify-content-lg-between justify-content-center p-4 border-bottom">
+    class="d-flex justify-content-lg-between justify-content-center py-4 border-bottom">
     <div class="flex-column text-center text-lg-start">
       <!-- Left -->
       <div class="logo">
@@ -13,34 +13,38 @@
               ? '/assets/images/misc/axonivy-logo.svg'
               : '/assets/images/misc/axonivy-logo-black.svg'
           "
-          alt="Axon Ivy" />
+          alt="Axon Ivy"/>
       </div>
-      <div [innerHtml]="'common.footer.newVersionsInfo' | translate"></div>
-      <div class="flex-row">
-        <button class="btn btn-primary border-0">
+      <div
+        class="text-secondary"
+        [innerHtml]="'common.footer.newVersionsInfo' | translate"></div>
+      <div class="button-container flex-row">
+        <button
+          class="btn btn-primary border-0"
+          [ngClass]="themeService.isDarkMode() ? 'text-dark' : 'text-light'">
           {{ 'common.footer.downloadLatestLTSVersion' | translate }}
         </button>
-        <button class="btn btn-secondary border-0 m-3">
+        <button class="btn btn-secondary m-2">
           {{ 'common.footer.downloadLatestDevVersion' | translate }}
         </button>
       </div>
     </div>
 
     <!-- Right -->
-    <div class="footer__navbar d-flex align-items-center d-none d-lg-block">
+    <div class="footer__navbar d-flex align-items-center d-none d-xl-block">
       <div class="navbar navbar-expand-lg">
         <ul class="navbar-nav me-auto mb-lg-0">
           @for (item of navItems; track $index) {
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                [ngClass]="
-                  item.link === '/' ? 'text-primary fw-bold' : 'text-secondary'
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [ngClass]="
+                  item.link === '/' ? 'text-primary fw-bold' : 'text-muted'
                 "
-                aria-current="page">
-                {{ item.label | translate }}
-              </a>
-            </li>
+              aria-current="page">
+              {{ item.label | translate | uppercase }}
+            </a>
+          </li>
           }
         </ul>
       </div>
@@ -48,17 +52,17 @@
   </section>
   <!-- Section: Policy & Social Media -->
   <section
-    class="d-flex flex-lg-row flex-column justify-content-between p-4 border-bottom">
-    <div class="navbar navbar-expand-lg align-self-md-center w-md-100">
+    class="d-flex flex-lg-row flex-column justify-content-between py-4 border-bottom">
+    <div class="navbar navbar-expand-xl align-self-md-center w-md-100">
       <!-- Left -->
       <div
         class="flex-row navbar-nav me-auto mb-lg-0 flex-wrap w-md-100 justify-content-center text-center footer__ivy-policy">
         @for (link of ivyFooterLinks; track $index) {
-          <div [class]="link.containerStyleClass">
-            <a class="nav-link" aria-current="page">
-              {{ link.label | translate }}
-            </a>
-          </div>
+        <div class="link--left" [class]="link.containerStyleClass">
+          <a class="nav-link text-secondary" aria-current="page">
+            {{ link.label | translate }}
+          </a>
+        </div>
         }
       </div>
     </div>
@@ -68,11 +72,14 @@
       <div class="navbar navbar-expand-lg">
         <ul class="navbar-nav me-auto mb-lg-0 flex-row">
           @for (link of socialMediaLinks; track $index) {
-            <li class="p-2">
-              <a class="nav-link" aria-current="page" [href]="link.url">
-                <i [class]="link.styleClass"></i>
-              </a>
-            </li>
+          <li>
+            <a class="nav-link" aria-current="page" [href]="link.url">
+                <span
+                  class="d-flex justify-content-center align-items-center link-icon">
+                  <i [class]="link.styleClass" class="w-100 h-100"></i>
+                </span>
+            </a>
+          </li>
           }
         </ul>
       </div>

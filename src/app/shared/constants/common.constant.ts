@@ -1,6 +1,6 @@
-import { FilterType } from '../enums/filter-type.enum';
+import { TypeOption } from '../enums/type-option.enum';
 import { Language } from '../enums/language.enum';
-import { SortType } from '../enums/sort-type.enum';
+import { SortOption } from '../enums/sort-option.enum';
 import { NavItem } from '../models/nav-item.model';
 
 export const NAV_ITEMS: NavItem[] = [
@@ -51,15 +51,15 @@ export const SOCIAL_MEDIA_LINK = [
 
 export const IVY_FOOTER_LINKS = [
   {
-    containerStyleClass: 'p-2 w-md-100 footer__ivy-tag',
+    containerStyleClass: 'w-md-100 footer__ivy-tag',
     label: 'common.footer.ivyCompanyInfo'
   },
   {
-    containerStyleClass: 'p-2 footer__ivy-policy-tag',
-    label: 'common.footer.privayPolicy'
+    containerStyleClass: 'footer__ivy-policy-tag',
+    label: 'common.footer.privacyPolicy'
   },
   {
-    containerStyleClass: 'p-2 footer__ivy-term-of-service-tag',
+    containerStyleClass: 'footer__ivy-term-of-service-tag',
     label: 'common.footer.termsOfService'
   }
 ];
@@ -77,34 +77,34 @@ export const LANGUAGES = [
 
 export const FILTER_TYPES = [
   {
-    value: FilterType.All_TYPES,
+    value: TypeOption.All_TYPES,
     label: 'common.filter.value.allTypes'
   },
   {
-    value: FilterType.CONNECTORS,
+    value: TypeOption.CONNECTORS,
     label: 'common.filter.value.connector'
   },
   {
-    value: FilterType.UTILITIES,
+    value: TypeOption.UTILITIES,
     label: 'common.filter.value.util'
   },
   {
-    value: FilterType.SOLUTION,
+    value: TypeOption.SOLUTION,
     label: 'common.filter.value.solution'
   }
 ];
 
 export const SORT_TYPES = [
   {
-    value: SortType.POPULARITY,
+    value: SortOption.POPULARITY,
     label: 'common.sort.value.popularity'
   },
   {
-    value: SortType.ALPHABETICALLY,
+    value: SortOption.ALPHABETICALLY,
     label: 'common.sort.value.alphabetically'
   },
   {
-    value: SortType.RECENT,
+    value: SortOption.RECENT,
     label: 'common.sort.value.recent'
   }
 ];

@@ -9,8 +9,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { FilterType } from '../../shared/enums/filter-type.enum';
-import { SortType } from '../../shared/enums/sort-type.enum';
+import { TypeOption } from '../../shared/enums/type-option.enum';
+import { SortOption } from '../../shared/enums/sort-option.enum';
 import { ProductComponent } from './product.component';
 import { ProductService } from './product.service';
 import { MockProductService } from '../../shared/mocks/mock-services';
@@ -25,18 +25,12 @@ describe('ProductComponent', () => {
   let mockIntersectionObserver: any;
 
   beforeAll(() => {
-    mockIntersectionObserver = jasmine.createSpyObj('IntersectionObserver', [
-      'observe',
-      'unobserve',
-      'disconnect'
-    ]);
-    mockIntersectionObserver.observe.and.callFake(() => {});
-    mockIntersectionObserver.unobserve.and.callFake(() => {});
-    mockIntersectionObserver.disconnect.and.callFake(() => {});
+    mockIntersectionObserver = jasmine.createSpyObj('IntersectionObserver', ['observe', 'unobserve', 'disconnect']);
+    mockIntersectionObserver.observe.and.callFake(() => { });
+    mockIntersectionObserver.unobserve.and.callFake(() => { });
+    mockIntersectionObserver.disconnect.and.callFake(() => { });
 
-    (window as any).IntersectionObserver = function (
-      callback: IntersectionObserverCallback
-    ) {
+    (window as any).IntersectionObserver = function (callback: IntersectionObserverCallback) {
       mockIntersectionObserver.callback = callback;
       return mockIntersectionObserver;
     };
@@ -75,15 +69,16 @@ describe('ProductComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('viewProductDetail should navigate', () => {
-  //   component.viewProductDetail('url');
-  //   expect(router.navigate).toHaveBeenCalledWith(['', 'url']);
-  // });
+  it('viewProductDetail should navigate', () => {
+    component.viewProductDetail('url');
+    expect(router.navigate).toHaveBeenCalledWith(['', 'url']);
+  });
 
   it('loadProductItems should return products with criteria', () => {
+
     component.loadProductItems();
     expect(component.loadProductItems).toBeTruthy();
-  });
+  })
 
   it('ngOnDestroy should unsubscribe all sub', () => {
     const sub = new Subscription();
@@ -93,20 +88,18 @@ describe('ProductComponent', () => {
   });
 
   it('onFilterChange should filter products properly', () => {
-    component.onFilterChange(FilterType.CONNECTORS);
-    component.products().forEach(product => {
+    component.onFilterChange(TypeOption.CONNECTORS);
+    component.products().forEach((product) => {
       expect(product.type).toEqual('connector');
     });
   });
 
   it('onSortChange should order products properly', () => {
     component.onSearchChanged('cur');
-    component.onSortChange(SortType.ALPHABETICALLY);
+    component.onSortChange(SortOption.ALPHABETICALLY);
     for (let i = 0; i < component.products.length - 1; i++) {
       expect(
-        component
-          .products()
-          [i + 1].name.localeCompare(component.products()[i].name)
+        component.products()[i + 1].name.localeCompare(component.products()[i].name)
       ).toEqual(1);
     }
   });
@@ -115,7 +108,7 @@ describe('ProductComponent', () => {
     const productName = 'amazon comprehend';
     component.onSearchChanged(productName);
     tick(500);
-    component.products().forEach(product => {
+    component.products().forEach((product) => {
       expect(product.name.toLowerCase()).toContain(productName);
     });
   }));
