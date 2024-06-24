@@ -9,10 +9,10 @@
     </span>
     <app-feedback-filter (sortChange)="onSortChange($event)" />
   </div>
-  @if (isScrollable) {
+  @if (isRenderInModalDialog) {
     <div
       class="position-absolute bottom-0 overflow-auto"
-      style="top: 59px; right: 0; left: 0; scrollbar-width: none;">
+      style="top: 59px; right: 0; left: 0; scrollbar-width: none;" (scroll)='onScrollCheckBottom($event)'>
       <div class="grid-feedbacks-container-dialog">
         @for (feedback of productFeedbacks; track $index) {
           <app-product-feedback [feedback]="feedback"></app-product-feedback>

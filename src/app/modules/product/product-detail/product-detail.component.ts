@@ -6,7 +6,7 @@ import { ThemeService } from '../../../core/services/theme/theme.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductFeedbacksPanelComponent } from './product-feedbacks-panel/product-feedbacks-panel.component';
 import { ShowFeedbacksDialogComponent } from './product-feedbacks-panel/show-feedbacks-dialog/show-feedbacks-dialog.component';
-import { StarRatingCountingComponent } from './star-rating-counting/star-rating-counting.component';
+import { StarRatingCountingComponent } from './product-feedbacks-panel/star-rating-counting/star-rating-counting.component';
 
 @Component({
     selector: 'app-product-detail',

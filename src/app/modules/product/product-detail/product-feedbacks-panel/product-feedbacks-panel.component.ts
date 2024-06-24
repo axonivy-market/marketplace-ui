@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, Input, inject } from '@angular/core';
 import { ProductFeedbackComponent } from './product-feedback/product-feedback.component';
 import { ProductFeedbackService } from './product-feedback.service';
 import { Subscription } from 'rxjs';
@@ -16,8 +16,8 @@ import { Feedback } from '../../../../shared/models/feedback.model';
   styleUrl: './product-feedbacks-panel.component.scss'
 })
 export class ProductFeedbacksPanelComponent {
-  @Input() isBtnShowMoreVisible = true;
-  @Input() isScrollable = false;
+  @Input() isRenderInModalDialog = false;
+  isScrollable = false;
 
   productFeedbacks: Feedback[] = [];
   totalElements: number = 0;
@@ -27,19 +27,59 @@ export class ProductFeedbacksPanelComponent {
   themeService = inject(ThemeService);
   productFeedbackService = inject(ProductFeedbackService);
   currentSort: string = 'updatedAt,desc'; // Default sort
+  atBottom = false;
 
   ngOnInit(): void {
     this.loadFeedbacks();
+    this.checkMediaSize();
   }
 
-  loadFeedbacks(page: number = 0, size: number = 6, sort: string = this.currentSort): void {
+  ngOnDestroy(): void {
+    // Clean up and remove scroll listener when component is destroyed
+    this.removeScrollListener();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkMediaSize();
+    
+  }
+
+  // Function to check media size and add/remove scroll listener accordingly
+  private checkMediaSize() {
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+    if (mediaQuery.matches) {
+      this.addScrollListener();
+      console.log('add');
+      
+    } else {
+      this.removeScrollListener();
+      console.log('remove');
+    }
+  }
+
+  // Function to add scroll listener to root element
+  private addScrollListener() {
+    document.documentElement.addEventListener('scroll', this.onScrollCheckBottom);
+    document.body.addEventListener('scroll', this.onScrollCheckBottom);
+  }
+
+  // Function to remove scroll listener from root element
+  private removeScrollListener() {
+    document.documentElement.removeEventListener('scroll', this.onScrollCheckBottom);
+    document.body.removeEventListener('scroll', this.onScrollCheckBottom);
+  }
+
+  loadFeedbacks(page: number = 0, size: number = this.pageSize, sort: string = this.currentSort): void {
     this.productFeedbackService.findProductFeedbacksByCriteria('667109f11666e1352a072f8a', page, size, sort)
       .subscribe((response: FeedbackApiResponse) => {
-        this.productFeedbacks = response._embedded.feedbacks; // Assuming `content` holds the list of feedbacks
-        console.log(response._embedded.feedbacks);
-        
-        this.totalElements = response.page.totalElements; // Assuming `totalElements` holds the total count
-        this.currentPage = response.page.number; // Assuming `number` holds the current page number
+        if (page === 0) {
+          this.productFeedbacks = response._embedded.feedbacks;
+        } else {
+          this.productFeedbacks = [...this.productFeedbacks, ...response._embedded.feedbacks];
+        }
+        this.totalElements = response.page.totalElements;
+        this.currentPage = response.page.number;
       });
   }
 
@@ -50,5 +90,20 @@ export class ProductFeedbacksPanelComponent {
 
   onPageChange(event: any): void {
     this.loadFeedbacks(event.page, event.size, this.currentSort);
+  }
+
+  onScrollCheckBottom(e: any): void {
+    const threshold = 150; // Add a small threshold for triggering the load
+    const position = e.target.scrollTop + e.target.offsetHeight;
+    const height = e.target.scrollHeight;
+
+    if (position >= height - threshold) {
+      if (!this.atBottom && this.currentPage * this.pageSize < this.totalElements) {
+        this.atBottom = true;
+        this.loadFeedbacks(this.currentPage + 1, this.pageSize, this.currentSort);
+      }
+    } else {
+      this.atBottom = false;
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, Injector, inject } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Injector, inject, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -10,5 +10,5 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class SuccessDialogComponent {
   activeModal = inject(NgbActiveModal);
-  username!: string;
+  @Input() username!: string;
 }

@@ -1,12 +1,12 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { StarRatingCounting } from '../../../../shared/models/star-rating-counting.model';
+import { StarRatingCounting } from '../../../../../shared/models/star-rating-counting.model';
 import { StarRatingCountingService } from './star-rating-counting.service';
 import { StarRatingHighlightDirective } from './star-rating-highlight.directive';
-import { StarRatingComponent } from '../../../../shared/components/star-rating/star-rating.component';
+import { StarRatingComponent } from '../../../../../shared/components/star-rating/star-rating.component';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AddFeedbackDialogComponent } from '../product-feedbacks-panel/add-feedback-dialog/add-feedback-dialog.component';
+import { AddFeedbackDialogComponent } from '../add-feedback-dialog/add-feedback-dialog.component';
 
 @Component({
   selector: 'app-star-rating-counting',
@@ -22,8 +22,8 @@ import { AddFeedbackDialogComponent } from '../product-feedbacks-panel/add-feedb
   templateUrl: './star-rating-counting.component.html',
   styleUrl: './star-rating-counting.component.scss'
 })
-export class StarRatingCountingComponent {
-  @Input() productId: string = 'abc';
+export class StarRatingCountingComponent implements OnInit {
+  @Input() productId: string = '667109f11666e1352a072f8a';
   @Input() productName!: string;
   @Input() platformReview: string = '3.5';
   @Input() isDisplayInDialog: boolean = false;
@@ -37,19 +37,19 @@ export class StarRatingCountingComponent {
   starRatingCountingService = inject(StarRatingCountingService);
   private modalService = inject(NgbModal);
 
-  constructor() {
+  ngOnInit(): void {
     this.loadAllStarRatingCountings();
-    this.calculateTotalComments();
-    this.sortByStar();
-    this.reviewNumber = Number.parseFloat(this.platformReview);
   }
 
   loadAllStarRatingCountings(): void {
     this.subscriptions.push(
       this.starRatingCountingService
-        .getAllRatingCommentCountings()
+        .getAllRatingCommentCounting(this.productId)
         .subscribe(starRatingCountings => {
           this.starRatingCountings = starRatingCountings;
+          this.calculateTotalComments();
+          this.calculateReviewNumber();
+          this.sortByStar();
         })
     );
   }
@@ -57,6 +57,12 @@ export class StarRatingCountingComponent {
   calculateTotalComments(): void {
     this.starRatingCountings.forEach(starRating => {
       this.totalComments = this.totalComments + starRating.commentNumber;
+    });
+  }
+
+  calculateReviewNumber(): void {
+    this.starRatingCountings.forEach(starRating => {
+      this.reviewNumber += starRating.starRating * starRating.percent / 100;
     });
   }
 

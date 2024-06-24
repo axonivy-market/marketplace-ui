@@ -90,7 +90,9 @@ export class AddFeedbackDialogComponent {
         (response) => {
           console.log('Review submitted successfully:', response);
           this.activeModal.dismiss('Cross click');
-          this.modalService.open(SuccessDialogComponent, { centered: true, modalDialogClass: 'add-feedback-modal-dialog' }).result.then(
+          const successModal = this.modalService.open(SuccessDialogComponent, { centered: true, modalDialogClass: 'add-feedback-modal-dialog' })
+          successModal.componentInstance.username = this.username;
+          successModal.result.then(
             (result) => {
               window.location.reload();
             },
