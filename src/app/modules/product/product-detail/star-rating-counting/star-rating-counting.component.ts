@@ -1,12 +1,12 @@
-import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { StarRatingCounting } from '../../../shared/models/star-rating-counting.model';
+import { StarRatingCounting } from '../../../../shared/models/star-rating-counting.model';
 import { StarRatingCountingService } from './star-rating-counting.service';
 import { StarRatingHighlightDirective } from './star-rating-highlight.directive';
-import { StarRatingComponent } from '../star-rating/star-rating.component';
+import { StarRatingComponent } from '../../../../shared/components/star-rating/star-rating.component';
 import { CommonModule, DecimalPipe } from '@angular/common';
-import { AddFeedbackDialogComponent } from '../product-feedbacks-panel/add-feedback-dialog/add-feedback-dialog.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddFeedbackDialogComponent } from '../product-feedbacks-panel/add-feedback-dialog/add-feedback-dialog.component';
 
 @Component({
   selector: 'app-star-rating-counting',
@@ -28,6 +28,7 @@ export class StarRatingCountingComponent {
   @Input() platformReview: string = '3.5';
   @Input() isDisplayInDialog: boolean = false;
   @ViewChild('ratingLink', { static: false }) ratingLink!: ElementRef;
+  @Output() openAddFeedbacDialogEvent = new EventEmitter();
 
   totalComments: number = 0;
   reviewNumber: number = 0;
@@ -84,6 +85,7 @@ export class StarRatingCountingComponent {
     console.log(tokenExpiryValid);
 
     if (token && tokenExpiryValid) {
+      this.openAddFeedbacDialogEvent.emit();
       const modalRef = this.modalService.open(AddFeedbackDialogComponent, {centered: true, modalDialogClass: 'add-feedback-modal-dialog'});
       modalRef.componentInstance.productName = this.productName;
     }

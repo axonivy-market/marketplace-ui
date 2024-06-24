@@ -3,11 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../../shared/models/product.model';
 import { ProductService } from '../product.service';
 import { ThemeService } from '../../../core/services/theme/theme.service';
-import { ProductFeedbacksPanelComponent } from '../product-feedbacks-panel/product-feedbacks-panel.component';
-import { ShowFeedbacksDialogComponent } from '../product-feedbacks-panel/show-feedbacks-dialog/show-feedbacks-dialog.component';
-import { StarRatingCountingComponent } from '../star-rating-counting/star-rating-counting.component';
-import { AddFeedbackDialogComponent } from "../product-feedbacks-panel/add-feedback-dialog/add-feedback-dialog.component";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProductFeedbacksPanelComponent } from './product-feedbacks-panel/product-feedbacks-panel.component';
+import { ShowFeedbacksDialogComponent } from './product-feedbacks-panel/show-feedbacks-dialog/show-feedbacks-dialog.component';
+import { StarRatingCountingComponent } from './star-rating-counting/star-rating-counting.component';
 
 @Component({
     selector: 'app-product-detail',
@@ -15,7 +14,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
     providers: [ProductService],
     templateUrl: './product-detail.component.html',
     styleUrl: './product-detail.component.scss',
-    imports: [ShowFeedbacksDialogComponent, AddFeedbackDialogComponent, ProductFeedbacksPanelComponent, StarRatingCountingComponent]
+    imports: [ShowFeedbacksDialogComponent, ProductFeedbacksPanelComponent, StarRatingCountingComponent]
 })
 export class ProductDetailComponent {
   product!: Product;
@@ -51,6 +50,7 @@ export class ProductDetailComponent {
   }
 
   openShowFeedbacksDialog() {
-    this.modalService.open(ShowFeedbacksDialogComponent, { centered: true, modalDialogClass: 'show-feedbacks-modal-dialog' });
+    const showFeedbackDialog = this.modalService.open(ShowFeedbacksDialogComponent, { centered: true, modalDialogClass: 'show-feedbacks-modal-dialog' });
+    showFeedbackDialog.componentInstance.productName = this.product.name;
   }
 }

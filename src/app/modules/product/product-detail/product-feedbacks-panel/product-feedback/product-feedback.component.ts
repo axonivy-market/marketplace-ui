@@ -1,8 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { Feedback } from '../../../../shared/models/feedback.model';
 import { CommonModule } from '@angular/common';
-import { log } from 'console';
-import { StarRatingComponent } from '../../star-rating/star-rating.component';
+import { StarRatingComponent } from '../../../../../shared/components/star-rating/star-rating.component';
+import { Feedback } from '../../../../../shared/models/feedback.model';
 
 @Component({
   selector: 'app-product-feedback',

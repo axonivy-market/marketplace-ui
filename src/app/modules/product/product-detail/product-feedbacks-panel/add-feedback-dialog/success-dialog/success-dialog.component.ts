@@ -10,4 +10,5 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class SuccessDialogComponent {
   activeModal = inject(NgbActiveModal);
+  username!: string;
 }

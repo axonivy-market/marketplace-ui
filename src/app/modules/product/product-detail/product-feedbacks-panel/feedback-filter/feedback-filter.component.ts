@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FEEDBACK_SORT_TYPES } from '../../../../shared/constants/common.constant';
 import { TranslateModule } from '@ngx-translate/core';
+import { FEEDBACK_SORT_TYPES } from '../../../../../shared/constants/common.constant';
 
 @Component({
   selector: 'app-feedback-filter',

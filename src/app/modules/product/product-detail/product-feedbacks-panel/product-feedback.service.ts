@@ -1,10 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Feedback } from '../../../shared/models/feedback.model';
-import { MOCK_FEEDBACKS } from '../../../shared/mocks/mock-data';
-import { Criteria } from '../../../shared/models/criteria.model';
-import { FeedbackApiResponse } from '../../../shared/models/apis/feedback-response.model';
+import { FeedbackApiResponse } from '../../../../shared/models/apis/feedback-response.model';
 
 const FEEDBACK_API_URL = 'api/feedback';
 @Injectable()

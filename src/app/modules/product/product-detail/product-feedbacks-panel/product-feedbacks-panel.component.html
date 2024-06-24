@@ -11,8 +11,8 @@
   </div>
   @if (isScrollable) {
     <div
-      class="position-absolute left-0 right-0 bottom-0 overflow-auto"
-      style="top: 59px; scrollbar-width: none;">
+      class="position-absolute bottom-0 overflow-auto"
+      style="top: 59px; right: 0; left: 0; scrollbar-width: none;">
       <div class="grid-feedbacks-container-dialog">
         @for (feedback of productFeedbacks; track $index) {
           <app-product-feedback [feedback]="feedback"></app-product-feedback>

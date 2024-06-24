@@ -1,12 +1,12 @@
 import { ChangeDetectorRef, Component, Input, ViewEncapsulation, inject } from '@angular/core';
-import { Feedback } from '../../../../shared/models/feedback.model';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { JwtService } from '../../../../shared/services/jwt.service';
 import { Observable, catchError, of, switchMap } from 'rxjs';
-import { NgbActiveModal, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons, NgbActiveModal, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Feedback } from '../../../../../shared/models/feedback.model';
+import { JwtService } from '../../../../../shared/services/jwt.service';
 
 @Component({
   selector: 'app-add-feedback-dialog',
@@ -18,7 +18,7 @@ import { ActivatedRoute } from '@angular/router';
   encapsulation: ViewEncapsulation.None
 })
 export class AddFeedbackDialogComponent {
-  @Input() productId: string = '6674a23283c3194d33fb8da2';
+  @Input() productId: string = '667109f11666e1352a072f8a';
   @Input() productName!: string;
   jwtService = inject(JwtService);
   http = inject(HttpClient);
@@ -31,6 +31,7 @@ export class AddFeedbackDialogComponent {
   activeModal = inject(NgbActiveModal);
   private modalService = inject(NgbModal);
   private route = inject(ActivatedRoute);
+  closeResult = '';
 
   constructor() { }
 
@@ -89,7 +90,14 @@ export class AddFeedbackDialogComponent {
         (response) => {
           console.log('Review submitted successfully:', response);
           this.activeModal.dismiss('Cross click');
-          this.modalService.open(SuccessDialogComponent, { centered: true, modalDialogClass: 'add-feedback-modal-dialog' });
+          this.modalService.open(SuccessDialogComponent, { centered: true, modalDialogClass: 'add-feedback-modal-dialog' }).result.then(
+            (result) => {
+              window.location.reload();
+            },
+            (reason) => {
+              window.location.reload();
+            }
+          );
         },
         (error) => {
           console.error('Error submitting review:', error);

@@ -1,13 +1,11 @@
 import { ChangeDetectorRef, Component, Input, inject } from '@angular/core';
-import { ThemeService } from '../../../core/services/theme/theme.service';
 import { ProductFeedbackComponent } from './product-feedback/product-feedback.component';
 import { ProductFeedbackService } from './product-feedback.service';
-import { Feedback } from '../../../shared/models/feedback.model';
 import { Subscription } from 'rxjs';
 import { FeedbackFilterComponent } from './feedback-filter/feedback-filter.component';
-import { ShowFeedbacksDialogComponent } from './show-feedbacks-dialog/show-feedbacks-dialog.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FeedbackApiResponse } from '../../../shared/models/apis/feedback-response.model';
+import { ThemeService } from '../../../../core/services/theme/theme.service';
+import { FeedbackApiResponse } from '../../../../shared/models/apis/feedback-response.model';
+import { Feedback } from '../../../../shared/models/feedback.model';
 
 @Component({
   selector: 'app-product-feedbacks-panel',
@@ -35,7 +33,7 @@ export class ProductFeedbacksPanelComponent {
   }
 
   loadFeedbacks(page: number = 0, size: number = 6, sort: string = this.currentSort): void {
-    this.productFeedbackService.findProductFeedbacksByCriteria('6674a23283c3194d33fb8da2', page, size, sort)
+    this.productFeedbackService.findProductFeedbacksByCriteria('667109f11666e1352a072f8a', page, size, sort)
       .subscribe((response: FeedbackApiResponse) => {
         this.productFeedbacks = response._embedded.feedbacks; // Assuming `content` holds the list of feedbacks
         console.log(response._embedded.feedbacks);

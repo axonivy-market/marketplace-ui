@@ -1,8 +1,7 @@
-import { Component, ViewEncapsulation, inject } from '@angular/core';
+import { Component, Input, ViewEncapsulation, inject } from '@angular/core';
 import { ProductFeedbacksPanelComponent } from '../product-feedbacks-panel.component';
-import { StarRatingComponent } from '../../star-rating/star-rating.component';
-import { StarRatingCountingComponent } from '../../star-rating-counting/star-rating-counting.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { StarRatingCountingComponent } from '../../star-rating-counting/star-rating-counting.component';
 
 @Component({
   selector: 'app-show-feedbacks-dialog',
@@ -14,4 +13,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ShowFeedbacksDialogComponent {
   activeModal = inject(NgbActiveModal);
+  @Input() productName!: string;
+
+  
 }

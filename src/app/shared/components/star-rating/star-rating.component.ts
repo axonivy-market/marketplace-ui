@@ -2,7 +2,7 @@ import {
   Component,
   Input
 } from '@angular/core';
-import { ProductService } from '../product.service';
+import { ProductService } from '../../../modules/product/product.service';
 import { NgbRating } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
