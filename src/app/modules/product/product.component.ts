@@ -82,20 +82,20 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
     this.router.navigate(['', productId]);
   }
 
-  onFilterChange(type: TypeOption) {
+  onFilterChange(selectedType: TypeOption) {
     this.criteria = {
       ...this.criteria,
       nextPageHref: '',
-      type: type
+      type: selectedType
     };
     this.loadProductItems(true);
   }
 
-  onSortChange(sort: SortOption) {
+  onSortChange(selectedSort: SortOption) {
     this.criteria = {
       ...this.criteria,
       nextPageHref: '',
-      sort: sort
+      sort: selectedSort
     };
     this.loadProductItems(true);
   }
