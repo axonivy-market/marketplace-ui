@@ -14,8 +14,8 @@ import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subject, Subscription, debounceTime } from 'rxjs';
 import { ThemeService } from '../../core/services/theme/theme.service';
-import { FilterType } from '../../shared/enums/filter-type.enum';
-import { SortType } from '../../shared/enums/sort-type.enum';
+import { TypeOption } from '../../shared/enums/type-option.enum';
+import { SortOption } from '../../shared/enums/sort-option.enum';
 import { Criteria } from '../../shared/models/criteria.model';
 import { Product } from '../../shared/models/product.model';
 import { ProductCardComponent } from './product-card/product-card.component';
@@ -47,8 +47,8 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
   searchTextChanged = new Subject<string>();
   criteria: Criteria = {
     search: '',
-    type: FilterType.All_TYPES,
-    sort: SortType.POPULARITY
+    type: TypeOption.All_TYPES,
+    sort: SortOption.POPULARITY
   };
   responseLink!: Link;
   responsePage!: Page;
@@ -82,20 +82,20 @@ export class ProductComponent implements AfterViewInit, OnDestroy {
     this.router.navigate(['', productId]);
   }
 
-  onFilterChange(filterType: FilterType) {
+  onFilterChange(type: TypeOption) {
     this.criteria = {
       ...this.criteria,
       nextPageHref: '',
-      type: filterType
+      type: type
     };
     this.loadProductItems(true);
   }
 
-  onSortChange(sortType: SortType) {
+  onSortChange(sort: SortOption) {
     this.criteria = {
       ...this.criteria,
       nextPageHref: '',
-      sort: sortType
+      sort: sort
     };
     this.loadProductItems(true);
   }

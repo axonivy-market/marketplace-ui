@@ -1,4 +1,4 @@
-export enum FilterType {
+export enum TypeOption {
   All_TYPES = 'all',
   CONNECTORS = 'connectors',
   UTILITIES = 'utilities',

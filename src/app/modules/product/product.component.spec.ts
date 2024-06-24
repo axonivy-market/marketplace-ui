@@ -9,8 +9,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { FilterType } from '../../shared/enums/filter-type.enum';
-import { SortType } from '../../shared/enums/sort-type.enum';
+import { TypeOption } from '../../shared/enums/type-option.enum';
+import { SortOption } from '../../shared/enums/sort-option.enum';
 import { ProductComponent } from './product.component';
 import { ProductService } from './product.service';
 import { MockProductService } from '../../shared/mocks/mock-services';
@@ -88,7 +88,7 @@ describe('ProductComponent', () => {
   });
 
   it('onFilterChange should filter products properly', () => {
-    component.onFilterChange(FilterType.CONNECTORS);
+    component.onFilterChange(TypeOption.CONNECTORS);
     component.products().forEach((product) => {
       expect(product.type).toEqual('connector');
     });
@@ -96,7 +96,7 @@ describe('ProductComponent', () => {
 
   it('onSortChange should order products properly', () => {
     component.onSearchChanged('cur');
-    component.onSortChange(SortType.ALPHABETICALLY);
+    component.onSortChange(SortOption.ALPHABETICALLY);
     for (let i = 0; i < component.products.length - 1; i++) {
       expect(
         component.products()[i + 1].name.localeCompare(component.products()[i].name)

@@ -5,8 +5,8 @@ import {
   withInterceptorsFromDi
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { FilterType } from '../../shared/enums/filter-type.enum';
-import { SortType } from '../../shared/enums/sort-type.enum';
+import { TypeOption } from '../../shared/enums/type-option.enum';
+import { SortOption } from '../../shared/enums/sort-option.enum';
 import { MOCK_PRODUCTS } from '../../shared/mocks/mock-data';
 import { Criteria } from '../../shared/models/criteria.model';
 import { ProductService } from './product.service';
@@ -52,13 +52,13 @@ describe('ProductService', () => {
     const searchString = 'Amazon Comprehend';
     const criteria: Criteria = {
       search: searchString,
-      sort: SortType.ALPHABETICALLY,
-      type: FilterType.CONNECTORS
+      sort: SortOption.ALPHABETICALLY,
+      type: TypeOption.CONNECTORS
     };
     service.findProductsByCriteria(criteria).subscribe(response => {
       let products = response._embedded.products;
       for (let i = 0; i < products.length; i++) {
-        expect(products[i].type).toEqual(FilterType.CONNECTORS);
+        expect(products[i].type).toEqual(TypeOption.CONNECTORS);
         expect(products[i].name.toLowerCase()).toContain(searchString);
         if (products[i + 1]) {
           expect(products[i + 1].name.localeCompare(products[i].name)).toEqual(
@@ -83,7 +83,7 @@ describe('ProductService', () => {
   it('findProductsByCriteria with popularity order', () => {
     const criteria: Criteria = {
       search: '',
-      sort: SortType.POPULARITY,
+      sort: SortOption.POPULARITY,
       type: null
     };
     service.findProductsByCriteria(criteria).subscribe(response => {
@@ -105,7 +105,7 @@ describe('ProductService', () => {
   it('findProductsByCriteria with default sort', () => {
     const criteria: Criteria = {
       search: '',
-      sort: SortType.RECENT,
+      sort: SortOption.RECENT,
       type: null
     };
     service.findProductsByCriteria(criteria).subscribe(response => {
@@ -117,8 +117,8 @@ describe('ProductService', () => {
     const criteria: Criteria = {
       nextPageHref: 'http://localhost:8080/marketplace-service/api/product?type=all&page=1&size=20',
       search: '',
-      sort: SortType.RECENT,
-      type: FilterType.All_TYPES
+      sort: SortOption.RECENT,
+      type: TypeOption.All_TYPES
     };
     service.findProductsByCriteria(criteria).subscribe(response => {
       expect(response._embedded.products.length).toEqual(0);
