@@ -1,4 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:8082'
+  apiUrl: 'http://localhost:8080',
+  githubClientId: 'Ov23liUzb36JCQIfEBGn',
+  githubAuthCallbackUrl: 'http://localhost:4200/auth/github/callback'
 };
