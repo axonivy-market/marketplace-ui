@@ -15,6 +15,7 @@ import { MarkdownModule, MarkdownService } from 'ngx-markdown';
 import { ProductDetail } from '../../../shared/models/product-detail.model';
 import { Readme } from '../../../shared/models/readme.model';
 import { ProductVersionActionComponent } from './product-version-action/product-version-action.component';
+declare var bootstrap: any;
 
 const NON_NUMERIC_CHAR = '[^0-9.]';
 @Component({
@@ -84,6 +85,16 @@ export class ProductDetailComponent {
         this.setActiveTab('description');
       }
     });
+    var popoverTriggerList = [].slice.call(
+      document.querySelectorAll('[data-bs-toggle="popover"]')
+    );
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl);
+    });
+  }
+
+  popoverContent(): string {
+    return document.querySelector('.info-tab')!.innerHTML;
   }
 
   setActiveTab(tab: string) {
@@ -98,9 +109,9 @@ export class ProductDetailComponent {
   getTypeIcon() {
     switch (this.productDetail().type) {
       case 'connector':
-        return 'ti ti-plug';
+        return 'bi bi-plug';
       case 'solution':
-        return 'ti ti-flask';
+        return 'bi bi-flask';
       case 'util':
         return 'ti ti-pencil-check';
       default:

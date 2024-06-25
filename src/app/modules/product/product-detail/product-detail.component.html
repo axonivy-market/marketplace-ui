@@ -2,215 +2,278 @@
   class="d-flex flex-column justify-content-center align-items-start p-0"
   style="gap: 96px">
   <div
-    class="d-flex flex-column justify-content-center align-items-start p-0"
-    style="gap: 72px">
+    class="d-flex flex-column justify-content-center align-items-start"
+    style="gap: 72px; margin-top: 72px; width: 100%">
     <div
-      class="d-flex flex-column justify-content-center align-items-start p-0"
-      style="gap: 72px">
-      <div
-        class="d-flex flex-column justify-content-between align-items-start p-0"
-        style="gap: 10px">
-        Back to home
-      </div>
-      <div
-        class="d-flex flex-row justify-content-between align-items-center p-0"
-        style="gap: 32px">
-        <div
-          class="d-flex flex-row align-items-center p-0"
-          style="gap: 20px; margin: 0 auto">
-          <div
-            class="d-flex flex-row justify-content-center align-items-center p-0"
-            style="gap: 10px">
-            <img style="width: 70px" [src]="productDetail().logoUrl" alt="" />
-          </div>
-          <div>
-            <h1 class="text-primary">{{ productDetail().name }}</h1>
-          </div>
-        </div>
-        <div
-          class="d-flex flex-row align-items-center p-0"
-          style="gap: 10px; margin: 0 auto">
-          <app-product-version-action
-            [productId]="productDetail().id"
-            (versionChanged)="
-              loadDetailTabs($event)
-            "></app-product-version-action>
-        </div>
-      </div>
+      class="d-flex flex-column justify-content-between align-items-start"
+      style="gap: 10px">
+      Back to mảketplace overview
     </div>
-    <div class="d-flex flex-row align-items-start p-0" style="gap: 72px">
-      <div class="d-flex flex-column align-items-start p-0" style="gap: 10px">
-        <h4 class="text-secondary">
-          {{ 'common.product.detail.review' | translate }}
-        </h4>
-        <h2 class="text-primary">{{ productDetail().platformReview }}</h2>
-        <app-star-rating
-          class="d-flex flex-row justify-content-center align-items-start p-0"
-          style="gap: 3.2px"
-          [rating]="productDetail().platformReview!"></app-star-rating>
-      </div>
-      <div class="d-flex flex-column align-items-start p-0" style="gap: 10px">
-        <h4 class="text-secondary">
-          {{ 'common.product.detail.installation' | translate }}
-        </h4>
-        <h2 class="text-primary">46</h2>
-        <h4 class="text-primary">
-          {{ 'common.product.detail.times' | translate }}
-        </h4>
-      </div>
-      <div class="d-flex flex-column align-items-start p-0" style="gap: 10px">
-        <h4 class="text-secondary">
-          {{ 'common.product.detail.type' | translate }}
-        </h4>
-        <h2>
-          <i [class]="getTypeIcon()"></i>
-        </h2>
-        <h4 class="text-primary">{{ productDetail().type }}</h4>
+    <div style="height: 100px; background-color: aquamarine; width: 100%">
+      <div class="d-flex flex-row">
+        <div class="col-sm-12 col-md-8" style="background-color: bisque">
+          <div class="d-flex flex-column">
+            <div style="height: 150px; background-color: blanchedalmond">
+              <div
+                class="d-flex flex-row align-items-center p-0"
+                style="gap: 20px; margin: 0 auto">
+                <div
+                  class="d-flex flex-row justify-content-center align-items-center p-0"
+                  style="gap: 10px">
+                  <img
+                    class="logo__image"
+                    [src]="productDetail().logoUrl"
+                    alt="" />
+                </div>
+                <div>
+                  <h1 class="text-primary product-title">{{ productDetail().name }}</h1>
+                </div>
+              </div>
+            </div>
+              <div
+                class="d-flex flex-row align-items-start p-0 flexible-gap">
+                <div
+                  class="d-flex flex-column align-items-start p-0"
+                  style="
+                    gap: 10px;
+                    background-color: blue;
+                  ">
+                  <h4 class="text-secondary">
+                    {{ 'common.product.detail.review' | translate }}
+                  </h4>
+                  <h2 class="text-primary">
+                    {{ productDetail().platformReview }}
+                  </h2>
+                  <app-star-rating
+                    class="d-flex flex-row justify-content-center align-items-start p-0"
+                    style="gap: 3.2px"
+                    [rating]="
+                      productDetail().platformReview!
+                    "></app-star-rating>
+                </div>
+                <div
+                  class="d-flex flex-column align-items-start p-0"
+                  style="gap: 10px">
+                  <h4 class="text-secondary">
+                    {{ 'common.product.detail.installation' | translate }}
+                  </h4>
+                  <h2 class="text-primary">46</h2>
+                  <h4 class="text-primary">
+                    {{ 'common.product.detail.times' | translate }}
+                  </h4>
+                </div>
+                <div
+                  class="d-flex flex-column align-items-start p-0"
+                  style="gap: 10px">
+                  <h4 class="text-secondary">
+                    {{ 'common.product.detail.type' | translate }}
+                  </h4>
+                  <h2>
+                    <i [class]="getTypeIcon()"></i>
+                  </h2>
+                  <h4 class="text-primary">{{ productDetail().type }}</h4>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4" style="background-color: rebeccapurple">
+          <div
+            class="d-flex flex-row align-items-center justify-content-center justify-content-md-end"
+            style="gap: 10px; margin: 0 auto; height: 79px;">
+            <app-product-version-action
+              [productId]="productDetail().id"
+              (versionChanged)="
+                loadDetailTabs($event)
+              "></app-product-version-action>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div
-    class="d-flex flex-row align-items-start p-0"
-    style="gap: 64px; width: 100%">
+
+  <div class="d-flex flex-row align-items-start p-0 w-100" style="gap: 64px">
     <div
-      class="d-flex flex-column align-items-start p-0"
-      style="gap: 40px; width: 704px">
+      class="d-flex flex-column align-items-start p-0 col-xl-8"
+      style="gap: 40px">
       <div
         class="d-flex flex-column justify-content-center align-items-start p-0"
         style="gap: 1px">
         <div
           class="tab-group d-flex flex-column justify-content-center align-items-start p-0"
-          style="gap: 32px">
-          <ul class="nav nav-tabs form-tabs" role="tablist">
-            <li
-              class="nav-item d-flex flex-row justify-content-center align-items-start"
-              style="padding: 15px; gap: 10px; border: 0 0 1 0"
-              role="presentation">
-              <a
-                class="nav-link active"
-                [class.active]="activeTab === 'description'"
-                id="description-tab"
-                (click)="setActiveTab('description')"
-                fragment="tab-description"
-                data-bs-toggle="tab"
-                href="#description"
-                role="tab"
-                aria-controls="description"
-                aria-selected="true">
-                {{ 'common.product.detail.description' | translate }}
-              </a>
-            </li>
-            <li
-              class="nav-item d-flex flex-row justify-content-center align-items-start"
-              style="padding: 15px; gap: 10px"
-              role="presentation">
-              <a
-                class="nav-link"
-                [class.active]="activeTab === 'demo'"
-                id="demo-tab"
-                (click)="setActiveTab('demo')"
-                fragment="tab-demo"
-                data-bs-toggle="tab"
-                href="#demo"
-                role="tab"
-                aria-controls="demo"
-                aria-selected="false">
-                {{ 'common.product.detail.demo' | translate }}
-              </a>
-            </li>
-            <li
-              class="nav-item d-flex flex-row justify-content-center align-items-start"
-              style="padding: 15px; gap: 10px"
-              role="presentation">
-              <a
-                class="nav-link"
-                [class.active]="activeTab === 'setup'"
-                id="setup-tab"
-                (click)="setActiveTab('setup')"
-                fragment="tab-setup"
-                data-bs-toggle="tab"
-                href="#setup"
-                role="tab"
-                aria-controls="setup"
-                aria-selected="false">
-                {{ 'common.product.detail.installationGuide' | translate }}
-              </a>
-            </li>
-            @if (readme().isDependency) {
+          style="gap: 32px; margin-top: 200px">
+          <div class="d-none d-xl-block">
+            <ul class="nav nav-tabs form-tabs" role="tablist">
+              <li
+                class="nav-item d-flex flex-row justify-content-center align-items-start"
+                style="padding: 15px; gap: 10px; border: 0 0 1 0"
+                role="presentation">
+                <a
+                  class="nav-link active"
+                  [class.active]="activeTab === 'description'"
+                  id="description-tab"
+                  (click)="setActiveTab('description')"
+                  fragment="tab-description"
+                  data-bs-toggle="tab"
+                  href="#description"
+                  role="tab"
+                  aria-controls="description"
+                  aria-selected="true">
+                  {{ 'common.product.detail.description' | translate }}
+                </a>
+              </li>
               <li
                 class="nav-item d-flex flex-row justify-content-center align-items-start"
                 style="padding: 15px; gap: 10px"
                 role="presentation">
                 <a
                   class="nav-link"
-                  [class.active]="activeTab === 'dependency'"
-                  id="dependency-tab"
-                  (click)="setActiveTab('dependency')"
-                  fragment="tab-dependency"
+                  [class.active]="activeTab === 'demo'"
+                  id="demo-tab"
+                  (click)="setActiveTab('demo')"
+                  fragment="tab-demo"
                   data-bs-toggle="tab"
-                  href="#dependency"
+                  href="#demo"
                   role="tab"
-                  aria-controls="dependency"
+                  aria-controls="demo"
                   aria-selected="false">
-                  {{ 'common.product.detail.maven.label' | translate }}
+                  {{ 'common.product.detail.demo' | translate }}
                 </a>
               </li>
-            }
-          </ul>
+              <li
+                class="nav-item d-flex flex-row justify-content-center align-items-start"
+                style="padding: 15px; gap: 10px"
+                role="presentation">
+                <a
+                  class="nav-link"
+                  [class.active]="activeTab === 'setup'"
+                  id="setup-tab"
+                  (click)="setActiveTab('setup')"
+                  fragment="tab-setup"
+                  data-bs-toggle="tab"
+                  href="#setup"
+                  role="tab"
+                  aria-controls="setup"
+                  aria-selected="false">
+                  {{ 'common.product.detail.installationGuide' | translate }}
+                </a>
+              </li>
+              @if (readme().isDependency) {
+                <li
+                  class="nav-item d-flex flex-row justify-content-center align-items-start"
+                  style="padding: 15px; gap: 10px"
+                  role="presentation">
+                  <a
+                    class="nav-link"
+                    [class.active]="activeTab === 'dependency'"
+                    id="dependency-tab"
+                    (click)="setActiveTab('dependency')"
+                    fragment="tab-dependency"
+                    data-bs-toggle="tab"
+                    href="#dependency"
+                    role="tab"
+                    aria-controls="dependency"
+                    aria-selected="false">
+                    {{ 'common.product.detail.maven.label' | translate }}
+                  </a>
+                </li>
+              }
+            </ul>
+          </div>
+          <!-- Dropdown for smaller screens -->
+          <div
+            class="d-block d-xl-none d-flex flex-row justify-content-center align-items-center w-100">
+            <div
+              class="d-flex flex-row align-items-center w-100"
+              style="gap: 16px">
+              <div class="dropdown-container">
+                <select
+                  class="form-select flex-grow-1 select-description"
+                  id="nav_item">
+                  <option value="description" id="description-tab">
+                    {{ 'common.product.detail.description' | translate }}
+                  </option>
+                  <option value="demo" id="demo-tab">
+                    {{ 'common.product.detail.demo' | translate }}
+                  </option>
+                  <option value="setup" id="setup-tab">
+                    {{ 'common.product.detail.installationGuide' | translate }}
+                  </option>
+                  <option value="maven" id="maven-tab">
+                    {{ 'common.product.detail.maven.label' | translate }}
+                  </option>
+                </select>
+                <button
+                type="button"
+                class="btn btn-info d-block d-xl-none"
+                data-bs-toggle="popover"
+                data-bs-container="body"
+                data-bs-placement="bottom"
+                data-bs-html="true"
+                [attr.data-bs-content]="popoverContent()"
+                style="background-color: none">
+                <i class="info-button bi bi-info-circle"></i>
+              </button>
+              </div>
+            </div>
+          </div>
 
           <div class="tab-content">
             <div
               class="tab-pane fade show in active"
+              [class.show]="activeTab === 'description'"
               id="description"
               role="tabpanel"
               aria-labelledby="description-tab">
               <markdown
-                class="readme-content col-lg-7 col-md-7 col-sm-5"
+                class="readme-content"
                 [data]="readme().description"></markdown>
             </div>
             <div
               class="tab-pane fade"
+              [class.show]="activeTab === 'demo'"
               id="demo"
               role="tabpanel"
               aria-labelledby="demo-tab">
               <markdown
-                class="readme-content col-lg-7 col-md-7 col-sm-5"
+                class="readme-content"
                 [data]="readme().demo"></markdown>
             </div>
             <div
               class="tab-pane fade"
+              [class.show]="activeTab === 'setup'"
               id="setup"
               role="tabpanel"
               aria-labelledby="setup-tab">
               <markdown
-                class="readme-content col-lg-7 col-md-7 col-sm-5"
+                class="readme-content"
                 [data]="readme().setup"></markdown>
             </div>
             <div
               class="tab-pane fade"
+              [class.show]="activeTab === 'maven'"
               id="dependency"
               role="tabpanel"
               aria-labelledby="dependency-tab">
-              <p>{{ 'common.product.detail.maven.description' | translate }}</p>
+              <p>
+                {{ 'common.product.detail.maven.description' | translate }}
+              </p>
               <pre><code>&lt;!-- {{ readme().name }} --&gt;
-      &lt;dependency&gt;
-        &lt;groupId&gt;{{ readme().groupId }}&lt;/groupId&gt;
-        &lt;artifactId&gt;{{ readme().artifactId }}&lt;/artifactId&gt;
-        &lt;version&gt;{{ readme().tag }}&lt;/version&gt;
-        &lt;type&gt;{{ readme().type }}&lt;/type&gt;
-      &lt;/dependency&gt;</code></pre>
+        &lt;dependency&gt;
+          &lt;groupId&gt;{{ readme().groupId }}&lt;/groupId&gt;
+          &lt;artifactId&gt;{{ readme().artifactId }}&lt;/artifactId&gt;
+          &lt;version&gt;{{ readme().tag }}&lt;/version&gt;
+          &lt;type&gt;{{ readme().type }}&lt;/type&gt;
+        &lt;/dependency&gt;</code></pre>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="content"></div>
     </div>
 
     <div
-      class="d-flex flex-column align-items-start"
+      class="info-tab d-none d-xl-block d-flex flex-column align-items-start col-xl-3"
       style="padding: 15px; gap: 16px; flex-grow: 1">
-      <h3 class="text-primary">
+      <h3 class="info-title text-primary">
         {{ 'common.product.detail.information.label' | translate }}
       </h3>
       <div class="d-flex flex-column p-0" style="gap: 8px; width: 100%">
@@ -237,7 +300,9 @@
                 | translate
             }}
           </span>
-          <span class="text-primary">{{ productDetail().compatibility }}</span>
+          <span class="text-primary">
+            {{ productDetail().compatibility }}
+          </span>
         </div>
         <hr />
         <div class="d-flex flex-row justify-content-between p-0">

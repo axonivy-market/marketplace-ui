@@ -8,10 +8,6 @@ import { ProductApiResponse } from '../models/apis/product-response.model';
 const products = MOCK_PRODUCTS._embedded.products as Product[];
 export class MockProductService {
 
-  getProductById(id: string) {
-    return of(products.find(product => product.id === id));
-  }
-
   findProductsByCriteria(criteria: Criteria): Observable<ProductApiResponse> {
     let response = MOCK_PRODUCTS;
     if (criteria.nextPageHref) {

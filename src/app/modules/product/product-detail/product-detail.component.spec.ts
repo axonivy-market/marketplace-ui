@@ -5,6 +5,7 @@ import { MockProductService } from '../../../shared/mocks/mock-services';
 import { ProductService } from '../product.service';
 import { ProductDetailComponent } from './product-detail.component';
 import { Product } from '../../../shared/models/product.model';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 const products = MOCK_PRODUCTS._embedded.products as Product[];
 
@@ -14,8 +15,9 @@ describe('ProductDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProductDetailComponent],
+      imports: [ProductDetailComponent, TranslateModule.forRoot()],
       providers: [
+        TranslateService,
         {
           provide: ActivatedRoute,
           useValue: {
@@ -45,4 +47,6 @@ describe('ProductDetailComponent', () => {
   it('should create', () => {
     expect(component.productDetail.name).toEqual(products[0].name);
   });
+
+  
 });

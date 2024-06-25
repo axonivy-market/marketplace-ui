@@ -12,10 +12,13 @@ import { Criteria } from '../../shared/models/criteria.model';
 import { ProductService } from './product.service';
 import { Product } from '../../shared/models/product.model';
 import { catchError } from 'rxjs';
+import { ProductDetail } from '../../shared/models/product-detail.model';
+import { Readme } from '../../shared/models/readme.model';
 
 const PRODUCT_ID = 'amazon-comprehend';
 const PRODUCT_TYPE = 'util';
 const NOT_EXIST_ID = 'undefined';
+const NOT_EXIST_TYPE = 'undefined';
 
 describe('ProductService', () => {
   let products = MOCK_PRODUCTS._embedded.products as Product[];
@@ -35,18 +38,6 @@ describe('ProductService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
-  });
-
-  it('getProductById should return a product', () => {
-    service.getProductDetails(PRODUCT_ID, PRODUCT_TYPE).subscribe(data => {
-      expect(data.id).toEqual(PRODUCT_ID);
-    });
-  });
-
-  it('getProductById should return null product', () => {
-    service.getProductDetails(NOT_EXIST_ID, NOT_EXIST_ID).subscribe(data => {
-      expect(data).toEqual({} as Product);
-    });
   });
 
   it('findProductsByCriteria with should return products properly', () => {
@@ -116,7 +107,8 @@ describe('ProductService', () => {
 
   it('findProductsByCriteria by next page url', () => {
     const criteria: Criteria = {
-      nextPageHref: 'http://localhost:8080/marketplace-service/api/product?type=all&page=1&size=20',
+      nextPageHref:
+        'http://localhost:8080/marketplace-service/api/product?type=all&page=1&size=20',
       search: '',
       sort: SortOption.RECENT,
       type: TypeOption.All_TYPES
@@ -125,5 +117,33 @@ describe('ProductService', () => {
       expect(response._embedded.products.length).toEqual(0);
       expect(response.page.number).toEqual(1);
     });
+  });
+
+  it('getProductDetails should return a product details', () => {
+    service.getProductDetails(PRODUCT_ID, PRODUCT_TYPE).subscribe(data => {
+      expect(data.id).toEqual(PRODUCT_ID);
+    });
+  });
+
+  it('getProductDetails should return null product details', () => {
+    service.getProductDetails(NOT_EXIST_ID, NOT_EXIST_TYPE).subscribe(data => {
+      expect(data).toEqual({} as ProductDetail);
+    });
+  });
+
+  it('getReadmeAndProductContentsFromTag should return a readme', () => {
+    const tag = 'v10.0.0';
+    service.getReadmeAndProductContentsFromTag(PRODUCT_ID, tag)
+      .subscribe(data => {
+        expect(data).toEqual({} as Readme);
+      });
+  });
+
+  it('getReadmeAndProductContentsFromTag should return null readme', () => {
+    const tag = 'undefined';
+    service.getReadmeAndProductContentsFromTag(PRODUCT_ID, tag)
+      .subscribe(data => {
+        expect(data).toEqual({} as Readme);
+      });
   });
 });
