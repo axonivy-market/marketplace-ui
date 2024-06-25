@@ -92,7 +92,15 @@ export class StarRatingCountingComponent implements OnInit {
 
     if (token && tokenExpiryValid) {
       this.openAddFeedbacDialogEvent.emit();
-      const modalRef = this.modalService.open(AddFeedbackDialogComponent, {centered: true, modalDialogClass: 'add-feedback-modal-dialog'});
+      
+      var modalRef;
+      const mediaQuery = window.matchMedia('(max-width: 767px)');
+      if (mediaQuery.matches) {
+        modalRef = this.modalService.open(AddFeedbackDialogComponent, {fullscreen: true});
+      }
+      else {
+        modalRef = this.modalService.open(AddFeedbackDialogComponent, {centered: true, modalDialogClass: 'add-feedback-modal-dialog'});
+      }
       modalRef.componentInstance.productName = this.productName;
     }
     else {

@@ -21,7 +21,7 @@
     </div>
   } @else {
     <div class="grid-feedbacks-container">
-      @for (feedback of productFeedbacks; track $index) {
+      @for (feedback of displayedFeedbacks; track $index) {
         <app-product-feedback [feedback]="feedback" />
       }
     </div>

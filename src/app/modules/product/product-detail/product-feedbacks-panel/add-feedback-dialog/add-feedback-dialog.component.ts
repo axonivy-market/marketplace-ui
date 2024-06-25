@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, Input, ViewEncapsulation, inject } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { ChangeDetectorRef, Component, HostListener, Input, ViewEncapsulation, inject } from '@angular/core';
+import { HttpClient, HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, catchError, of, switchMap } from 'rxjs';
 import { ModalDismissReasons, NgbActiveModal, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Feedback } from '../../../../../shared/models/feedback.model';
 import { JwtService } from '../../../../../shared/services/jwt.service';
+import { SkipLoading } from '../../../../../core/interceptors/api.interceptor';
 
 @Component({
   selector: 'app-add-feedback-dialog',
@@ -20,6 +21,8 @@ import { JwtService } from '../../../../../shared/services/jwt.service';
 export class AddFeedbackDialogComponent {
   @Input() productId: string = '667109f11666e1352a072f8a';
   @Input() productName!: string;
+  inMobileMode!: boolean;
+
   jwtService = inject(JwtService);
   http = inject(HttpClient);
   cd = inject(ChangeDetectorRef);
@@ -44,6 +47,7 @@ export class AddFeedbackDialogComponent {
     this.fetchFeedbackData().subscribe(() => {
       console.log('Next operations after fetching feedback data');
     });
+    this.checkMediaSize();
   }
 
   fetchFeedbackData() {
@@ -55,7 +59,7 @@ export class AddFeedbackDialogComponent {
       params = params.set('userId', userId);
     }
 
-    return this.http.get<Feedback>('api/feedback', { headers, params })
+    return this.http.get<Feedback>('api/feedback', { headers, params, context: new HttpContext().set(SkipLoading, true) })
       .pipe(
         catchError(error => {
           if (error.status === 404) {
@@ -90,7 +94,14 @@ export class AddFeedbackDialogComponent {
         (response) => {
           console.log('Review submitted successfully:', response);
           this.activeModal.dismiss('Cross click');
-          const successModal = this.modalService.open(SuccessDialogComponent, { centered: true, modalDialogClass: 'add-feedback-modal-dialog' })
+          var successModal;
+          if (this.inMobileMode) {
+            successModal = this.modalService.open(SuccessDialogComponent, { fullscreen: true });
+          }
+          else {
+            successModal = this.modalService.open(SuccessDialogComponent, { centered: true, modalDialogClass: 'add-feedback-modal-dialog' });
+          }
+          
           successModal.componentInstance.username = this.username;
           successModal.result.then(
             (result) => {
@@ -120,6 +131,21 @@ export class AddFeedbackDialogComponent {
       content: content
     };
 
-    return this.http.post<any>('api/feedback', feedback, { headers });
+    return this.http.post<any>('api/feedback', feedback, { headers, context: new HttpContext().set(SkipLoading, true) });
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkMediaSize();
+  }
+
+  private checkMediaSize() {
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+    if (mediaQuery.matches) {
+      this.inMobileMode = true;
+      
+    } else {
+      this.inMobileMode = false;
+    }
   }
 }

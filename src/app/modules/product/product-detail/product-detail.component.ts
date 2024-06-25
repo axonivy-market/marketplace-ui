@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, Renderer2, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../../shared/models/product.model';
 import { ProductService } from '../product.service';
@@ -25,8 +25,12 @@ export class ProductDetailComponent {
   renderer = inject(Renderer2);
   showPopup!: boolean;
   private modalService = inject(NgbModal);
+  allFeedbacksLoaded = false; // Flag to track if all feedbacks are loaded
+  inMobileMode!: boolean;
+  maxFeedbacksToShow = 6;
 
   @ViewChild(StarRatingCountingComponent) starRatingCountingComponent!: StarRatingCountingComponent;
+  @ViewChild(ProductFeedbacksPanelComponent) feedbackPanelComponent!: ProductFeedbacksPanelComponent;
 
   constructor() {
     const productId = this.route.snapshot.params['id'];
@@ -47,10 +51,42 @@ export class ProductDetailComponent {
       const ratingLinkElement = this.starRatingCountingComponent.ratingLink.nativeElement;
       ratingLinkElement.click();
     }
+    this.feedbackPanelComponent.showFeedbacksLoadedBtn.subscribe(() => {
+      this.allFeedbacksLoaded = true;
+    });
+    this.checkMediaSize();
   }
 
   openShowFeedbacksDialog() {
-    const showFeedbackDialog = this.modalService.open(ShowFeedbacksDialogComponent, { centered: true, modalDialogClass: 'show-feedbacks-modal-dialog' });
-    showFeedbackDialog.componentInstance.productName = this.product.name;
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+    if (mediaQuery.matches) {
+      // If the width is smaller than 700px, perform a different action
+      this.handleSmallScreenFeedback();
+    } else {
+      // Otherwise, open the dialog as usual
+      const showFeedbackDialog = this.modalService.open(ShowFeedbacksDialogComponent, { centered: true, modalDialogClass: 'show-feedbacks-modal-dialog' });
+      showFeedbackDialog.componentInstance.productName = this.product.name;
+    }
+  }
+
+  private handleSmallScreenFeedback() {
+    if (this.feedbackPanelComponent.currentPage * this.feedbackPanelComponent.pageSize < this.feedbackPanelComponent.totalElements) {
+      this.feedbackPanelComponent.loadFeedbacks(this.feedbackPanelComponent.currentPage + 1, this.feedbackPanelComponent.pageSize, this.feedbackPanelComponent.currentSort);
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkMediaSize();
+  }
+
+  private checkMediaSize() {
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+    if (mediaQuery.matches) {
+      this.inMobileMode = true;
+      
+    } else {
+      this.inMobileMode = false;
+    }
   }
 }

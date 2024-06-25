@@ -14,6 +14,6 @@ import { StarRatingCountingComponent } from '../star-rating-counting/star-rating
 export class ShowFeedbacksDialogComponent {
   activeModal = inject(NgbActiveModal);
   @Input() productName!: string;
-
+  
   
 }
