@@ -16,10 +16,12 @@ export class ProductDetailComponent {
   product!: Product;
   route = inject(ActivatedRoute);
   productService = inject(ProductService);
+  productId!: string;
 
   constructor() {
     const productId = this.route.snapshot.params['id'];
     if (productId) {
+      this.productId = productId;
       this.productService.getProductById(productId).subscribe(product => {
         this.product = product;
       });
