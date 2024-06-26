@@ -1,4 +1,10 @@
-import { Component, inject, Input, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  signal,
+  WritableSignal
+} from '@angular/core';
 import { ThemeService } from '../../../../core/services/theme/theme.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
@@ -16,15 +22,15 @@ import { Artifact } from '../../../../shared/models/vesion-artifact.model';
 export class ProductDetailVersionActionComponent {
   @Input()
   productId!: string;
-  versions: string[] = [];
-  artifacts: Artifact[] = [];
+  versions: WritableSignal<string[]> = signal([]);
+  artifacts: WritableSignal<Artifact[]> = signal([]);
   themeService = inject(ThemeService);
   translateService = inject(TranslateService);
   isDevVersionsDisplayed = signal(false);
   isDropDownDisplayed = signal(false);
   isDesignerEnvironment = signal(false);
   isInvalidInstallationEnvironment = signal(false);
-  designerVersion!: string;
+  designerVersion = '';
   selectedArtifact!: Artifact;
   selectedVersion!: string;
   productService = inject(ProductService);
@@ -42,10 +48,10 @@ export class ProductDetailVersionActionComponent {
   }
 
   onSelectVersion() {
-    this.artifacts = this.versionMap.get(this.selectedVersion) || [];
+    this.artifacts.set(this.versionMap.get(this.selectedVersion) || []);
 
-    if (this.artifacts.length !== 0) {
-      this.selectedArtifact = this.artifacts[0];
+    if (this.artifacts().length !== 0) {
+      this.selectedArtifact = this.artifacts()[0];
     }
   }
 
@@ -64,6 +70,7 @@ export class ProductDetailVersionActionComponent {
 
   async getVersionWithArtifact() {
     this.sanitizeDataBeforFetching();
+
     this.productService
       .sendRequestToProductDetailVersionAPITest(
         this.productId,
@@ -73,19 +80,24 @@ export class ProductDetailVersionActionComponent {
       .subscribe(data => {
         data.forEach(item => {
           const version = 'Version '.concat(item.version);
-          this.versions.push(version);
-          this.versionMap.set(version, item.artifactsByVersion);
+          this.versions.update(currentVersions => [
+            ...currentVersions,
+            version
+          ]);
+          if (!this.versionMap.get(version)) {
+            this.versionMap.set(version, item.artifactsByVersion);
+          }
         });
-        if (this.versions.length !== 0) {
-          this.selectedVersion = this.versions[0];
+        if (this.versions().length !== 0) {
+          this.selectedVersion = this.versions()[0];
           this.onSelectVersion();
         }
       });
   }
 
   sanitizeDataBeforFetching() {
-    this.versions = [];
-    this.artifacts = [];
+    this.versions.set([]);
+    this.artifacts.set([]);
     this.selectedArtifact = {} as Artifact;
     this.selectedVersion = '';
   }

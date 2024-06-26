@@ -30,7 +30,7 @@
             name="Artifact"
             class="form-select form-select-sm"
             aria-label=".form-select-sm example">
-            @for (item of artifacts; track $index) {
+            @for (item of artifacts(); track $index) {
               <option [value]="item">{{ item.name }}</option>
             }
           </select>
@@ -48,7 +48,7 @@
             (change)="onSelectVersion()"
             class="form-select form-select-sm"
             aria-label=".form-select-sm example">
-            @for (item of versions; track $index) {
+            @for (item of versions(); track $index) {
               <option [value]="item">{{ item }}</option>
             }
           </select>
