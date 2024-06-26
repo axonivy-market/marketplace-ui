@@ -5,17 +5,19 @@ import {
   withInterceptorsFromDi
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { FilterType } from '../../shared/enums/filter-type.enum';
-import { SortType } from '../../shared/enums/sort-type.enum';
+import { TypeOption } from '../../shared/enums/type-option.enum';
+import { SortOption } from '../../shared/enums/sort-option.enum';
 import { MOCK_PRODUCTS } from '../../shared/mocks/mock-data';
 import { Criteria } from '../../shared/models/criteria.model';
 import { ProductService } from './product.service';
 import { Product } from '../../shared/models/product.model';
+import { catchError } from 'rxjs';
 
-const PRODUCT_ID = 'portal';
+const PRODUCT_ID = 'amazon-comprehend';
 const NOT_EXIST_ID = 'undefined';
 
 describe('ProductService', () => {
+  let products = MOCK_PRODUCTS._embedded.products as Product[];
   let service: ProductService;
 
   beforeEach(() => {
@@ -46,16 +48,17 @@ describe('ProductService', () => {
     });
   });
 
-  it('getProductByCriteria with should return products properly', () => {
-    const searchString = 'amazon';
+  it('findProductsByCriteria with should return products properly', () => {
+    const searchString = 'Amazon Comprehend';
     const criteria: Criteria = {
       search: searchString,
-      sort: SortType.ALPHABETICALLY,
-      type: FilterType.CONNECTORS
+      sort: SortOption.ALPHABETICALLY,
+      type: TypeOption.CONNECTORS
     };
-    service.getProductsByCriteria(criteria).subscribe(products => {
+    service.findProductsByCriteria(criteria).subscribe(response => {
+      let products = response._embedded.products;
       for (let i = 0; i < products.length; i++) {
-        expect(products[i].type).toEqual(FilterType.CONNECTORS);
+        expect(products[i].type).toEqual(TypeOption.CONNECTORS);
         expect(products[i].name.toLowerCase()).toContain(searchString);
         if (products[i + 1]) {
           expect(products[i + 1].name.localeCompare(products[i].name)).toEqual(
@@ -66,24 +69,25 @@ describe('ProductService', () => {
     });
   });
 
-  it('getProductByCriteria with empty searchString', () => {
+  it('findProductsByCriteria with empty searchString', () => {
     const criteria: Criteria = {
       search: '',
       sort: null,
       type: null
     };
-    service.getProductsByCriteria(criteria).subscribe(products => {
-      expect(products.length).toEqual(MOCK_PRODUCTS.length);
+    service.findProductsByCriteria(criteria).subscribe(response => {
+      expect(response._embedded.products.length).toEqual(products.length);
     });
   });
 
-  it('getProductByCriteria with popularity order', () => {
+  it('findProductsByCriteria with popularity order', () => {
     const criteria: Criteria = {
       search: '',
-      sort: SortType.POPULARITY,
+      sort: SortOption.POPULARITY,
       type: null
     };
-    service.getProductsByCriteria(criteria).subscribe(products => {
+    service.findProductsByCriteria(criteria).subscribe(response => {
+      let products = response._embedded.products;
       for (let i = 0; i < products.length; i++) {
         if (
           products[i].platformReview &&
@@ -98,14 +102,27 @@ describe('ProductService', () => {
     });
   });
 
-  it('getProductByCriteria with default sort', () => {
+  it('findProductsByCriteria with default sort', () => {
     const criteria: Criteria = {
       search: '',
-      sort: SortType.RECENT,
+      sort: SortOption.RECENT,
       type: null
     };
-    service.getProductsByCriteria(criteria).subscribe(products => {
-      expect(products.length).toEqual(MOCK_PRODUCTS.length);
+    service.findProductsByCriteria(criteria).subscribe(response => {
+      expect(response._embedded.products.length).toEqual(products.length);
+    });
+  });
+
+  it('findProductsByCriteria by next page url', () => {
+    const criteria: Criteria = {
+      nextPageHref: 'http://localhost:8080/marketplace-service/api/product?type=all&page=1&size=20',
+      search: '',
+      sort: SortOption.RECENT,
+      type: TypeOption.All_TYPES
+    };
+    service.findProductsByCriteria(criteria).subscribe(response => {
+      expect(response._embedded.products.length).toEqual(0);
+      expect(response.page.number).toEqual(1);
     });
   });
 });
