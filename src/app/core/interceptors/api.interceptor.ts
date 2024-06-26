@@ -1,11 +1,12 @@
-import { HttpContextToken, HttpHeaders, HttpInterceptorFn } from '@angular/common/http';
+import { HttpHeaders, HttpContextToken, HttpInterceptorFn } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { LoadingService } from '../services/loading/loading.service';
 import { inject } from '@angular/core';
 import { finalize } from 'rxjs';
 
-export const REQUEST_BY = 'X-Requested-By';
-export const IVY = 'ivy';
+export const REQUEST_BY = "X-Requested-By";
+export const IVY = "ivy";
+
 /** This is option for exclude loading api
  * @Example return httpClient.get('apiEndPoint', { context: new HttpContext().set(SkipLoading, true) })
  */
@@ -17,11 +18,13 @@ export const apiInterceptor: HttpInterceptorFn = (req, next) => {
   if (req.url.includes('i18n')) {
     return next(req);
   }
-  const cloneReq = req.clone({
-    headers: req.headers.set('X-Requested-By', 'ivy'),
-    url: `${environment.apiUrl}/${req.url}`
-  });
-
+  let requestURL = req.url;
+  const apiURL = environment.apiUrl;
+  if (!requestURL.startsWith(apiURL)) {
+    requestURL = `${apiURL}/${req.url}`;
+  }
+  const cloneReq = req.clone({ url: requestURL, headers: addIvyHeaders(req.headers) });
+  
   if (req.context.get(SkipLoading)) {
     return next(cloneReq);
   }

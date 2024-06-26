@@ -7,8 +7,8 @@ import {
   FILTER_TYPES,
   SORT_TYPES
 } from '../../../shared/constants/common.constant';
-import { FilterType } from '../../../shared/enums/filter-type.enum';
-import { SortType } from '../../../shared/enums/sort-type.enum';
+import { TypeOption } from '../../../shared/enums/type-option.enum';
+import { SortOption } from '../../../shared/enums/sort-option.enum';
 
 @Component({
   selector: 'app-product-filter',
@@ -19,21 +19,21 @@ import { SortType } from '../../../shared/enums/sort-type.enum';
 })
 export class ProductFilterComponent {
   @Output() searchChange = new EventEmitter<string>();
-  @Output() filterChange = new EventEmitter<FilterType>();
-  @Output() sortChange = new EventEmitter<SortType>();
+  @Output() filterChange = new EventEmitter<TypeOption>();
+  @Output() sortChange = new EventEmitter<SortOption>();
 
-  selectedFilterType = FilterType.All_TYPES;
-  filterTypes = FILTER_TYPES;
-  selectedSortType: SortType = SortType.POPULARITY;
-  sortTypes = SORT_TYPES;
+  selectedType = TypeOption.All_TYPES;
+  types = FILTER_TYPES;
+  selectedSort: SortOption = SortOption.POPULARITY;
+  sorts = SORT_TYPES;
 
   searchText = '';
 
   themeService = inject(ThemeService);
   translateService = inject(TranslateService);
 
-  onSelectFilterType(type: FilterType) {
-    this.selectedFilterType = type;
+  onSelectType(type: TypeOption) {
+    this.selectedType = type;
     this.filterChange.emit(type);
   }
 
@@ -42,6 +42,6 @@ export class ProductFilterComponent {
   }
 
   onSortChange() {
-    this.sortChange.next(this.selectedSortType);
+    this.sortChange.next(this.selectedSort);
   }
 }

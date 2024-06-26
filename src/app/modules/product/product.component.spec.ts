@@ -9,8 +9,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { FilterType } from '../../shared/enums/filter-type.enum';
-import { SortType } from '../../shared/enums/sort-type.enum';
+import { TypeOption } from '../../shared/enums/type-option.enum';
+import { SortOption } from '../../shared/enums/sort-option.enum';
 import { ProductComponent } from './product.component';
 import { ProductService } from './product.service';
 import { MockProductService } from '../../shared/mocks/mock-services';
@@ -22,6 +22,23 @@ const router = {
 describe('ProductComponent', () => {
   let component: ProductComponent;
   let fixture: ComponentFixture<ProductComponent>;
+  let mockIntersectionObserver: any;
+
+  beforeAll(() => {
+    mockIntersectionObserver = jasmine.createSpyObj('IntersectionObserver', ['observe', 'unobserve', 'disconnect']);
+    mockIntersectionObserver.observe.and.callFake(() => { });
+    mockIntersectionObserver.unobserve.and.callFake(() => { });
+    mockIntersectionObserver.disconnect.and.callFake(() => { });
+
+    (window as any).IntersectionObserver = function (callback: IntersectionObserverCallback) {
+      mockIntersectionObserver.callback = callback;
+      return mockIntersectionObserver;
+    };
+  });
+
+  afterAll(() => {
+    delete (window as any).IntersectionObserver;
+  });
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -57,10 +74,10 @@ describe('ProductComponent', () => {
     expect(router.navigate).toHaveBeenCalledWith(['', 'url']);
   });
 
-  it('loadAllProducts should return products with criteria', () => {
+  it('loadProductItems should return products with criteria', () => {
 
-    component.loadAllProducts();
-    expect(component.loadAllProducts).toBeTruthy();
+    component.loadProductItems();
+    expect(component.loadProductItems).toBeTruthy();
   })
 
   it('ngOnDestroy should unsubscribe all sub', () => {
@@ -71,15 +88,15 @@ describe('ProductComponent', () => {
   });
 
   it('onFilterChange should filter products properly', () => {
-    component.onFilterChange(FilterType.CONNECTORS);
+    component.onFilterChange(TypeOption.CONNECTORS);
     component.products().forEach((product) => {
-      expect(product.type).toEqual(FilterType.CONNECTORS);
+      expect(product.type).toEqual('connector');
     });
   });
 
   it('onSortChange should order products properly', () => {
     component.onSearchChanged('cur');
-    component.onSortChange(SortType.ALPHABETICALLY);
+    component.onSortChange(SortOption.ALPHABETICALLY);
     for (let i = 0; i < component.products.length - 1; i++) {
       expect(
         component.products()[i + 1].name.localeCompare(component.products()[i].name)
@@ -88,11 +105,55 @@ describe('ProductComponent', () => {
   });
 
   it('search should return match products name', fakeAsync(() => {
-    const productName = 'adobe';
+    const productName = 'amazon comprehend';
     component.onSearchChanged(productName);
     tick(500);
     component.products().forEach((product) => {
       expect(product.name.toLowerCase()).toContain(productName);
     });
   }));
+
+  it('setupIntersectionObserver should not trigger when init page', () => {
+    component.ngAfterViewInit();
+    expect(component.criteria.nextPageHref).toBeUndefined();
+  });
+
+  it('should call loadProductItems when observerElement is intersecting and has more products', () => {
+    spyOn(component, 'loadProductItems').and.callThrough();
+    spyOn(component, 'hasMore').and.returnValue(true);
+
+    const entries = [{ isIntersecting: true }];
+    const callback = mockIntersectionObserver.callback;
+
+    callback(entries as IntersectionObserverEntry[]);
+
+    expect(component.hasMore).toHaveBeenCalled();
+    expect(component.loadProductItems).toHaveBeenCalled();
+  });
+
+  it('should not call loadProductItems when observerElement is not intersecting', () => {
+    spyOn(component, 'loadProductItems').and.callThrough();
+    spyOn(component, 'hasMore').and.returnValue(true);
+
+    const entries = [{ isIntersecting: false }];
+    const callback = mockIntersectionObserver.callback;
+
+    callback(entries as IntersectionObserverEntry[]);
+
+    expect(component.hasMore).not.toHaveBeenCalled();
+    expect(component.loadProductItems).not.toHaveBeenCalled();
+  });
+
+  it('should not call loadProductItems when there are no more products', () => {
+    spyOn(component, 'loadProductItems').and.callThrough();
+    spyOn(component, 'hasMore').and.returnValue(false);
+
+    const entries = [{ isIntersecting: true }];
+    const callback = mockIntersectionObserver.callback;
+
+    callback(entries as IntersectionObserverEntry[]);
+
+    expect(component.hasMore).toHaveBeenCalled();
+    expect(component.loadProductItems).not.toHaveBeenCalled();
+  });
 });
