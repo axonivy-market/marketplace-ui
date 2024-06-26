@@ -62,7 +62,10 @@ describe('ProductVersionActionComponent', () => {
     expect(warningDialog).toBeNull();
   }));
 
-  it('first artifact should be chosen when select corresponding version', () => {
+  fit('first artifact should be chosen when select corresponding version', () => {
+    component.onSelectVersion();
+    expect(component.artifacts().length).toBe(0);
+
     const selectedVersion = 'Version 10.0.2';
     const artifact = {
       name: 'Example Artifact',

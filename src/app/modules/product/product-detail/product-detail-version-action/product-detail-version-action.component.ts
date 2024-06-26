@@ -72,7 +72,7 @@ export class ProductDetailVersionActionComponent {
     this.sanitizeDataBeforFetching();
 
     this.productService
-      .sendRequestToProductDetailVersionAPITest(
+      .sendRequestToProductDetailVersionAPI(
         this.productId,
         this.isDevVersionsDisplayed(),
         this.designerVersion

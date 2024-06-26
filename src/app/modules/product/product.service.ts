@@ -41,7 +41,8 @@ export class ProductService {
     }
     return of({} as Product);
   }
-  sendRequestToProductDetailVersionAPITest(
+
+  sendRequestToProductDetailVersionAPI(
     productId: string,
     showDevVersion: boolean,
     designerVersion: string
