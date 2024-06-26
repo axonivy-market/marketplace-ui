@@ -1,44 +1,16 @@
-<svg class="dn">
-  <defs>
-    <symbol id="svg-confetti">
-      <path fill="currentColor" d="M-.017 6.91L4.035.012l2.587 1.52L2.57 8.43z"></path>
-    </symbol>
-  </defs>
-</svg>
-
-<div
-  class="d-flex align-items-center justify-content-center"
-  style="position: absolute; top: 0; bottom: 0; width: 100%">
-  <div
-    #a
-    style="
-      font-size: 18px;
-      font-weight: 400;
-      line-height: 25.2px;
-      text-align: center;
-      padding-bottom: 15px;
-      color: #1b1b1b;
-    ">
-    <span
-      style="
-        display: block;
-        font-size: 50px;
-        font-weight: 400;
-        line-height: 60px;
-        text-align: center;
-        padding-bottom: 20px;
-      ">
-      🎉
-    </span>
-    <span style="display: block">
-      Your feedback has been successfully submitted!
-    </span>
-    <span style="display: block">Thank you for your contribution {{username}}</span>
+<div class="modal-content-wrapper">
+  <div class="modal-header border-bottom-0">
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"></button>
   </div>
-  <button
-    type="button"
-    class="btn-close"
-    aria-label="Close"
-    style="position: absolute; right: 18px; top: 18px"
-    (click)="activeModal.dismiss('Cross click')"></button>
+  <div class="modal-body">
+    <img src="/assets/images/misc/confetti-icon.png">
+    <div>
+      {{ 'common.feedback.successMessage' | translate }}
+    </div>
+    <div>{{ 'common.feedback.thankMessage' | translate }} {{ displayName }}</div>
+  </div>
 </div>

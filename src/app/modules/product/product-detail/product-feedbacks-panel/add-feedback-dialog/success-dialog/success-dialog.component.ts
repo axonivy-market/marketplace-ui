@@ -1,14 +1,25 @@
-import { Component, OnInit, ElementRef, ViewChild, Injector, inject, Input } from '@angular/core';
+import { AfterViewInit, Component, inject } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../../../../../../auth/auth.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-success-dialog',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
+  providers: [AuthService],
   templateUrl: './success-dialog.component.html',
   styleUrls: ['./success-dialog.component.scss']
 })
 export class SuccessDialogComponent {
+
   activeModal = inject(NgbActiveModal);
-  @Input() username!: string;
+
+  private authService = inject(AuthService);
+  
+  displayName: string | null = null;
+
+  constructor() {
+    this.displayName = this.authService.getDisplayName();
+  }
 }

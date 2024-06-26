@@ -45,3 +45,6 @@ common:
     ivyCompanyInfo: © 2023 Axon Ivy Inc
     privacyPolicy: Datenschutzrichtlinie
     termsOfService: Nutzungsbedingungen
+  feedback:
+    successMessage: Your feedback has been successfully submitted! 
+    thankMessage: Thank you for your contribution 

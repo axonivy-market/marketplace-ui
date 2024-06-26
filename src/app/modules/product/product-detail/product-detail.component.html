@@ -1,8 +1,10 @@
 <h1>{{ product.name }}</h1>
 <p>{{ product.shortDescription }}</p>
+
 <app-star-rating-counting
   [productName]="product.name"
   [platformReview]="product.platformReview" />
+
 <app-product-feedbacks-panel></app-product-feedbacks-panel>
 @if (!allFeedbacksLoaded || !inMobileMode) {
   <div class="d-flex flex-row justify-content-center">

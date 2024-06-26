@@ -2,72 +2,104 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
-import { Observable, Observer, catchError, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable()
 export class AuthService {
-  private githubAuthUrl = `https://github.com/login/oauth/authorize`;
-  private apiAuthExchangeCodeEndpoint = `${environment.apiUrl}/auth/github/exchange-code`;
+  private readonly BASE_URL = environment.apiUrl;
+  private readonly TOKEN_KEY = 'token';
+  private readonly githubAuthUrl = 'https://github.com/login/oauth/authorize';
+  private readonly githubAuthCallbackUrl = environment.githubAuthCallbackUrl;
 
-  http = inject(HttpClient);
-  router = inject(Router);
+  constructor(private http: HttpClient, private router: Router, private cookieService: CookieService) {}
 
-  redirectToGitHub(originalUrl: string) {
+  // Login related functions
+
+  redirectToGitHub(originalUrl: string): void {
     const state = encodeURIComponent(originalUrl);
-    const authUrl = `${this.githubAuthUrl}?client_id=${environment.githubClientId}&redirect_uri=${environment.githubAuthCallbackUrl}&state=${state}`;
+    const authUrl = `${this.githubAuthUrl}?client_id=${environment.githubClientId}&redirect_uri=${this.githubAuthCallbackUrl}&state=${state}`;
     window.location.href = authUrl;
   }
 
-  /**
-   * Handles GitHub callback by exchanging code for token.
-   * @param code The authorization code received from GitHub callback.
-   * @param state The state parameter received from GitHub callback (used for redirection).
-   */
-  handleGitHubCallback(code: string, state: string) {
+  handleGitHubCallback(code: string, state: string): void {
     const body = { code };
     const headers = new HttpHeaders().set('x-requested-by', 'ivy');
 
-    this.exchangeCodeForToken(body, headers).subscribe(
-      response => {
-        this.handleTokenResponse(response.token, state);
-      },
-      error => {
-        console.error('Error occurred during token exchange:', error);
-        // Handle error (e.g., redirect to an error page)
-      }
-    );
+    this.exchangeCodeForToken(body, headers)
+      .subscribe(
+        response => this.handleTokenResponse(response.token, state),
+        error => {
+          console.error('Error occurred during login:', error);
+          // Handle error (e.g., redirect to an error page)
+        }
+      );
   }
 
-  /**
-   * Sends a POST request to exchange authorization code for an access token.
-   * @param body The request body containing code and state.
-   * @param headers The HttpHeaders for the request.
-   * @returns Observable<any> The observable for the HTTP POST request.
-   */
-  private exchangeCodeForToken(
-    body: any,
-    headers: HttpHeaders
-  ): Observable<any> {
-    return this.http.post<any>(this.apiAuthExchangeCodeEndpoint, body, { headers }).pipe(
-      catchError(error => {
-        console.error('Error occurred during HTTP request:', error);
-        return throwError(() => error);
-      })
-    );
+  private exchangeCodeForToken(body: any, headers: HttpHeaders): Observable<any> {
+    const url = `${this.BASE_URL}/auth/github/login`;
+    return this.http.post<any>(url, body, { headers })
+      .pipe(
+        catchError(error => {
+          console.error('Error occurred during HTTP request:', error);
+          return throwError(() => error);
+        })
+      );
   }
 
-  /**
-   * Handles the response containing the access token.
-   * @param token The access token received from the backend.
-   * @param state The state parameter used for redirection.
-   */
   private handleTokenResponse(token: string, state: string): void {
-    // Store token securely (e.g., in localStorage or a secure cookie)
-    document.cookie = `token=${token}; path=/; max-age=${365 * 86400}`;
-
-    // Redirect to the original URL (e.g., /product/{productName})
+    this.setTokenAsCookie(token);
     this.router.navigate([`/product/${state}`], {
       queryParams: { showAddFeedbackDialog: 'true' }
     });
+  }
+
+  // Token related functions
+
+  private setTokenAsCookie(token: string): void {
+    const expiryDate = new Date();
+    expiryDate.setDate(expiryDate.getDate() + 365); // One year expiry
+    this.cookieService.set(this.TOKEN_KEY, token, expiryDate);
+  }
+
+  getToken(): string | null {
+    return this.cookieService.get(this.TOKEN_KEY);
+  }
+
+  decodeToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch (error) {
+      console.error('Error decoding token', error);
+      return null;
+    }
+  }
+
+  getDisplayName(): string | null {
+    const token = this.getToken();
+    if (token) {
+      const decoded = this.decodeToken(token);
+      return decoded ? decoded.name || decoded.username : null;
+    }
+    return null;
+  }
+
+  getUsername(): string | null {
+    const token = this.getToken();
+    if (token) {
+      const decoded = this.decodeToken(token);
+      return decoded ? decoded.username : null;
+    }
+    return null;
+  }
+
+  getUserId(): string | null {
+    const token = this.getToken();
+    if (token) {
+      const decoded = this.decodeToken(token);
+      return decoded ? decoded.sub : null;
+    }
+    return null;
   }
 }

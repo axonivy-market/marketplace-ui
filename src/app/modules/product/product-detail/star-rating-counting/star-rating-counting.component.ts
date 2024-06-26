@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StarRatingComponent } from '../../../../shared/components/star-rating/star-rating.component';
 import { StarRatingCounting } from '../../../../shared/models/star-rating-counting.model';
 import { AddFeedbackDialogComponent } from '../product-feedbacks-panel/add-feedback-dialog/add-feedback-dialog.component';
+import { SuccessDialogComponent } from '../product-feedbacks-panel/add-feedback-dialog/success-dialog/success-dialog.component';
 
 @Component({
   selector: 'app-star-rating-counting',
@@ -23,7 +24,7 @@ import { AddFeedbackDialogComponent } from '../product-feedbacks-panel/add-feedb
   styleUrl: './star-rating-counting.component.scss'
 })
 export class StarRatingCountingComponent implements OnInit {
-  @Input() productId: string = '6674a23283c3194d33fb8da2';
+  @Input() productId: string = '667109f11666e1352a072f8a';
   @Input() productName!: string;
   @Input() platformReview: string = '3.5';
   @Input() isDisplayInDialog: boolean = false;
@@ -84,28 +85,29 @@ export class StarRatingCountingComponent implements OnInit {
   }
 
   openRateConnectorDialog() {
-    const token = this.getTokenFromCookie(); // Implement this method to get token from cookie
-    console.log(token);
+    // const token = this.getTokenFromCookie(); // Implement this method to get token from cookie
+    // console.log(token);
 
-    const tokenExpiryValid = this.isTokenValid(token); // Implement this method to check token validity
-    console.log(tokenExpiryValid);
+    // const tokenExpiryValid = this.isTokenValid(token); // Implement this method to check token validity
+    // console.log(tokenExpiryValid);
 
-    if (token && tokenExpiryValid) {
-      this.openAddFeedbacDialogEvent.emit();
+    // if (token && tokenExpiryValid) {
+    //   this.openAddFeedbacDialogEvent.emit();
       
-      var modalRef;
-      const mediaQuery = window.matchMedia('(max-width: 767px)');
-      if (mediaQuery.matches) {
-        modalRef = this.modalService.open(AddFeedbackDialogComponent, {fullscreen: true});
-      }
-      else {
-        modalRef = this.modalService.open(AddFeedbackDialogComponent, {centered: true, modalDialogClass: 'add-feedback-modal-dialog'});
-      }
-      modalRef.componentInstance.productName = this.productName;
-    }
-    else {
-      this.onClickRateThisConnector();
-    }
+    //   var modalRef;
+    //   const mediaQuery = window.matchMedia('(max-width: 767px)');
+    //   if (mediaQuery.matches) {
+    //     modalRef = this.modalService.open(AddFeedbackDialogComponent, {fullscreen: true});
+    //   }
+    //   else {
+    //     modalRef = this.modalService.open(AddFeedbackDialogComponent, {centered: true, modalDialogClass: 'add-feedback-modal-dialog'});
+    //   }
+    //   modalRef.componentInstance.productName = this.productName;
+    // }
+    // else {
+    //   this.onClickRateThisConnector();
+    // }
+    this.modalService.open(SuccessDialogComponent, { fullscreen: 'md', centered: true, modalDialogClass: 'add-feedback-modal-dialog' });
   }
 
   getTokenFromCookie(): string {

@@ -78,7 +78,7 @@ export class ProductFeedbacksPanelComponent {
   // }
 
   loadFeedbacks(page: number = 0, size: number = this.pageSize, sort: string = this.currentSort): void {
-    this.productFeedbackService.findProductFeedbacksByCriteria('6674a23283c3194d33fb8da2', page, size, sort)
+    this.productFeedbackService.findProductFeedbacksByCriteria('667109f11666e1352a072f8a', page, size, sort)
       .subscribe((response: FeedbackApiResponse) => {
         if (page === 0) {
           this.productFeedbacks = response._embedded.feedbacks;

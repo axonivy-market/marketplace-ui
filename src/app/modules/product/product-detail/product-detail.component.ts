@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Renderer2, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, Renderer2, ViewChild, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../../shared/models/product.model';
 import { ProductService } from '../product.service';
@@ -7,37 +7,42 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductFeedbacksPanelComponent } from './product-feedbacks-panel/product-feedbacks-panel.component';
 import { ShowFeedbacksDialogComponent } from './product-feedbacks-panel/show-feedbacks-dialog/show-feedbacks-dialog.component';
 import { StarRatingCountingComponent } from './star-rating-counting/star-rating-counting.component';
+import { ProductDetailService } from './product-detail.service';
+import { interval } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-product-detail',
     standalone: true,
-    providers: [ProductService],
+    providers: [ProductDetailService],
     templateUrl: './product-detail.component.html',
     styleUrl: './product-detail.component.scss',
     imports: [ShowFeedbacksDialogComponent, ProductFeedbacksPanelComponent, StarRatingCountingComponent]
 })
 export class ProductDetailComponent {
-  product!: Product;
 
-  route = inject(ActivatedRoute);
-  productService = inject(ProductService);
-  themeService = inject(ThemeService);
-  renderer = inject(Renderer2);
-  showPopup!: boolean;
+  @ViewChild(StarRatingCountingComponent) starRatingCountingComponent!: StarRatingCountingComponent;
+  @ViewChild(ProductFeedbacksPanelComponent) feedbackPanelComponent!: ProductFeedbacksPanelComponent;
+
+  private productDetailService = inject(ProductDetailService);
+  private route = inject(ActivatedRoute);
+  private themeService = inject(ThemeService);
+  private renderer = inject(Renderer2);
   private modalService = inject(NgbModal);
+
+  product!: Product;
+  showPopup!: boolean;
   allFeedbacksLoaded = false; // Flag to track if all feedbacks are loaded
   inMobileMode!: boolean;
   maxFeedbacksToShow = 6;
 
-  @ViewChild(StarRatingCountingComponent) starRatingCountingComponent!: StarRatingCountingComponent;
-  @ViewChild(ProductFeedbacksPanelComponent) feedbackPanelComponent!: ProductFeedbacksPanelComponent;
 
   constructor() {
     const productId = this.route.snapshot.params['id'];
     console.log(this.route.snapshot.params);
     
     if (productId) {
-      this.productService.getProductById(productId).subscribe(product => {
+      this.productDetailService.getProductDetailById(productId).subscribe(product => {
         this.product = product;
       });
     }
@@ -93,3 +98,4 @@ export class ProductDetailComponent {
   // Get detail of product by id (include name) then pass product into child component
   // Move button Show into product-feedback-panel
 }
+
