@@ -57,7 +57,11 @@
           href="#"
           class="fs-small primary-color text-decoration-none"
           (click)="onShowDevVersion($event)">
-          {{ 'common.product.detail.download.hideDevVersions' | translate }}
+          @if(isDevVersionsDisplayed()){
+            {{ 'common.product.detail.download.hideDevVersions' | translate }}
+          } @else {
+            {{ 'common.product.detail.download.showDevVersions' | translate }}
+          }
         </a>
         <div class="form-group d-flex justify-content-end">
           <button

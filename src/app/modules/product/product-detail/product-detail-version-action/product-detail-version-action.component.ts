@@ -49,7 +49,7 @@ export class ProductDetailVersionActionComponent {
 
   onShowDevVersion(event: Event) {
     event.preventDefault();
-    this.isDevVersionsDisplayed.set(this.isDevVersionsDisplayed());
+    this.isDevVersionsDisplayed.set(!this.isDevVersionsDisplayed());
     this.getVersionWithArtifact();
   }
 
@@ -71,8 +71,9 @@ export class ProductDetailVersionActionComponent {
         )
         .subscribe(data => {
           data.forEach(item => {
-            this.versions.push(item.version);
-            this.versionMap.set(item.version, item.artifactsByVersion);
+            let version = 'Version '.concat(item.version);
+            this.versions.push(version);
+            this.versionMap.set(version, item.artifactsByVersion);
           });
           if (this.versions.length != 0) {
             this.selectedVersion = this.versions[0];

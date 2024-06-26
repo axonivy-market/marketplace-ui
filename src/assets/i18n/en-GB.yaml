@@ -52,6 +52,7 @@ common:
       download:
         buttonLabel: Download
         hideDevVersions: Hide developement versions
+        showDevVersions: Show developement versions
         versionSelector:
           label: Choose target platform
         artifactSelector:
