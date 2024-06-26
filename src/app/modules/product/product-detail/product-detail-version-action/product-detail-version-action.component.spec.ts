@@ -110,7 +110,7 @@ describe('ProductVersionActionComponent', () => {
     component.getVersionWithArtifact();
 
     expect(
-      productServiceMock.sendRequestToProductDetailVersionAPITest
+      productServiceMock.sendRequestToProductDetailVersionAPI
     ).toHaveBeenCalledWith(
       component.productId,
       component.isDevVersionsDisplayed(),
@@ -174,7 +174,7 @@ describe('ProductVersionActionComponent', () => {
       }
     ];
 
-    productServiceMock.sendRequestToProductDetailVersionAPITest.and.returnValue(
+    productServiceMock.sendRequestToProductDetailVersionAPI.and.returnValue(
       of(mockData)
     );
     return { mockArtifct1, mockArtifct2 };
