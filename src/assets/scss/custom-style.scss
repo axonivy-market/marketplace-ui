@@ -116,6 +116,10 @@ p {
     color: #{$ivyPrimaryTextColorLight} !important;
   }
 
+  .text-link-blue {
+    color: #{$ivyPrimaryColorLight} !important;
+  }
+
   .border-dark {
     border-color: #{$ivyPrimaryTextColorLight};
   }

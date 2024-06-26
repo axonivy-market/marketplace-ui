@@ -2,6 +2,12 @@
   width: 70px;
 }
 
+.back-link {
+  font-weight: 500;
+  font-size: 16px;
+  text-decoration: none;
+}
+
 .product-data-title,
 .product-data-info {
   font-size: 1.1rem;
@@ -71,9 +77,16 @@ hr {
 }
 
 .nav-item a {
-  color: #000000;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 22px;
+}
+
+.nav-item a.active {
+  font-weight: 600;
+}
+
+.nav-item a.text-secondary.active {
+  color: #ffffff !important;
 }
 
 .nav-tabs .nav-item {
@@ -98,7 +111,7 @@ hr {
 
 pre {
   padding: 15px;
-  border: 1px solid #000;
+  border: 1px solid;
 }
 
 .info-title {
@@ -127,16 +140,18 @@ pre {
   overflow: hidden;
 }
 
-// .dropdown-menu {
-//   width: 100%;
-// }
-
-// .modal-content {
-//   transform: translateY(93%);
-// }
-
 .select-description option {
   width: 100%;
+}
+
+.tab-content {
+  position: relative;
+}
+
+.popover {
+  position: absolute;
+  width: 100%;
+  background-color: red;
 }
 
 .flexible-gap {
@@ -144,6 +159,8 @@ pre {
 }
 
 .product-title {
+  font-size: 72px;
+  font-weight: 600;
   line-height: 79.2px;
   text-align: left;
 }

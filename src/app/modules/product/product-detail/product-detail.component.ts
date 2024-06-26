@@ -10,11 +10,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../product.service';
 import { StarRatingComponent } from '../star-rating/star-rating.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { FilterType } from '../../../shared/enums/filter-type.enum';
 import { MarkdownModule, MarkdownService } from 'ngx-markdown';
 import { ProductDetail } from '../../../shared/models/product-detail.model';
 import { Readme } from '../../../shared/models/readme.model';
 import { ProductVersionActionComponent } from './product-version-action/product-version-action.component';
+import { ThemeService } from '../../../core/services/theme/theme.service';
+import { CommonModule } from '@angular/common';
+import { PopOverPipe } from './pop-over.pipe';
+
 declare var bootstrap: any;
 
 const NON_NUMERIC_CHAR = '[^0-9.]';
@@ -22,10 +25,12 @@ const NON_NUMERIC_CHAR = '[^0-9.]';
   selector: 'app-product-detail',
   standalone: true,
   imports: [
+    CommonModule,
     StarRatingComponent,
     TranslateModule,
     MarkdownModule,
-    ProductVersionActionComponent
+    ProductVersionActionComponent,
+    PopOverPipe
   ],
   providers: [ProductService, MarkdownService],
   templateUrl: './product-detail.component.html',
@@ -34,10 +39,12 @@ const NON_NUMERIC_CHAR = '[^0-9.]';
 export class ProductDetailComponent {
   productDetail: WritableSignal<ProductDetail> = signal({} as ProductDetail);
   readme: WritableSignal<Readme> = signal({} as Readme);
+  themeService = inject(ThemeService);
   route = inject(ActivatedRoute);
   router = inject(Router);
   productService = inject(ProductService);
   activeTab: string = 'description';
+  resizeObserver: ResizeObserver;
 
   @Output() versionChanged = new EventEmitter<string>();
 
@@ -57,6 +64,9 @@ export class ProductDetailComponent {
           }
         });
     }
+    this.resizeObserver = new ResizeObserver(() => {
+      this.updateDropdownSelection();
+    });
   }
 
   loadDetailTabs(versionChanged: string) {
@@ -77,6 +87,18 @@ export class ProductDetailComponent {
       });
   }
 
+  onTabChange(event: Event) {
+    const selectedTab = (event.target as HTMLSelectElement).value;
+    this.setActiveTab(selectedTab);
+  }
+
+  updateDropdownSelection() {
+    const dropdown = document.getElementById('nav_item') as HTMLSelectElement;
+    if (dropdown) {
+      dropdown.value = this.activeTab;
+    }
+  }
+
   ngOnInit() {
     this.route.fragment.subscribe(fragment => {
       if (fragment) {
@@ -85,16 +107,6 @@ export class ProductDetailComponent {
         this.setActiveTab('description');
       }
     });
-    var popoverTriggerList = [].slice.call(
-      document.querySelectorAll('[data-bs-toggle="popover"]')
-    );
-    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-      return new bootstrap.Popover(popoverTriggerEl);
-    });
-  }
-
-  popoverContent(): string {
-    return document.querySelector('.info-tab')!.innerHTML;
   }
 
   setActiveTab(tab: string) {
@@ -104,6 +116,37 @@ export class ProductDetailComponent {
       queryParamsHandling: 'preserve',
       fragment: 'tab-' + tab
     });
+    this.updateDropdownSelection();
+  }
+
+  initializePopover() {
+    const popoverTriggerList = [].slice.call(
+      document.querySelectorAll('[data-bs-toggle="popover"]')
+    );
+    popoverTriggerList.map((popoverTriggerEl: Element) => {
+      return new bootstrap.Popover(popoverTriggerEl, {
+        html: true,
+        content: this.popoverContent(),
+        sanitize: false,
+        placement: 'bottom',
+        container: document.querySelector('.tab-pane'),
+        trigger: 'focus'
+      });
+    });
+  }
+
+  popoverContent(): string {
+    const infoTab = document.querySelector('.info-tab');
+    return infoTab ? infoTab.innerHTML : '';
+  }
+
+  ngAfterViewInit() {
+    this.resizeObserver.observe(document.body);
+    this.initializePopover();
+  }
+
+  ngOnDestroy() {
+    this.resizeObserver.disconnect();
   }
 
   getTypeIcon() {
