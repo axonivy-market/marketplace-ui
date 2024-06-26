@@ -47,11 +47,11 @@ export class ProductService {
     designerVersion: string
   ): Observable<VersionData[]> {
     this.loadingService.show();
-    let url = 'api/product-details/' + productId + '/versions';
+    const url = `api/product-details/${productId}/versions`;
     const params = new HttpParams()
       .append('designerVersion', designerVersion)
       .append('isShowDevVersion', showDevVersion);
-    return this.httpClient.get<VersionData[]>(url, { params: params }).pipe(
+    return this.httpClient.get<VersionData[]>(url, { params }).pipe(
       tap(() => {
         this.loadingService.hide();
       })

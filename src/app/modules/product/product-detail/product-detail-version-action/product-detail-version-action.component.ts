@@ -22,28 +22,30 @@ export class ProductDetailVersionActionComponent {
   translateService = inject(TranslateService);
   isDevVersionsDisplayed = signal(false);
   isDropDownDisplayed = signal(false);
-  isDesignerEnvironment: boolean = false;
+  isDesignerEnvironment = signal(false);
   isInvalidInstallationEnvironment = signal(false);
-  designerVersion: string = '';
+  designerVersion!: string;
   selectedArtifact!: Artifact;
-  selectedVersion: string = '';
+  selectedVersion!: string;
   productService = inject(ProductService);
   versionMap: Map<string, Artifact[]> = new Map();
 
   onInstallArtifact() {
-    if (!this.isDesignerEnvironment) {
+    if (!this.isDesignerEnvironment()) {
+      const delayTimeBeforeHideMessage = 2000;
       this.isInvalidInstallationEnvironment.set(true);
-      setTimeout(() => this.isInvalidInstallationEnvironment.set(false), 2000);
+      setTimeout(
+        () => this.isInvalidInstallationEnvironment.set(false),
+        delayTimeBeforeHideMessage
+      );
     }
   }
 
   onSelectVersion() {
     this.artifacts = this.versionMap.get(this.selectedVersion) || [];
-    console.log(this.artifacts.length);
 
-    if (this.artifacts.length != 0) {
+    if (this.artifacts.length !== 0) {
       this.selectedArtifact = this.artifacts[0];
-      console.log(this.selectedArtifact);
     }
   }
 
@@ -54,7 +56,7 @@ export class ProductDetailVersionActionComponent {
   }
 
   async onShowVersionAndArtifact() {
-    if(!this.isDropDownDisplayed() && this.artifacts.length == 0){
+    if (!this.isDropDownDisplayed() && this.artifacts.length === 0) {
       await this.getVersionWithArtifact();
     }
     this.isDropDownDisplayed.set(!this.isDropDownDisplayed());
@@ -62,27 +64,23 @@ export class ProductDetailVersionActionComponent {
 
   async getVersionWithArtifact() {
     this.sanitizeDataBeforFetching();
-    try {
-      this.productService
-        .sendRequestToProductDetailVersionAPITest(
-          this.productId,
-          this.isDevVersionsDisplayed(),
-          this.designerVersion
-        )
-        .subscribe(data => {
-          data.forEach(item => {
-            let version = 'Version '.concat(item.version);
-            this.versions.push(version);
-            this.versionMap.set(version, item.artifactsByVersion);
-          });
-          if (this.versions.length != 0) {
-            this.selectedVersion = this.versions[0];
-            this.onSelectVersion();
-          }
+    this.productService
+      .sendRequestToProductDetailVersionAPITest(
+        this.productId,
+        this.isDevVersionsDisplayed(),
+        this.designerVersion
+      )
+      .subscribe(data => {
+        data.forEach(item => {
+          const version = 'Version '.concat(item.version);
+          this.versions.push(version);
+          this.versionMap.set(version, item.artifactsByVersion);
         });
-    } catch(error) {
-      console.error('API call failed', error);
-    }
+        if (this.versions.length !== 0) {
+          this.selectedVersion = this.versions[0];
+          this.onSelectVersion();
+        }
+      });
   }
 
   sanitizeDataBeforFetching() {
