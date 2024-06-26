@@ -18,7 +18,7 @@ describe('ProductVersionActionComponent', () => {
 
   beforeEach(() => {
     productServiceMock = jasmine.createSpyObj('ProductService', [
-      'sendRequestToProductDetailVersionAPITest'
+      'sendRequestToProductDetailVersionAPI'
     ]);
 
     TestBed.configureTestingModule({
@@ -104,7 +104,7 @@ describe('ProductVersionActionComponent', () => {
     expect(component.selectedArtifact).toEqual({} as Artifact);
   });
 
-  it('should call sendRequestToProductDetailVersionAPITest and update versions and versionMap', () => {
+  it('should call sendRequestToProductDetailVersionAPI and update versions and versionMap', () => {
     const { mockArtifct1, mockArtifct2 } = mockApiWithExpectedResponse();
 
     component.getVersionWithArtifact();
