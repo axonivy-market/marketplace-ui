@@ -62,7 +62,7 @@ describe('ProductVersionActionComponent', () => {
     expect(warningDialog).toBeNull();
   }));
 
-  fit('first artifact should be chosen when select corresponding version', () => {
+  it('first artifact should be chosen when select corresponding version', () => {
     component.onSelectVersion();
     expect(component.artifacts().length).toBe(0);
 
