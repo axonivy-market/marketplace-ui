@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { GitAuthComponent } from './modules/git-auth/git-auth.component';
+import { GithubCallbackComponent } from './auth/github-callback/github-callback.component';
 
 export const routes: Routes = [
   {
@@ -12,6 +12,7 @@ export const routes: Routes = [
       import('./modules/product/product.routes').then(m => m.routes)
   },
   {
-    path: 'auth/callback', component: GitAuthComponent
+    path: 'auth/github/callback',
+    component: GithubCallbackComponent
   }
 ];

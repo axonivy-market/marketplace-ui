@@ -19,7 +19,7 @@ import { SkipLoading } from '../../../../../core/interceptors/api.interceptor';
   encapsulation: ViewEncapsulation.None
 })
 export class AddFeedbackDialogComponent {
-  @Input() productId: string = '667109f11666e1352a072f8a';
+  @Input() productId: string = '6674a23283c3194d33fb8da2';
   @Input() productName!: string;
   inMobileMode!: boolean;
 

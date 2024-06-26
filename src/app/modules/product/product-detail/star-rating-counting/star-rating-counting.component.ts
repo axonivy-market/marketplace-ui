@@ -1,12 +1,12 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { StarRatingCounting } from '../../../../../shared/models/star-rating-counting.model';
 import { StarRatingCountingService } from './star-rating-counting.service';
 import { StarRatingHighlightDirective } from './star-rating-highlight.directive';
-import { StarRatingComponent } from '../../../../../shared/components/star-rating/star-rating.component';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AddFeedbackDialogComponent } from '../add-feedback-dialog/add-feedback-dialog.component';
+import { StarRatingComponent } from '../../../../shared/components/star-rating/star-rating.component';
+import { StarRatingCounting } from '../../../../shared/models/star-rating-counting.model';
+import { AddFeedbackDialogComponent } from '../product-feedbacks-panel/add-feedback-dialog/add-feedback-dialog.component';
 
 @Component({
   selector: 'app-star-rating-counting',
@@ -23,7 +23,7 @@ import { AddFeedbackDialogComponent } from '../add-feedback-dialog/add-feedback-
   styleUrl: './star-rating-counting.component.scss'
 })
 export class StarRatingCountingComponent implements OnInit {
-  @Input() productId: string = '667109f11666e1352a072f8a';
+  @Input() productId: string = '6674a23283c3194d33fb8da2';
   @Input() productName!: string;
   @Input() platformReview: string = '3.5';
   @Input() isDisplayInDialog: boolean = false;
