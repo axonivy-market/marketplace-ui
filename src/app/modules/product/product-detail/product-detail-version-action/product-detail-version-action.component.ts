@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../product.service';
 import { Artifact } from '../../../../shared/models/vesion-artifact.model';
 
+const delayTimeBeforeHideMessage = 2000;
 @Component({
   selector: 'app-product-version-action',
   standalone: true,
@@ -38,7 +39,6 @@ export class ProductDetailVersionActionComponent {
 
   onInstallArtifact() {
     if (!this.isDesignerEnvironment()) {
-      const delayTimeBeforeHideMessage = 2000;
       this.isInvalidInstallationEnvironment.set(true);
       setTimeout(
         () => this.isInvalidInstallationEnvironment.set(false),
@@ -61,14 +61,14 @@ export class ProductDetailVersionActionComponent {
     this.getVersionWithArtifact();
   }
 
-  async onShowVersionAndArtifact() {
+  onShowVersionAndArtifact() {
     if (!this.isDropDownDisplayed() && this.artifacts.length === 0) {
-      await this.getVersionWithArtifact();
+      this.getVersionWithArtifact();
     }
     this.isDropDownDisplayed.set(!this.isDropDownDisplayed());
   }
 
-  async getVersionWithArtifact() {
+  getVersionWithArtifact() {
     this.sanitizeDataBeforFetching();
 
     this.productService
