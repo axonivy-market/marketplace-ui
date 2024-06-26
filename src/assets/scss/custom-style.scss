@@ -159,6 +159,14 @@ p {
     background-color: #{$ivyNormalTextColorLight} !important;
   }
 
+  .bg-dark {
+    color: #{$ivyBodyBackgroundDark} !important;
+  }
+
+  .bg-white {
+    color: #{$white} !important;
+  }
+
   .btn {
     border-radius: 0.5rem;
   }

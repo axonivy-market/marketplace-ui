@@ -5,7 +5,7 @@ import {
   SimpleChanges,
   inject
 } from '@angular/core';
-import { ProductService } from '../product.service';
+import { ProductService } from '../../product.service';
 
 @Component({
   selector: 'app-star-rating',

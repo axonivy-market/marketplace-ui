@@ -8,15 +8,15 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../product.service';
-import { StarRatingComponent } from '../star-rating/star-rating.component';
+import { StarRatingComponent } from './star-rating/star-rating.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { MarkdownModule, MarkdownService } from 'ngx-markdown';
 import { ProductDetail } from '../../../shared/models/product-detail.model';
 import { Readme } from '../../../shared/models/readme.model';
-import { ProductVersionActionComponent } from './product-version-action/product-version-action.component';
+import { ProductDetailVersionActionComponent } from './product-version-action/product-version-action.component';
 import { ThemeService } from '../../../core/services/theme/theme.service';
 import { CommonModule } from '@angular/common';
-import { PopOverPipe } from './pop-over.pipe';
+import { InformationDetailComponent } from './information-detail/information-detail.component';
 
 declare var bootstrap: any;
 
@@ -29,8 +29,8 @@ const NON_NUMERIC_CHAR = '[^0-9.]';
     StarRatingComponent,
     TranslateModule,
     MarkdownModule,
-    ProductVersionActionComponent,
-    PopOverPipe
+    ProductDetailVersionActionComponent,
+    InformationDetailComponent
   ],
   providers: [ProductService, MarkdownService],
   templateUrl: './product-detail.component.html',
@@ -45,6 +45,7 @@ export class ProductDetailComponent {
   productService = inject(ProductService);
   activeTab: string = 'description';
   resizeObserver: ResizeObserver;
+  isDropdownOpen: WritableSignal<boolean> = signal(false);
 
   @Output() versionChanged = new EventEmitter<string>();
 
@@ -119,34 +120,9 @@ export class ProductDetailComponent {
     this.updateDropdownSelection();
   }
 
-  initializePopover() {
-    const popoverTriggerList = [].slice.call(
-      document.querySelectorAll('[data-bs-toggle="popover"]')
-    );
-    popoverTriggerList.map((popoverTriggerEl: Element) => {
-      return new bootstrap.Popover(popoverTriggerEl, {
-        html: true,
-        content: this.popoverContent(),
-        sanitize: false,
-        placement: 'bottom',
-        container: document.querySelector('.tab-pane'),
-        trigger: 'focus'
-      });
-    });
-  }
-
-  popoverContent(): string {
-    const infoTab = document.querySelector('.info-tab');
-    return infoTab ? infoTab.innerHTML : '';
-  }
-
-  ngAfterViewInit() {
-    this.resizeObserver.observe(document.body);
-    this.initializePopover();
-  }
-
-  ngOnDestroy() {
-    this.resizeObserver.disconnect();
+  onShowDropdown() {
+    this.isDropdownOpen.update(value => !value);
+    console.log(this.isDropdownOpen());
   }
 
   getTypeIcon() {
