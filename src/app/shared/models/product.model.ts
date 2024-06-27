@@ -4,7 +4,9 @@ export interface Product {
   id: string;
   version: string;
   name: string;
+  nameDE: string;
   shortDescription: string;
+  shortDescriptionDE: string;
   type: string;
   logoUrl: string;
   cost: string;

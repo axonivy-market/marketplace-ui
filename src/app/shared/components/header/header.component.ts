@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../../../core/services/language/language.service';
 import { ThemeService } from '../../../core/services/theme/theme.service';
 import { Language } from '../../enums/language.enum';
 import { LanguageSelectionComponent } from './language-selection/language-selection.component';
@@ -37,7 +38,10 @@ export class HeaderComponent {
 
   themeService = inject(ThemeService);
   translateService = inject(TranslateService);
+  languageService = inject(LanguageService);
+
   constructor() {
+    this.selectedLanguage = this.languageService.getSelectedLanguage();
     this.translateService.setDefaultLang(this.selectedLanguage);
     this.translateService.use(this.selectedLanguage);
   }
