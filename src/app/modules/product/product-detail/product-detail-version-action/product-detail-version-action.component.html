@@ -22,7 +22,7 @@
     <div class="dropdown-menu show mt-5 maven-artifact-version__action">
       <form>
         <div class="form-group">
-          <label for="artifacts-selector" class="form-label fs-small">
+          <label for="artifacts-selector" class="form-label">
             {{
               'common.product.detail.download.artifactSelector.label'
                 | translate
@@ -32,15 +32,15 @@
             id="artifacts-selector"
             [(ngModel)]="selectedArtifact"
             name="Artifact"
-            class="form-select form-select-sm"
-            aria-label=".form-select-sm example">
+            class="form-select form-select-sm artifacts-selector__dropdown"
+            aria-label=".form-select-sm">
             @for (item of artifacts(); track $index) {
-              <option [value]="item">{{ item.name }}</option>
+              <option class="option" [value]="item">{{ item.name }}</option>
             }
           </select>
         </div>
         <div class="form-group">
-          <label for="verions-selector" class="form-label mt-2 fs-small">
+          <label for="verions-selector" class="form-label mt-2">
             {{
               'common.product.detail.download.versionSelector.label' | translate
             }}
@@ -48,9 +48,11 @@
           <select
             id="verions-selector"
             [(ngModel)]="selectedVersion"
+            [ngClass]="getIndicatorClass()"
+            (click)="onShowVersions()"
             name="Version"
             (change)="onSelectVersion()"
-            class="form-select form-select-sm"
+            class="form-select form-select-sm versions-selector__dropdown"
             aria-label=".form-select-sm example">
             @for (item of versions(); track $index) {
               <option [value]="item">{{ item }}</option>
@@ -59,7 +61,7 @@
         </div>
         <a
           href="#"
-          class="fs-small primary-color text-decoration-none"
+          class="dev-versions__toggle primary-color text-decoration-none"
           (click)="onShowDevVersion($event)">
           @if (isDevVersionsDisplayed()) {
             {{ 'common.product.detail.download.hideDevVersions' | translate }}
@@ -69,7 +71,7 @@
         </a>
         <div class="form-group d-flex justify-content-end">
           <button
-            class="btn"
+            class="btn form-download__btn"
             [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'"
             (click)="downloadArifact()"
             type="button"

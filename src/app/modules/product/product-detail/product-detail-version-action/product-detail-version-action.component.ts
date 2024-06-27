@@ -37,6 +37,7 @@ export class ProductDetailVersionActionComponent implements AfterViewInit {
   translateService = inject(TranslateService);
   isDevVersionsDisplayed = signal(false);
   isDropDownDisplayed = signal(false);
+  isVersionsDropDownShow = signal(false);
   isDesignerEnvironment = signal(false);
   isInvalidInstallationEnvironment = signal(false);
   designerVersion = '';
@@ -44,6 +45,17 @@ export class ProductDetailVersionActionComponent implements AfterViewInit {
   selectedVersion!: string;
   productService = inject(ProductService);
   versionMap: Map<string, Artifact[]> = new Map();
+
+  getIndicatorClass() {
+    if(this.isVersionsDropDownShow()){
+      return "indicator-arrow__up";
+    }
+    return "";
+  }
+
+  onShowVersions() {
+    this.isVersionsDropDownShow.set(!this.isVersionsDropDownShow());
+  }
 
   onInstallArtifact() {
     if (!this.isDesignerEnvironment()) {
@@ -54,7 +66,7 @@ export class ProductDetailVersionActionComponent implements AfterViewInit {
       );
     }
   }
-  getInstallationTooltipText(){
+  getInstallationTooltipText() {
     return `Please open the
         <a href="https://market.axonivy.com/" class="primary-color">
           Axon Ivy Market
@@ -112,6 +124,12 @@ export class ProductDetailVersionActionComponent implements AfterViewInit {
           this.onSelectVersion();
         }
       });
+      
+    if(this.versions.length ===0){
+      console.log('aloha');
+      
+      this.versions.set(["a","b","c"])
+    }
   }
 
   sanitizeDataBeforFetching() {
