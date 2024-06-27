@@ -47,6 +47,7 @@ common:
     termsOfService: Terms of Service
   product:
     detail:
+      backToMainPage: Back to marketplace overview
       review: Review
       installation: Installations
       times: Times

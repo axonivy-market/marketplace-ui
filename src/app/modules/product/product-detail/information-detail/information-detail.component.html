@@ -1,7 +1,7 @@
 <h3 class="info-title text-primary">
   {{ 'common.product.detail.information.label' | translate }}
 </h3>
-<div class="d-flex flex-column p-0" style="gap: 8px; width: 100%">
+<div class="info-container d-flex flex-column p-0">
   <div class="d-flex flex-row justify-content-between p-0">
     <span class="text-secondary">
       {{ 'common.product.detail.information.value.author' | translate }}
@@ -45,7 +45,7 @@
     <span class="text-secondary">
       {{ 'common.product.detail.type' | translate }}
     </span>
-    <span class="text-primary">{{ productDetail.type }}</span>
+    <span class="text-primary text-capitalize">{{ productDetail.type }}</span>
   </div>
   <hr />
   <div class="d-flex flex-row justify-content-between p-0">
@@ -59,7 +59,7 @@
     <span class="text-secondary">
       {{ 'common.product.detail.information.value.tag' | translate }}
     </span>
-    <span class="text-primary">
+    <span class="text-primary text-capitalize">
       {{ productDetail.tags ? productDetail.tags!.join(', ') : '' }}
     </span>
   </div>
@@ -69,10 +69,7 @@
       {{ 'common.product.detail.information.value.source' | translate }}
     </span>
     <span>
-      <a
-        class="text-primary"
-        style="margin: 0 auto"
-        href="{{ productDetail.sourceUrl }}">
+      <a class="text-primary" href="{{ productDetail.sourceUrl }}">
         github.com
       </a>
     </span>
@@ -82,9 +79,7 @@
     <span class="text-secondary">
       {{ 'common.product.detail.information.value.status' | translate }}
     </span>
-    <img
-      style="height: 20.36px; border-radius: 2px"
-      src="{{ productDetail.statusBadgeUrl }}" />
+    <img class="status__image" src="{{ productDetail.statusBadgeUrl }}" />
   </div>
   <hr />
   <div class="d-flex flex-row justify-content-between p-0">
@@ -96,7 +91,6 @@
     <span>
       <a
         class="text-primary"
-        style="margin: 0 auto"
         href="https://www.axonivy.com/marketplace/contact/?market_solutions= + {{
           productDetail.id
         }}">

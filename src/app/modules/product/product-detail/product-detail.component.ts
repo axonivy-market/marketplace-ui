@@ -13,7 +13,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MarkdownModule, MarkdownService } from 'ngx-markdown';
 import { ProductDetail } from '../../../shared/models/product-detail.model';
 import { Readme } from '../../../shared/models/readme.model';
-import { ProductDetailVersionActionComponent } from './product-version-action/product-version-action.component';
 import { ThemeService } from '../../../core/services/theme/theme.service';
 import { CommonModule } from '@angular/common';
 import { InformationDetailComponent } from './information-detail/information-detail.component';
@@ -29,7 +28,6 @@ const NON_NUMERIC_CHAR = '[^0-9.]';
     StarRatingComponent,
     TranslateModule,
     MarkdownModule,
-    ProductDetailVersionActionComponent,
     InformationDetailComponent
   ],
   providers: [ProductService, MarkdownService],

@@ -2,12 +2,23 @@
   padding: 12px 0;
 }
 
-.status-badge {
-  width: 135px;
+.info-container {
+  gap: 8px;
+  width: 100%;
+}
+
+.status__image {
+  height: 20.36px;
   border-radius: 2px;
 }
 
 hr {
   border: 1px solid var(--Neutral-N50, #f8f8f8);
   margin: 0;
+}
+
+span {
+ a {
+  margin: 0 auto
+ }
 }

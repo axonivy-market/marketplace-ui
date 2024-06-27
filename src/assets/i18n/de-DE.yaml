@@ -47,6 +47,7 @@ common:
     termsOfService: Nutzungsbedingungen
   product:
     detail:
+      backToMainPage: TODO Back to marketplace overview
       review: TODO Review
       installation: TODO Installations
       times: TODO Times
