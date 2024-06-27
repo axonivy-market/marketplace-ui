@@ -2,9 +2,18 @@
   class="product-detail__versions-action position-relative d-flex justify-content-center">
   <button
     class="btn btn__install"
+    data-toggle="tooltip"
+    data-placement="top"
+    title="Tooltip on top"
     [ngClass]="themeService.isDarkMode() ? 'btn-light' : 'btn-primary'"
     (click)="onInstallArtifact()">
     {{ 'common.product.detail.install.buttonLabel' | translate }}
+  </button>
+  <button
+    data-bs-toggle="tooltip"
+    title="Tooltip text!"
+    class="btn btn-primary">
+    Hover over me
   </button>
   <button
     class="btn btn__download btn-secondary dropdown-toggle primary-bg"
@@ -57,7 +66,7 @@
           href="#"
           class="fs-small primary-color text-decoration-none"
           (click)="onShowDevVersion($event)">
-          @if(isDevVersionsDisplayed()){
+          @if (isDevVersionsDisplayed()) {
             {{ 'common.product.detail.download.hideDevVersions' | translate }}
           } @else {
             {{ 'common.product.detail.download.showDevVersions' | translate }}
@@ -76,7 +85,7 @@
       </form>
     </div>
   }
-  @if (isInvalidInstallationEnvironment()) {
+  <!-- @if (isInvalidInstallationEnvironment()) {
     <div class="up-arrow up-arrow__warning"></div>
     <div
       class="dropdown-menu show mt-5 invalid-installation-environment__warning">
@@ -92,5 +101,5 @@
         (minimum version 9.2.0)
       </p>
     </div>
-  }
+  } -->
 </div>

@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   inject,
   Input,
@@ -11,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../product.service';
 import { Artifact } from '../../../../shared/models/vesion-artifact.model';
+import * as bootstrap from 'bootstrap';
 
 const delayTimeBeforeHideMessage = 2000;
 @Component({
@@ -20,7 +22,16 @@ const delayTimeBeforeHideMessage = 2000;
   templateUrl: './product-detail-version-action.component.html',
   styleUrl: './product-detail-version-action.component.scss'
 })
-export class ProductDetailVersionActionComponent {
+export class ProductDetailVersionActionComponent implements AfterViewInit {
+  ngAfterViewInit() {
+    // Initialize Bootstrap tooltips
+    const tooltipTriggerList = Array.from(
+      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    );
+    tooltipTriggerList.forEach(tooltipTriggerEl => {
+      new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+  }
   @Input()
   productId!: string;
   versions: WritableSignal<string[]> = signal([]);
