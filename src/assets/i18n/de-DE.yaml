@@ -47,28 +47,28 @@ common:
     termsOfService: Nutzungsbedingungen
   product:
     detail:
-      backToMainPage: TODO Back to marketplace overview
-      review: TODO Review
-      installation: TODO Installations
-      times: TODO Times
-      type: TODO Type
-      description: TODO Description
-      installationGuide: TODO Installation Guide
-      demo: TODO Demo
+      backToMainPage: Zurück zur Marktplatzübersicht
+      review: Überprüfung
+      installation: Installationen
+      times: Zeiten
+      type: Typ
+      description: Beschreibung
+      installationGuide: Installationsanleitung
+      demo: Demo
       maven:
-        label: TODO Maven
+        label: Maven
         description: TODO You can consume it as maven artifact in your <i>pom.xml</i>
       information:
-        label: TODO Information
+        label: Informationen
         value:
-          author: TODO Author/Support
-          version: TODO Version
-          compatibility: TODO Compatibility
-          cost: TODO Cost
-          language: TODO Language
-          industry: TODO Industry
-          tag: TODO Tag
-          source: TODO Source
-          status: TODO Status
-          moreInformation: TODO More Information
-          contactUs: TODO Contact Us
+          author: Autor/Unterstützung
+          version: Version
+          compatibility: Kompatibilität
+          cost: Kosten
+          language: Sprache
+          industry: Branche
+          tag: Tag
+          source: Quelle
+          status: Status
+          moreInformation: Mehr Informationen
+          contactUs: Kontakt
