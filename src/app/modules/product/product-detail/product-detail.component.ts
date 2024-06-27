@@ -5,16 +5,15 @@ import { ProductService } from '../product.service';
 import { ThemeService } from '../../../core/services/theme/theme.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductFeedbacksPanelComponent } from './product-feedbacks-panel/product-feedbacks-panel.component';
-import { ShowFeedbacksDialogComponent } from './product-feedbacks-panel/show-feedbacks-dialog/show-feedbacks-dialog.component';
 import { StarRatingCountingComponent } from './star-rating-counting/star-rating-counting.component';
 import { ProductDetailService } from './product-detail.service';
-import { interval } from 'rxjs';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { AuthService } from '../../../auth/auth.service';
+import { ShowFeedbacksDialogComponent } from './show-feedbacks-dialog/show-feedbacks-dialog.component';
 
 @Component({
     selector: 'app-product-detail',
     standalone: true,
-    providers: [ProductDetailService],
+    providers: [ProductDetailService, AuthService],
     templateUrl: './product-detail.component.html',
     styleUrl: './product-detail.component.scss',
     imports: [ShowFeedbacksDialogComponent, ProductFeedbacksPanelComponent, StarRatingCountingComponent]
@@ -51,6 +50,20 @@ export class ProductDetailComponent {
     });
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkMediaSize();
+  }
+
+  private checkMediaSize() {
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+    if (mediaQuery.matches) {
+      this.inMobileMode = true;
+    } else {
+      this.inMobileMode = false;
+    }
+  }
+
   ngAfterViewInit(): void {
     if (this.showPopup) {
       const ratingLinkElement = this.starRatingCountingComponent.ratingLink.nativeElement;
@@ -80,22 +93,6 @@ export class ProductDetailComponent {
     }
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.checkMediaSize();
-  }
 
-  private checkMediaSize() {
-    const mediaQuery = window.matchMedia('(max-width: 767px)');
-    if (mediaQuery.matches) {
-      this.inMobileMode = true;
-      
-    } else {
-      this.inMobileMode = false;
-    }
-  }
-
-  // Get detail of product by id (include name) then pass product into child component
-  // Move button Show into product-feedback-panel
 }
 

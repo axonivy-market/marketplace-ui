@@ -2,6 +2,11 @@
   padding: 18px;
 }
 
+.modal-body {
+  padding: 0;
+  scrollbar-width: none;
+}
+
 .modal-content-wrapper {
   display: flex;
   flex-direction: column;
@@ -13,10 +18,10 @@
 @media (min-width: 768px) {
   .add-feedback-modal-dialog {
     max-width: 627px;
-  
+
     .modal-content {
       border-radius: 10px;
-      height: 622px;
+      height: 640px;
       border: 0;
       box-shadow: 0px 0px 26px 5px rgba(0, 0, 0, 0.25);
     }

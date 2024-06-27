@@ -47,4 +47,8 @@ common:
     termsOfService: Nutzungsbedingungen
   feedback:
     successMessage: Your feedback has been successfully submitted! 
-    thankMessage: Thank you for your contribution 
+    thankMessage: Thank you for your contribution
+    addFeedbackTitle: Give your feedback!
+    addFeedbackDescription: By giving your feedback you are enabling us to constantly improve our products and always deliver the best quality to both you and your team.
+    currentProductTitle: Currently reviewing
+    starRatingTitle: Stars rating

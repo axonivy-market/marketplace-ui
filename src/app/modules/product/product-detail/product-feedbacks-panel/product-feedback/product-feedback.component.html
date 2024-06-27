@@ -17,7 +17,7 @@
         <i class="bi bi-github feedback-color" style="font-size: 18.56px"></i>
       </div>
     </div>
-    <div style="height: 19px; font-size: 12.91px;">
+    <div style="height: 19px; font-size: 12.91px">
       <app-star-rating
         [isTotalCommentsVisibility]="false"
         [rating]="feedback.rating"
@@ -28,14 +28,16 @@
     <div
       #content
       class="collapsed feedback-color"
-      [class.expanded]="isExpanded" style="white-space: pre-wrap;">
+      [class.expanded]="isExpanded()"
+      style="white-space: pre-wrap">
       {{ feedback.content }}
     </div>
-    <a
-      *ngIf="showToggle"
-      class="expand-toggle-link-color expand-toggle-link"
-      (click)="toggleContent()">
-      {{ isExpanded ? 'See less' : 'See more' }}
-    </a>
+    @if (showToggle()) {
+      <a
+        class="expand-toggle-link-color expand-toggle-link"
+        (click)="toggleContent()">
+        {{ isExpanded() ? 'See less' : 'See more' }}
+      </a>
+    }
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, HostListener, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output, SimpleChanges, computed, effect, inject, input, signal } from '@angular/core';
 import { ProductFeedbackComponent } from './product-feedback/product-feedback.component';
 import { ProductFeedbackService } from './product-feedback.service';
 import { Subscription } from 'rxjs';
@@ -16,13 +16,12 @@ import { Feedback } from '../../../../shared/models/feedback.model';
   styleUrl: './product-feedbacks-panel.component.scss'
 })
 export class ProductFeedbacksPanelComponent {
-  @Input() isRenderInModalDialog = false;
+  isRenderInModalDialog = input(false);
+  @Input() isMobileMode = false;
   @Output() showFeedbacksLoadedBtn = new EventEmitter<void>();
   
-  isScrollable = false;
-  
   productFeedbacks: Feedback[] = [];
-  displayedFeedbacks: Feedback[] = []; // Store displayed feedbacks separately
+  displayedFeedbacks: Feedback[] = [];
   totalElements: number = 0;
   currentPage: number = 0;
   pageSize: number = 6;
@@ -37,45 +36,9 @@ export class ProductFeedbacksPanelComponent {
     this.loadFeedbacks();
   }
 
-  ngOnDestroy(): void {
-    // Clean up and remove scroll listener when component is destroyed
-    // this.removeScrollListener();
+  ngOnChanges(changes: SimpleChanges) {
+    this.updateDisplayedFeedbacks(changes.isMobileMode.currentValue);
   }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.updateDisplayedFeedbacks();
-  }
-
-  // // Function to check media size and add/remove scroll listener accordingly
-  // private checkMediaSize() {
-  //   const mediaQuery = window.matchMedia('(max-width: 767px)');
-  //   if (mediaQuery.matches) {
-  //     this.addScrollListener();
-      
-  //   } else {
-  //     this.removeScrollListener();
-  //   }
-  // }
-
-  // // Function to add scroll listener to root element
-  // private addScrollListener() {
-  //   if (!this.scrollListenerAdded) {
-  //     window.addEventListener('scroll', this.onScrollCheckBottomWindow);
-  //     this.scrollListenerAdded = true;
-  //     console.log('added');
-  //   }
-  // }
-
-  // // Function to remove scroll listener from root element
-  // private removeScrollListener() {
-  //   if (this.scrollListenerAdded) {
-  //     window.removeEventListener('scroll', this.onScrollCheckBottomWindow);
-  //     this.scrollListenerAdded = false;
-  //     console.log('removed');
-      
-  //   }
-  // }
 
   loadFeedbacks(page: number = 0, size: number = this.pageSize, sort: string = this.currentSort): void {
     this.productFeedbackService.findProductFeedbacksByCriteria('667109f11666e1352a072f8a', page, size, sort)
@@ -87,20 +50,18 @@ export class ProductFeedbacksPanelComponent {
         }
         this.totalElements = response.page.totalElements;
         this.currentPage = response.page.number;
-        this.updateDisplayedFeedbacks();
         this.checkIfAllFeedbacksLoaded();
       });
   }
 
   checkIfAllFeedbacksLoaded(): void {
     if (this.productFeedbacks.length >= this.totalElements) {
-      this.showFeedbacksLoadedBtn.emit(); // Emit event when all feedbacks are loaded
+      this.showFeedbacksLoadedBtn.emit();
     }
   }
 
-  updateDisplayedFeedbacks(): void {
-    const mediaQuery = window.matchMedia('(max-width: 767px)');
-    if (mediaQuery.matches) {
+  updateDisplayedFeedbacks(isMobileMode: boolean): void {
+    if (isMobileMode) {
       this.displayedFeedbacks = this.productFeedbacks;
     } else {
       this.displayedFeedbacks = this.productFeedbacks.slice(0, 6);
@@ -131,20 +92,4 @@ export class ProductFeedbacksPanelComponent {
       this.atBottom = false;
     }
   }
-
-  // private onScrollCheckBottomWindow(e: any): void {
-  //   const threshold = 150; // Add a small threshold for triggering the load
-  //   const position = window.scrollY + window.innerHeight;
-  //   const height = document.documentElement.scrollHeight;
-  //   console.log('position: ' + position);
-  //   console.log('height - threshold: ' + (height - threshold));
-  //   if (position >= height - threshold) {
-  //     if (!this.atBottomWindow && this.currentPage * this.pageSize < this.totalElements) {
-  //       this.atBottomWindow = true;
-  //       this.loadFeedbacks(this.currentPage + 1, this.pageSize, this.currentSort);
-  //     }
-  //   } else {
-  //     this.atBottomWindow = false;
-  //   }
-  // }
 }

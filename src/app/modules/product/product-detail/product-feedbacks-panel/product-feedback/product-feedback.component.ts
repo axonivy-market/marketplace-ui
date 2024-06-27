@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Input, ViewChild, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StarRatingComponent } from '../../../../../shared/components/star-rating/star-rating.component';
 import { Feedback } from '../../../../../shared/models/feedback.model';
@@ -14,20 +14,26 @@ export class ProductFeedbackComponent {
   @Input() feedback!: Feedback;
   @ViewChild('content') contentElement!: ElementRef;
 
-  isExpanded: boolean = false;
   maxLines: number = 6;
-  showToggle = false;
+  showToggle = signal(false);
+  isExpanded = signal(false);
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor() {}
 
   ngAfterViewInit() {
-    this.showToggle = this.contentElement.nativeElement.scrollHeight > this.contentElement.nativeElement.clientHeight;
-    console.log("scrollHeight: " + this.contentElement.nativeElement.scrollHeight);
-    console.log("clientHeight: " + this.contentElement.nativeElement.clientHeight);
-    this.cdr.detectChanges();
+    this.setShowToggle();
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.setShowToggle();
+  }
+
+  private setShowToggle() {
+    this.showToggle.set(this.contentElement.nativeElement.scrollHeight > this.contentElement.nativeElement.clientHeight);
+  } 
+
   toggleContent() {
-    this.isExpanded = !this.isExpanded;
+    this.isExpanded.set(!this.isExpanded());
   }
 }

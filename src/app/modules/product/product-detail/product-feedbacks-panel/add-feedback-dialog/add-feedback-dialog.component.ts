@@ -7,15 +7,16 @@ import { FormsModule } from '@angular/forms';
 import { Feedback } from '../../../../../shared/models/feedback.model';
 import { SkipLoading } from '../../../../../core/interceptors/api.interceptor';
 import { AuthService } from '../../../../../auth/auth.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { ProductFeedbackService } from '../product-feedback.service';
 
 @Component({
   selector: 'app-add-feedback-dialog',
   standalone: true,
-  providers: [AuthService],
-  imports: [FormsModule, NgbModule],
+  providers: [AuthService, ProductFeedbackService],
+  imports: [FormsModule, NgbModule, TranslateModule],
   templateUrl: './add-feedback-dialog.component.html',
-  styleUrl: './add-feedback-dialog.component.scss',
-  encapsulation: ViewEncapsulation.None
+  styleUrl: './add-feedback-dialog.component.scss'
 })
 export class AddFeedbackDialogComponent {
 
@@ -24,6 +25,7 @@ export class AddFeedbackDialogComponent {
 
   activeModal = inject(NgbActiveModal);
 
+  private productFeedbackService = inject(ProductFeedbackService);
   private authService = inject(AuthService);
   private modalService = inject(NgbModal);
 
@@ -32,40 +34,21 @@ export class AddFeedbackDialogComponent {
 
   constructor() {
     this.displayName = this.authService.getDisplayName();
+    this.feedback.productId = this.productId;
   }
 
   ngOnInit(): void {
   }
 
-  onSubmit(): void {
-    this.modalService.open(SuccessDialogComponent, { fullscreen: 'md', centered: true, modalDialogClass: 'add-feedback-modal-dialog' });
-    // this.submitFeedback(this.productId, this.feedback.rating, this.feedback.content, token!)
-    //   .subscribe(
-    //     (response) => {
-    //       console.log('Review submitted successfully:', response);
-    //       this.activeModal.dismiss('Cross click');
-    //       var successModal;
-          
-    //     },
-    //     (error) => {
-    //       console.error('Error submitting review:', error);
-    //       // Handle error as needed
-    //     }
-    //   );
+  onSubmitFeedback(): void {
+    this.productFeedbackService.submitFeedback(this.feedback).subscribe(
+      (response) => {
+        this.activeModal.dismiss('Cross click');
+        this.modalService.open(SuccessDialogComponent, { fullscreen: 'md', centered: true, modalDialogClass: 'add-feedback-modal-dialog' });
+      },
+      (error) => {
+        console.error('Error submitting review:', error);
+      }
+    );
   }
-
-  // submitFeedback(productId: string, rating: number, content: string, token: string): Observable<any> {
-  //   const headers = new HttpHeaders()
-  //     .set('Content-Type', 'application/json')
-  //     .set('x-requested-by', 'ivy')
-  //     .set('Authorization', `Bearer ${token}`);
-
-  //   const feedback: any = {
-  //     productId: productId,
-  //     rating: rating,
-  //     content: content
-  //   };
-
-  //   return this.http.post<any>('api/feedback', feedback, { headers, context: new HttpContext().set(SkipLoading, true) });
-  // }
 }

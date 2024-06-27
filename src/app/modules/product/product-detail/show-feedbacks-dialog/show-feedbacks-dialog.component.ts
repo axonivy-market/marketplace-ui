@@ -1,12 +1,14 @@
 import { Component, Input, ViewEncapsulation, inject } from '@angular/core';
-import { ProductFeedbacksPanelComponent } from '../product-feedbacks-panel.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { StarRatingCountingComponent } from '../../star-rating-counting/star-rating-counting.component';
+import { ProductFeedbacksPanelComponent } from '../product-feedbacks-panel/product-feedbacks-panel.component';
+import { StarRatingCountingComponent } from '../star-rating-counting/star-rating-counting.component';
+import { AuthService } from '../../../../auth/auth.service';
 
 @Component({
   selector: 'app-show-feedbacks-dialog',
   standalone: true,
   imports: [ProductFeedbacksPanelComponent, StarRatingCountingComponent],
+  providers: [AuthService],
   templateUrl: './show-feedbacks-dialog.component.html',
   styleUrl: './show-feedbacks-dialog.component.scss',
   encapsulation: ViewEncapsulation.None

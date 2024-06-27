@@ -107,7 +107,7 @@ export class StarRatingCountingComponent implements OnInit {
     // else {
     //   this.onClickRateThisConnector();
     // }
-    this.modalService.open(SuccessDialogComponent, { fullscreen: 'md', centered: true, modalDialogClass: 'add-feedback-modal-dialog' });
+    this.modalService.open(AddFeedbackDialogComponent, { fullscreen: 'md', centered: true, modalDialogClass: 'add-feedback-modal-dialog' });
   }
 
   getTokenFromCookie(): string {

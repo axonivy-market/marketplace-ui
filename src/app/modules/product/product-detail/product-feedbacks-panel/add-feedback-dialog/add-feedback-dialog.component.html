@@ -1,100 +1,42 @@
-<button
-  type="button"
-  class="btn-close"
-  aria-label="Close"
-  style="position: absolute; right: 18px; top: 18px; z-index: 10"
-  (click)="activeModal.dismiss('Cross click')"></button>
-@if (inMobileMode) {
-  <div
-    class="d-flex flex-column"
-    style="
-      margin: auto;
-      width: 383px;
-      gap: 30px;
-      position: absolute;
-      top: 85px;
-      bottom: 28px;
-      right: 0;
-      left: 0;
-    ">
-    <div
-      class="feedback-color"
-      style="
-        font-weight: 600;
-        font-size: 18px;
-        line-height: 140%;
-        min-height: 25px;
-      ">
-      Give your feedback!
+<div class="modal-content-wrapper">
+  <div class="modal-header border-bottom-0">
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body modal-body-wrapper">
+    <div class="add-feedback-title">
+      {{ 'common.feedback.addFeedbackTitle' | translate }}
     </div>
-    <div
-      class="feedback-secondary-color"
-      style="
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 140%;
-        min-height: 100px;
-      ">
-      By giving your feedback you are enabling us to constantly improve our
-      products and always deliver the best quality to both you and your team.
+    <div class="add-feedback-description">
+      {{ 'common.feedback.addFeedbackDescription' | translate }}
     </div>
-    <div class="d-flex flex-column" style="gap: 10px">
-      <div
-        class="feedback-secondary-color"
-        style="
-          font-weight: 400;
-          font-size: 14px;
-          line-height: 120%;
-          height: 17px;
-        ">
-        Currently reviewing
+    <div>
+      <div class="current-product-title">
+        {{ 'common.feedback.currentProductTitle' | translate }}
       </div>
-      <div>
-        <select
-          class="form-select feedback-color"
-          aria-label="item"
-          name="item"
-          style="
-            border-radius: 10px;
-            font-size: 14px;
-            line-height: 120%;
-            font-weight: 400;
-            padding: 10px 35px 10px 15px;
-            height: 37px;
-            cursor: pointer;
-            width: 100%;
-            opacity: 0.8;
-            border: 1px solid #1b1b1b;
-          ">
-          <option>{{ 'abc' }}</option>
-        </select>
-      </div>
+      <select
+        class="form-select product-item-select"
+        aria-label="item"
+        name="item">
+        <option>{{ 'abc' }}</option>
+      </select>
     </div>
-    <div style="flex: 1; display: flex; flex-direction: column; gap: 10px">
-      <div
-        class="feedback-secondary-color"
-        style="
-          font-weight: 400;
-          font-size: 14px;
-          line-height: 120%;
-          height: 17px;
-        ">
-        Stars rating
+    <div class="d-flex flex-column flex-grow-1">
+      <div class="star-rating-title">
+        {{ 'common.feedback.starRatingTitle' | translate }}
       </div>
       <ng-template #t let-fill="fill">
-        <div class="star-container">
-          <i class="bi-star-fill" style="padding-right: 45px">
-            @if (fill > 0) {
-              <i class="bi-star-fill filled" [style.width.%]="fill"></i>
-            }
-          </i>
-        </div>
+        <i class="bi-star-fill" style="padding-right: 45px">
+          @if (fill > 0) {
+            <i class="bi-star-fill filled" [style.width.%]="fill"></i>
+          }
+        </i>
       </ng-template>
       <div style="height: 48px">
-        <ngb-rating
-          [(rate)]="feedback.rating"
-          [max]="5"
-          [starTemplate]="t"></ngb-rating>
+        <ngb-rating [max]="5" [starTemplate]="t"></ngb-rating>
       </div>
       <div
         class="feedback-secondary-color"
@@ -108,23 +50,7 @@
         Let a comment
       </div>
       <textarea
-        class="feedback-color"
-        style="
-          flex: 1;
-          padding: 10px;
-          margin-top: 10px;
-          width: 100%;
-          resize: none;
-          background: #fafafa;
-          border: 0.5px solid #e7e7e7;
-          border-radius: 5px;
-          font-family: 'Inter';
-          font-style: normal;
-          font-weight: 400;
-          font-size: 14px;
-          line-height: 120%;
-          scrollbar-width: none;
-        "
+        class="feedback-color feedback-content-textarea"
         maxlength="250"
         [(ngModel)]="feedback.content"></textarea>
     </div>
@@ -138,7 +64,7 @@
         font-size: 16px;
         line-height: 120%;
       "
-      (click)="onSubmit()">
+      (click)="onSubmitFeedback()">
       Submit review
     </button>
     <div
@@ -163,154 +89,4 @@
       </span>
     </div>
   </div>
-} @else {
-  <div
-    class="d-flex flex-column"
-    style="margin: 0 auto; margin-top: 52px; width: 525px; gap: 20px">
-    <div
-      class="feedback-color"
-      style="
-        font-weight: 600;
-        font-size: 18px;
-        line-height: 140%;
-        height: 25px;
-      ">
-      Give your feedback!
-    </div>
-    <div
-      class="feedback-secondary-color"
-      style="
-        font-weight: 400;
-        font-size: 17px;
-        line-height: 140%;
-        height: 66px;
-      ">
-      By giving your feedback you are enabling us to constantly improve our
-      products and always deliver the best quality to both you and your team.
-    </div>
-    <div class="d-flex flex-column" style="gap: 10px">
-      <div
-        class="feedback-secondary-color"
-        style="
-          font-weight: 400;
-          font-size: 14px;
-          line-height: 120%;
-          height: 17px;
-        ">
-        Currently reviewing
-      </div>
-      <div>
-        <select
-          class="form-select feedback-color"
-          aria-label="item"
-          name="item"
-          style="
-            border-radius: 10px;
-            font-size: 14px;
-            line-height: 120%;
-            font-weight: 400;
-            padding: 10px 35px 10px 15px;
-            height: 37px;
-            cursor: pointer;
-            width: fit-content;
-            opacity: 0.8;
-            border: 1px solid #1b1b1b;
-          ">
-          <option>{{ 'abc' }}</option>
-        </select>
-      </div>
-    </div>
-    <div>
-      <div
-        class="feedback-secondary-color"
-        style="
-          font-weight: 400;
-          font-size: 14px;
-          line-height: 120%;
-          height: 17px;
-        ">
-        Stars rating
-      </div>
-      <ng-template #t let-fill="fill">
-        <div class="star-container">
-          <i class="bi-star-fill">
-            @if (fill > 0) {
-              <i class="bi-star-fill filled" [style.width.%]="fill"></i>
-            }
-          </i>
-        </div>
-      </ng-template>
-      <div style="margin-top: 10px; height: 48px">
-        <ngb-rating
-          [(rate)]="feedback.rating"
-          [max]="5"
-          [starTemplate]="t"></ngb-rating>
-      </div>
-      <div
-        class="feedback-secondary-color"
-        style="
-          margin-top: 30px;
-          font-weight: 400;
-          font-size: 14px;
-          line-height: 120%;
-          height: 17px;
-        ">
-        Let a comment
-      </div>
-      <textarea
-        class="feedback-color"
-        style="
-          height: 90px;
-          padding: 10px;
-          margin-top: 10px;
-          width: 100%;
-          resize: none;
-          background: #fafafa;
-          border: 0.5px solid #e7e7e7;
-          border-radius: 5px;
-          font-family: 'Inter';
-          font-style: normal;
-          font-weight: 400;
-          font-size: 14px;
-          line-height: 120%;
-          scrollbar-width: none;
-        "
-        maxlength="250"
-        [(ngModel)]="feedback.content"></textarea>
-    </div>
-    <button
-      class="btn btn-primary border-0"
-      style="
-        width: 100%;
-        padding: 12px 32px;
-        border-radius: 10px;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 120%;
-      "
-      (click)="onSubmit()">
-      Submit review
-    </button>
-    <div
-      style="
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 120%;
-        height: 17px;
-        margin: 0 auto;
-      "
-      class="feedback-secondary-color">
-      Logged in Github as:
-      <span
-        style="
-          margin-left: 3px;
-          text-align: center;
-          text-decoration-line: underline;
-          color: #007095;
-          cursor: pointer;
-        ">
-        {{ displayName }}
-      </span>
-    </div>
-  </div>
-}
+</div>
