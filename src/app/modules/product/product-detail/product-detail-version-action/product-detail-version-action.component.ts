@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../product.service';
 import { Artifact } from '../../../../shared/models/vesion-artifact.model';
-import * as bootstrap from 'bootstrap';
+import { Tooltip } from 'bootstrap';
 
 const delayTimeBeforeHideMessage = 2000;
 @Component({
@@ -24,12 +24,9 @@ const delayTimeBeforeHideMessage = 2000;
 })
 export class ProductDetailVersionActionComponent implements AfterViewInit {
   ngAfterViewInit() {
-    // Initialize Bootstrap tooltips
-    const tooltipTriggerList = Array.from(
-      document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    );
-    tooltipTriggerList.forEach(tooltipTriggerEl => {
-      new bootstrap.Tooltip(tooltipTriggerEl);
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new Tooltip(tooltipTriggerEl);
     });
   }
   @Input()
@@ -56,6 +53,17 @@ export class ProductDetailVersionActionComponent implements AfterViewInit {
         delayTimeBeforeHideMessage
       );
     }
+  }
+  getInstallationTooltipText(){
+    return `Please open the
+        <a href="https://market.axonivy.com/" class="primary-color">
+          Axon Ivy Market
+        </a>
+        inside your
+        <a class="primary-color" href="https://developer.axonivy.com/download">
+          Axon Ivy Designer
+        </a>
+        (minimum version 9.2.0)`;
   }
 
   onSelectVersion() {
