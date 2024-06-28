@@ -31,11 +31,12 @@
           <select
             id="artifacts-selector"
             [(ngModel)]="selectedArtifact"
+            (ngModelChange)="test($event)"
             name="Artifact"
             class="form-select form-select-sm artifacts-selector__dropdown"
             aria-label=".form-select-sm">
             @for (item of artifacts(); track $index) {
-              <option class="option" [value]="item">{{ item.name }}</option>
+              <option class="option" [value]="item.downloadUrl">{{ item.name }}</option>
             }
           </select>
         </div>

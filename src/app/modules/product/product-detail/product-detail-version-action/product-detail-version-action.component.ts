@@ -44,7 +44,7 @@ export class ProductDetailVersionActionComponent implements AfterViewInit {
   isDesignerEnvironment = signal(false);
   isInvalidInstallationEnvironment = signal(false);
   designerVersion = '';
-  selectedArtifact!: Artifact;
+  selectedArtifact = '';
   selectedVersion!: string;
   productService = inject(ProductService);
   versionMap: Map<string, Artifact[]> = new Map();
@@ -85,8 +85,12 @@ export class ProductDetailVersionActionComponent implements AfterViewInit {
     this.artifacts.set(this.versionMap.get(this.selectedVersion) || []);
 
     if (this.artifacts().length !== 0) {
-      this.selectedArtifact = this.artifacts()[0];
+      this.selectedArtifact = this.artifacts()[0].downloadUrl;
     }
+  }
+
+  test(event: Artifact) {
+    console.log(JSON.stringify(event));
   }
 
   onShowDevVersion(event: Event) {
@@ -96,10 +100,14 @@ export class ProductDetailVersionActionComponent implements AfterViewInit {
   }
 
   onShowVersionAndArtifact() {
-    if (!this.isDropDownDisplayed() && this.artifacts.length === 0) {
+    if (!this.isDropDownDisplayed() && this.artifacts().length === 0) {
       this.getVersionWithArtifact();
     }
     this.isDropDownDisplayed.set(!this.isDropDownDisplayed());
+  }
+
+  onChangeArtifact(event: Event) {
+    console.log(event);
   }
 
   getVersionWithArtifact() {
@@ -132,12 +140,12 @@ export class ProductDetailVersionActionComponent implements AfterViewInit {
   sanitizeDataBeforFetching() {
     this.versions.set([]);
     this.artifacts.set([]);
-    this.selectedArtifact = {} as Artifact;
+    this.selectedArtifact = '';
     this.selectedVersion = '';
   }
 
   downloadArifact() {
-    const newTab = window.open(this.selectedArtifact.downloadUrl, '_blank');
+    const newTab = window.open(this.selectedArtifact, '_blank');
     if (newTab) {
       newTab.blur();
     }
