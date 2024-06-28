@@ -149,7 +149,7 @@ export class ProductService {
   }
 
   sendRequestToUpdateInstallationCount(productId: string) {
-    let url = 'api/product/installationcount/' + productId;
-    return this.httpClient.post<number>(url, {}, {headers: {'X-Requested-By': 'ivy'}});
+    let url = 'api/product-details/installationcount/' + productId;
+    return this.httpClient.post<number>(url, null, {headers: {'X-Requested-By': 'ivy'}});
   }
 }
