@@ -11,13 +11,13 @@
   </div>
   @if (isRenderInModalDialog()) {
     <div class="position-absolute bottom-0 overflow-auto grid-feedbacks-container-dialog" style="top: 59px; right: 0; left: 0; scrollbar-width: none;" (scroll)='onScrollCheckBottom($event)'>
-      @for (feedback of productFeedbacks; track $index) {
+      @for (feedback of productFeedbacks(); track $index) {
         <app-product-feedback [feedback]="feedback"></app-product-feedback>
       }
     </div>
   } @else {
     <div class="grid-feedbacks-container">
-      @for (feedback of displayedFeedbacks; track $index) {
+      @for (feedback of displayedFeedbacks(); track $index) {
         <app-product-feedback [feedback]="feedback" />
       }
     </div>

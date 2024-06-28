@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, Output, SimpleChanges, computed, effect, inject, input, signal } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, HostListener, Input, Output, SimpleChanges, computed, effect, inject, input, signal } from '@angular/core';
 import { ProductFeedbackComponent } from './product-feedback/product-feedback.component';
 import { ProductFeedbackService } from './product-feedback.service';
 import { Subscription } from 'rxjs';
@@ -6,6 +6,7 @@ import { FeedbackFilterComponent } from './feedback-filter/feedback-filter.compo
 import { ThemeService } from '../../../../core/services/theme/theme.service';
 import { FeedbackApiResponse } from '../../../../shared/models/apis/feedback-response.model';
 import { Feedback } from '../../../../shared/models/feedback.model';
+import { Product } from '../../../../shared/models/product.model';
 
 @Component({
   selector: 'app-product-feedbacks-panel',
@@ -16,12 +17,16 @@ import { Feedback } from '../../../../shared/models/feedback.model';
   styleUrl: './product-feedbacks-panel.component.scss'
 })
 export class ProductFeedbacksPanelComponent {
-  isRenderInModalDialog = input(false);
-  @Input() isMobileMode = false;
+  isRenderInModalDialog = input();
+  isMobileMode = input<boolean>();
+  @Input() productId!: string;
   @Output() showFeedbacksLoadedBtn = new EventEmitter<void>();
   
-  productFeedbacks: Feedback[] = [];
-  displayedFeedbacks: Feedback[] = [];
+  productFeedbacks = signal<Feedback[]>([]);
+  // displayedFeedbacks: Feedback[] = [];
+  displayedFeedbacks = computed(() => 
+    this.isMobileMode() ? this.productFeedbacks() : this.productFeedbacks().slice(0, 6)
+  );
   totalElements: number = 0;
   currentPage: number = 0;
   pageSize: number = 6;
@@ -36,17 +41,13 @@ export class ProductFeedbacksPanelComponent {
     this.loadFeedbacks();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.updateDisplayedFeedbacks(changes.isMobileMode.currentValue);
-  }
-
   loadFeedbacks(page: number = 0, size: number = this.pageSize, sort: string = this.currentSort): void {
-    this.productFeedbackService.findProductFeedbacksByCriteria('667109f11666e1352a072f8a', page, size, sort)
+    this.productFeedbackService.findProductFeedbacksByCriteria(this.productId, page, size, sort)
       .subscribe((response: FeedbackApiResponse) => {
         if (page === 0) {
-          this.productFeedbacks = response._embedded.feedbacks;
+          this.productFeedbacks.set(response._embedded.feedbacks);
         } else {
-          this.productFeedbacks = [...this.productFeedbacks, ...response._embedded.feedbacks];
+          this.productFeedbacks.update(values => [...values, ...response._embedded.feedbacks]);
         }
         this.totalElements = response.page.totalElements;
         this.currentPage = response.page.number;
@@ -60,13 +61,13 @@ export class ProductFeedbacksPanelComponent {
     }
   }
 
-  updateDisplayedFeedbacks(isMobileMode: boolean): void {
-    if (isMobileMode) {
-      this.displayedFeedbacks = this.productFeedbacks;
-    } else {
-      this.displayedFeedbacks = this.productFeedbacks.slice(0, 6);
-    }
-  }
+  // updateDisplayedFeedbacks(isMobileMode: boolean): void {
+  //   if (isMobileMode) {
+  //     this.displayedFeedbacks = this.productFeedbacks;
+  //   } else {
+  //     this.displayedFeedbacks = this.productFeedbacks.slice(0, 6);
+  //   }
+  // }
 
   onSortChange(sort: string): void {
     this.currentSort = sort;

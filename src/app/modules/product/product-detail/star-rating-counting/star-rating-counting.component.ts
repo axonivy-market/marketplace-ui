@@ -8,6 +8,7 @@ import { StarRatingComponent } from '../../../../shared/components/star-rating/s
 import { StarRatingCounting } from '../../../../shared/models/star-rating-counting.model';
 import { AddFeedbackDialogComponent } from '../product-feedbacks-panel/add-feedback-dialog/add-feedback-dialog.component';
 import { SuccessDialogComponent } from '../product-feedbacks-panel/add-feedback-dialog/success-dialog/success-dialog.component';
+import { Feedback } from '../../../../shared/models/feedback.model';
 
 @Component({
   selector: 'app-star-rating-counting',
@@ -24,7 +25,7 @@ import { SuccessDialogComponent } from '../product-feedbacks-panel/add-feedback-
   styleUrl: './star-rating-counting.component.scss'
 })
 export class StarRatingCountingComponent implements OnInit {
-  @Input() productId: string = '667109f11666e1352a072f8a';
+  @Input() productId!: string;
   @Input() productName!: string;
   @Input() platformReview: string = '3.5';
   @Input() isDisplayInDialog: boolean = false;
@@ -36,9 +37,11 @@ export class StarRatingCountingComponent implements OnInit {
   starRatingCountings: StarRatingCounting[] = [];
   subscriptions: Subscription[] = [];
   starRatingCountingService = inject(StarRatingCountingService);
+  feedback!: Feedback;
   private modalService = inject(NgbModal);
 
   ngOnInit(): void {
+    this.loadUserFeedback();
     this.loadAllStarRatingCountings();
   }
 
@@ -107,7 +110,8 @@ export class StarRatingCountingComponent implements OnInit {
     // else {
     //   this.onClickRateThisConnector();
     // }
-    this.modalService.open(AddFeedbackDialogComponent, { fullscreen: 'md', centered: true, modalDialogClass: 'add-feedback-modal-dialog' });
+    const addFeedbackModal = this.modalService.open(AddFeedbackDialogComponent, { fullscreen: 'md', centered: true, modalDialogClass: 'add-feedback-modal-dialog' });
+    addFeedbackModal.componentInstance.feedback = this.feedback;
   }
 
   getTokenFromCookie(): string {
@@ -140,5 +144,11 @@ export class StarRatingCountingComponent implements OnInit {
       console.error('Error parsing JWT token:', error);
       return false;
     }
+  }
+
+  loadUserFeedback() {
+    // this.feedback = {
+
+    // }
   }
 }

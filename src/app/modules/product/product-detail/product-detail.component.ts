@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Renderer2, ViewChild, inject, signal } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../../shared/models/product.model';
 import { ProductService } from '../product.service';
@@ -31,14 +31,12 @@ export class ProductDetailComponent {
 
   product!: Product;
   showPopup!: boolean;
-  allFeedbacksLoaded = false; // Flag to track if all feedbacks are loaded
-  inMobileMode!: boolean;
+  allFeedbacksLoaded = signal<boolean>(false); // Flag to track if all feedbacks are loaded
+  inMobileMode = signal<boolean>(false);
   maxFeedbacksToShow = 6;
-
 
   constructor() {
     const productId = this.route.snapshot.params['id'];
-    console.log(this.route.snapshot.params);
     
     if (productId) {
       this.productDetailService.getProductDetailById(productId).subscribe(product => {
@@ -58,9 +56,9 @@ export class ProductDetailComponent {
   private checkMediaSize() {
     const mediaQuery = window.matchMedia('(max-width: 767px)');
     if (mediaQuery.matches) {
-      this.inMobileMode = true;
+      this.inMobileMode.set(true);
     } else {
-      this.inMobileMode = false;
+      this.inMobileMode.set(false);
     }
   }
 
@@ -70,7 +68,7 @@ export class ProductDetailComponent {
       ratingLinkElement.click();
     }
     this.feedbackPanelComponent.showFeedbacksLoadedBtn.subscribe(() => {
-      this.allFeedbacksLoaded = true;
+      this.allFeedbacksLoaded.set(true);
     });
     this.checkMediaSize();
   }
