@@ -15,7 +15,7 @@ export class LanguageService {
 
   loadDefaultLanguage(localStorage: Storage) {
     const language = localStorage.getItem(DATA_LANGUAGE);
-    this.loadLanguage(language ? language : Language.EN_GB);
+    this.loadLanguage(language ?? Language.EN_GB);
   }
 
   loadLanguage(language: string): void {
@@ -23,6 +23,6 @@ export class LanguageService {
   }
 
   getSelectedLanguage(): string {
-    return localStorage.getItem(DATA_LANGUAGE) || Language.EN_GB;
+    return localStorage.getItem(DATA_LANGUAGE) ?? Language.EN_GB;
   }
 }
