@@ -127,12 +127,6 @@ export class ProductDetailVersionActionComponent implements AfterViewInit {
           this.onSelectVersion();
         }
       });
-    //remove this
-    if (this.versions.length === 0) {
-      console.log('aloha');
-
-      this.versions.set(['a', 'b', 'c']);
-    }
   }
 
   sanitizeDataBeforFetching() {
