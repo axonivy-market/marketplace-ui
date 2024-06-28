@@ -24,11 +24,14 @@ const delayTimeBeforeHideMessage = 2000;
 })
 export class ProductDetailVersionActionComponent implements AfterViewInit {
   ngAfterViewInit() {
-    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    const tooltipTriggerList = [].slice.call(
+      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    );
     tooltipTriggerList.map(function (tooltipTriggerEl) {
       return new Tooltip(tooltipTriggerEl);
     });
   }
+
   @Input()
   productId!: string;
   versions: WritableSignal<string[]> = signal([]);
@@ -47,10 +50,10 @@ export class ProductDetailVersionActionComponent implements AfterViewInit {
   versionMap: Map<string, Artifact[]> = new Map();
 
   getIndicatorClass() {
-    if(this.isVersionsDropDownShow()){
-      return "indicator-arrow__up";
+    if (this.isVersionsDropDownShow()) {
+      return 'indicator-arrow__up';
     }
-    return "";
+    return '';
   }
 
   onShowVersions() {
@@ -124,11 +127,11 @@ export class ProductDetailVersionActionComponent implements AfterViewInit {
           this.onSelectVersion();
         }
       });
-      
-    if(this.versions.length ===0){
+    //remove this
+    if (this.versions.length === 0) {
       console.log('aloha');
-      
-      this.versions.set(["a","b","c"])
+
+      this.versions.set(['a', 'b', 'c']);
     }
   }
 
@@ -140,6 +143,10 @@ export class ProductDetailVersionActionComponent implements AfterViewInit {
   }
 
   downloadArifact() {
-    window.open(this.selectedArtifact.downloadUrl, '_blank');
+    const newTab = window.open(this.selectedArtifact.downloadUrl, '_blank');
+    if (newTab) {
+      newTab.blur();
+    }
+    window.focus();
   }
 }
