@@ -4,6 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ThemeService } from '../../../core/services/theme/theme.service';
 import { Product } from '../../../shared/models/product.model';
 import { ProductLogoPipe } from '../../../shared/pipes/logo.pipe';
+import { LanguageService } from '../../../core/services/language/language.service';
 
 @Component({
   selector: 'app-product-card',
@@ -14,6 +15,7 @@ import { ProductLogoPipe } from '../../../shared/pipes/logo.pipe';
 })
 export class ProductCardComponent {
   themeService = inject(ThemeService);
+  languageService = inject(LanguageService);
 
   @Input() product!: Product;
 }

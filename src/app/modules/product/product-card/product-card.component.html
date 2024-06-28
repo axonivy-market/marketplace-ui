@@ -13,9 +13,19 @@
     </div>
   </div>
   <div>
-    <h5 class="card__title text-primary">{{ product.name }}</h5>
+    <h5 class="card__title text-primary">
+      {{
+        languageService.getSelectedLanguage() == 'en-GB'
+          ? product.name
+          : product.nameDE
+      }}
+    </h5>
     <p class="card__description text-secondary">
-      {{ product.shortDescription }}
+      {{
+        languageService.getSelectedLanguage() == 'en-GB'
+          ? product.shortDescription
+          : product.shortDescriptionDE
+      }}
     </p>
   </div>
 </div>
