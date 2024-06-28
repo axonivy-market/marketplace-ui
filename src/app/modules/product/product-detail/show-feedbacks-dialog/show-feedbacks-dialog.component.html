@@ -15,11 +15,11 @@
   (click)="activeModal.dismiss('Cross click')"></button>
 <div
   style="position: absolute; left: 321px; top: 71px; bottom: 0; width: 528px">
-  <app-product-feedbacks-panel
+  <app-product-feedbacks-panel [productId]="productId"
     [isRenderInModalDialog]="true"></app-product-feedbacks-panel>
 </div>
 <div style="position: absolute; top: 76.64px; left: 42px; width: 218px">
   <app-star-rating-counting
-    [productName]="productName"
+    [productId]="productId" [productName]="productName"
     [isDisplayInDialog]="true" (openAddFeedbacDialogEvent)="activeModal.dismiss('Cross click')"></app-star-rating-counting>
 </div>

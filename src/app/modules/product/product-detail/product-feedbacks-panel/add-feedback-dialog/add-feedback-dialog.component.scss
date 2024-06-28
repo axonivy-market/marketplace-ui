@@ -2,7 +2,6 @@ i {
   position: relative;
   display: inline-block;
   font-size: 2.5rem;
-  padding-right: 10px;
   color: #dfdfdf;
 }
 
@@ -23,9 +22,8 @@ i {
 
 .add-feedback-description {
   font-weight: 400;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 140%;
-  min-height: 100px;
 }
 
 .current-product-title {
@@ -49,7 +47,6 @@ i {
 }
 
 .star-rating-title {
-  margin-bottom: 10px;
   font-weight: 400;
   font-size: 14px;
   line-height: 120%;
@@ -84,29 +81,35 @@ i {
     padding: 20px;
     padding-top: 60px;
     gap: 30px;
-    max-width: 370px;
-    min-width: 300px;
+    max-width: 400px;
+    min-width: 350px;
+    width: 100%;
   }
 
   i {
-    padding-right: 45px;
+    padding-right: 39px;
   }
 
   .product-item-select {
     width: 100%;
   }
+
+  @media (max-width: 400px) {
+    i {
+      padding-right: clamp(27px, 6vw, 39px);
+    }
+  }
 }
 
 @media (min-width: 768px) {
   .modal-body-wrapper {
-    padding-top: 27px;
-    padding-bottom: 15px;
+    padding-bottom: 24px;
     gap: 20px;
     width: 525px;
   }
 
   i {
-    padding-right: 10px;
+    padding-right: 15px;
   }
 
   .product-item-select {

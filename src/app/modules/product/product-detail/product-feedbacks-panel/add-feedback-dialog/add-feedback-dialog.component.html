@@ -21,7 +21,7 @@
         class="form-select product-item-select"
         aria-label="item"
         name="item">
-        <option>{{ 'abc' }}</option>
+        <option>{{ productName }}</option>
       </select>
     </div>
     <div class="d-flex flex-column flex-grow-1">
@@ -29,19 +29,19 @@
         {{ 'common.feedback.starRatingTitle' | translate }}
       </div>
       <ng-template #t let-fill="fill">
-        <i class="bi-star-fill" style="padding-right: 45px">
+        <i class="bi-star-fill">
           @if (fill > 0) {
             <i class="bi-star-fill filled" [style.width.%]="fill"></i>
           }
         </i>
       </ng-template>
       <div style="height: 48px">
-        <ngb-rating [max]="5" [starTemplate]="t"></ngb-rating>
+        <ngb-rating [max]="5" [(rate)]="feedback.rating" [starTemplate]="t"></ngb-rating>
       </div>
       <div
         class="feedback-secondary-color"
         style="
-          margin-top: 20px;
+          margin-top: 30px;
           font-weight: 400;
           font-size: 14px;
           line-height: 120%;
@@ -74,6 +74,7 @@
         line-height: 120%;
         height: 17px;
         margin: 0 auto;
+        margin-bottom: 10px;
       "
       class="feedback-secondary-color">
       Logged in Github as:

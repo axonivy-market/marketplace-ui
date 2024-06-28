@@ -55,19 +55,21 @@ export class ProductFeedbacksPanelComponent {
       });
   }
 
+  refreshFeedbackWithKeepState(): void {
+      // Clear existing feedbacks to reset
+      this.productFeedbackService.findProductFeedbacksByCriteria(this.productId, 0, this.productFeedbacks.length, this.currentSort)
+      .subscribe((response: FeedbackApiResponse) => {
+        this.productFeedbacks.set(response._embedded.feedbacks);
+        this.totalElements = response.page.totalElements;
+        this.checkIfAllFeedbacksLoaded();
+      });
+  }
+
   checkIfAllFeedbacksLoaded(): void {
-    if (this.productFeedbacks.length >= this.totalElements) {
+    if (this.productFeedbacks().length >= this.totalElements) {
       this.showFeedbacksLoadedBtn.emit();
     }
   }
-
-  // updateDisplayedFeedbacks(isMobileMode: boolean): void {
-  //   if (isMobileMode) {
-  //     this.displayedFeedbacks = this.productFeedbacks;
-  //   } else {
-  //     this.displayedFeedbacks = this.productFeedbacks.slice(0, 6);
-  //   }
-  // }
 
   onSortChange(sort: string): void {
     this.currentSort = sort;
@@ -82,8 +84,6 @@ export class ProductFeedbacksPanelComponent {
     const threshold = 150; // Add a small threshold for triggering the load
     const position = e.target.scrollTop + e.target.offsetHeight;
     const height = e.target.scrollHeight;
-    console.log(e);
-    console.log(height);
     if (position >= height - threshold) {
       if (!this.atBottom && this.currentPage * this.pageSize < this.totalElements) {
         this.atBottom = true;

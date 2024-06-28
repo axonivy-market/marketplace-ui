@@ -21,6 +21,7 @@ import { ProductFeedbackService } from '../product-feedback.service';
 export class AddFeedbackDialogComponent {
 
   @Input() productId!: string;
+  @Input() productName!: string;
   @Input() feedback!: Feedback;
 
   activeModal = inject(NgbActiveModal);
@@ -34,16 +35,15 @@ export class AddFeedbackDialogComponent {
 
   constructor() {
     this.displayName = this.authService.getDisplayName();
-    this.feedback.productId = this.productId;
-  }
-
-  ngOnInit(): void {
+    if (this.feedback) {
+      this.feedback.productId = this.productId;
+    }
   }
 
   onSubmitFeedback(): void {
     this.productFeedbackService.submitFeedback(this.feedback).subscribe(
-      (response) => {
-        this.activeModal.dismiss('Cross click');
+      () => {
+        this.activeModal.close();
         this.modalService.open(SuccessDialogComponent, { fullscreen: 'md', centered: true, modalDialogClass: 'add-feedback-modal-dialog' });
       },
       (error) => {

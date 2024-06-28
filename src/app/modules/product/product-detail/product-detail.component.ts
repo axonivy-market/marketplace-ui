@@ -9,6 +9,8 @@ import { StarRatingCountingComponent } from './star-rating-counting/star-rating-
 import { ProductDetailService } from './product-detail.service';
 import { AuthService } from '../../../auth/auth.service';
 import { ShowFeedbacksDialogComponent } from './show-feedbacks-dialog/show-feedbacks-dialog.component';
+import { Feedback } from '../../../shared/models/feedback.model';
+import { AddFeedbackDialogComponent } from './product-feedbacks-panel/add-feedback-dialog/add-feedback-dialog.component';
 
 @Component({
     selector: 'app-product-detail',
@@ -43,9 +45,6 @@ export class ProductDetailComponent {
         this.product = product;
       });
     }
-    this.route.queryParams.subscribe(params => {
-      this.showPopup = params['showPopup'];
-    });
   }
 
   @HostListener('window:resize', ['$event'])
@@ -63,24 +62,29 @@ export class ProductDetailComponent {
   }
 
   ngAfterViewInit(): void {
-    if (this.showPopup) {
-      const ratingLinkElement = this.starRatingCountingComponent.ratingLink.nativeElement;
-      ratingLinkElement.click();
-    }
-    this.feedbackPanelComponent.showFeedbacksLoadedBtn.subscribe(() => {
-      this.allFeedbacksLoaded.set(true);
+    this.route.queryParams.subscribe(params => {
+      this.showPopup = params['showPopup'];
+      
+      if (this.showPopup) {
+        
+      }
     });
+    
+    if (this.feedbackPanelComponent) {
+      this.feedbackPanelComponent.showFeedbacksLoadedBtn.subscribe(() => {
+        this.allFeedbacksLoaded.set(true);
+      });
+    }
     this.checkMediaSize();
   }
 
   openShowFeedbacksDialog() {
-    const mediaQuery = window.matchMedia('(max-width: 767px)');
-    if (mediaQuery.matches) {
-      // If the width is smaller than 700px, perform a different action
+    if (this.inMobileMode()) {
       this.handleSmallScreenFeedback();
     } else {
       // Otherwise, open the dialog as usual
       const showFeedbackDialog = this.modalService.open(ShowFeedbacksDialogComponent, { centered: true, modalDialogClass: 'show-feedbacks-modal-dialog' });
+      showFeedbackDialog.componentInstance.productId = this.product.id;
       showFeedbackDialog.componentInstance.productName = this.product.name;
     }
   }
@@ -91,6 +95,8 @@ export class ProductDetailComponent {
     }
   }
 
-
+  updateFeedbackFromAddFeedbackDialog() {
+    this.feedbackPanelComponent.refreshFeedbackWithKeepState();
+  }
 }
 

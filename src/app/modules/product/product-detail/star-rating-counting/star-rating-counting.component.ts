@@ -9,6 +9,9 @@ import { StarRatingCounting } from '../../../../shared/models/star-rating-counti
 import { AddFeedbackDialogComponent } from '../product-feedbacks-panel/add-feedback-dialog/add-feedback-dialog.component';
 import { SuccessDialogComponent } from '../product-feedbacks-panel/add-feedback-dialog/success-dialog/success-dialog.component';
 import { Feedback } from '../../../../shared/models/feedback.model';
+import { ProductService } from '../../product.service';
+import { ProductFeedbackService } from '../product-feedbacks-panel/product-feedback.service';
+import { AuthService } from '../../../../auth/auth.service';
 
 @Component({
   selector: 'app-star-rating-counting',
@@ -20,7 +23,7 @@ import { Feedback } from '../../../../shared/models/feedback.model';
     DecimalPipe,
     CommonModule
   ],
-  providers: [StarRatingCountingService],
+  providers: [StarRatingCountingService, ProductFeedbackService],
   templateUrl: './star-rating-counting.component.html',
   styleUrl: './star-rating-counting.component.scss'
 })
@@ -29,16 +32,22 @@ export class StarRatingCountingComponent implements OnInit {
   @Input() productName!: string;
   @Input() platformReview: string = '3.5';
   @Input() isDisplayInDialog: boolean = false;
-  @ViewChild('ratingLink', { static: false }) ratingLink!: ElementRef;
   @Output() openAddFeedbacDialogEvent = new EventEmitter();
+  @Output() updateFeedback = new EventEmitter<Feedback>();
 
   totalComments: number = 0;
   reviewNumber: number = 0;
   starRatingCountings: StarRatingCounting[] = [];
   subscriptions: Subscription[] = [];
   starRatingCountingService = inject(StarRatingCountingService);
-  feedback!: Feedback;
+  feedback: Feedback = {
+    productId: this.productId,
+    rating: 0
+  };
   private modalService = inject(NgbModal);
+  private productFeedbackService = inject(ProductFeedbackService)
+
+  authService = inject(AuthService);
 
   ngOnInit(): void {
     this.loadUserFeedback();
@@ -75,10 +84,7 @@ export class StarRatingCountingComponent implements OnInit {
   }
 
   onClickRateThisConnector(): void {
-    let redirectUri = `http://localhost:4200/auth/callback?productId=${this.productName}`;
-    let clientId = 'Ov23liUzb36JCQIfEBGn';
-    let githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}`;
-    window.location.href = githubAuthUrl;
+    this.authService.redirectToGitHub("approval-decision-utils");
   }
 
   ngOnDestroy(): void {
@@ -88,30 +94,27 @@ export class StarRatingCountingComponent implements OnInit {
   }
 
   openRateConnectorDialog() {
-    // const token = this.getTokenFromCookie(); // Implement this method to get token from cookie
-    // console.log(token);
+    const token = this.authService.getToken(); // Implement this method to get token from cookie
 
     // const tokenExpiryValid = this.isTokenValid(token); // Implement this method to check token validity
-    // console.log(tokenExpiryValid);
 
-    // if (token && tokenExpiryValid) {
-    //   this.openAddFeedbacDialogEvent.emit();
+    if (token) {
+      this.openAddFeedbacDialogEvent.emit();
+      console.log(token);
       
-    //   var modalRef;
-    //   const mediaQuery = window.matchMedia('(max-width: 767px)');
-    //   if (mediaQuery.matches) {
-    //     modalRef = this.modalService.open(AddFeedbackDialogComponent, {fullscreen: true});
-    //   }
-    //   else {
-    //     modalRef = this.modalService.open(AddFeedbackDialogComponent, {centered: true, modalDialogClass: 'add-feedback-modal-dialog'});
-    //   }
-    //   modalRef.componentInstance.productName = this.productName;
-    // }
-    // else {
-    //   this.onClickRateThisConnector();
-    // }
-    const addFeedbackModal = this.modalService.open(AddFeedbackDialogComponent, { fullscreen: 'md', centered: true, modalDialogClass: 'add-feedback-modal-dialog' });
-    addFeedbackModal.componentInstance.feedback = this.feedback;
+      const addFeedbackModal = this.modalService.open(AddFeedbackDialogComponent, { fullscreen: 'md', centered: true, modalDialogClass: 'add-feedback-modal-dialog' });
+      addFeedbackModal.componentInstance.feedback = this.feedback;
+      addFeedbackModal.componentInstance.productId = this.productId;
+      addFeedbackModal.componentInstance.productName = this.productName;
+      addFeedbackModal.result.then(
+        () => {
+          this.updateFeedback.emit();
+        }
+      );
+    }
+    else {
+      this.onClickRateThisConnector();
+    }
   }
 
   getTokenFromCookie(): string {
@@ -147,8 +150,13 @@ export class StarRatingCountingComponent implements OnInit {
   }
 
   loadUserFeedback() {
-    // this.feedback = {
-
-    // }
+    this.productFeedbackService.findProductFeedbackOfUser(this.productId).subscribe(
+      (feedback) => {
+        this.feedback = feedback;
+      },
+      (error) => {
+        // this.feedback = {productId: this.productId};
+      }
+    );
   }
 }

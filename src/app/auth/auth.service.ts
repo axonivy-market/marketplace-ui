@@ -6,7 +6,9 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from 'jwt-decode';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
   private readonly BASE_URL = environment.apiUrl;
   private readonly TOKEN_KEY = 'token';
@@ -50,8 +52,8 @@ export class AuthService {
 
   private handleTokenResponse(token: string, state: string): void {
     this.setTokenAsCookie(token);
-    this.router.navigate([`/product/${state}`], {
-      queryParams: { showAddFeedbackDialog: 'true' }
+    this.router.navigate([`${state}`], {
+      queryParams: { showPopup: 'true' }
     });
   }
 
