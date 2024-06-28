@@ -1,7 +1,9 @@
 ::ng-deep .custom-tooltip {
-  --bs-tooltip-bg: var(--Default-background, #ffffff);
+  --bs-tooltip-bg: #ffffff;
+  background-color: #ffffff;
   --bs-tooltip-color: black;
   --bs-tooltip-font-size: 12px;
+  --bs-tooltip-opacity:inherit !important;
 
   .tooltip-inner {
     padding: 0px;
@@ -153,7 +155,11 @@
       }
 
       @media (max-width: 767px) {
-        left: 17.5rem;
+        left: 18.5rem;
+      }
+
+      @media (max-width: 575px) {
+        left: 54vw;
       }
     }
   }
