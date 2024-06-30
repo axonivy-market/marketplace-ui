@@ -1,4 +1,13 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  inject
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StarRatingCountingService } from './star-rating-counting.service';
 import { StarRatingHighlightDirective } from './star-rating-highlight.directive';
@@ -7,7 +16,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StarRatingComponent } from '../../../../shared/components/star-rating/star-rating.component';
 import { StarRatingCounting } from '../../../../shared/models/star-rating-counting.model';
 import { AddFeedbackDialogComponent } from '../product-feedbacks-panel/add-feedback-dialog/add-feedback-dialog.component';
-import { SuccessDialogComponent } from '../product-feedbacks-panel/add-feedback-dialog/success-dialog/success-dialog.component';
 import { Feedback } from '../../../../shared/models/feedback.model';
 import { ProductService } from '../../product.service';
 import { ProductFeedbackService } from '../product-feedbacks-panel/product-feedback.service';
@@ -42,10 +50,11 @@ export class StarRatingCountingComponent implements OnInit {
   starRatingCountingService = inject(StarRatingCountingService);
   feedback: Feedback = {
     productId: this.productId,
-    rating: 0
+    rating: 0,
+    content: ''
   };
   private modalService = inject(NgbModal);
-  private productFeedbackService = inject(ProductFeedbackService)
+  private productFeedbackService = inject(ProductFeedbackService);
 
   authService = inject(AuthService);
 
@@ -75,7 +84,7 @@ export class StarRatingCountingComponent implements OnInit {
 
   calculateReviewNumber(): void {
     this.starRatingCountings.forEach(starRating => {
-      this.reviewNumber += starRating.starRating * starRating.percent / 100;
+      this.reviewNumber += (starRating.starRating * starRating.percent) / 100;
     });
   }
 
@@ -84,7 +93,7 @@ export class StarRatingCountingComponent implements OnInit {
   }
 
   onClickRateThisConnector(): void {
-    this.authService.redirectToGitHub("approval-decision-utils");
+    this.authService.redirectToGitHub('approval-decision-utils');
   }
 
   ngOnDestroy(): void {
@@ -101,18 +110,22 @@ export class StarRatingCountingComponent implements OnInit {
     if (token) {
       this.openAddFeedbacDialogEvent.emit();
       console.log(token);
-      
-      const addFeedbackModal = this.modalService.open(AddFeedbackDialogComponent, { fullscreen: 'md', centered: true, modalDialogClass: 'add-feedback-modal-dialog' });
+
+      const addFeedbackModal = this.modalService.open(
+        AddFeedbackDialogComponent,
+        {
+          fullscreen: 'md',
+          centered: true,
+          modalDialogClass: 'add-feedback-modal-dialog'
+        }
+      );
       addFeedbackModal.componentInstance.feedback = this.feedback;
       addFeedbackModal.componentInstance.productId = this.productId;
       addFeedbackModal.componentInstance.productName = this.productName;
-      addFeedbackModal.result.then(
-        () => {
-          this.updateFeedback.emit();
-        }
-      );
-    }
-    else {
+      addFeedbackModal.result.then(() => {
+        this.updateFeedback.emit();
+      });
+    } else {
       this.onClickRateThisConnector();
     }
   }
@@ -150,13 +163,15 @@ export class StarRatingCountingComponent implements OnInit {
   }
 
   loadUserFeedback() {
-    this.productFeedbackService.findProductFeedbackOfUser(this.productId).subscribe(
-      (feedback) => {
-        this.feedback = feedback;
-      },
-      (error) => {
-        // this.feedback = {productId: this.productId};
-      }
-    );
+    this.productFeedbackService
+      .findProductFeedbackOfUser(this.productId)
+      .subscribe(
+        feedback => {
+          this.feedback = feedback;
+        },
+        error => {
+          // this.feedback = {productId: this.productId};
+        }
+      );
   }
 }

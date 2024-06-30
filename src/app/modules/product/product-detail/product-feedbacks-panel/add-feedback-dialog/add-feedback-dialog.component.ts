@@ -9,42 +9,44 @@ import { SkipLoading } from '../../../../../core/interceptors/api.interceptor';
 import { AuthService } from '../../../../../auth/auth.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProductFeedbackService } from '../product-feedback.service';
+import { AppModalService } from '../../../../../shared/services/app-modal.service';
 
 @Component({
   selector: 'app-add-feedback-dialog',
   standalone: true,
-  providers: [AuthService, ProductFeedbackService],
+  providers: [AuthService, ProductFeedbackService, AppModalService],
   imports: [FormsModule, NgbModule, TranslateModule],
   templateUrl: './add-feedback-dialog.component.html',
   styleUrl: './add-feedback-dialog.component.scss'
 })
 export class AddFeedbackDialogComponent {
 
-  @Input() productId!: string;
-  @Input() productName!: string;
-  @Input() feedback!: Feedback;
-
   activeModal = inject(NgbActiveModal);
-
   private productFeedbackService = inject(ProductFeedbackService);
   private authService = inject(AuthService);
-  private modalService = inject(NgbModal);
+  private appModalService = inject(AppModalService);
 
-  displayName: string | null = null;
-  inMobileMode!: boolean;
+  productId!: string;
+  productName!: string;
+  displayName: string = '';
+  feedback: Feedback = {
+    content: '',
+    rating: 0
+  };
 
-  constructor() {
-    this.displayName = this.authService.getDisplayName();
-    if (this.feedback) {
-      this.feedback.productId = this.productId;
+  ngOnInit() {
+    const displayName = this.authService.getDisplayName();
+    if (displayName) {
+      this.displayName = displayName;
     }
+    this.feedback.productId = this.productId;
   }
 
   onSubmitFeedback(): void {
     this.productFeedbackService.submitFeedback(this.feedback).subscribe(
       () => {
         this.activeModal.close();
-        this.modalService.open(SuccessDialogComponent, { fullscreen: 'md', centered: true, modalDialogClass: 'add-feedback-modal-dialog' });
+        this.appModalService.openSuccessDialog();
       },
       (error) => {
         console.error('Error submitting review:', error);

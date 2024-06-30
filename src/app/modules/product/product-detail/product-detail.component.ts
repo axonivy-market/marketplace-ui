@@ -1,64 +1,51 @@
-import { Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild, inject, signal } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, Renderer2, ViewChild, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../../shared/models/product.model';
 import { ProductService } from '../product.service';
 import { ThemeService } from '../../../core/services/theme/theme.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductFeedbacksPanelComponent } from './product-feedbacks-panel/product-feedbacks-panel.component';
-import { StarRatingCountingComponent } from './star-rating-counting/star-rating-counting.component';
 import { ProductDetailService } from './product-detail.service';
 import { AuthService } from '../../../auth/auth.service';
 import { ShowFeedbacksDialogComponent } from './show-feedbacks-dialog/show-feedbacks-dialog.component';
 import { Feedback } from '../../../shared/models/feedback.model';
 import { AddFeedbackDialogComponent } from './product-feedbacks-panel/add-feedback-dialog/add-feedback-dialog.component';
+import { StarRatingCountingComponent } from "./star-rating-counting/star-rating-counting.component";
+import { AppModalService } from '../../../shared/services/app-modal.service';
+import { ProductFeedbackService } from './product-feedbacks-panel/product-feedback.service';
 
 @Component({
     selector: 'app-product-detail',
     standalone: true,
-    providers: [ProductDetailService, AuthService],
+    providers: [ProductDetailService, AuthService, AppModalService, ProductFeedbackService],
     templateUrl: './product-detail.component.html',
     styleUrl: './product-detail.component.scss',
     imports: [ShowFeedbacksDialogComponent, ProductFeedbacksPanelComponent, StarRatingCountingComponent]
 })
 export class ProductDetailComponent {
 
-  @ViewChild(StarRatingCountingComponent) starRatingCountingComponent!: StarRatingCountingComponent;
   @ViewChild(ProductFeedbacksPanelComponent) feedbackPanelComponent!: ProductFeedbacksPanelComponent;
 
   private productDetailService = inject(ProductDetailService);
   private route = inject(ActivatedRoute);
-  private themeService = inject(ThemeService);
-  private renderer = inject(Renderer2);
-  private modalService = inject(NgbModal);
+  private appModalService = inject(AppModalService);
+  private productFeedbackService = inject(ProductFeedbackService);
 
   product!: Product;
   showPopup!: boolean;
-  allFeedbacksLoaded = signal<boolean>(false); // Flag to track if all feedbacks are loaded
-  inMobileMode = signal<boolean>(false);
+  allFeedbacksLoaded = signal<boolean>(false);
+  isMobileMode = signal<boolean>(false);
   maxFeedbacksToShow = 6;
+  userFeedback!: Feedback;
 
   constructor() {
     const productId = this.route.snapshot.params['id'];
-    
-    if (productId) {
-      this.productDetailService.getProductDetailById(productId).subscribe(product => {
-        this.product = product;
-      });
-    }
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.checkMediaSize();
-  }
-
-  private checkMediaSize() {
-    const mediaQuery = window.matchMedia('(max-width: 767px)');
-    if (mediaQuery.matches) {
-      this.inMobileMode.set(true);
-    } else {
-      this.inMobileMode.set(false);
-    }
+    this.productDetailService.getProductDetailById(productId).subscribe(product => {
+      this.product = product;
+    });
+    this.productFeedbackService.findProductFeedbackOfUser(productId).subscribe(userFeedback => {
+      this.userFeedback = userFeedback;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -66,7 +53,10 @@ export class ProductDetailComponent {
       this.showPopup = params['showPopup'];
       
       if (this.showPopup) {
-        
+        this.appModalService.openAddFeedbackDialog(this.userFeedback, this.product.id, this.product.name)
+        .then(() => {
+          // this.updateFeedback.emit();
+        });
       }
     });
     
@@ -78,14 +68,25 @@ export class ProductDetailComponent {
     this.checkMediaSize();
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkMediaSize();
+  }
+
+  private checkMediaSize() {
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+    if (mediaQuery.matches) {
+      this.isMobileMode.set(true);
+    } else {
+      this.isMobileMode.set(false);
+    }
+  }
+
   openShowFeedbacksDialog() {
-    if (this.inMobileMode()) {
+    if (this.isMobileMode()) {
       this.handleSmallScreenFeedback();
     } else {
-      // Otherwise, open the dialog as usual
-      const showFeedbackDialog = this.modalService.open(ShowFeedbacksDialogComponent, { centered: true, modalDialogClass: 'show-feedbacks-modal-dialog' });
-      showFeedbackDialog.componentInstance.productId = this.product.id;
-      showFeedbackDialog.componentInstance.productName = this.product.name;
+      this.appModalService.openShowFeedbacksDialog(this.product.id, this.product.name);
     }
   }
 

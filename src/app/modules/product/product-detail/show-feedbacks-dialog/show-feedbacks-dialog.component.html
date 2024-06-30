@@ -1,25 +1,24 @@
-<div
-  class="vr"
-  style="
-    position: absolute;
-    height: 817px;
-    left: 291px;
-    top: 26px;
-    border: 1px solid #ebebeb;
-  "></div>
-<button
-  type="button"
-  class="btn-close"
-  aria-label="Close"
-  style="position: absolute; right: 18px; top: 18px"
-  (click)="activeModal.dismiss('Cross click')"></button>
-<div
-  style="position: absolute; left: 321px; top: 71px; bottom: 0; width: 528px">
-  <app-product-feedbacks-panel [productId]="productId"
-    [isRenderInModalDialog]="true"></app-product-feedbacks-panel>
-</div>
-<div style="position: absolute; top: 76.64px; left: 42px; width: 218px">
-  <app-star-rating-counting
-    [productId]="productId" [productName]="productName"
-    [isDisplayInDialog]="true" (openAddFeedbacDialogEvent)="activeModal.dismiss('Cross click')"></app-star-rating-counting>
+<div class="modal-content-wrapper">
+  <div class="modal-header border-bottom-0">
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="activeModal.dismiss()"></button>
+  </div>
+  <div class="modal-body" style="margin-left: 40px; margin-right: 40px;">
+    <div class="d-flex">
+      <app-star-rating-counting style="width: 218px"
+        [productId]="productId"
+        [productName]="productName"
+        [isDisplayInDialog]="true"
+        (openAddFeedbacDialogEvent)="activeModal.dismiss()" />
+      <div style="width: 60px;" class="d-flex justify-content-center">
+        <div class="vr" style="position: relative; height: 817px; top: -15px; border: 1px solid #ebebeb;"></div>
+      </div>
+      <app-product-feedbacks-panel style="width: 525px;"
+        [productId]="productId"
+        [isRenderInModalDialog]="true" />
+    </div>
+  </div>
 </div>

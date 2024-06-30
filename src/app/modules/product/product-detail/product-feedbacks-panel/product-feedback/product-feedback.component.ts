@@ -18,8 +18,6 @@ export class ProductFeedbackComponent {
   showToggle = signal(false);
   isExpanded = signal(false);
 
-  constructor() {}
-
   ngAfterViewInit() {
     this.setShowToggle();
   }

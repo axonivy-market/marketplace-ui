@@ -4,7 +4,7 @@ export interface Feedback {
   userProvider?: string;
   createdDate?: Date;
   updatedDate?: Date;
-  content?: string;
+  content: string;
   rating: number;
-  productId: string;
+  productId?: string;
 }

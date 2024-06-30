@@ -12,6 +12,6 @@ export class ProductDetailService {
 
   getProductDetailById(id: string): Observable<Product> {
     const requestURL = `${PRODUCT_DETAIL_API_URL}/${id}`;
-    return this.httpClient.get<Product>(requestURL, { context: new HttpContext().set(SkipLoading, true) });
+    return this.httpClient.get<Product>(requestURL);
   }
 }

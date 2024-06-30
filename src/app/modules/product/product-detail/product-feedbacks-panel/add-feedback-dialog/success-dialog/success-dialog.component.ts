@@ -17,9 +17,12 @@ export class SuccessDialogComponent {
 
   private authService = inject(AuthService);
   
-  displayName: string | null = null;
+  displayName: string = '';
 
-  constructor() {
-    this.displayName = this.authService.getDisplayName();
+  ngOnInit() {
+    const displayName = this.authService.getDisplayName();
+    if (displayName) {
+      this.displayName = displayName;
+    }
   }
 }
