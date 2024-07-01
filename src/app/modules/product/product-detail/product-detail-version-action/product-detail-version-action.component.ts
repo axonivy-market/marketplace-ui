@@ -60,15 +60,6 @@ export class ProductDetailVersionActionComponent implements AfterViewInit {
     this.isVersionsDropDownShow.set(!this.isVersionsDropDownShow());
   }
 
-  onInstallArtifact() {
-    if (!this.isDesignerEnvironment()) {
-      this.isInvalidInstallationEnvironment.set(true);
-      setTimeout(
-        () => this.isInvalidInstallationEnvironment.set(false),
-        delayTimeBeforeHideMessage
-      );
-    }
-  }
   getInstallationTooltipText() {
     return `Please open the
         <a href="https://market.axonivy.com/" class="primary-color">

@@ -171,11 +171,4 @@ describe('ProductVersionActionComponent', () => {
     component.onShowVersions();
     expect(component.isVersionsDropDownShow()).toBe(initialState);
   });
-
-  it('should not change isInvalidInstallationEnvironment for designer environment', () => {
-    spyOn(component, 'isDesignerEnvironment').and.returnValue(true);
-
-    component.onInstallArtifact();
-    expect(component.isInvalidInstallationEnvironment()).toBe(false);
-  });
 });
