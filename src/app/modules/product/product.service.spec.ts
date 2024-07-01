@@ -4,7 +4,10 @@ import {
   provideHttpClient,
   withInterceptorsFromDi
 } from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import {
+  HttpTestingController,
+  provideHttpClientTesting
+} from '@angular/common/http/testing';
 import { TypeOption } from '../../shared/enums/type-option.enum';
 import { SortOption } from '../../shared/enums/sort-option.enum';
 import { MOCK_PRODUCTS } from '../../shared/mocks/mock-data';
@@ -12,6 +15,8 @@ import { Criteria } from '../../shared/models/criteria.model';
 import { ProductService } from './product.service';
 import { Product } from '../../shared/models/product.model';
 import { catchError } from 'rxjs';
+import { LoadingService } from '../../core/services/loading/loading.service';
+import { VersionData } from '../../shared/models/vesion-artifact.model';
 
 const PRODUCT_ID = 'amazon-comprehend';
 const NOT_EXIST_ID = 'undefined';
@@ -19,17 +24,26 @@ const NOT_EXIST_ID = 'undefined';
 describe('ProductService', () => {
   let products = MOCK_PRODUCTS._embedded.products as Product[];
   let service: ProductService;
+  let httpMock: HttpTestingController;
+  let loadingServiceSpy: jasmine.SpyObj<LoadingService>;
 
   beforeEach(() => {
+    const spyLoading = jasmine.createSpyObj('LoadingService', ['show', 'hide']);
+
     TestBed.configureTestingModule({
       imports: [],
       providers: [
         ProductService,
         provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting()
+        provideHttpClientTesting(),
+        { provide: LoadingService, useValue: spyLoading }
       ]
     });
     service = TestBed.inject(ProductService);
+    httpMock = TestBed.inject(HttpTestingController);
+    loadingServiceSpy = TestBed.inject(
+      LoadingService
+    ) as jasmine.SpyObj<LoadingService>;
   });
 
   it('should be created', () => {
@@ -115,7 +129,8 @@ describe('ProductService', () => {
 
   it('findProductsByCriteria by next page url', () => {
     const criteria: Criteria = {
-      nextPageHref: 'http://localhost:8080/marketplace-service/api/product?type=all&page=1&size=20',
+      nextPageHref:
+        'http://localhost:8080/marketplace-service/api/product?type=all&page=1&size=20',
       search: '',
       sort: SortOption.RECENT,
       type: TypeOption.All_TYPES
@@ -124,5 +139,39 @@ describe('ProductService', () => {
       expect(response._embedded.products.length).toEqual(0);
       expect(response.page.number).toEqual(1);
     });
+  });
+
+  it('should call the API and return VersionData[]', () => {
+    const mockResponse: VersionData[] = [
+      { version: '10.0.1', artifactsByVersion: [] }
+    ];
+
+    const productId = 'adobe-acrobat-connector';
+    const showDevVersion = true;
+    const designerVersion = '10.0.1';
+
+    service
+      .sendRequestToProductDetailVersionAPI(
+        productId,
+        showDevVersion,
+        designerVersion
+      )
+      .subscribe(data => {
+        expect(data).toEqual(mockResponse);
+      });
+
+    const req = httpMock.expectOne(request => {
+      return (
+        request.url === `api/product-details/${productId}/versions` &&
+        request.params.get('designerVersion') === designerVersion &&
+        request.params.get('isShowDevVersion') === showDevVersion.toString()
+      );
+    });
+
+    expect(req.request.method).toBe('GET');
+    req.flush(mockResponse);
+
+    expect(loadingServiceSpy.show).toHaveBeenCalled();
+    expect(loadingServiceSpy.hide).toHaveBeenCalled();
   });
 });

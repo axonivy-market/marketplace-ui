@@ -45,3 +45,15 @@ common:
     ivyCompanyInfo: © 2023 Axon Ivy Inc
     privacyPolicy: Datenschutzrichtlinie
     termsOfService: Nutzungsbedingungen
+  product:
+    detail:
+      install:
+        buttonLabel: Jetzt installieren
+      download:
+        buttonLabel: Herunterladen
+        hideDevVersions: Entwicklungsversionen ausblenden
+        showDevVersions: Entwicklungsversionen anzeigen
+        versionSelector:
+          label: Zielplattform wählen
+        artifactSelector:
+          label: Artefakt auswählen
