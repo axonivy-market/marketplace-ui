@@ -1,4 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick
+} from '@angular/core/testing';
 import { of } from 'rxjs';
 import { ProductDetailVersionActionComponent } from './product-detail-version-action.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -148,4 +153,29 @@ describe('ProductVersionActionComponent', () => {
     );
     return { mockArtifct1, mockArtifct2 };
   }
+
+  it('should return correct class based on isVersionsDropDownShow', () => {
+    component.isVersionsDropDownShow.set(true);
+    expect(component.getIndicatorClass()).toBe('indicator-arrow__up');
+
+    component.isVersionsDropDownShow.set(false);
+    expect(component.getIndicatorClass()).toBe('');
+  });
+
+  it('should toggle isVersionsDropDownShow on calling onShowVersions', () => {
+    const initialState = component.isVersionsDropDownShow();
+
+    component.onShowVersions();
+    expect(component.isVersionsDropDownShow()).toBe(!initialState);
+
+    component.onShowVersions();
+    expect(component.isVersionsDropDownShow()).toBe(initialState);
+  });
+
+  it('should not change isInvalidInstallationEnvironment for designer environment', () => {
+    spyOn(component, 'isDesignerEnvironment').and.returnValue(true);
+
+    component.onInstallArtifact();
+    expect(component.isInvalidInstallationEnvironment()).toBe(false);
+  });
 });
