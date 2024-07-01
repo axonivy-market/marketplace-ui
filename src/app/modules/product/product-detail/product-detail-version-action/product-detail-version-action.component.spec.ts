@@ -78,7 +78,7 @@ describe('ProductVersionActionComponent', () => {
     component.onSelectVersion();
 
     expect(component.artifacts().length).toBe(1);
-    expect(component.selectedArtifact).toEqual(artifact);
+    expect(component.selectedArtifact).toEqual('https://example.com/download');
   });
 
   it('all of state should be reset before call rest api', () => {
@@ -89,19 +89,19 @@ describe('ProductVersionActionComponent', () => {
       isProductArtifact: true
     } as Artifact;
     component.selectedVersion = selectedVersion;
-    component.selectedArtifact = artifact;
+    component.selectedArtifact = artifact.downloadUrl;
     component.versions().push(selectedVersion);
     component.artifacts().push(artifact);
 
     expect(component.versions().length).toBe(1);
     expect(component.artifacts().length).toBe(1);
     expect(component.selectedVersion).toBe(selectedVersion);
-    expect(component.selectedArtifact).toBe(artifact);
+    expect(component.selectedArtifact).toBe('https://example.com/download');
     component.sanitizeDataBeforFetching();
     expect(component.versions().length).toBe(0);
     expect(component.artifacts().length).toBe(0);
     expect(component.selectedVersion).toEqual('');
-    expect(component.selectedArtifact).toEqual({} as Artifact);
+    expect(component.selectedArtifact).toEqual('');
   });
 
   it('should call sendRequestToProductDetailVersionAPI and update versions and versionMap', () => {
@@ -125,9 +125,7 @@ describe('ProductVersionActionComponent', () => {
 
   it('should open the artifact download URL in a new window', () => {
     spyOn(window, 'open');
-    component.selectedArtifact = {
-      downloadUrl: 'https://example.com/download'
-    } as Artifact;
+    component.selectedArtifact = 'https://example.com/download';
     component.downloadArifact();
     expect(window.open).toHaveBeenCalledWith(
       'https://example.com/download',
