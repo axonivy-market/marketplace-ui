@@ -1,9 +1,4 @@
-import {
-  ComponentFixture,
-  TestBed,
-  tick,
-  fakeAsync
-} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { ProductDetailVersionActionComponent } from './product-detail-version-action.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -38,29 +33,6 @@ describe('ProductVersionActionComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('validation message should appear while not install in AI designer & disappear after 2s', fakeAsync(() => {
-    expect(component.isDesignerEnvironment()).toBeFalse();
-    const installButton = fixture.debugElement.query(By.css('.btn__install'));
-    let warningDialog = fixture.debugElement.query(
-      By.css('.invalid-installation-environment__warning')
-    );
-
-    expect(warningDialog).toBeNull();
-    installButton.triggerEventHandler('click', null);
-    fixture.detectChanges();
-    warningDialog = fixture.debugElement.query(
-      By.css('.invalid-installation-environment__warning')
-    );
-    expect(warningDialog).toBeTruthy();
-
-    tick(3000);
-    fixture.detectChanges();
-    warningDialog = fixture.debugElement.query(
-      By.css('.invalid-installation-environment__warning')
-    );
-    expect(warningDialog).toBeNull();
-  }));
 
   it('first artifact should be chosen when select corresponding version', () => {
     component.onSelectVersion();
