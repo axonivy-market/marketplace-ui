@@ -89,10 +89,6 @@ export class ProductDetailVersionActionComponent implements AfterViewInit {
     }
   }
 
-  test(event: Artifact) {
-    console.log(JSON.stringify(event));
-  }
-
   onShowDevVersion(event: Event) {
     event.preventDefault();
     this.isDevVersionsDisplayed.set(!this.isDevVersionsDisplayed());
@@ -104,10 +100,6 @@ export class ProductDetailVersionActionComponent implements AfterViewInit {
       this.getVersionWithArtifact();
     }
     this.isDropDownDisplayed.set(!this.isDropDownDisplayed());
-  }
-
-  onChangeArtifact(event: Event) {
-    console.log(event);
   }
 
   getVersionWithArtifact() {
