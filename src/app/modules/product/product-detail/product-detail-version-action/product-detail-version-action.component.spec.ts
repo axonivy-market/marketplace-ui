@@ -4,7 +4,6 @@ import { ProductDetailVersionActionComponent } from './product-detail-version-ac
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ProductService } from '../../product.service';
 import { provideHttpClient } from '@angular/common/http';
-import { By } from '@angular/platform-browser';
 import { Artifact } from '../../../../shared/models/vesion-artifact.model';
 describe('ProductVersionActionComponent', () => {
   let component: ProductDetailVersionActionComponent;
