@@ -63,6 +63,8 @@ p {
   --ivy-textarea-background-color: #FAFAFA;
   --header-border-color: #ebebeb;
   --footer-border-color: #e7e7e7;
+  --star-color: #b0b0b0;
+  --star-filled-color: #{$ivyPrimaryTextColorLight};
 
   .bg-primary {
     background-color: #{$ivyPrimaryColorLight} !important;
@@ -175,6 +177,8 @@ p {
   --ivy-textarea-background-color: #333333;
   --header-border-color: #{$ivySecondaryTextLight};
   --footer-border-color: #4f4e4e;
+  --star-color: #757575;
+  --star-filled-color: #{$white};
 
   a {
     color: #{$white};

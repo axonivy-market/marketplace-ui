@@ -6,6 +6,7 @@ import {
   OnInit,
   Output,
   ViewChild,
+  ViewEncapsulation,
   inject
 } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -33,7 +34,8 @@ import { AuthService } from '../../../../auth/auth.service';
   ],
   providers: [StarRatingCountingService, ProductFeedbackService],
   templateUrl: './star-rating-counting.component.html',
-  styleUrl: './star-rating-counting.component.scss'
+  styleUrl: './star-rating-counting.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class StarRatingCountingComponent implements OnInit {
   @Input() productId!: string;

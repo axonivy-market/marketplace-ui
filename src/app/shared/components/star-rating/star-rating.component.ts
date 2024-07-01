@@ -1,6 +1,8 @@
 import {
   Component,
-  Input
+  HostBinding,
+  Input,
+  ViewEncapsulation
 } from '@angular/core';
 import { ProductService } from '../../../modules/product/product.service';
 import { NgbRating } from '@ng-bootstrap/ng-bootstrap';
@@ -15,7 +17,7 @@ import { NgbRating } from '@ng-bootstrap/ng-bootstrap';
 })
 export class StarRatingComponent {
   @Input() rating: number = 0;
-  @Input() totalComments: number = 0;
-  @Input() isTotalCommentsVisibility: boolean = true;
-  @Input() starFeedbackClassName: string = "star-feedback-default";
+  @Input() isReadOnly: boolean = false;
+  @Input() starClass: string = '';
+  @Input() filledStarClass: string = '';
 }

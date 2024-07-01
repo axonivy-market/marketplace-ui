@@ -10,8 +10,7 @@ import { AuthService } from '../../../../auth/auth.service';
   imports: [ProductFeedbacksPanelComponent, StarRatingCountingComponent],
   providers: [AuthService],
   templateUrl: './show-feedbacks-dialog.component.html',
-  styleUrl: './show-feedbacks-dialog.component.scss',
-  encapsulation: ViewEncapsulation.None
+  styleUrl: './show-feedbacks-dialog.component.scss'
 })
 export class ShowFeedbacksDialogComponent {
   activeModal = inject(NgbActiveModal);

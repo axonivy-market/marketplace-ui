@@ -1,16 +1,12 @@
 <div class="d-flex flex-column p-0" style="gap: 48px">
-  <div
-    class="d-flex flex-row p-0 align-items-center justify-content-between"
-    style="height: 37px">
-    <span
-      class="feedback-secondary-color"
-      style="font-size: 18px; font-weight: 400; line-height: 140%">
-      Feedbacks
-    </span>
+  <div class="d-flex flex-row p-0 align-items-center justify-content-between feedback-header">
+    <h4 class="text-secondary mb-0">
+      {{ 'common.feedback.label' | translate }}
+    </h4>
     <app-feedback-filter (sortChange)="onSortChange($event)" />
   </div>
   @if (isRenderInModalDialog()) {
-    <div class="overflow-auto grid-feedbacks-container-dialog" style="height: 733px; scrollbar-width: none;" (scroll)='onScrollCheckBottom($event)'>
+    <div class="overflow-auto grid-feedbacks-container-dialog" (scroll)="onScrollCheckBottom($event)">
       @for (feedback of productFeedbacks(); track $index) {
         <app-product-feedback [feedback]="feedback"></app-product-feedback>
       }

@@ -46,6 +46,7 @@ common:
     privacyPolicy: Datenschutzrichtlinie
     termsOfService: Nutzungsbedingungen
   feedback:
+    label: Feedback
     successMessage: Your feedback has been successfully submitted! 
     thankMessage: Thank you for your contribution
     addFeedbackTitle: Give your feedback!

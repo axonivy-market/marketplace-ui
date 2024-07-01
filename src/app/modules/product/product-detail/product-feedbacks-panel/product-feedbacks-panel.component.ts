@@ -7,11 +7,12 @@ import { ThemeService } from '../../../../core/services/theme/theme.service';
 import { FeedbackApiResponse } from '../../../../shared/models/apis/feedback-response.model';
 import { Feedback } from '../../../../shared/models/feedback.model';
 import { Product } from '../../../../shared/models/product.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-feedbacks-panel',
   standalone: true,
-  imports: [ProductFeedbackComponent, FeedbackFilterComponent],
+  imports: [ProductFeedbackComponent, FeedbackFilterComponent, TranslateModule],
   providers: [ProductFeedbackService],
   templateUrl: './product-feedbacks-panel.component.html',
   styleUrl: './product-feedbacks-panel.component.scss'
