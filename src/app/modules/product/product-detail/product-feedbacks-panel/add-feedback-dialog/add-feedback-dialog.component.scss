@@ -15,23 +15,6 @@ i {
 
 .add-feedback-title {
   font-weight: 600;
-  font-size: 18px;
-  line-height: 140%;
-  min-height: 25px;
-}
-
-.add-feedback-description {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 140%;
-}
-
-.current-product-title {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 120%;
-  height: 17px;
-  margin-bottom: 10px;
 }
 
 .product-item-select {
@@ -43,14 +26,7 @@ i {
   height: 37px;
   cursor: pointer;
   opacity: 0.8;
-  border: 1px solid #1b1b1b;
-}
-
-.star-rating-title {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 120%;
-  height: 17px;
+  border: 1px solid;
 }
 
 .feedback-content-textarea {
@@ -59,15 +35,29 @@ i {
   margin-top: 10px;
   width: 100%;
   resize: none;
-  background: #fafafa;
-  border: 0.5px solid #e7e7e7;
+  background: var(--ivy-textarea-background-color);
+  border: 0.5px solid var(--footer-border-color);
   border-radius: 5px;
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 120%;
   scrollbar-width: none;
+}
+
+.submit-feedback-btn {
+  width: 100%;
+  padding: 12px 32px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 120%;
+}
+
+.user-link {
+  text-align: center;
+  text-decoration-line: underline;
+  color: var(--ivy-active-color);
+  cursor: pointer;
 }
 
 .modal-body-wrapper {

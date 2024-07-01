@@ -56,3 +56,6 @@ common:
     addFeedbackDescription: By giving your feedback you are enabling us to constantly improve our products and always deliver the best quality to both you and your team.
     currentProductTitle: Currently reviewing
     starRatingTitle: Stars rating
+    commentLabel: Let a comment
+    submitBtnLabel: Submit review
+    loggedGithubAsLabel: Logged in Github as
