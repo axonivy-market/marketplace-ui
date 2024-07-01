@@ -66,7 +66,7 @@
     border-radius: 5px;
     gap: 15px;
     opacity: 0px;
-    background: var(--Default-Background, #ffffff);
+    background: var(--bs-body-bg);
     box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.1);
     border: 0.5px solid var(--ivy-seconadary-border-color);
 
@@ -90,12 +90,11 @@
           gap: 10px;
           border: 0.5px solid var(--ivy-seconadary-border-color);
           opacity: 0px;
-          border-radius: 3px;
+          border-radius: 5px;
           font-size: 12px;
-          line-height: 10px;
+          line-height: 12px;
           text-align: start !important;
-          background-color:  #fafafa;
-
+          background-color: var(--ivy-text-normal-color);
           option {
             height: 44px;
             padding: 15px;
@@ -135,7 +134,7 @@
   .up-arrow {
     position: absolute;
     transform: rotate(45deg);
-    top: 1.45rem;
+    top: 1.4rem;
     z-index: 1001;
     width: 20px;
     height: 20px;
