@@ -1,0 +1,16 @@
+<div class="modal-content-wrapper">
+  <div class="modal-header border-bottom-0">
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <img src="/assets/images/misc/confetti-icon.png">
+    <h4 class="text-primary">
+      {{ 'common.feedback.successMessage' | translate }}
+    </h4>
+    <h4 class="text-primary">{{ 'common.feedback.thankMessage' | translate }} {{ displayName }}</h4>
+  </div>
+</div>

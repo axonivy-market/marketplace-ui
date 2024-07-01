@@ -1,0 +1,26 @@
+<div class="modal-content-wrapper">
+  <div class="modal-header border-bottom-0">
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="activeModal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <div class="d-flex">
+      <app-star-rating-counting
+        class="star-rating"
+        [productId]="productId"
+        [productName]="productName"
+        [isDisplayInDialog]="true"
+        (openAddFeedbacDialogEvent)="activeModal.dismiss()" />
+      <div class="separator">
+        <div class="vr"></div>
+      </div>
+      <app-product-feedbacks-panel
+        class="feedback-panel"
+        [productId]="productId"
+        [isRenderInModalDialog]="true" />
+    </div>
+  </div>
+</div>

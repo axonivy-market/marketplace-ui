@@ -1,0 +1,31 @@
+.star-feedback {
+  position: relative;
+  display: inline-block;
+  color: var(--star-color);
+  line-height: 110%;
+  font-size: 10px;
+  padding-right: 3px;
+  .filled {
+    color: var(--star-filled-color);
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.medium-star {
+  line-height: 120%;
+  font-size: 17px;
+  padding-right: 10px;
+}
+
+.adding-feeback-star {
+  line-height: 120%;
+  font-size: 17px;
+  padding-right: 10px;
+  color: var(--star-color);
+  .filled {
+    color: var(--star-filled-color);
+  }
+}

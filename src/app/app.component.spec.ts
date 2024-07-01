@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AppComponent } from './app.component';
 import { By } from '@angular/platform-browser';
+import { NAV_ITEMS } from './shared/constants/common.constant';
 
 describe('AppComponent', () => {
   let component: AppComponent;

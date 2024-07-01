@@ -1,0 +1,91 @@
+.start-rating-counting-line {
+  display: grid;
+  grid-template-columns: max-content auto;
+  align-items: center;
+
+  .star-index {
+    padding-right: 4px;
+    display: inline-flex;
+
+    .number-star-rating {
+      padding: 0 1px;
+      font-family: 'Inter';
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 25.2px;
+      text-align: left;
+    }
+
+    .mini-star-icon {
+      padding: 0 2.5px;
+      display: flex;
+      font-size: 8px;
+      align-content: center;
+      flex-wrap: wrap;
+
+      .star-rating-count {
+        width: 11px;
+        display: flex;
+        height: 11px;
+        align-items: center;
+        justify-content: space-evenly;
+      }
+    }
+  }
+
+  .star-rating-counting-line {
+    width: 100%;
+    border-radius: 100px;
+    height: 8px;
+
+    .star-rating-percent {
+      border-radius: 100px;
+      height: 100%;
+    }
+  }
+}
+
+.detailed-reviews {
+  width: 110px;
+  height: 17px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 120%;
+}
+
+.product-data-title {
+  width: 61px;
+  height: 25px;
+
+  span {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 140%;
+    width: 61px;
+  }
+}
+
+.product-data-content {
+  width: 101px;
+  height: 70px;
+
+  span {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 110%;
+  }
+}
+
+.connector-rate-link {
+  font-family: 'Inter';
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.8px;
+  text-align: left;
+}

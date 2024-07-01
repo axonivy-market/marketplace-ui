@@ -1,4 +1,5 @@
 import { TypeOption } from '../enums/type-option.enum';
+import { FeedbackSortType } from '../enums/feedback-sort-type';
 import { Language } from '../enums/language.enum';
 import { SortOption } from '../enums/sort-option.enum';
 import { NavItem } from '../models/nav-item.model';
@@ -106,5 +107,28 @@ export const SORT_TYPES = [
   {
     value: SortOption.RECENT,
     label: 'common.sort.value.recent'
+  }
+];
+
+export const FEEDBACK_SORT_TYPES = [
+  {
+    value: FeedbackSortType.NEWEST,
+    label: 'common.sort.value.newest',
+    sortFn: 'updatedAt,desc'
+  },
+  {
+    value: FeedbackSortType.OLDEST,
+    label: 'common.sort.value.oldest',
+    sortFn: 'updatedAt,asc'
+  },
+  {
+    value: FeedbackSortType.HIGHEST,
+    label: 'common.sort.value.highest',
+    sortFn: 'rating,desc'
+  },
+  {
+    value: FeedbackSortType.LOWEST,
+    label: 'common.sort.value.lowest',
+    sortFn: 'rating,asc'
   }
 ];

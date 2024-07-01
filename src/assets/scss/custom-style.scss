@@ -1,9 +1,8 @@
 // Required
-@import '../../../node_modules/bootstrap/scss/functions';
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
 
-// Required
-@import '../../../node_modules/bootstrap/scss/variables';
-@import '../../../node_modules/bootstrap/scss/mixins';
 @font-face {
   font-family: Inter;
   src: url(../fonts/inter.ttf) format('truetype');
@@ -42,6 +41,11 @@ h4 {
   font-size: 18px;
 }
 
+h5 {
+  font-weight: 400;
+  font-size: 16px;
+}
+
 p {
   font-weight: 400;
   font-size: 14px;
@@ -56,8 +60,11 @@ p {
   --ivy-text-primary-color: $ivyPrimaryTextColorLight;
   --ivy-text-secondary-color: $ivySecondaryTextLight;
   --ivy-border-color: #{$ivySecondaryButtonHoverLight};
+  --ivy-textarea-background-color: #FAFAFA;
   --header-border-color: #ebebeb;
   --footer-border-color: #e7e7e7;
+  --star-color: #b0b0b0;
+  --star-filled-color: #{$ivyPrimaryTextColorLight};
 
   .bg-primary {
     background-color: #{$ivyPrimaryColorLight} !important;
@@ -113,6 +120,39 @@ p {
   .border-primary {
     border-color: #{$ivyPrimaryTextColorLight} !important;
   }
+
+  /** Star Rating Summary **/
+  .rating-review-text-color {
+    color: #{$ivySecondaryTextLight} !important;
+  }
+
+  .rating-text-color {
+    color: #{$ivyPrimaryTextColorLight} !important;
+  }
+
+  .star-rating-counting-line {
+    background-color: #{$ivySecondaryColorLight} !important;
+    .star-rating-percent {
+      background-color: #{$ivyPrimaryColorLight} !important;
+    }
+  }
+
+  .connector-rate-link {
+    color: #{$ivyPrimaryColorLight} !important;
+  }
+
+  .expand-toggle-link-color {
+    color: #{$ivyPrimaryColorLight} !important;
+  }
+
+  .feedback-color {
+    color: #{$ivyPrimaryTextColorLight} !important;
+  }
+
+  .feedback-secondary-color {
+    color: #{$ivySecondaryTextLight} !important;
+  }
+  /** End Star Rating Summary **/
 }
 
 .spinner-border {
@@ -134,8 +174,11 @@ p {
   --ivy-text-secondary-color: #{$ivySecondaryTextDark};
 
   --ivy-border-color: #{$ivySecondaryTextLight};
+  --ivy-textarea-background-color: #333333;
   --header-border-color: #{$ivySecondaryTextLight};
   --footer-border-color: #4f4e4e;
+  --star-color: #757575;
+  --star-filled-color: #{$white};
 
   a {
     color: #{$white};
@@ -186,6 +229,39 @@ p {
   .border-light {
     border-color: #{$white} !important;
   }
+
+  /** Star Rating Summary **/
+  .rating-review-text-color {
+    color: #{$ivySecondaryTextDark} !important;
+  }
+
+  .rating-text-color {
+    color: #{$white} !important;
+  }
+
+  .star-rating-counting-line {
+    background-color: #383838 !important;
+    .star-rating-percent {
+      background-color: #FAFAFA !important;
+    }
+  }
+
+  .connector-rate-link {
+    color: #FAFAFA !important;
+  }
+
+  .expand-toggle-link-color {
+    color: #{$ivyPrimaryColorDark} !important;
+  }
+
+  .feedback-color {
+    color: #{$white} !important;
+  }
+
+  .feedback-secondary-color {
+    color: #{$ivySecondaryTextDark} !important;
+  }
+  /** End Star Rating Summary **/
 }
 
 *:focus {

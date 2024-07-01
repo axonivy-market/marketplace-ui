@@ -1,0 +1,21 @@
+<div class="d-flex flex-column p-0" style="gap: 48px">
+  <div class="d-flex flex-row p-0 align-items-center justify-content-between feedback-header">
+    <h4 class="text-secondary mb-0">
+      {{ 'common.feedback.label' | translate }}
+    </h4>
+    <app-feedback-filter (sortChange)="onSortChange($event)" />
+  </div>
+  @if (isRenderInModalDialog()) {
+    <div class="overflow-auto grid-feedbacks-container-dialog" (scroll)="onScrollCheckBottom($event)">
+      @for (feedback of productFeedbacks(); track $index) {
+        <app-product-feedback [feedback]="feedback"></app-product-feedback>
+      }
+    </div>
+  } @else {
+    <div class="grid-feedbacks-container">
+      @for (feedback of displayedFeedbacks(); track $index) {
+        <app-product-feedback [feedback]="feedback" />
+      }
+    </div>
+  }
+</div>

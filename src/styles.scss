@@ -1,6 +1,8 @@
-@import 'bootstrap';
-@import 'bootstrap-icons';
+
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
 @import './assets/scss/custom-style.scss';
+@import './assets/scss/custom-modal-style.scss';
 
 * {
   margin: 0;

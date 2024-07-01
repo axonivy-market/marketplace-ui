@@ -1,0 +1,43 @@
+<div class="star-rating-summary row mb-4">
+    <div [ngClass]="{'col-sm-3 col-6': !isDisplayInDialog, 'col-12': isDisplayInDialog}" class="text-start d-lg-block" [style.margin-bottom.px]="isDisplayInDialog ? 40 : 0">
+      <div class="product-data-title rating-review-text-color">
+        <span>Review</span>
+      </div>
+      <div class="product-data-content rating-text-color">
+        <span>{{ reviewNumber | number: '1.1-1' }}</span>
+      </div>
+      <div class="product-data-info">
+        <app-star-rating
+          [rating]="reviewNumber"></app-star-rating>
+          <a class="connector-rate-link" (click)="openRateConnectorDialog()" style="cursor: pointer;">Rate this connector</a>
+      </div>
+    </div>
+    <div [ngClass]="{'col-sm-9 col-6': !isDisplayInDialog, 'col-12': isDisplayInDialog}" class="text-start d-lg-block">
+      <div>
+        <span class="detailed-reviews rating-review-text-color">
+          Detailed reviews
+        </span>
+      </div>
+      <div>
+        @for (counting of starRatingCountings; track $index) {
+          <div class="start-rating-counting-line rating-text-color">
+            <div aria-hidden="true" class="star-index">
+              <div class="number-star-rating" style="width: 14px;">{{ counting.starRating }}</div>
+              <div class="mini-star-icon">
+                <i class="start-rating-count bi bi-star-fill"></i>
+              </div>
+            </div>
+            <div aria-hidden="true" class="star-rating-counting-line">
+              <div
+                id="star-rating-percent-{{ counting.starRating }}"
+                class="star-rating-percent"
+                title="{{ counting.commentNumber }}"
+                starRatingHighlight
+                percent="{{ counting.percent }}"></div>
+            </div>
+          </div>
+        }
+      </div>
+  </div>
+</div>
+
